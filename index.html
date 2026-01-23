@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vật lý 11 - Trường THPT Đốc Binh Kiều</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-atom"></i>
+                <h1>Vật Lý 11 - Chân Trời Sáng Tạo</h1>
+            </div>
+            <div class="school-info">
+                <p>Trường THPT Đốc Binh Kiều</p>
+                <p>Năm học: 2023-2024</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Đăng ký thông tin học sinh -->
+    <section id="student-registration" class="registration-section">
+        <div class="container">
+            <h2><i class="fas fa-user-graduate"></i> Thông tin học sinh</h2>
+            <form id="studentForm">
+                <div class="form-group">
+                    <label for="fullName"><i class="fas fa-signature"></i> Họ và tên:</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="className"><i class="fas fa-users"></i> Lớp:</label>
+                    <input type="text" id="className" value="11" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentId"><i class="fas fa-id-card"></i> Mã học sinh:</label>
+                    <input type="text" id="studentId" required>
+                </div>
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-check-circle"></i> Lưu thông tin
+                </button>
+            </form>
+            <div id="studentInfoDisplay" class="student-info-display" style="display: none;">
+                <h3>Thông tin đã đăng ký</h3>
+                <p><strong>Học sinh:</strong> <span id="displayName"></span></p>
+                <p><strong>Lớp:</strong> <span id="displayClass"></span></p>
+                <p><strong>Mã học sinh:</strong> <span id="displayId"></span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phần nội dung học tập -->
+    <main class="container">
+        <!-- Chọn chương -->
+        <section id="chapter-selection">
+            <h2><i class="fas fa-book-open"></i> Chọn chương học</h2>
+            <div class="chapter-grid">
+                <div class="chapter-card" data-chapter="1">
+                    <div class="chapter-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Chương I</h3>
+                    <p>Điện tích. Điện trường</p>
+                </div>
+                <div class="chapter-card" data-chapter="2">
+                    <div class="chapter-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Chương II</h3>
+                    <p>Dòng điện. Mạch điện</p>
+                </div>
+                <div class="chapter-card" data-chapter="3">
+                    <div class="chapter-icon">
+                        <i class="fas fa-magnet"></i>
+                    </div>
+                    <h3>Chương III</h3>
+                    <p>Từ trường</p>
+                </div>
+                <div class="chapter-card" data-chapter="4">
+                    <div class="chapter-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Chương IV</h3>
+                    <p>Cảm ứng điện từ</p>
+                </div>
+                <div class="chapter-card" data-chapter="5">
+                    <div class="chapter-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3>Chương V</h3>
+                    <p>Khúc xạ ánh sáng</p>
+                </div>
+                <div class="chapter-card" data-chapter="6">
+                    <div class="chapter-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Chương VI</h3>
+                    <p>Giao thoa ánh sáng</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hiển thị nội dung bài học -->
+        <section id="lesson-content" style="display: none;">
+            <div class="lesson-header">
+                <button id="backToChapters" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Quay lại chọn chương
+                </button>
+                <h2 id="lessonTitle"></h2>
+            </div>
+            
+            <div class="content-tabs">
+                <button class="tab-btn active" data-tab="knowledge">
+                    <i class="fas fa-book"></i> Kiến thức bài học
+                </button>
+                <button class="tab-btn" data-tab="practice">
+                    <i class="fas fa-pencil-alt"></i> Bài tập vận dụng
+                </button>
+                <button class="tab-btn" data-tab="homework">
+                    <i class="fas fa-home"></i> Bài tập về nhà
+                </button>
+            </div>
+            
+            <!-- Tab Kiến thức bài học -->
+            <div id="knowledge-tab" class="tab-content active">
+                <div class="knowledge-content">
+                    <!-- Nội dung sẽ được thêm bằng JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Tab Bài tập vận dụng -->
+            <div id="practice-tab" class="tab-content">
+                <div class="practice-content">
+                    <div class="quiz-container">
+                        <!-- Câu hỏi trắc nghiệm sẽ được thêm bằng JavaScript -->
+                    </div>
+                    <button id="submitPractice" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Nộp bài
+                    </button>
+                    <div id="practiceResult" class="result-container"></div>
+                </div>
+            </div>
+            
+            <!-- Tab Bài tập về nhà -->
+            <div id="homework-tab" class="tab-content">
+                <div class="homework-content">
+                    <div class="quiz-container">
+                        <!-- Câu hỏi bài tập về nhà sẽ được thêm bằng JavaScript -->
+                    </div>
+                    <button id="submitHomework" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Nộp bài về nhà
+                    </button>
+                    <div id="homeworkResult" class="result-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phần kiểm tra 45 phút -->
+        <section id="exam-section" class="exam-section">
+            <h2><i class="fas fa-clock"></i> Kiểm tra 45 phút</h2>
+            <p>Tham gia bài kiểm tra 45 phút theo lịch của giáo viên.</p>
+            <button id="startExam" class="btn-exam" disabled>
+                <i class="fas fa-play-circle"></i> Bắt đầu kiểm tra (Chỉ mở khi có yêu cầu)
+            </button>
+            <div class="exam-notice">
+                <p><i class="fas fa-info-circle"></i> <strong>Lưu ý:</strong> Bài kiểm tra chỉ mở khi giáo viên yêu cầu. Thời gian làm bài: 45 phút.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Trường THPT Đốc Binh Kiều</h3>
+                    <p>Website hỗ trợ học tập môn Vật lý 11</p>
+                    <p>Chương trình: Chân trời sáng tạo</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Giáo viên phụ trách</h3>
+                    <p>Thầy/Cô: Lãnh đạo trường</p>
+                    <p>Môn: Vật lý 11</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hỗ trợ kỹ thuật</h3>
+                    <p>Email: support@docbinhkieu.edu.vn</p>
+                    <p>Điện thoại: (027) 3xxx xxx</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Trường THPT Đốc Binh Kiều. Tất cả các quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
