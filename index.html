@@ -51,8 +51,21 @@
 
         // Supabase client (chỉ khởi tạo khi đã cấu hình)
         const getSupabase = () => {
-            if (!CONFIG.supabaseUrl || CONFIG.supabaseUrl.includes('YOUR_PROJECT')) return null;
-            return window.supabase?.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey) || null;
+            if (!CONFIG.supabaseUrl || CONFIG.supabaseUrl.includes('YOUR_PROJECT')) {
+                console.error('❌ Supabase URL chưa được cấu hình!');
+                return null;
+            }
+            if (!CONFIG.supabaseKey || CONFIG.supabaseKey.includes('YOUR_ANON_KEY')) {
+                console.error('❌ Supabase Key chưa được cấu hình!');
+                return null;
+            }
+            
+            try {
+                return window.supabase?.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey) || null;
+            } catch (err) {
+                console.error('❌ Lỗi khi tạo Supabase client:', err);
+                return null;
+            }
         };
 
         // Mã hóa mật khẩu (SHA-256 với salt)
@@ -223,6 +236,19 @@
                     setTimeout(renderMath, 50);
                 }
             }, [currentIdx, gameState, showExpl, renderMath]);
+
+            // Kiểm tra kết nối Supabase khi component tải
+            useEffect(() => {
+                const supabase = getSupabase();
+                if (supabase) {
+                    console.log('✅ Supabase đã được khởi tạo thành công');
+                    console.log('URL:', CONFIG.supabaseUrl);
+                } else {
+                    console.error('❌ Không thể khởi tạo Supabase!');
+                    console.error('URL:', CONFIG.supabaseUrl);
+                    console.error('Key tồn tại:', !!CONFIG.supabaseKey);
+                }
+            }, []);
 
             // Theo dõi thời gian làm bài
             useEffect(() => {
@@ -458,20 +484,38 @@
             };
 
             const saveQuizResult = async (finalScore, warnings = 0, timeTaken = 0) => {
-                if (!student) return;
                 const supabase = getSupabase();
-                if (!supabase) return;
+                if (!supabase) {
+                    console.error('Supabase chưa được khởi tạo!');
+                    return;
+                }
+                if (!student) {
+                    console.error('Không có thông tin student!');
+                    return;
+                }
+
                 try {
-                    const { count } = await supabase.from('quiz_attempts').select('*', { count: 'exact', head: true }).eq('student_id', student.id);
-                    await supabase.from('quiz_attempts').insert({
+                    console.log('Bắt đầu lưu kết quả:', { finalScore, warnings, timeTaken, student });
+                    
+                    const { data, error } = await supabase.from('quiz_attempts').insert({
                         student_id: student.id,
                         score: finalScore,
                         total_questions: 50,
-                        attempt_number: (count || 0) + 1,
+                        attempt_number: 1, // Tạm thời hardcode
                         time_taken: timeTaken, // Thêm thời gian làm bài
                         cheat_warnings: warnings // Thêm số lần cảnh báo gian lận
-                    });
-                } catch (err) { console.warn('Không lưu được kết quả:', err); }
+                    }).select();
+
+                    if (error) {
+                        console.error('Lỗi Supabase khi lưu:', error);
+                        throw error;
+                    }
+                    
+                    console.log('Lưu kết quả thành công:', data);
+                } catch (err) {
+                    console.error('Không lưu được kết quả:', err);
+                    console.error('Chi tiết lỗi:', err.message);
+                }
             };
 
             const handleAdminExport = async (e) => {
