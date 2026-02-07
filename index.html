@@ -187,6 +187,12 @@
             const [showCheatAlert, setShowCheatAlert] = useState(false);
             const [isTestActive, setIsTestActive] = useState(false);
 
+            // Trạng thái theo dõi thời gian
+            const [startTime, setStartTime] = useState(null);
+            const [elapsedTime, setElapsedTime] = useState(0);
+            const [leaderboard, setLeaderboard] = useState([]);
+            const [showLeaderboard, setShowLeaderboard] = useState(false);
+
             // Trạng thái đăng nhập
             const [student, setStudent] = useState(() => {
                 try {
@@ -216,6 +222,38 @@
                     setTimeout(renderMath, 50);
                 }
             }, [currentIdx, gameState, showExpl, renderMath]);
+
+            // Theo dõi thời gian làm bài
+            useEffect(() => {
+                let interval;
+                if (isTestActive && startTime) {
+                    interval = setInterval(() => {
+                        setElapsedTime(Math.floor((Date.now() - startTime) / 1000));
+                    }, 1000);
+                }
+                return () => clearInterval(interval);
+            }, [isTestActive, startTime]);
+
+            // Lấy dữ liệu bảng xếp hạng
+            const fetchLeaderboard = async () => {
+                const supabase = getSupabase();
+                if (!supabase) return;
+                try {
+                    const { data, error } = await supabase.from('leaderboard').select('*').limit(50);
+                    if (!error && data) {
+                        setLeaderboard(data);
+                    }
+                } catch (err) {
+                    console.error('Lỗi lấy bảng xếp hạng:', err);
+                }
+            };
+
+            // Hàm định dạng thời gian từ giây sang phút:giây
+            const formatTime = (seconds) => {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            };
 
             // Chống gian lận - theo dõi việc chuyển tab
             useEffect(() => {
@@ -286,6 +324,8 @@
                 setCheatWarnings(0); // Reset cảnh báo gian lận
                 setShowCheatAlert(false);
                 setIsTestActive(true); // Bắt đầu theo dõi chống gian lận
+                setStartTime(Date.now()); // Bắt đầu đếm thời gian
+                setElapsedTime(0);
                 setGameState('playing');
             };
 
@@ -308,8 +348,12 @@
                     setSelected(null);
                     setShowExpl(false);
                 } else {
-                    saveQuizResult(score + (questions[currentIdx] && selected === questions[currentIdx].a ? 10 : 0), cheatWarnings);
+                    const finalScore = score + (questions[currentIdx] && selected === questions[currentIdx].a ? 10 : 0);
+                    const finalTime = elapsedTime;
+                    saveQuizResult(finalScore, cheatWarnings, finalTime);
                     setIsTestActive(false); // Kết thúc theo dõi chống gian lận
+                    fetchLeaderboard(); // Lấy bảng xếp hạng
+                    setShowLeaderboard(true); // Hiển thị bảng xếp hạng
                     setGameState('end');
                 }
             };
@@ -389,7 +433,7 @@
                 } finally { setAuthLoading(false); }
             };
 
-            const saveQuizResult = async (finalScore, warnings = 0) => {
+            const saveQuizResult = async (finalScore, warnings = 0, timeTaken = 0) => {
                 if (!student) return;
                 const supabase = getSupabase();
                 if (!supabase) return;
@@ -400,6 +444,7 @@
                         score: finalScore,
                         total_questions: 50,
                         attempt_number: (count || 0) + 1,
+                        time_taken: timeTaken, // Thêm thời gian làm bài
                         cheat_warnings: warnings // Thêm số lần cảnh báo gian lận
                     });
                 } catch (err) { console.warn('Không lưu được kết quả:', err); }
@@ -663,6 +708,133 @@
 
             if (gameState === 'end') {
                 const finalScore = score + (selected !== null && questions[currentIdx] && selected === questions[currentIdx].a ? 10 : 0);
+                
+                // Nếu đang hiển thị bảng xếp hạng
+                if (showLeaderboard) {
+                    const currentUserRank = leaderboard.find(item => 
+                        item.full_name === student?.full_name && 
+                        item.class_name === student?.class_name && 
+                        item.score === finalScore && 
+                        item.time_taken === elapsedTime
+                    );
+                    
+                    return (
+                        <div className="max-w-4xl mx-auto px-4 py-10">
+                            <div className="glass-panel p-8 md:p-10 border-t-8 border-yellow-500 shadow-2xl">
+                                <div className="text-center mb-8">
+                                    <i className="fas fa-trophy text-6xl text-yellow-500 mb-4"></i>
+                                    <h1 className="text-3xl font-black text-slate-800 mb-2">BẢNG XẾP HẠNG</h1>
+                                    <p className="text-slate-500">Vật Lí 11 - Chương 3: Điện trường</p>
+                                </div>
+
+                                {/* Kết quả của bạn */}
+                                <div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6 mb-8">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <h3 className="font-bold text-blue-800 text-lg mb-2">Kết quả của bạn</h3>
+                                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                                <div>
+                                                    <div className="text-2xl font-black text-blue-600">{finalScore}</div>
+                                                    <div className="text-sm text-blue-600">Điểm</div>
+                                                </div>
+                                                <div>
+                                                    <div className="text-2xl font-black text-blue-600">{formatTime(elapsedTime)}</div>
+                                                    <div className="text-sm text-blue-600">Thời gian</div>
+                                                </div>
+                                                <div>
+                                                    <div className="text-2xl font-black text-blue-600">#{currentUserRank?.rank_position || '-'}</div>
+                                                    <div className="text-sm text-blue-600">Xếp hạng</div>
+                                                </div>
+                                                <div>
+                                                    <div className="text-2xl font-black text-red-600">{cheatWarnings}</div>
+                                                    <div className="text-sm text-red-600">Cảnh báo</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Bảng xếp hạng */}
+                                <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+                                    <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white p-4">
+                                        <h3 className="font-bold text-lg">Top 50 Thí Sinh</h3>
+                                    </div>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full">
+                                            <thead className="bg-slate-50 border-b">
+                                                <tr>
+                                                    <th className="px-4 py-3 text-left text-sm font-bold text-slate-700">#</th>
+                                                    <th className="px-4 py-3 text-left text-sm font-bold text-slate-700">Họ và tên</th>
+                                                    <th className="px-4 py-3 text-left text-sm font-bold text-slate-700">Lớp</th>
+                                                    <th className="px-4 py-3 text-center text-sm font-bold text-slate-700">Điểm</th>
+                                                    <th className="px-4 py-3 text-center text-sm font-bold text-slate-700">Thời gian</th>
+                                                    <th className="px-4 py-3 text-center text-sm font-bold text-slate-700">Cảnh báo</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {leaderboard.map((item, index) => {
+                                                    const isCurrentUser = item.full_name === student?.full_name && 
+                                                                       item.class_name === student?.class_name && 
+                                                                       item.score === finalScore && 
+                                                                       item.time_taken === elapsedTime;
+                                                    return (
+                                                        <tr key={index} className={`border-b hover:bg-slate-50 ${isCurrentUser ? 'bg-blue-50 font-bold' : ''}`}>
+                                                            <td className="px-4 py-3">
+                                                                {item.rank_position <= 3 ? (
+                                                                    <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full font-bold text-white ${
+                                                                        item.rank_position === 1 ? 'bg-yellow-500' : 
+                                                                        item.rank_position === 2 ? 'bg-gray-400' : 'bg-orange-600'
+                                                                    }`}>
+                                                                        {item.rank_position}
+                                                                    </span>
+                                                                ) : (
+                                                                    <span className="text-slate-600 font-medium">{item.rank_position}</span>
+                                                                )}
+                                                            </td>
+                                                            <td className="px-4 py-3">
+                                                                <div className="flex items-center">
+                                                                    {isCurrentUser && <i className="fas fa-star text-yellow-500 mr-2"></i>}
+                                                                    <span className={isCurrentUser ? 'text-blue-700' : 'text-slate-700'}>
+                                                                        {item.full_name}
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td className="px-4 py-3 text-slate-600">{item.class_name}</td>
+                                                            <td className="px-4 py-3 text-center">
+                                                                <span className={`font-bold ${isCurrentUser ? 'text-blue-700 text-lg' : 'text-slate-700'}`}>
+                                                                    {item.score}
+                                                                </span>
+                                                            </td>
+                                                            <td className="px-4 py-3 text-center text-slate-600">{formatTime(item.time_taken)}</td>
+                                                            <td className="px-4 py-3 text-center">
+                                                                {item.cheat_warnings > 0 ? (
+                                                                    <span className="text-red-600 font-bold">{item.cheat_warnings}</span>
+                                                                ) : (
+                                                                    <span className="text-green-600">0</span>
+                                                                )}
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-4 mt-8">
+                                    <button onClick={start} className="flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all">
+                                        <i className="fas fa-redo mr-2"></i>Làm lại
+                                    </button>
+                                    <button onClick={() => { setShowLeaderboard(false); setGameState('start'); }} className="flex-1 bg-slate-100 text-slate-600 py-4 rounded-xl font-semibold hover:bg-slate-200">
+                                        <i className="fas fa-home mr-2"></i>Về trang chủ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                }
+
+                // Màn hình kết quả cũ (nếu không hiển thị bảng xếp hạng)
                 return (
                     <div className="flex items-center justify-center min-h-screen p-4">
                         <div className="glass-panel p-10 text-center max-w-md w-full shadow-2xl border-t-8 border-blue-500">
@@ -718,6 +890,10 @@
                             Câu {currentIdx + 1}/50
                         </div>
                         <div className="flex items-center gap-2">
+                            <div className="bg-green-100 text-green-700 px-3 py-2 rounded-xl border border-green-200 font-bold text-sm">
+                                <i className="fas fa-clock mr-1"></i>
+                                {formatTime(elapsedTime)}
+                            </div>
                             {cheatWarnings > 0 && (
                                 <div className="bg-red-100 text-red-600 px-3 py-2 rounded-xl border border-red-200 font-bold text-sm">
                                     <i className="fas fa-exclamation-triangle mr-1"></i>
