@@ -249,6 +249,12 @@
                     }
                     if (data) {
                         console.log('Dữ liệu bảng xếp hạng:', data);
+                        console.log('Thông tin user hiện tại:', {
+                            name: student?.full_name,
+                            class: student?.class_name,
+                            score: finalScore,
+                            time: elapsedTime
+                        });
                         setLeaderboard(data);
                     }
                 } catch (err) {
@@ -362,15 +368,17 @@
                 } else {
                     const finalScore = score + (questions[currentIdx] && selected === questions[currentIdx].a ? 10 : 0);
                     const finalTime = elapsedTime;
+                    console.log('Kết thúc bài thi - Điểm:', finalScore, 'Thời gian:', finalTime);
                     saveQuizResult(finalScore, cheatWarnings, finalTime);
                     setIsTestActive(false); // Kết thúc theo dõi chống gian lận
                     
-                    // Delay 1 giây để đảm bảo dữ liệu được lưu rồi mới lấy bảng xếp hạng
+                    // Delay 2 giây để đảm bảo dữ liệu được lưu rồi mới lấy bảng xếp hạng
                     setTimeout(() => {
+                        console.log('Bắt đầu lấy bảng xếp hạng...');
                         fetchLeaderboard(); // Lấy bảng xếp hạng
                         setShowLeaderboard(true); // Hiển thị bảng xếp hạng
                         setGameState('end');
-                    }, 1000);
+                    }, 2000);
                 }
             };
 
@@ -727,12 +735,17 @@
                 
                 // Nếu đang hiển thị bảng xếp hạng
                 if (showLeaderboard) {
+                    // Tìm xếp hạng của user hiện tại một cách trực tiếp hơn
                     const currentUserRank = leaderboard.find(item => 
-                        item.full_name === student?.full_name && 
-                        item.class_name === student?.class_name && 
-                        item.score === finalScore && 
-                        item.time_taken === elapsedTime
+                        student && 
+                        item.full_name === student.full_name && 
+                        item.class_name === student.class_name &&
+                        Math.abs(item.score - finalScore) < 0.01
                     );
+                    
+                    console.log('User hiện tại:', student);
+                    console.log('Final score:', finalScore);
+                    console.log('Current user rank:', currentUserRank);
                     
                     return (
                         <div className="max-w-4xl mx-auto px-4 py-10">
@@ -795,10 +808,11 @@
                                                 </thead>
                                                 <tbody>
                                                     {leaderboard.map((item, index) => {
-                                                        const isCurrentUser = item.full_name === student?.full_name && 
-                                                                           item.class_name === student?.class_name && 
-                                                                           item.score === finalScore && 
-                                                                           item.time_taken === elapsedTime;
+                                                        // Logic linh hoạt hơn để tìm user hiện tại
+                                                        const isCurrentUser = student && 
+                                                                           item.full_name === student.full_name && 
+                                                                           item.class_name === student.class_name &&
+                                                                           Math.abs(item.score - finalScore) < 0.01; // Cho phép sai số nhỏ
                                                         return (
                                                             <tr key={index} className={`border-b hover:bg-slate-50 ${isCurrentUser ? 'bg-blue-50 font-bold' : ''}`}>
                                                                 <td className="px-4 py-3">
