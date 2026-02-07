@@ -219,19 +219,32 @@
 
             // Chống gian lận - theo dõi việc chuyển tab
             useEffect(() => {
-                const handleVisibilityChange = () => {
-                    if (document.hidden && isTestActive) {
-                        // Người dùng đã chuyển tab hoặc ẩn cửa sổ
+                let isCheatDetected = false; // Flag để tránh đếm trùng
+                
+                const handleCheatDetection = () => {
+                    if (isTestActive && !isCheatDetected) {
+                        isCheatDetected = true;
                         setCheatWarnings(prev => prev + 1);
                         setShowCheatAlert(true);
+                        
+                        // Ghi log gian lận
+                        console.warn(`CẢNH BÁO GIAN LẬN: ${student?.full_name || 'Unknown'} đã rời khỏi tab thi`);
+                        
+                        // Reset flag sau 2 giây để có thể phát hiện lần tiếp theo
+                        setTimeout(() => {
+                            isCheatDetected = false;
+                        }, 2000);
                         
                         // Tự động ẩn cảnh báo sau 5 giây
                         setTimeout(() => {
                             setShowCheatAlert(false);
                         }, 5000);
-                        
-                        // Ghi log gian lận
-                        console.warn(`CẢNH BÁO GIAN LẬN: ${student?.full_name || 'Unknown'} đã chuyển tab (Lần ${cheatWarnings + 1})`);
+                    }
+                };
+
+                const handleVisibilityChange = () => {
+                    if (document.hidden) {
+                        handleCheatDetection();
                     }
                 };
 
@@ -245,20 +258,7 @@
 
                 const handleBlur = (e) => {
                     if (isTestActive && e.target === window) {
-                        setCheatWarnings(prev => prev + 1);
-                        setShowCheatAlert(true);
-                        setTimeout(() => setShowCheatAlert(false), 5000);
-                    }
-                };
-
-                const handleFocus = () => {
-                    if (isTestActive) {
-                        // Khi quay lại tab, kiểm tra xem có gian lận không
-                        if (document.hidden) {
-                            setCheatWarnings(prev => prev + 1);
-                            setShowCheatAlert(true);
-                            setTimeout(() => setShowCheatAlert(false), 5000);
-                        }
+                        handleCheatDetection();
                     }
                 };
 
@@ -266,16 +266,14 @@
                     document.addEventListener('visibilitychange', handleVisibilityChange);
                     window.addEventListener('beforeunload', handleBeforeUnload);
                     window.addEventListener('blur', handleBlur);
-                    window.addEventListener('focus', handleFocus);
                 }
 
                 return () => {
                     document.removeEventListener('visibilitychange', handleVisibilityChange);
                     window.removeEventListener('beforeunload', handleBeforeUnload);
                     window.removeEventListener('blur', handleBlur);
-                    window.removeEventListener('focus', handleFocus);
                 };
-            }, [isTestActive, cheatWarnings, student]);
+            }, [isTestActive, student]);
 
             const start = () => {
                 initAudio(); // Kích hoạt AudioContext qua tương tác người dùng
