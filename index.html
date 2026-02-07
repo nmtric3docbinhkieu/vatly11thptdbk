@@ -182,6 +182,11 @@
             const [questions, setQuestions] = useState([]);
             const { playCorrect, playWrong, initAudio } = useSound();
 
+            // Trạng thái chống gian lận
+            const [cheatWarnings, setCheatWarnings] = useState(0);
+            const [showCheatAlert, setShowCheatAlert] = useState(false);
+            const [isTestActive, setIsTestActive] = useState(false);
+
             // Trạng thái đăng nhập
             const [student, setStudent] = useState(() => {
                 try {
@@ -212,6 +217,66 @@
                 }
             }, [currentIdx, gameState, showExpl, renderMath]);
 
+            // Chống gian lận - theo dõi việc chuyển tab
+            useEffect(() => {
+                const handleVisibilityChange = () => {
+                    if (document.hidden && isTestActive) {
+                        // Người dùng đã chuyển tab hoặc ẩn cửa sổ
+                        setCheatWarnings(prev => prev + 1);
+                        setShowCheatAlert(true);
+                        
+                        // Tự động ẩn cảnh báo sau 5 giây
+                        setTimeout(() => {
+                            setShowCheatAlert(false);
+                        }, 5000);
+                        
+                        // Ghi log gian lận
+                        console.warn(`CẢNH BÁO GIAN LẬN: ${student?.full_name || 'Unknown'} đã chuyển tab (Lần ${cheatWarnings + 1})`);
+                    }
+                };
+
+                const handleBeforeUnload = (e) => {
+                    if (isTestActive) {
+                        e.preventDefault();
+                        e.returnValue = 'Bạn đang trong buổi thi. Đóng tab sẽ bị ghi nhận là gian lận!';
+                        return e.returnValue;
+                    }
+                };
+
+                const handleBlur = (e) => {
+                    if (isTestActive && e.target === window) {
+                        setCheatWarnings(prev => prev + 1);
+                        setShowCheatAlert(true);
+                        setTimeout(() => setShowCheatAlert(false), 5000);
+                    }
+                };
+
+                const handleFocus = () => {
+                    if (isTestActive) {
+                        // Khi quay lại tab, kiểm tra xem có gian lận không
+                        if (document.hidden) {
+                            setCheatWarnings(prev => prev + 1);
+                            setShowCheatAlert(true);
+                            setTimeout(() => setShowCheatAlert(false), 5000);
+                        }
+                    }
+                };
+
+                if (isTestActive) {
+                    document.addEventListener('visibilitychange', handleVisibilityChange);
+                    window.addEventListener('beforeunload', handleBeforeUnload);
+                    window.addEventListener('blur', handleBlur);
+                    window.addEventListener('focus', handleFocus);
+                }
+
+                return () => {
+                    document.removeEventListener('visibilitychange', handleVisibilityChange);
+                    window.removeEventListener('beforeunload', handleBeforeUnload);
+                    window.removeEventListener('blur', handleBlur);
+                    window.removeEventListener('focus', handleFocus);
+                };
+            }, [isTestActive, cheatWarnings, student]);
+
             const start = () => {
                 initAudio(); // Kích hoạt AudioContext qua tương tác người dùng
                 const shuffled = [...questionDatabase].sort(() => Math.random() - 0.5);
@@ -220,6 +285,9 @@
                 setScore(0);
                 setSelected(null);
                 setShowExpl(false);
+                setCheatWarnings(0); // Reset cảnh báo gian lận
+                setShowCheatAlert(false);
+                setIsTestActive(true); // Bắt đầu theo dõi chống gian lận
                 setGameState('playing');
             };
 
@@ -242,7 +310,8 @@
                     setSelected(null);
                     setShowExpl(false);
                 } else {
-                    saveQuizResult(score + (questions[currentIdx] && selected === questions[currentIdx].a ? 10 : 0));
+                    saveQuizResult(score + (questions[currentIdx] && selected === questions[currentIdx].a ? 10 : 0), cheatWarnings);
+                    setIsTestActive(false); // Kết thúc theo dõi chống gian lận
                     setGameState('end');
                 }
             };
@@ -252,6 +321,7 @@
             const logout = () => {
                 setStudent(null);
                 localStorage.removeItem(STORAGE_KEY);
+                setIsTestActive(false); // Dừng theo dõi khi đăng xuất
                 setGameState('start');
             };
 
@@ -321,7 +391,7 @@
                 } finally { setAuthLoading(false); }
             };
 
-            const saveQuizResult = async (finalScore) => {
+            const saveQuizResult = async (finalScore, warnings = 0) => {
                 if (!student) return;
                 const supabase = getSupabase();
                 if (!supabase) return;
@@ -331,7 +401,8 @@
                         student_id: student.id,
                         score: finalScore,
                         total_questions: 50,
-                        attempt_number: (count || 0) + 1
+                        attempt_number: (count || 0) + 1,
+                        cheat_warnings: warnings // Thêm số lần cảnh báo gian lận
                     });
                 } catch (err) { console.warn('Không lưu được kết quả:', err); }
             };
@@ -359,6 +430,8 @@
                         'Số lần làm bài': r['Số lần làm bài'] || 0,
                         'Điểm cao nhất': r['Điểm cao nhất'] || 0,
                         'Điểm trung bình': r['Điểm trung bình'] || 0,
+                        'Tổng cảnh báo gian lận': r['Tổng cảnh báo gian lận'] || 0,
+                        'Cảnh báo cao nhất': r['Cảnh báo cao nhất'] || 0,
                         'Lần đầu làm': r['Lần đầu làm'] ? new Date(r['Lần đầu làm']).toLocaleString('vi-VN') : '',
                         'Lần cuối làm': r['Lần cuối làm'] ? new Date(r['Lần cuối làm']).toLocaleString('vi-VN') : ''
                     }));
@@ -599,6 +672,20 @@
                             <h2 className="text-2xl font-bold text-slate-800 mb-2">HOÀN THÀNH THỬ THÁCH</h2>
                             <div className="text-7xl font-black text-blue-600 mb-4">{finalScore}</div>
                             <p className="text-slate-400 font-bold mb-2">ĐIỂM SỐ CỦA BẠN</p>
+                            
+                            {/* Hiển thị cảnh báo gian lận */}
+                            {cheatWarnings > 0 && (
+                                <div className="mb-4 p-4 bg-red-50 border-2 border-red-200 rounded-xl">
+                                    <div className="text-red-600 font-bold mb-2">
+                                        <i className="fas fa-exclamation-triangle mr-2"></i>
+                                        CẢNH BÁO GIAN LẬN
+                                    </div>
+                                    <div className="text-red-500 text-sm">
+                                        Bạn đã bị ghi nhận {cheatWarnings} lần vi phạm quy chế thi
+                                    </div>
+                                </div>
+                            )}
+                            
                             <p className="text-slate-400 text-sm mb-6">Kết quả đã được lưu. Giáo viên có thể xuất Excel để xem.</p>
                             <button onClick={start} className="w-full bg-slate-800 text-white py-4 rounded-xl font-bold hover:bg-black transition-all mb-3">
                                 THỬ THÁCH LẠI
@@ -615,12 +702,33 @@
 
             return (
                 <div className="max-w-2xl mx-auto px-4 py-10 tex2jax_process">
+                    {/* Cảnh báo gian lận */}
+                    {showCheatAlert && (
+                        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-red-600 text-white px-6 py-4 rounded-xl shadow-2xl border-2 border-red-700 animate-pulse">
+                            <div className="flex items-center gap-3">
+                                <i className="fas fa-exclamation-triangle text-2xl"></i>
+                                <div>
+                                    <div className="font-bold text-lg">CẢNH BÁO GIAN LẬN!</div>
+                                    <div className="text-sm">Bạn đã rời khỏi tab thi. Lần {cheatWarnings}</div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     <div className="flex justify-between items-center mb-6">
                         <div className="bg-white px-4 py-2 rounded-xl shadow-sm border font-bold text-slate-600">
                             Câu {currentIdx + 1}/50
                         </div>
-                        <div className="bg-blue-600 px-6 py-2 rounded-xl shadow-md text-white font-black">
-                            <i className="fas fa-star mr-2 text-yellow-300"></i> {score}
+                        <div className="flex items-center gap-2">
+                            {cheatWarnings > 0 && (
+                                <div className="bg-red-100 text-red-600 px-3 py-2 rounded-xl border border-red-200 font-bold text-sm">
+                                    <i className="fas fa-exclamation-triangle mr-1"></i>
+                                    {cheatWarnings} cảnh báo
+                                </div>
+                            )}
+                            <div className="bg-blue-600 px-6 py-2 rounded-xl shadow-md text-white font-black">
+                                <i className="fas fa-star mr-2 text-yellow-300"></i> {score}
+                            </div>
                         </div>
                     </div>
 

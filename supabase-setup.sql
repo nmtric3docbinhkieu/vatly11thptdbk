@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS quiz_attempts (
   score INT NOT NULL,
   total_questions INT NOT NULL,
   attempt_number INT NOT NULL,
+  cheat_warnings INT DEFAULT 0, -- Thêm cột ghi nhận số lần gian lận
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -42,6 +43,8 @@ SELECT
   COUNT(qa.id) AS "Số lần làm bài",
   COALESCE(MAX(qa.score), 0) AS "Điểm cao nhất",
   COALESCE(ROUND(AVG(qa.score)::numeric, 1), 0) AS "Điểm trung bình",
+  COALESCE(SUM(qa.cheat_warnings), 0) AS "Tổng cảnh báo gian lận",
+  COALESCE(MAX(qa.cheat_warnings), 0) AS "Cảnh báo cao nhất",
   MIN(qa.created_at) AS "Lần đầu làm",
   MAX(qa.created_at) AS "Lần cuối làm"
 FROM students s
