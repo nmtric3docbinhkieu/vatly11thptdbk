@@ -49,21 +49,58 @@
             adminPassword: 'teacher123'                       // Mật khẩu giáo viên để xuất Excel
         };
 
+        // Flag để theo dõi trạng thái Supabase
+        let supabaseStatus = { connected: false, error: null };
+
+        // Test kết nối Supabase
+        const testSupabaseConnection = async () => {
+            try {
+                const supabase = getSupabase();
+                if (!supabase) {
+                    supabaseStatus = { connected: false, error: 'Supabase chưa cấu hình' };
+                    return false;
+                }
+                
+                const { data, error } = await supabase.from('students').select('count').limit(1);
+                if (error) {
+                    supabaseStatus = { connected: false, error: error.message };
+                    console.error('❌ Kết nối Supabase thất bại:', error.message);
+                    return false;
+                }
+                
+                supabaseStatus = { connected: true, error: null };
+                console.log('✅ Supabase kết nối thành công');
+                return true;
+            } catch (err) {
+                supabaseStatus = { connected: false, error: err.message };
+                console.error('❌ Lỗi test Supabase:', err.message);
+                return false;
+            }
+        };
+
         // Supabase client (chỉ khởi tạo khi đã cấu hình)
         const getSupabase = () => {
             if (!CONFIG.supabaseUrl || CONFIG.supabaseUrl.includes('YOUR_PROJECT')) {
                 console.error('❌ Supabase URL chưa được cấu hình!');
+                console.warn('📋 Vui lòng cập nhật CONFIG.supabaseUrl trong file index.html');
                 return null;
             }
             if (!CONFIG.supabaseKey || CONFIG.supabaseKey.includes('YOUR_ANON_KEY')) {
                 console.error('❌ Supabase Key chưa được cấu hình!');
+                console.warn('📋 Vui lòng cập nhật CONFIG.supabaseKey trong file index.html');
                 return null;
             }
             
             try {
-                return window.supabase?.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey) || null;
+                const client = window.supabase?.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey);
+                if (!client) {
+                    console.error('❌ Không thể tạo Supabase client. Thư viện supabase có thể chưa load.');
+                    return null;
+                }
+                return client;
             } catch (err) {
-                console.error('❌ Lỗi khi tạo Supabase client:', err);
+                console.error('❌ Lỗi khi tạo Supabase client:', err.message);
+                console.error('Chi tiết:', err);
                 return null;
             }
         };
@@ -225,6 +262,9 @@
             const [adminError, setAdminError] = useState('');
             const [exportLoading, setExportLoading] = useState(false);
 
+            // Trạng thái kết nối Supabase
+            const [supabaseConnected, setSupabaseConnected] = useState(false);
+
             const renderMath = useCallback(() => {
                 if (window.MathJax && window.MathJax.typesetPromise) {
                     window.MathJax.typesetPromise();
@@ -239,15 +279,27 @@
 
             // Kiểm tra kết nối Supabase khi component tải
             useEffect(() => {
-                const supabase = getSupabase();
-                if (supabase) {
-                    console.log('✅ Supabase đã được khởi tạo thành công');
-                    console.log('URL:', CONFIG.supabaseUrl);
-                } else {
-                    console.error('❌ Không thể khởi tạo Supabase!');
-                    console.error('URL:', CONFIG.supabaseUrl);
-                    console.error('Key tồn tại:', !!CONFIG.supabaseKey);
-                }
+                const checkConnection = async () => {
+                    const supabase = getSupabase();
+                    if (!supabase) {
+                        console.error('❌ Supabase client không khả dụng');
+                        setSupabaseConnected(false);
+                        return;
+                    }
+                    
+                    console.log('📡 Kiểm tra kết nối Supabase...');
+                    const connected = await testSupabaseConnection();
+                    setSupabaseConnected(connected);
+                    
+                    if (connected) {
+                        console.log('✅ Supabase kết nối thành công');
+                        console.log('🌐 URL:', CONFIG.supabaseUrl);
+                    } else {
+                        console.warn('⚠️ Supabase chưa kết nối được. Ứng dụng vẫn chạy được ở mode offline.');
+                        console.warn('❌ Lỗi:', supabaseStatus.error);
+                    }
+                };
+                checkConnection();
             }, []);
 
             // Theo dõi thời gian làm bài
@@ -486,35 +538,42 @@
             const saveQuizResult = async (finalScore, warnings = 0, timeTaken = 0) => {
                 const supabase = getSupabase();
                 if (!supabase) {
-                    console.error('Supabase chưa được khởi tạo!');
-                    return;
+                    console.error('❌ Supabase chưa được khởi tạo!');
+                    console.warn('⚠️ Kết quả không thể lưu được. Vui lòng kiểm tra cấu hình Supabase.');
+                    return false;
                 }
                 if (!student) {
-                    console.error('Không có thông tin student!');
-                    return;
+                    console.error('❌ Không có thông tin student!');
+                    return false;
                 }
 
                 try {
-                    console.log('Bắt đầu lưu kết quả:', { finalScore, warnings, timeTaken, student });
+                    console.log('📝 Bắt đầu lưu kết quả:', { finalScore, warnings, timeTaken, student });
                     
                     const { data, error } = await supabase.from('quiz_attempts').insert({
                         student_id: student.id,
                         score: finalScore,
                         total_questions: 50,
-                        attempt_number: 1, // Tạm thời hardcode
-                        time_taken: timeTaken, // Thêm thời gian làm bài
-                        cheat_warnings: warnings // Thêm số lần cảnh báo gian lận
+                        attempt_number: 1,
+                        time_taken: timeTaken,
+                        cheat_warnings: warnings
                     }).select();
 
                     if (error) {
-                        console.error('Lỗi Supabase khi lưu:', error);
-                        throw error;
+                        console.error('❌ Lỗi Supabase khi lưu:', error);
+                        console.error('📋 Lỗi chi tiết:', { code: error.code, message: error.message });
+                        if (error.message?.includes('relation')) {
+                            console.error('⚠️ Bảng quiz_attempts chưa được tạo hoặc Supabase chưa khởi tạo.');
+                        }
+                        return false;
                     }
                     
-                    console.log('Lưu kết quả thành công:', data);
+                    console.log('✅ Lưu kết quả thành công:', data);
+                    return true;
                 } catch (err) {
-                    console.error('Không lưu được kết quả:', err);
-                    console.error('Chi tiết lỗi:', err.message);
+                    console.error('❌ Lỗi exception khi lưu kết quả:', err);
+                    console.error('📋 Chi tiết lỗi:', { name: err.name, message: err.message, stack: err.stack });
+                    return false;
                 }
             };
 
