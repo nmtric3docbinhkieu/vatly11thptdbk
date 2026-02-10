@@ -319,24 +319,18 @@
                 if (!supabase) return;
                 setLoadingLeaderboard(true);
                 try {
-                    console.log('Đang lấy dữ liệu bảng xếp hạng...');
                     const { data, error } = await supabase.from('leaderboard').select('*').limit(50);
                     if (error) {
-                        console.error('Lỗi Supabase:', error);
+                        // Log chi tiết lỗi
+                        console.error('Supabase fetch error:', error);
+                        alert('Supabase fetch error: ' + JSON.stringify(error));
+                        setLoadingLeaderboard(false);
                         return;
                     }
-                    if (data) {
-                        console.log('Dữ liệu bảng xếp hạng:', data);
-                        console.log('Thông tin user hiện tại:', {
-                            name: student?.full_name,
-                            class: student?.class_name,
-                            score: finalScore,
-                            time: elapsedTime
-                        });
-                        setLeaderboard(data);
-                    }
+                    setLeaderboard(data);
                 } catch (err) {
                     console.error('Lỗi lấy bảng xếp hạng:', err);
+                    alert('Lỗi lấy bảng xếp hạng: ' + err.message);
                 } finally {
                     setLoadingLeaderboard(false);
                 }
@@ -630,19 +624,19 @@
                             <form onSubmit={authMode === 'login' ? handleLogin : handleRegister} className="space-y-4">
                                 <div>
                                     <label className="block text-sm font-bold text-slate-600 mb-1">Họ và tên</label>
-                                    <input type="text" value={authForm.fullName} onChange={e => setAuthForm(f => ({ ...f, fullName: e.target.value }))}
+                                    <input type="text" value={authForm.fullName} onChange={e => setAuthForm(f => ({ ...f, fullName: e.target.value }))
                                         className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
                                         placeholder="Nguyễn Văn A" autoComplete="name" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-bold text-slate-600 mb-1">Lớp</label>
-                                    <input type="text" value={authForm.className} onChange={e => setAuthForm(f => ({ ...f, className: e.target.value }))}
+                                    <input type="text" value={authForm.className} onChange={e => setAuthForm(f => ({ ...f, className: e.target.value }))
                                         className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
                                         placeholder="11A1" autoComplete="off" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-bold text-slate-600 mb-1">Mật khẩu</label>
-                                    <input type="password" value={authForm.password} onChange={e => setAuthForm(f => ({ ...f, password: e.target.value }))}
+                                    <input type="password" value={authForm.password} onChange={e => setAuthForm(f => ({ ...f, password: e.target.value }))
                                         className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
                                         placeholder="••••••" autoComplete={authMode === 'login' ? 'current-password' : 'new-password'} />
                                 </div>
