@@ -278,7 +278,7 @@
                         console.log('Thông tin user hiện tại:', {
                             name: student?.full_name,
                             class: student?.class_name,
-                            score: finalScore,
+                            score: score,
                             time: elapsedTime
                         });
                         setLeaderboard(data);
@@ -359,7 +359,9 @@
 
             const start = () => {
                 initAudio(); // Kích hoạt AudioContext qua tương tác người dùng
-                const shuffled = [...questionDatabase].sort(() => Math.random() - 0.5);
+                // DÙNG 5 CÂU ĐẦU ĐỂ TEST
+const testQuestions = questionDatabase.slice(0, 5); // Lấy 5 câu đầu
+const shuffled = [...testQuestions].sort(() => Math.random() - 0.5);
                 setQuestions(shuffled);
                 setCurrentIdx(0);
                 setScore(0);
@@ -842,8 +844,8 @@
                     const currentUserRank = leaderboard.find(item => 
                         student && 
                         item.full_name === student.full_name && 
-                        item.class_name === student.class_name &&
-                        Math.abs(item.score - finalScore) < 0.01
+                        item.class_name === student.class_name
+                        
                     );
                     
                     console.log('User hiện tại:', student);
