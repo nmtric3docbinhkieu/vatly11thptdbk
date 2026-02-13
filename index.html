@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vật Lí 11 - Trắc Nghiệm 4 Chương</title>
+    <title>Vật Lí 11 - Học kỳ 2</title>
     
     <!-- Scripts CDN -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -250,81 +250,320 @@
             };
 
             // Render
-            if (!student) {
-                // Login screen (giữ nguyên code login từ file cũ)
-                return (
-                    <div className="flex items-center justify-center min-h-screen p-4">
-                        <div className="glass-panel p-10 max-w-md w-full border-t-8 border-blue-500">
-                            <h1 className="text-2xl font-black text-center mb-6">ĐĂNG NHẬP</h1>
-                            <p className="text-center text-slate-500 mb-6">Vật Lí 11 - Trắc nghiệm 4 chương</p>
-                            
-                            <form onSubmit={(e) => {
-                                e.preventDefault();
-                                // Tạm thời cho login giả để test
-                                const fakeStudent = {
-                                    id: 1,
-                                    full_name: 'Học sinh',
-                                    class_name: '11A1'
-                                };
-                                setStudent(fakeStudent);
-                                localStorage.setItem(window.CONFIG?.storageKey || 'vatly11_student', JSON.stringify(fakeStudent));
-                            }}>
-                                <input 
-                                    type="text" 
-                                    placeholder="Họ và tên" 
-                                    className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 mb-4"
-                                />
-                                <input 
-                                    type="text" 
-                                    placeholder="Lớp" 
-                                    className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 mb-4"
-                                />
-                                <input 
-                                    type="password" 
-                                    placeholder="Mật khẩu" 
-                                    className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 mb-6"
-                                />
-                                <button 
-                                    type="submit"
-                                    className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-blue-700"
-                                >
-                                    ĐĂNG NHẬP
-                                </button>
-                            </form>
-                            
-                            <button 
-                                onClick={() => setAdminMode(true)}
-                                className="w-full mt-6 text-slate-400 text-sm hover:text-slate-600"
-                            >
-                                Giáo viên: Xuất Excel
-                            </button>
-                        </div>
-                        
-                        {/* Admin modal */}
-                        {adminMode && (
-                            <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4" onClick={() => setAdminMode(false)}>
-                                <div className="glass-panel p-8 max-w-sm w-full" onClick={e => e.stopPropagation()}>
-                                    <h3 className="text-lg font-black mb-4">Xuất Excel</h3>
-                                    <form onSubmit={handleAdminExport}>
-                                        <input 
-                                            type="password" 
-                                            value={adminPassword}
-                                            onChange={e => setAdminPassword(e.target.value)}
-                                            className="w-full px-4 py-3 rounded-xl border-2 mb-4"
-                                            placeholder="Mật khẩu giáo viên"
-                                        />
-                                        {adminError && <div className="text-red-600 text-sm mb-4">{adminError}</div>}
-                                        <div className="flex gap-2">
-                                            <button type="button" onClick={() => setAdminMode(false)} className="flex-1 py-3 rounded-xl border-2">Hủy</button>
-                                            <button type="submit" className="flex-1 py-3 rounded-xl bg-slate-700 text-white">Xuất</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+            // ===== LOGIN SCREEN MỚI - CÓ ĐĂNG KÝ =====
+if (!student) {
+    const [authMode, setAuthMode] = useState('login'); // 'login' | 'register' | 'pending'
+    const [authForm, setAuthForm] = useState({ fullName: '', className: '', password: '' });
+    const [authError, setAuthError] = useState('');
+    const [authLoading, setAuthLoading] = useState(false);
+    const [registerSuccess, setRegisterSuccess] = useState(false);
+    
+    const handleLogin = async (e) => {
+        e?.preventDefault();
+        setAuthError('');
+        
+        if (!authForm.fullName.trim() || !authForm.className.trim() || !authForm.password) {
+            setAuthError('Vui lòng điền đầy đủ thông tin');
+            return;
+        }
+        
+        setAuthLoading(true);
+        
+        const result = await window.loginStudent(
+            authForm.fullName.trim(),
+            authForm.className.trim(),
+            authForm.password
+        );
+        
+        setAuthLoading(false);
+        
+        if (result.success) {
+            setStudent(result.data);
+            setAuthForm({ fullName: '', className: '', password: '' });
+        } else {
+            if (result.needsApproval) {
+                setAuthMode('pending');
+                setAuthError('');
+            } else {
+                setAuthError(result.error || 'Đăng nhập thất bại');
+            }
+        }
+    };
+    
+    const handleRegister = async (e) => {
+        e?.preventDefault();
+        setAuthError('');
+        
+        if (!authForm.fullName.trim() || !authForm.className.trim() || !authForm.password) {
+            setAuthError('Vui lòng điền đầy đủ thông tin');
+            return;
+        }
+        
+        if (authForm.password.length < 4) {
+            setAuthError('Mật khẩu tối thiểu 4 ký tự');
+            return;
+        }
+        
+        setAuthLoading(true);
+        
+        const result = await window.registerStudent(
+            authForm.fullName.trim(),
+            authForm.className.trim(),
+            authForm.password
+        );
+        
+        setAuthLoading(false);
+        
+        if (result.success) {
+            setRegisterSuccess(true);
+            setAuthForm({ fullName: '', className: '', password: '' });
+            setTimeout(() => {
+                setAuthMode('login');
+                setRegisterSuccess(false);
+            }, 3000);
+        } else {
+            setAuthError(result.error || 'Đăng ký thất bại');
+        }
+    };
+    
+    // MÀN HÌNH CHỜ DUYỆT
+    if (authMode === 'pending') {
+        return (
+            <div className="flex items-center justify-center min-h-screen p-4">
+                <div className="glass-panel p-10 max-w-md w-full border-t-8 border-yellow-500 text-center">
+                    <i className="fas fa-hourglass-half text-6xl text-yellow-500 mb-6"></i>
+                    <h2 className="text-2xl font-black text-slate-800 mb-4">CHỜ PHÊ DUYỆT</h2>
+                    <p className="text-slate-600 mb-6">
+                        Tài khoản của bạn đang chờ giáo viên phê duyệt.<br />
+                        Vui lòng quay lại sau.
+                    </p>
+                    <button
+                        onClick={() => setAuthMode('login')}
+                        className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-blue-700"
+                    >
+                        Quay lại đăng nhập
+                    </button>
+                </div>
+            </div>
+        );
+    }
+    
+    // MÀN HÌNH ĐĂNG KÝ/ĐĂNG NHẬP
+    return (
+        <div className="flex items-center justify-center min-h-screen p-4">
+            <div className="glass-panel p-10 max-w-md w-full border-t-8 border-blue-500 shadow-2xl">
+                <div className="text-center mb-8">
+                    <i className="fas fa-user-graduate text-5xl text-blue-500 mb-4"></i>
+                    <h1 className="text-2xl font-black text-slate-800">
+                        {authMode === 'login' ? 'ĐĂNG NHẬP' : 'ĐĂNG KÝ TÀI KHOẢN'}
+                    </h1>
+                    <p className="text-slate-500 text-sm mt-1">Vật Lí 11 - Chân trời sáng tạo</p>
+                </div>
+                
+                {registerSuccess && (
+                    <div className="mb-6 p-4 bg-green-50 border-2 border-green-200 rounded-xl text-green-700 text-center">
+                        <i className="fas fa-check-circle mr-2"></i>
+                        Đăng ký thành công! Vui lòng đăng nhập sau khi được duyệt.
+                    </div>
+                )}
+                
+                <form onSubmit={authMode === 'login' ? handleLogin : handleRegister} className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-bold text-slate-600 mb-1">Họ và tên</label>
+                        <input
+                            type="text"
+                            value={authForm.fullName}
+                            onChange={e => setAuthForm(f => ({ ...f, fullName: e.target.value }))}
+                            className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
+                            placeholder="Nguyễn Văn A"
+                            disabled={authLoading}
+                        />
+                    </div>
+                    
+                    <div>
+                        <label className="block text-sm font-bold text-slate-600 mb-1">Lớp</label>
+                        <input
+                            type="text"
+                            value={authForm.className}
+                            onChange={e => setAuthForm(f => ({ ...f, className: e.target.value }))}
+                            className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
+                            placeholder="11A1"
+                            disabled={authLoading}
+                        />
+                    </div>
+                    
+                    <div>
+                        <label className="block text-sm font-bold text-slate-600 mb-1">Mật khẩu</label>
+                        <input
+                            type="password"
+                            value={authForm.password}
+                            onChange={e => setAuthForm(f => ({ ...f, password: e.target.value }))}
+                            className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
+                            placeholder="••••••"
+                            disabled={authLoading}
+                        />
+                        {authMode === 'register' && (
+                            <p className="text-xs text-slate-500 mt-1">Tối thiểu 4 ký tự</p>
                         )}
                     </div>
-                );
-            }
+                    
+                    {authError && (
+                        <div className="text-red-600 text-sm bg-red-50 p-3 rounded-xl">
+                            <i className="fas fa-exclamation-circle mr-2"></i>
+                            {authError}
+                        </div>
+                    )}
+                    
+                    <button
+                        type="submit"
+                        disabled={authLoading}
+                        className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 disabled:opacity-60 transition-all"
+                    >
+                        {authLoading ? 'Đang xử lý...' : (authMode === 'login' ? 'ĐĂNG NHẬP' : 'ĐĂNG KÝ')}
+                    </button>
+                </form>
+                
+                <button
+                    type="button"
+                    onClick={() => {
+                        setAuthMode(authMode === 'login' ? 'register' : 'login');
+                        setAuthError('');
+                        setAuthForm({ fullName: '', className: '', password: '' });
+                    }}
+                    className="w-full mt-4 text-blue-600 text-sm font-semibold hover:underline"
+                >
+                    {authMode === 'login' 
+                        ? 'Chưa có tài khoản? Đăng ký ngay' 
+                        : 'Đã có tài khoản? Đăng nhập'}
+                </button>
+                
+                   
+    {/* Nút mới: Đi đến trang Admin riêng */}
+    <a
+        href="admin.html"
+        className="flex items-center justify-center gap-2 text-blue-600 text-sm font-semibold hover:text-blue-800 py-3"
+    >
+        <i className="fas fa-cog"></i>
+        Quản trị hệ thống
+        <i className="fas fa-external-link-alt text-xs"></i>
+    </a>
+            </div>
+            
+            {/* MODAL ADMIN MỚI - Quản lý phê duyệt */}
+            {adminMode && (
+                <AdminApprovalModal 
+                    onClose={() => setAdminMode(false)}
+                    onApprove={async (id) => {
+                        const result = await window.approveStudent(id, adminPassword);
+                        if (result.success) {
+                            alert('Đã phê duyệt!');
+                        } else {
+                            alert('Lỗi: ' + result.error);
+                        }
+                    }}
+                    onReject={async (id) => {
+                        if (confirm('Xóa học sinh này?')) {
+                            const result = await window.rejectStudent(id, adminPassword);
+                            if (result.success) {
+                                alert('Đã xóa!');
+                            } else {
+                                alert('Lỗi: ' + result.error);
+                            }
+                        }
+                    }}
+                />
+            )}
+        </div>
+    );
+}
+
+// ===== COMPONENT MODAL ADMIN MỚI =====
+const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
+    const [password, setPassword] = useState('');
+    const [pendingList, setPendingList] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    
+    const loadPending = async () => {
+        if (password !== window.CONFIG.adminPassword) {
+            setError('Sai mật khẩu');
+            return;
+        }
+        
+        setLoading(true);
+        const result = await window.getPendingApprovals(password);
+        setLoading(false);
+        
+        if (result.success) {
+            setPendingList(result.data);
+            setError('');
+        } else {
+            setError(result.error);
+        }
+    };
+    
+    return (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" onClick={onClose}>
+            <div className="glass-panel p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+                <h3 className="text-lg font-black text-slate-800 mb-4">QUẢN LÝ PHÊ DUYỆT HỌC SINH</h3>
+                
+                <div className="mb-6">
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 mb-2"
+                        placeholder="Mật khẩu giáo viên"
+                    />
+                    <button
+                        onClick={loadPending}
+                        disabled={loading}
+                        className="w-full bg-slate-700 text-white py-3 rounded-xl font-bold hover:bg-slate-800 disabled:opacity-50"
+                    >
+                        {loading ? 'Đang tải...' : 'Tải danh sách chờ duyệt'}
+                    </button>
+                    {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
+                </div>
+                
+                {pendingList.length === 0 ? (
+                    <p className="text-center text-slate-500 py-8">Không có học sinh chờ duyệt</p>
+                ) : (
+                    <div className="space-y-3">
+                        {pendingList.map(s => (
+                            <div key={s.id} className="p-4 bg-slate-50 rounded-xl flex items-center justify-between">
+                                <div>
+                                    <p className="font-bold">{s.full_name}</p>
+                                    <p className="text-sm text-slate-500">Lớp: {s.class_name}</p>
+                                    <p className="text-xs text-slate-400">
+                                        Đăng ký: {new Date(s.created_at).toLocaleString('vi-VN')}
+                                    </p>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => onApprove(s.id)}
+                                        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                                    >
+                                        <i className="fas fa-check mr-1"></i>Duyệt
+                                    </button>
+                                    <button
+                                        onClick={() => onReject(s.id)}
+                                        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                                    >
+                                        <i className="fas fa-times mr-1"></i>Từ chối
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+                
+                <button onClick={onClose} className="w-full mt-6 py-3 rounded-xl border-2 border-slate-200">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    );
+};
 
             // Chapter selection
             if (gameState === 'start') {

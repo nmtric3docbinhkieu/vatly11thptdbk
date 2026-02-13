@@ -4,12 +4,17 @@
 // Cấu hình chung cho toàn bộ ứng dụng
 
 window.CONFIG = {
-    // Supabase configuration
     supabaseUrl: 'https://bxffaxcimeturttxqrme.supabase.co',
     supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4ZmZheGNpbWV0dXJ0dHhxcm1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MDk1MzQsImV4cCI6MjA4NTk4NTUzNH0.uU3H707Qjfd2X4iQN3K9KKhsvNZkYn8v8zB_5lthzr0',
-    
-    // Mật khẩu giáo viên
     adminPassword: 'teacher123',
+    storageKey: 'vatly11_student',
+    // THÊM CẤU HÌNH MỚI
+    appSettings: {
+        allowRegistration: true,           // Cho phép đăng ký
+        requireApproval: true,             // Cần phê duyệt
+        defaultApproved: false,             // Mặc định chưa được duyệt
+        adminEmails: ['nmtri.c3docbinhkieu@dongthap.edu.vn']    // Email admin nhận thông báo
+    },
     
     // Thông tin các chương
     chapters: {
