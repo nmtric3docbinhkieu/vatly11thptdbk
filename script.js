@@ -89,6 +89,8 @@ const chapterData = {
 // Biến toàn cục
 let currentChapter = null;
 let studentInfo = null;
+let shuffledPracticeQuestions = [];
+let shuffledHomeworkQuestions = [];
 
 // Đăng ký thông tin học sinh
 document.getElementById('studentForm').addEventListener('submit', function(e) {
@@ -184,10 +186,18 @@ function showTab(tabId) {
     });
     
     // Hiển thị tab được chọn
-    document.getElementById(`${tabId}-tab`).classList.add('active');
-    
     // Đánh dấu nút tab đang active
     document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+}
+
+// Hàm trộn mảng (Fisher-Yates shuffle)
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
 }
 
 // Tải nội dung kiến thức
@@ -195,7 +205,8 @@ function loadKnowledgeContent(chapter) {
     const container = document.querySelector('.knowledge-content');
     container.innerHTML = '';
     
-    chapter.knowledge.forEach((item, index) => {
+    const shuffledKnowledge = shuffleArray(chapter.knowledge);
+    shuffledKnowledge.forEach((item, index) => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'knowledge-item';
         
@@ -221,7 +232,25 @@ function loadPracticeQuestions(chapter) {
     const container = document.querySelector('#practice-tab .quiz-container');
     container.innerHTML = '';
     
-    chapter.practiceQuestions.forEach((q, index) => {
+    // Trộn câu hỏi và lưu vào biến toàn cục
+    shuffledPracticeQuestions = shuffleArray(chapter.practiceQuestions).map(q => {
+        // Tạo bản sao của câu hỏi
+        const questionCopy = { ...q };
+        
+        // Trộn đáp án và theo dõi vị trí đúng
+        const shuffledOptions = shuffleArray(q.options.map((option, index) => ({
+            text: option,
+            originalIndex: index
+        })));
+        
+        // Cập nhật lại options và correct
+        questionCopy.options = shuffledOptions.map(opt => opt.text);
+        questionCopy.correct = shuffledOptions.findIndex(opt => opt.originalIndex === q.correct);
+        
+        return questionCopy;
+    });
+    
+    shuffledPracticeQuestions.forEach((q, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.className = 'question-item';
         questionDiv.innerHTML = `
@@ -244,7 +273,25 @@ function loadHomeworkQuestions(chapter) {
     const container = document.querySelector('#homework-tab .quiz-container');
     container.innerHTML = '';
     
-    chapter.homeworkQuestions.forEach((q, index) => {
+    // Trộn câu hỏi và lưu vào biến toàn cục
+    shuffledHomeworkQuestions = shuffleArray(chapter.homeworkQuestions).map(q => {
+        // Tạo bản sao của câu hỏi
+        const questionCopy = { ...q };
+        
+        // Trộn đáp án và theo dõi vị trí đúng
+        const shuffledOptions = shuffleArray(q.options.map((option, index) => ({
+            text: option,
+            originalIndex: index
+        })));
+        
+        // Cập nhật lại options và correct
+        questionCopy.options = shuffledOptions.map(opt => opt.text);
+        questionCopy.correct = shuffledOptions.findIndex(opt => opt.originalIndex === q.correct);
+        
+        return questionCopy;
+    });
+    
+    shuffledHomeworkQuestions.forEach((q, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.className = 'question-item';
         questionDiv.innerHTML = `
@@ -269,11 +316,10 @@ document.getElementById('submitPractice').addEventListener('click', function() {
         return;
     }
     
-    const chapter = chapterData[currentChapter];
     let score = 0;
-    const totalQuestions = chapter.practiceQuestions.length;
+    const totalQuestions = shuffledPracticeQuestions.length;
     
-    chapter.practiceQuestions.forEach((q, index) => {
+    shuffledPracticeQuestions.forEach((q, index) => {
         const selected = document.querySelector(`input[name="practice_q${index}"]:checked`);
         if (selected && parseInt(selected.value) === q.correct) {
             score++;
@@ -301,11 +347,10 @@ document.getElementById('submitHomework').addEventListener('click', function() {
         return;
     }
     
-    const chapter = chapterData[currentChapter];
     let score = 0;
-    const totalQuestions = chapter.homeworkQuestions.length;
+    const totalQuestions = shuffledHomeworkQuestions.length;
     
-    chapter.homeworkQuestions.forEach((q, index) => {
+    shuffledHomeworkQuestions.forEach((q, index) => {
         const selected = document.querySelector(`input[name="homework_q${index}"]:checked`);
         if (selected && parseInt(selected.value) === q.correct) {
             score++;
