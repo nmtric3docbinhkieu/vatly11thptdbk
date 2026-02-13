@@ -267,24 +267,30 @@
     if (!supabase) return;
     
     setLoadingLeaderboard(true);
+    
+    // 👇 TẠO ABORT CONTROLLER
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    
     try {
         const { data, error } = await supabase
             .from('leaderboard')
             .select('*')
             .limit(50)
-            .abortSignal(AbortSignal.timeout(5000)); // Timeout 5 giây
+            .abortSignal(controller.signal); // 👉 GẮN SIGNAL
         
-        if (error) {
-            console.warn('Leaderboard timeout hoặc lỗi nhẹ:', error.message);
+        clearTimeout(timeoutId);
+        
+        if (error) throw error;
+        setLeaderboard(data || []);
+        
+    } catch (err) {
+        // 👇 CHẶN HOÀN TOÀN LỖI FETCHERROR
+        if (err.name === 'AbortError' || err.name === 'FetchError') {
+            console.log('⏱️ Bỏ qua lỗi timeout/network - không ảnh hưởng app');
             return;
         }
-        
-        setLeaderboard(data || []);
-    } catch (err) {
-        // Không log lỗi network ra console
-        if (err.name !== 'AbortError' && err.name !== 'FetchError') {
-            console.error('Lỗi leaderboard:', err);
-        }
+        console.error('Lỗi khác:', err);
     } finally {
         setLoadingLeaderboard(false);
     }
