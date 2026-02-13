@@ -532,30 +532,89 @@
                 }
                 setExportLoading(true);
                 try {
-                    const { data: summary, error } = await supabase.from('quiz_summary').select('*');
-                    if (error) throw error;
-                    const rows = (summary || []).map((r, i) => ({
-                        'STT': i + 1,
-                        'Họ và tên': r['Họ và tên'] || '',
-                        'Lớp': r['Lớp'] || '',
-                        'Số lần làm bài': r['Số lần làm bài'] || 0,
-                        'Điểm cao nhất': r['Điểm cao nhất'] || 0,
-                        'Điểm trung bình': r['Điểm trung bình'] || 0,
-                        'Tổng cảnh báo gian lận': r['Tổng cảnh báo gian lận'] || 0,
-                        'Cảnh báo cao nhất': r['Cảnh báo cao nhất'] || 0,
-                        'Lần đầu làm': r['Lần đầu làm'] ? new Date(r['Lần đầu làm']).toLocaleString('vi-VN') : '',
-                        'Lần cuối làm': r['Lần cuối làm'] ? new Date(r['Lần cuối làm']).toLocaleString('vi-VN') : ''
-                    }));
-                    const ws = window.XLSX.utils.json_to_sheet(rows);
-                    const wb = window.XLSX.utils.book_new();
-                    window.XLSX.utils.book_append_sheet(wb, ws, 'Kết quả trắc nghiệm');
-                    window.XLSX.writeFile(wb, 'ket-qua-trac-nghiem-vatly11-' + new Date().toISOString().slice(0,10) + '.xlsx');
-                    setAdminMode(false);
-                    setAdminPassword('');
-                } catch (err) {
-                    setAdminError('Lỗi xuất file. Kiểm tra kết nối Supabase và đã chạy supabase-setup.sql chưa.');
-                    console.error(err);
-                } finally { setExportLoading(false); }
+    let summary = [];
+    let error = null;
+    
+    // 👉 THỬ LẤY TỪ VIEW QUIZ_SUMMARY TRƯỚC
+    try {
+        const result = await supabase.from('quiz_summary').select('*');
+        if (!result.error) {
+            summary = result.data || [];
+            console.log('Lấy dữ liệu từ quiz_summary thành công:', summary);
+        } else {
+            error = result.error;
+            console.warn('Không lấy được quiz_summary:', error);
+        }
+    } catch (e) {
+        console.warn('Lỗi khi truy vấn quiz_summary:', e);
+    }
+    
+    // 👉 NẾU KHÔNG LẤY ĐƯỢC, TỰ JOIN DỮ LIỆU
+    if (!summary || summary.length === 0) {
+        console.log('Đang tự tổng hợp dữ liệu từ students và quiz_attempts...');
+        
+        // Lấy tất cả học sinh kèm bài làm
+        const { data: students, error: sErr } = await supabase
+            .from('students')
+            .select('*, quiz_attempts(*)');
+        
+        if (sErr) throw sErr;
+        
+        // Tự tổng hợp dữ liệu
+        summary = (students || []).map(student => {
+            const attempts = student.quiz_attempts || [];
+            const scores = attempts.map(a => a.score).filter(s => s != null);
+            const warnings = attempts.map(a => a.cheat_warnings || 0);
+            const dates = attempts.map(a => a.created_at).filter(d => d);
+            
+            return {
+                "Họ và tên": student.full_name,
+                "Lớp": student.class_name,
+                "Số lần làm bài": attempts.length,
+                "Điểm cao nhất": scores.length > 0 ? Math.max(...scores) : 0,
+                "Điểm trung bình": scores.length > 0 
+                    ? Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2))
+                    : 0,
+                "Tổng cảnh báo gian lận": warnings.reduce((a, b) => a + b, 0),
+                "Cảnh báo cao nhất": warnings.length > 0 ? Math.max(...warnings) : 0,
+                "Lần đầu làm": dates.length > 0 ? dates.sort()[0] : null,
+                "Lần cuối làm": dates.length > 0 ? dates.sort().reverse()[0] : null
+            };
+        });
+    }
+    
+    // 👉 TẠO ROWS CHO EXCEL
+    const rows = (summary || []).map((r, i) => ({
+        'STT': i + 1,
+        'Họ và tên': r['Họ và tên'] || r.full_name || '',
+        'Lớp': r['Lớp'] || r.class_name || '',
+        'Số lần làm bài': r['Số lần làm bài'] || 0,
+        'Điểm cao nhất': r['Điểm cao nhất'] || 0,
+        'Điểm trung bình': r['Điểm trung bình'] || 0,
+        'Tổng cảnh báo gian lận': r['Tổng cảnh báo gian lận'] || 0,
+        'Cảnh báo cao nhất': r['Cảnh báo cao nhất'] || 0,
+        'Lần đầu làm': r['Lần đầu làm'] 
+            ? new Date(r['Lần đầu làm']).toLocaleString('vi-VN') 
+            : '',
+        'Lần cuối làm': r['Lần cuối làm'] 
+            ? new Date(r['Lần cuối làm']).toLocaleString('vi-VN') 
+            : ''
+    }));
+    
+    // 👉 XUẤT EXCEL (GIỮ NGUYÊN)
+    const ws = window.XLSX.utils.json_to_sheet(rows);
+    const wb = window.XLSX.utils.book_new();
+    window.XLSX.utils.book_append_sheet(wb, ws, 'Kết quả trắc nghiệm');
+    window.XLSX.writeFile(wb, 'ket-qua-trac-nghiem-vatly11-' + new Date().toISOString().slice(0,10) + '.xlsx');
+    
+    setAdminMode(false);
+    setAdminPassword('');
+    
+} catch (err) {
+    console.error('Lỗi xuất Excel:', err);
+    setAdminError('Lỗi xuất file: ' + (err.message || 'Vui lòng thử lại'));
+} finally {
+    setExportLoading(false); }
             };
 
             // Màn hình đăng nhập / đăng ký (khi chưa đăng nhập)
