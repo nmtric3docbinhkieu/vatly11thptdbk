@@ -604,8 +604,37 @@
         'Điểm trung bình': r['Điểm trung bình'] || 0,
         'Tổng cảnh báo gian lận': r['Tổng cảnh báo gian lận'] || 0,
         'Cảnh báo cao nhất': r['Cảnh báo cao nhất'] || 0,
-        'Lần đầu làm': r['Lần đầu làm'] || '',
-'Lần cuối làm': r['Lần cuối làm'] || ''
+        'Lần đầu làm': r['Lần đầu làm'] 
+    ? (() => {
+        const d = new Date(r['Lần đầu làm']);
+        d.setHours(d.getHours() + 7); // Cộng 7 tiếng
+        
+        const day = d.getDate().toString().padStart(2, '0');
+        const month = (d.getMonth() + 1).toString().padStart(2, '0');
+        const year = d.getFullYear();
+        const hours = d.getHours().toString().padStart(2, '0');
+        const minutes = d.getMinutes().toString().padStart(2, '0');
+        const seconds = d.getSeconds().toString().padStart(2, '0');
+        
+        return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+      })()
+    : '',
+    
+'Lần cuối làm': r['Lần cuối làm'] 
+    ? (() => {
+        const d = new Date(r['Lần cuối làm']);
+        d.setHours(d.getHours() + 7); // Cộng 7 tiếng
+        
+        const day = d.getDate().toString().padStart(2, '0');
+        const month = (d.getMonth() + 1).toString().padStart(2, '0');
+        const year = d.getFullYear();
+        const hours = d.getHours().toString().padStart(2, '0');
+        const minutes = d.getMinutes().toString().padStart(2, '0');
+        const seconds = d.getSeconds().toString().padStart(2, '0');
+        
+        return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+      })()
+    : ''
     }));
     
     // 👉 XUẤT EXCEL (GIỮ NGUYÊN)
