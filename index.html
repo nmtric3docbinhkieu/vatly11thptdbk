@@ -360,8 +360,7 @@
             const start = () => {
                 initAudio(); // Kích hoạt AudioContext qua tương tác người dùng
                 // DÙNG 5 CÂU ĐẦU ĐỂ TEST
-const testQuestions = questionDatabase.slice(0, 5); // Lấy 5 câu đầu
-const shuffled = [...testQuestions].sort(() => Math.random() - 0.5);
+                const shuffled = [...questionDatabase].sort(() => Math.random() - 0.5);
                 setQuestions(shuffled);
                 setCurrentIdx(0);
                 setScore(0);
