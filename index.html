@@ -49,58 +49,21 @@
             adminPassword: 'teacher123'                       // Mật khẩu giáo viên để xuất Excel
         };
 
-        // Flag để theo dõi trạng thái Supabase
-        let supabaseStatus = { connected: false, error: null };
-
-        // Test kết nối Supabase
-        const testSupabaseConnection = async () => {
-            try {
-                const supabase = getSupabase();
-                if (!supabase) {
-                    supabaseStatus = { connected: false, error: 'Supabase chưa cấu hình' };
-                    return false;
-                }
-                
-                const { data, error } = await supabase.from('students').select('count').limit(1);
-                if (error) {
-                    supabaseStatus = { connected: false, error: error.message };
-                    console.error('❌ Kết nối Supabase thất bại:', error.message);
-                    return false;
-                }
-                
-                supabaseStatus = { connected: true, error: null };
-                console.log('✅ Supabase kết nối thành công');
-                return true;
-            } catch (err) {
-                supabaseStatus = { connected: false, error: err.message };
-                console.error('❌ Lỗi test Supabase:', err.message);
-                return false;
-            }
-        };
-
         // Supabase client (chỉ khởi tạo khi đã cấu hình)
         const getSupabase = () => {
             if (!CONFIG.supabaseUrl || CONFIG.supabaseUrl.includes('YOUR_PROJECT')) {
                 console.error('❌ Supabase URL chưa được cấu hình!');
-                console.warn('📋 Vui lòng cập nhật CONFIG.supabaseUrl trong file index.html');
                 return null;
             }
             if (!CONFIG.supabaseKey || CONFIG.supabaseKey.includes('YOUR_ANON_KEY')) {
                 console.error('❌ Supabase Key chưa được cấu hình!');
-                console.warn('📋 Vui lòng cập nhật CONFIG.supabaseKey trong file index.html');
                 return null;
             }
             
             try {
-                const client = window.supabase?.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey);
-                if (!client) {
-                    console.error('❌ Không thể tạo Supabase client. Thư viện supabase có thể chưa load.');
-                    return null;
-                }
-                return client;
+                return window.supabase?.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey) || null;
             } catch (err) {
-                console.error('❌ Lỗi khi tạo Supabase client:', err.message);
-                console.error('Chi tiết:', err);
+                console.error('❌ Lỗi khi tạo Supabase client:', err);
                 return null;
             }
         };
@@ -262,9 +225,6 @@
             const [adminError, setAdminError] = useState('');
             const [exportLoading, setExportLoading] = useState(false);
 
-            // Trạng thái kết nối Supabase
-            const [supabaseConnected, setSupabaseConnected] = useState(false);
-
             const renderMath = useCallback(() => {
                 if (window.MathJax && window.MathJax.typesetPromise) {
                     window.MathJax.typesetPromise();
@@ -279,27 +239,15 @@
 
             // Kiểm tra kết nối Supabase khi component tải
             useEffect(() => {
-                const checkConnection = async () => {
-                    const supabase = getSupabase();
-                    if (!supabase) {
-                        console.error('❌ Supabase client không khả dụng');
-                        setSupabaseConnected(false);
-                        return;
-                    }
-                    
-                    console.log('📡 Kiểm tra kết nối Supabase...');
-                    const connected = await testSupabaseConnection();
-                    setSupabaseConnected(connected);
-                    
-                    if (connected) {
-                        console.log('✅ Supabase kết nối thành công');
-                        console.log('🌐 URL:', CONFIG.supabaseUrl);
-                    } else {
-                        console.warn('⚠️ Supabase chưa kết nối được. Ứng dụng vẫn chạy được ở mode offline.');
-                        console.warn('❌ Lỗi:', supabaseStatus.error);
-                    }
-                };
-                checkConnection();
+                const supabase = getSupabase();
+                if (supabase) {
+                    console.log('✅ Supabase đã được khởi tạo thành công');
+                    console.log('URL:', CONFIG.supabaseUrl);
+                } else {
+                    console.error('❌ Không thể khởi tạo Supabase!');
+                    console.error('URL:', CONFIG.supabaseUrl);
+                    console.error('Key tồn tại:', !!CONFIG.supabaseKey);
+                }
             }, []);
 
             // Theo dõi thời gian làm bài
@@ -315,26 +263,26 @@
 
             // Lấy dữ liệu bảng xếp hạng
             const fetchLeaderboard = async () => {
-    const supabase = getSupabase();
-    if (!supabase) return;
-    setLoadingLeaderboard(true);
-    try {
-        const { data, error } = await supabase.from('leaderboard').select('*').limit(50);
-        if (error) {
-            // Log chi tiết lỗi
-            console.error('Supabase fetch error:', error);
-            alert('Supabase fetch error: ' + (error.message || JSON.stringify(error)));
-            setLoadingLeaderboard(false);
-            return;
-        }
-        setLeaderboard(data);
-    } catch (err) {
-        console.error('Lỗi lấy bảng xếp hạng:', err);
-        alert('Lỗi lấy bảng xếp hạng: ' + (err.message || JSON.stringify(err)));
-    } finally {
-        setLoadingLeaderboard(false);
-    }
-};
+                const supabase = getSupabase();
+                if (!supabase) return;
+                setLoadingLeaderboard(true);
+                try {
+                    console.log('Đang lấy dữ liệu bảng xếp hạng...');
+                    const { data, error } = await supabase.from('leaderboard').select('*').limit(50);
+                    if (error) {
+                        console.error('Lỗi Supabase:', error);
+                        return;
+                    }
+                    if (data) {
+                        console.log('Dữ liệu bảng xếp hạng:', data);
+                        console.log('Thông tin user hiện tại:', {
+                            name: student?.full_name,
+                            class: student?.class_name,
+                            score: finalScore,
+                            time: elapsedTime
+                        });
+                        setLeaderboard(data);
+                    }
                 } catch (err) {
                     console.error('Lỗi lấy bảng xếp hạng:', err);
                 } finally {
@@ -538,42 +486,35 @@
             const saveQuizResult = async (finalScore, warnings = 0, timeTaken = 0) => {
                 const supabase = getSupabase();
                 if (!supabase) {
-                    console.error('❌ Supabase chưa được khởi tạo!');
-                    console.warn('⚠️ Kết quả không thể lưu được. Vui lòng kiểm tra cấu hình Supabase.');
-                    return false;
+                    console.error('Supabase chưa được khởi tạo!');
+                    return;
                 }
                 if (!student) {
-                    console.error('❌ Không có thông tin student!');
-                    return false;
+                    console.error('Không có thông tin student!');
+                    return;
                 }
 
                 try {
-                    console.log('📝 Bắt đầu lưu kết quả:', { finalScore, warnings, timeTaken, student });
+                    console.log('Bắt đầu lưu kết quả:', { finalScore, warnings, timeTaken, student });
                     
                     const { data, error } = await supabase.from('quiz_attempts').insert({
                         student_id: student.id,
                         score: finalScore,
                         total_questions: 50,
-                        attempt_number: 1,
-                        time_taken: timeTaken,
-                        cheat_warnings: warnings
+                        attempt_number: 1, // Tạm thời hardcode
+                        time_taken: timeTaken, // Thêm thời gian làm bài
+                        cheat_warnings: warnings // Thêm số lần cảnh báo gian lận
                     }).select();
 
                     if (error) {
-                        console.error('❌ Lỗi Supabase khi lưu:', error);
-                        console.error('📋 Lỗi chi tiết:', { code: error.code, message: error.message });
-                        if (error.message?.includes('relation')) {
-                            console.error('⚠️ Bảng quiz_attempts chưa được tạo hoặc Supabase chưa khởi tạo.');
-                        }
-                        return false;
+                        console.error('Lỗi Supabase khi lưu:', error);
+                        throw error;
                     }
                     
-                    console.log('✅ Lưu kết quả thành công:', data);
-                    return true;
+                    console.log('Lưu kết quả thành công:', data);
                 } catch (err) {
-                    console.error('❌ Lỗi exception khi lưu kết quả:', err);
-                    console.error('📋 Chi tiết lỗi:', { name: err.name, message: err.message, stack: err.stack });
-                    return false;
+                    console.error('Không lưu được kết quả:', err);
+                    console.error('Chi tiết lỗi:', err.message);
                 }
             };
 
@@ -676,29 +617,13 @@
                                             </button>
                                         </div>
                                     </form>
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-600 mb-1">Họ và tên</label>
-                                    <input type="text" value={authForm.fullName} onChange={e => setAuthForm(f => ({ ...f, fullName: e.target.value }))}
-                                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
-                                        placeholder="Nguyễn Văn A" autoComplete="name" />
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-600 mb-1">Lớp</label>
-                                    <input type="text" value={authForm.className} onChange={e => setAuthForm(f => ({ ...f, className: e.target.value }))}
-                                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
-                                        placeholder="11A1" autoComplete="class" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-600 mb-1">Mật khẩu</label>
-                                    <input type="password" value={authForm.password} onChange={e => setAuthForm(f => ({ ...f, password: e.target.value }))}
-                                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
-                                        placeholder="Mật khẩu tối thiểu 4 ký tự" autoComplete="current-password" />
-                                </div>
-                                {authError && <div className="text-red-600 text-sm bg-red-50 p-3 rounded-xl">{authError}</div>}
-                                <button type="submit" disabled={authLoading}
-                                    className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black text-lg shadow-lg hover:bg-blue-700 transition-all active:scale-95 mt-2">
-                                    {authLoading ? 'Đang xử lý...' : (authMode === 'login' ? 'ĐĂNG NHẬP' : 'ĐĂNG KÝ')}
-                                </button>
+                            </div>
+                        )}
+                    </div>
+                );
+            }
+
             if (gameState === 'start') return (
                 <div className="flex items-center justify-center min-h-screen p-4">
                     <div className="glass-panel p-10 text-center max-w-md w-full border-t-8 border-blue-500 shadow-2xl relative">
