@@ -11,7 +11,18 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
-    
+    <script>
+    // 🚫 TẮT HOÀN TOÀN REACT DEVTOOLS
+    window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = 
+    window.__REACT_DEVTOOLS_GLOBAL_HOOK__ || {};
+    Object.assign(window.__REACT_DEVTOOLS_GLOBAL_HOOK__, {
+        inject: function() {},
+        onCommitFiberRoot: function() {},
+        onCommitFiberUnmount: function() {},
+        supportsFiber: true,
+        checkDCE: function() {}
+    });
+</script>
     <script>
         window.MathJax = {
             tex: {
