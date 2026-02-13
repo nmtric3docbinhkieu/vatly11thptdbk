@@ -263,32 +263,32 @@
 
             // Lấy dữ liệu bảng xếp hạng
             const fetchLeaderboard = async () => {
-                const supabase = getSupabase();
-                if (!supabase) return;
-                setLoadingLeaderboard(true);
-                try {
-                    console.log('Đang lấy dữ liệu bảng xếp hạng...');
-                    const { data, error } = await supabase.from('leaderboard').select('*').limit(50);
-                    if (error) {
-                        console.error('Lỗi Supabase:', error);
-                        return;
-                    }
-                    if (data) {
-                        console.log('Dữ liệu bảng xếp hạng:', data);
-                        console.log('Thông tin user hiện tại:', {
-                            name: student?.full_name,
-                            class: student?.class_name,
-                            score: score,
-                            time: elapsedTime
-                        });
-                        setLeaderboard(data);
-                    }
-                } catch (err) {
-                    console.error('Lỗi lấy bảng xếp hạng:', err);
-                } finally {
-                    setLoadingLeaderboard(false);
-                }
-            };
+    const supabase = getSupabase();
+    if (!supabase) return;
+    
+    setLoadingLeaderboard(true);
+    try {
+        const { data, error } = await supabase
+            .from('leaderboard')
+            .select('*')
+            .limit(50)
+            .abortSignal(AbortSignal.timeout(5000)); // Timeout 5 giây
+        
+        if (error) {
+            console.warn('Leaderboard timeout hoặc lỗi nhẹ:', error.message);
+            return;
+        }
+        
+        setLeaderboard(data || []);
+    } catch (err) {
+        // Không log lỗi network ra console
+        if (err.name !== 'AbortError' && err.name !== 'FetchError') {
+            console.error('Lỗi leaderboard:', err);
+        }
+    } finally {
+        setLoadingLeaderboard(false);
+    }
+};
 
             // Hàm định dạng thời gian từ giây sang phút:giây
             const formatTime = (seconds) => {
