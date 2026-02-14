@@ -489,7 +489,7 @@ window.questionsChapter1 = [
             "Thế năng và động năng đều cực đại"
         ], 
         a: 1, 
-        expl: "Tại VTCB, $x = 0$ nên $W_t = 0$ (cực tiểu), $v = v_{\\text{max}}$ nên $W_đ = W_đ_{\\text{max}}$ (cực đại)." 
+        expl: "Tại VTCB, $x = 0$ nên $W_t = 0$ (cực tiểu), $v = v_{\\text{max}}$ nên $W_đ = W_{đ\\text{max}}$ (cực đại)." 
     },
     
     // Câu 38
@@ -502,7 +502,7 @@ window.questionsChapter1 = [
             "Thế năng và động năng đều cực đại"
         ], 
         a: 0, 
-        expl: "Tại biên, $x = \\pm A$ nên $W_t = W_t_{\\text{max}}$ (cực đại), $v = 0$ nên $W_đ = 0$ (cực tiểu)." 
+        expl: "Tại biên, $x = \\pm A$ nên $W_t = W_{t\\text{max}}$ (cực đại), $v = 0$ nên $W_đ = 0$ (cực tiểu)." 
     },
     
     // Câu 39

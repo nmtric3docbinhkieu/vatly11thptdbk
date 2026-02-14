@@ -112,7 +112,7 @@
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(523.25, audioCtx.current.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(880, audioCtx.current.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.1, audioCtx.current.currentTime);
+                gain.gain.setValueAtTime(0.5, audioCtx.current.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.current.currentTime + 0.3);
                 osc.connect(gain);
                 gain.connect(audioCtx.current.destination);
@@ -127,7 +127,7 @@
                 osc.type = 'sawtooth';
                 osc.frequency.setValueAtTime(150, audioCtx.current.currentTime);
                 osc.frequency.linearRampToValueAtTime(100, audioCtx.current.currentTime + 0.2);
-                gain.gain.setValueAtTime(0.1, audioCtx.current.currentTime);
+                gain.gain.setValueAtTime(0.3, audioCtx.current.currentTime);
                 gain.gain.linearRampToValueAtTime(0.01, audioCtx.current.currentTime + 0.2);
                 osc.connect(gain);
                 gain.connect(audioCtx.current.destination);
@@ -182,22 +182,27 @@
                 };
             }, [isTestActive]);
 
-            // Functions
-            const start = (chapter) => {
-                initAudio();
-                const chapterQuestions = window.getQuestionsByChapter?.(chapter, 50) || [];
-                setQuestions(chapterQuestions);
-                setSelectedChapter(chapter);
-                setCurrentIdx(0);
-                setScore(0);
-                setSelected(null);
-                setShowExpl(false);
-                setCheatWarnings(0);
-                setIsTestActive(true);
-                setStartTime(Date.now());
-                setElapsedTime(0);
-                setGameState('playing');
-            };
+            // Thay thế hàm start cũ bằng:
+const goToSummary = (chapter) => {
+    setSelectedChapter(chapter);
+    setGameState('summary');
+};
+
+const startQuiz = (chapter) => {
+    initAudio();
+    const chapterQuestions = window.getQuestionsByChapter?.(chapter, 50) || [];
+    setQuestions(chapterQuestions);
+    setSelectedChapter(chapter);
+    setCurrentIdx(0);
+    setScore(0);
+    setSelected(null);
+    setShowExpl(false);
+    setCheatWarnings(0);
+    setIsTestActive(true);
+    setStartTime(Date.now());
+    setElapsedTime(0);
+    setGameState('playing');
+};
 
             const handleSelect = (idx) => {
                 if (selected !== null) return;
@@ -569,7 +574,7 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
             // Chapter selection
             if (gameState === 'start') {
                 return <window.ChapterSelectionScreen 
-                    onSelectChapter={start}
+                    onSelectChapter={goToSummary}
                     onLogout={logout}
                     student={student}
                 />;
@@ -580,7 +585,7 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
                 return <window.SummaryScreen 
                     chapter={selectedChapter}
                     onBack={() => setGameState('start')}
-                    onStart={() => start(selectedChapter)}
+                    onStart={() => startQuiz(selectedChapter)}  // Gọi startQuiz, không phải start
                 />;
             }
 

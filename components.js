@@ -42,12 +42,7 @@ window.ChapterSelectionScreen = function({ onSelectChapter, onLogout, student })
                     );
                 })
             ),
-            // Nút admin
-            React.createElement('button', {
-                onClick: function() { if (window.setAdminMode) window.setAdminMode(true); },
-                className: "w-full mt-6 pt-4 border-t border-slate-200 text-slate-400 text-xs hover:text-slate-600"
-            }, "Giáo viên: Xuất Excel kết quả")
-        )
+                    )
     );
 };
 
@@ -76,7 +71,10 @@ window.SummaryScreen = function({ chapter, onBack, onStart }) {
                 (summary.topics || []).map(function(topic, idx) {
                     return React.createElement('div', { key: idx, className: "bg-blue-50/50 border-2 border-blue-100 rounded-2xl p-6" },
                         React.createElement('h3', { className: "text-lg font-bold text-slate-800 mb-3" }, topic.title),
-                        React.createElement('div', { className: "text-slate-700" }, topic.content)
+                        React.createElement('div', { 
+    className: "text-slate-700",
+    dangerouslySetInnerHTML: { __html: topic.content } 
+})
                     );
                 })
             ),
