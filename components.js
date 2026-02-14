@@ -122,7 +122,7 @@ window.QuizScreen = function({
                 ) : null,
                 React.createElement('div', { className: "bg-blue-600 px-6 py-2 rounded-xl shadow-md text-white font-black" },
                     React.createElement('i', { className: "fas fa-star mr-2 text-yellow-300" }),
-                    score
+                    score.toFixed(1)  // Thêm .toFixed(1)
                 )
             )
         ),

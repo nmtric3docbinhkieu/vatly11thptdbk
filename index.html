@@ -208,7 +208,7 @@ const startQuiz = (chapter) => {
                 if (selected !== null) return;
                 setSelected(idx);
                 if (idx === questions[currentIdx].a) {
-                    setScore(s => s + 10);
+                    setScore(s => s + 0.2);
                     playCorrect();
                 } else {
                     playWrong();
@@ -222,7 +222,7 @@ const startQuiz = (chapter) => {
                     setSelected(null);
                     setShowExpl(false);
                 } else {
-                    const finalScore = score + (selected === questions[currentIdx]?.a ? 10 : 0);
+                    const finalScore = score + (selected === questions[currentIdx]?.a ? 0.2 : 0);
                     const finalTime = elapsedTime;
                     
                     window.saveQuizResult?.(student, finalScore, cheatWarnings, finalTime, selectedChapter);
@@ -600,7 +600,7 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
                                 <div className="bg-blue-50 rounded-2xl p-6 mb-8">
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                         <div>
-                                            <div className="text-2xl font-black text-blue-600">{score}</div>
+                                            <div className="text-2xl font-black text-blue-600">{score.toFixed(1)}</div>
                                             <div className="text-sm">Điểm</div>
                                         </div>
                                         <div>
@@ -629,7 +629,7 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
                                                 <td className="px-4 py-3">{idx + 1}</td>
                                                 <td className="px-4 py-3">{item.full_name}</td>
                                                 <td className="px-4 py-3">{item.class_name}</td>
-                                                <td className="px-4 py-3 text-center font-bold">{item.score}</td>
+                                                <td className="px-4 py-3 text-center font-bold">{item.score.toFixed(1)}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -649,7 +649,7 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
                         <div className="glass-panel p-10 text-center max-w-md">
                             <i className="fas fa-trophy text-6xl text-yellow-500 mb-6"></i>
                             <h2 className="text-2xl font-bold mb-2">HOÀN THÀNH</h2>
-                            <div className="text-7xl font-black text-blue-600 mb-4">{score}</div>
+                            <div className="text-7xl font-black text-blue-600 mb-4">{score.toFixed(1)}</div>
                             <p className="text-slate-400 mb-6">Điểm số của bạn</p>
                             {cheatWarnings > 0 && (
                                 <div className="mb-4 p-4 bg-red-50 rounded-xl text-red-600">
