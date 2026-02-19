@@ -1,7 +1,6 @@
 // ==============================================
-// FILE: admin.js
+// FILE: admin.js - ĐÃ SỬA LỖI THỜI GIAN
 // ==============================================
-// Xử lý xuất Excel cho giáo viên
 
 window.exportToExcel = async function(adminPassword) {
     if (adminPassword !== window.CONFIG.adminPassword) {
@@ -27,7 +26,7 @@ window.exportToExcel = async function(adminPassword) {
             console.warn('Không lấy được quiz_summary:', e);
         }
         
-        // Nếu không lấy được, tự tổng hợp
+        // Nếu không lấy được, tự tổng hợp và format thời gian
         if (!summary || summary.length === 0) {
             const { data: students } = await supabase.from('students').select('*, quiz_attempts(*)');
             
@@ -35,6 +34,12 @@ window.exportToExcel = async function(adminPassword) {
                 const attempts = student.quiz_attempts || [];
                 const scores = attempts.map(a => a.score).filter(s => s != null);
                 const warnings = attempts.map(a => a.cheat_warnings || 0);
+                
+                // Format thời gian cho từng lần làm bài (nếu cần hiển thị chi tiết)
+                const formattedAttempts = attempts.map(a => ({
+                    ...a,
+                    created_at_vn: window.formatVNTime(a.created_at) // Thêm trường thời gian đã format
+                }));
                 
                 return {
                     "Họ và tên": student.full_name,
@@ -44,27 +49,45 @@ window.exportToExcel = async function(adminPassword) {
                     "Điểm trung bình": scores.length > 0 
                         ? Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2))
                         : 0,
-                    "Tổng cảnh báo gian lận": warnings.reduce((a, b) => a + b, 0)
+                    "Tổng cảnh báo gian lận": warnings.reduce((a, b) => a + b, 0),
+                    "Chi tiết thời gian làm bài": formattedAttempts.map(a => a.created_at_vn).join('; ') // Thêm thông tin thời gian
                 };
             });
         }
         
         // Tạo rows cho Excel
-        const rows = (summary || []).map((r, i) => ({
-            'STT': i + 1,
-            'Họ và tên': r['Họ và tên'] || r.full_name || '',
-            'Lớp': r['Lớp'] || r.class_name || '',
-            'Số lần làm bài': r['Số lần làm bài'] || 0,
-            'Điểm cao nhất': r['Điểm cao nhất'] || 0,
-            'Điểm trung bình': r['Điểm trung bình'] || 0,
-            'Tổng cảnh báo gian lận': r['Tổng cảnh báo gian lận'] || 0
-        }));
+        const rows = (summary || []).map((r, i) => {
+            // Xác định các giá trị
+            const hoTen = r['Họ và tên'] || r.full_name || '';
+            const lop = r['Lớp'] || r.class_name || '';
+            const soLan = r['Số lần làm bài'] || 0;
+            const diemCaoNhat = r['Điểm cao nhất'] || 0;
+            const diemTrungBinh = r['Điểm trung bình'] || 0;
+            const canhBao = r['Tổng cảnh báo gian lận'] || 0;
+            const thoiGianChiTiet = r['Chi tiết thời gian làm bài'] || '';
+            
+            return {
+                'STT': i + 1,
+                'Họ và tên': hoTen,
+                'Lớp': lop,
+                'Số lần làm bài': soLan,
+                'Điểm cao nhất': diemCaoNhat,
+                'Điểm trung bình': diemTrungBinh,
+                'Tổng cảnh báo gian lận': canhBao,
+                'Thời gian làm bài (VN)': thoiGianChiTiet
+            };
+        });
         
-        // Xuất Excel
+        // Xuất Excel với tên file có thời gian Việt Nam
+        const now = new Date();
+        const vnNow = new Date(now.getTime() + (7 * 60 * 60 * 1000));
+        const dateStr = vnNow.toISOString().slice(0,10); // YYYY-MM-DD
+        const timeStr = vnNow.toTimeString().slice(0,8).replace(/:/g, '-'); // HH-MM-SS
+        
         const ws = window.XLSX.utils.json_to_sheet(rows);
         const wb = window.XLSX.utils.book_new();
         window.XLSX.utils.book_append_sheet(wb, ws, 'Kết quả');
-        window.XLSX.writeFile(wb, 'ket-qua-vatly11-' + new Date().toISOString().slice(0,10) + '.xlsx');
+        window.XLSX.writeFile(wb, `ket-qua-vatly11-${dateStr}_${timeStr}.xlsx`);
         
         return { success: true };
         

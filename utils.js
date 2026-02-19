@@ -252,3 +252,110 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
         console.error('Không lưu được kết quả:', err);
     }
 };
+// ===== HÀM XỬ LÝ THỜI GIAN VIỆT NAM =====
+
+// Hàm chuyển đổi thời gian UTC sang giờ Việt Nam và định dạng dd/mm/yyyy HH:MM:SS
+window.formatVNTime = function(utcTimeString) {
+    if (!utcTimeString) return '';
+    
+    try {
+        // Tạo đối tượng Date từ chuỗi UTC
+        const date = new Date(utcTimeString);
+        
+        // Chuyển sang giờ Việt Nam (cộng thêm 7 giờ)
+        const vnTime = new Date(date.getTime() + (7 * 60 * 60 * 1000));
+        
+        // Định dạng dd/mm/yyyy HH:MM:SS
+        const day = vnTime.getDate().toString().padStart(2, '0');
+        const month = (vnTime.getMonth() + 1).toString().padStart(2, '0');
+        const year = vnTime.getFullYear();
+        const hours = vnTime.getHours().toString().padStart(2, '0');
+        const minutes = vnTime.getMinutes().toString().padStart(2, '0');
+        const seconds = vnTime.getSeconds().toString().padStart(2, '0');
+        
+        return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+    } catch (e) {
+        console.error('Lỗi format thời gian:', e);
+        return utcTimeString;
+    }
+};
+
+// Hàm format chỉ lấy ngày tháng (dd/mm/yyyy)
+window.formatVNDate = function(utcTimeString) {
+    if (!utcTimeString) return '';
+    
+    try {
+        const date = new Date(utcTimeString);
+        const vnTime = new Date(date.getTime() + (7 * 60 * 60 * 1000));
+        
+        const day = vnTime.getDate().toString().padStart(2, '0');
+        const month = (vnTime.getMonth() + 1).toString().padStart(2, '0');
+        const year = vnTime.getFullYear();
+        
+        return `${day}/${month}/${year}`;
+    } catch (e) {
+        return utcTimeString;
+    }
+};
+// ===== HÀM LẤY BẢNG XẾP HẠNG =====
+window.fetchLeaderboard = async function() {
+    const supabase = window.getSupabase();
+    if (!supabase) {
+        console.error('Không thể kết nối Supabase');
+        return [];
+    }
+    
+    try {
+        // Lấy tất cả học sinh đã được duyệt và kết quả quiz của họ
+        const { data, error } = await supabase
+            .from('students')
+            .select(`
+                id,
+                full_name,
+                class_name,
+                quiz_attempts (
+                    score,
+                    created_at
+                )
+            `)
+            .eq('is_approved', true)
+            .order('full_name');
+        
+        if (error) {
+            console.error('Lỗi khi lấy dữ liệu:', error);
+            return [];
+        }
+        
+        // Tính điểm cao nhất cho mỗi học sinh
+        const leaderboard = data
+            .map(student => {
+                // Lấy tất cả điểm từ quiz_attempts
+                const scores = (student.quiz_attempts || [])
+                    .map(attempt => attempt.score)
+                    .filter(score => score != null);
+                
+                // Tính điểm cao nhất
+                const highestScore = scores.length > 0 ? Math.max(...scores) : 0;
+                
+                return {
+                    full_name: student.full_name,
+                    class_name: student.class_name,
+                    score: highestScore,
+                    // Có thể thêm thời gian đạt điểm cao nhất nếu cần
+                    best_score_date: student.quiz_attempts
+                        ?.filter(a => a.score === highestScore)
+                        ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0]?.created_at
+                };
+            })
+            .filter(student => student.score > 0) // Chỉ hiển thị người có điểm > 0
+            .sort((a, b) => b.score - a.score) // Sắp xếp theo điểm từ cao xuống thấp
+            .slice(0, 20); // Chỉ lấy top 20
+        
+        console.log('Bảng xếp hạng:', leaderboard);
+        return leaderboard;
+        
+    } catch (err) {
+        console.error('Lỗi fetchLeaderboard:', err);
+        return [];
+    }
+};

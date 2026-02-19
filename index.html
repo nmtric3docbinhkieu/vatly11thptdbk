@@ -222,10 +222,17 @@ const startQuiz = (chapter) => {
                     setSelected(null);
                     setShowExpl(false);
                 } else {
-                    const finalScore = score + (selected === questions[currentIdx]?.a ? 0.2 : 0);
+                    const finalScore = score;
                     const finalTime = elapsedTime;
                     
-                    window.saveQuizResult?.(student, finalScore, cheatWarnings, finalTime, selectedChapter);
+                    if (!window._savingResult) {
+            window._savingResult = true;
+            
+            window.saveQuizResult(student, finalScore, cheatWarnings, finalTime, selectedChapter)
+                .finally(() => {
+                    window._savingResult = false;
+                });
+        }
                     
                     setIsTestActive(false);
                     
@@ -541,8 +548,8 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
                                     <p className="font-bold">{s.full_name}</p>
                                     <p className="text-sm text-slate-500">Lớp: {s.class_name}</p>
                                     <p className="text-xs text-slate-400">
-                                        Đăng ký: {new Date(s.created_at).toLocaleString('vi-VN')}
-                                    </p>
+    Đăng ký: {window.formatVNTime(s.created_at)}
+</p>
                                 </div>
                                 <div className="flex gap-2">
                                     <button
@@ -593,55 +600,88 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
             if (gameState === 'end') {
                 if (showLeaderboard) {
                     return (
-                        <div className="max-w-4xl mx-auto px-4 py-10">
-                            <div className="glass-panel p-8 border-t-8 border-yellow-500">
-                                <h1 className="text-3xl font-black text-center mb-8">BẢNG XẾP HẠNG</h1>
-                                
-                                <div className="bg-blue-50 rounded-2xl p-6 mb-8">
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                        <div>
-                                            <div className="text-2xl font-black text-blue-600">{score.toFixed(1)}</div>
-                                            <div className="text-sm">Điểm</div>
-                                        </div>
-                                        <div>
-                                            <div className="text-2xl font-black text-blue-600">{window.formatTime?.(elapsedTime) || '0:00'}</div>
-                                            <div className="text-sm">Thời gian</div>
-                                        </div>
-                                        <div>
-                                            <div className="text-2xl font-black text-red-600">{cheatWarnings}</div>
-                                            <div className="text-sm">Cảnh báo</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <table className="w-full">
-                                    <thead className="bg-slate-50">
-                                        <tr>
-                                            <th className="px-4 py-3 text-left">#</th>
-                                            <th className="px-4 py-3 text-left">Họ tên</th>
-                                            <th className="px-4 py-3 text-left">Lớp</th>
-                                            <th className="px-4 py-3 text-center">Điểm</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {leaderboard.map((item, idx) => (
-                                            <tr key={idx} className="border-b">
-                                                <td className="px-4 py-3">{idx + 1}</td>
-                                                <td className="px-4 py-3">{item.full_name}</td>
-                                                <td className="px-4 py-3">{item.class_name}</td>
-                                                <td className="px-4 py-3 text-center font-bold">{item.score.toFixed(1)}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                                
-                                <div className="flex gap-4 mt-8">
-                                    <button onClick={() => start(selectedChapter)} className="flex-1 bg-blue-600 text-white py-4 rounded-xl">Làm lại</button>
-                                    <button onClick={() => setGameState('start')} className="flex-1 bg-slate-100 py-4 rounded-xl">Về trang chủ</button>
-                                </div>
-                            </div>
-                        </div>
-                    );
+    <div className="max-w-4xl mx-auto px-4 py-10">
+        <div className="glass-panel p-8 border-t-8 border-yellow-500">
+            <h1 className="text-3xl font-black text-center mb-8">BẢNG XẾP HẠNG</h1>
+            
+            <div className="bg-blue-50 rounded-2xl p-6 mb-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                        <div className="text-2xl font-black text-blue-600">{score.toFixed(1)}</div>
+                        <div className="text-sm">Điểm của bạn</div>
+                    </div>
+                    <div>
+                        <div className="text-2xl font-black text-blue-600">{window.formatTime?.(elapsedTime) || '0:00'}</div>
+                        <div className="text-sm">Thời gian</div>
+                    </div>
+                    <div>
+                        <div className="text-2xl font-black text-red-600">{cheatWarnings}</div>
+                        <div className="text-sm">Cảnh báo</div>
+                    </div>
+                    <div>
+                        <div className="text-2xl font-black text-green-600">{leaderboard.length}</div>
+                        <div className="text-sm">Người tham gia</div>
+                    </div>
+                </div>
+            </div>
+            
+            {leaderboard.length === 0 ? (
+                <div className="text-center py-12 text-slate-500">
+                    <i className="fas fa-trophy text-6xl text-slate-300 mb-4"></i>
+                    <p>Chưa có dữ liệu bảng xếp hạng</p>
+                    <p className="text-sm mt-2">Hãy là người đầu tiên làm bài!</p>
+                </div>
+            ) : (
+                <div className="overflow-x-auto">
+                    <table className="w-full">
+                        <thead className="bg-slate-50">
+                            <tr>
+                                <th className="px-4 py-3 text-left">#</th>
+                                <th className="px-4 py-3 text-left">Họ tên</th>
+                                <th className="px-4 py-3 text-left">Lớp</th>
+                                <th className="px-4 py-3 text-center">Điểm cao nhất</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {leaderboard.map((item, idx) => (
+                                <tr key={idx} className="border-b hover:bg-slate-50">
+                                    <td className="px-4 py-3 font-bold">
+                                        {idx === 0 && <span className="text-yellow-500 mr-1">🥇</span>}
+                                        {idx === 1 && <span className="text-gray-400 mr-1">🥈</span>}
+                                        {idx === 2 && <span className="text-amber-600 mr-1">🥉</span>}
+                                        {idx + 1}
+                                    </td>
+                                    <td className="px-4 py-3 font-medium">{item.full_name}</td>
+                                    <td className="px-4 py-3">{item.class_name}</td>
+                                    <td className="px-4 py-3 text-center font-bold text-blue-600">
+                                        {item.score.toFixed(1)}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
+            
+            <div className="flex gap-4 mt-8">
+                <button 
+                    onClick={() => startQuiz(selectedChapter)} 
+                    className="flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition"
+                >
+                    <i className="fas fa-redo-alt mr-2"></i>
+                    Làm lại
+                </button>
+                <button 
+                    onClick={() => setGameState('start')} 
+                    className="flex-1 bg-slate-100 py-4 rounded-xl font-bold hover:bg-slate-200 transition"
+                >
+                    <i className="fas fa-home mr-2"></i>
+                    Về trang chủ
+                </button>
+            </div>
+        </div>
+    </div>
+);
                 }
                 
                 return (
