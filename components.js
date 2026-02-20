@@ -135,6 +135,23 @@ window.QuizScreen = function({
             })
         ),
         
+        // Explanation
+        showExpl ? React.createElement('div', { className: "explanation-anim bg-white border-2 border-blue-500 p-8 rounded-3xl shadow-xl mb-8" },
+            React.createElement('div', { className: "flex items-center mb-4 text-blue-600 font-bold uppercase tracking-widest text-sm" },
+                React.createElement('div', { className: "w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3" },
+                    React.createElement('i', { className: "fas fa-brain text-xs" })
+                ),
+                "Phân tích"
+            ),
+            React.createElement('div', { className: "text-lg text-slate-700 leading-relaxed bg-slate-50 p-5 rounded-2xl border border-slate-100 italic" },
+                question?.expl
+            ),
+            React.createElement('button', { onClick: onNext, className: "mt-8 w-full bg-blue-600 text-white py-5 rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all" },
+                currentIdx === totalQuestions - 1 ? 'XEM KẾT QUẢ' : 'CÂU TIẾP THEO',
+                React.createElement('i', { className: "fas fa-chevron-right ml-3" })
+            )
+        ) : null,
+        
         // Question
         React.createElement('div', { className: "glass-panel p-8 md:p-12 mb-6" },
             React.createElement('h2', { className: "text-xl md:text-2xl font-extrabold text-slate-800 mb-10 leading-snug" },
@@ -165,23 +182,6 @@ window.QuizScreen = function({
                     );
                 })
             )
-        ),
-        
-        // Explanation
-        showExpl ? React.createElement('div', { className: "explanation-anim bg-white border-2 border-blue-500 p-8 rounded-3xl shadow-xl mb-12" },
-            React.createElement('div', { className: "flex items-center mb-4 text-blue-600 font-bold uppercase tracking-widest text-sm" },
-                React.createElement('div', { className: "w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3" },
-                    React.createElement('i', { className: "fas fa-brain text-xs" })
-                ),
-                "Phân tích"
-            ),
-            React.createElement('div', { className: "text-lg text-slate-700 leading-relaxed bg-slate-50 p-5 rounded-2xl border border-slate-100 italic" },
-                question?.expl
-            ),
-            React.createElement('button', { onClick: onNext, className: "mt-8 w-full bg-blue-600 text-white py-5 rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all" },
-                currentIdx === totalQuestions - 1 ? 'XEM KẾT QUẢ' : 'CÂU TIẾP THEO',
-                React.createElement('i', { className: "fas fa-chevron-right ml-3" })
-            )
-        ) : null
+        )
     );
 };
