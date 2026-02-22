@@ -64,6 +64,10 @@
             const [questions, setQuestions] = useState([]);
             const [selectedChapter, setSelectedChapter] = useState(3);
             
+            // States cho chương 3 (thí nghiệm ảo)
+            const [chapter3Activity, setChapter3Activity] = useState(null); // 'theory' | 'experiments' | 'quiz'
+            const [selectedExperiment, setSelectedExperiment] = useState(null);
+            
             // Cheat detection
             const [cheatWarnings, setCheatWarnings] = useState(0);
             const [showCheatAlert, setShowCheatAlert] = useState(false);
@@ -202,6 +206,53 @@ const startQuiz = (chapter) => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setGameState('playing');
+};
+
+// Hàm xử lý khi chọn chương
+const handleChapterSelect = (chapter) => {
+    setSelectedChapter(chapter);
+    if (chapter === 3) {
+        // Chương 3 có màn hình chọn hoạt động riêng
+        setGameState('chapter3-activities');
+    } else {
+        // Các chương khác đi thẳng đến tóm tắt lý thuyết
+        goToSummary(chapter);
+    }
+};
+
+// Hàm xử lý hoạt động chương 3
+const handleChapter3Activity = (activity) => {
+    if (activity === 'back') {
+        setGameState('start');
+        return;
+    }
+    
+    setChapter3Activity(activity);
+    
+    switch (activity) {
+        case 'theory':
+            goToSummary(3);
+            break;
+        case 'experiments':
+            setGameState('experiments');
+            break;
+        case 'quiz':
+            startQuiz(3);
+            break;
+    }
+};
+
+// Hàm xử lý khi chọn thí nghiệm
+const handleExperimentSelect = (experiment) => {
+    setSelectedExperiment(experiment);
+    // Mở thí nghiệm trong tab mới
+    window.open(experiment.file, '_blank');
+};
+
+// Hàm quay lại từ màn hình thí nghiệm
+const backToChapter3Activities = () => {
+    setGameState('chapter3-activities');
+    setSelectedExperiment(null);
 };
 
             const handleSelect = (idx) => {
@@ -581,9 +632,26 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
             // Chapter selection
             if (gameState === 'start') {
                 return <window.ChapterSelectionScreen 
-                    onSelectChapter={goToSummary}
+                    onSelectChapter={handleChapterSelect}
                     onLogout={logout}
                     student={student}
+                />;
+            }
+
+            // Chapter 3 Activities
+            if (gameState === 'chapter3-activities') {
+                return <window.Chapter3ActivityScreen 
+                    onSelectActivity={handleChapter3Activity}
+                    onLogout={logout}
+                    student={student}
+                />;
+            }
+
+            // Experiments
+            if (gameState === 'experiments') {
+                return <window.ExperimentsScreen 
+                    onSelectExperiment={handleExperimentSelect}
+                    onBack={backToChapter3Activities}
                 />;
             }
 

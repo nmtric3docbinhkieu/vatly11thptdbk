@@ -42,11 +42,145 @@ window.ChapterSelectionScreen = function({ onSelectChapter, onLogout, student })
                     );
                 })
             ),
-                    )
+            // Nút admin
+            React.createElement('button', {
+                onClick: function() { if (window.setAdminMode) window.setAdminMode(true); },
+                className: "w-full mt-6 pt-4 border-t border-slate-200 text-slate-400 text-xs hover:text-slate-600"
+            }, "Giáo viên: Xuất Excel kết quả")
+        )
     );
 };
 
-// Component màn hình ôn tập
+// Component màn hình chọn hoạt động cho chương 3 (có thí nghiệm ảo)
+window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }) {
+    return React.createElement('div', { className: "flex items-center justify-center min-h-screen p-4" },
+        React.createElement('div', { className: "glass-panel p-10 text-center max-w-2xl w-full relative" },
+            // Nút đăng xuất
+            React.createElement('button', { onClick: onLogout, className: "absolute top-4 right-4 p-2 rounded-lg text-slate-400 hover:bg-slate-100" },
+                React.createElement('i', { className: "fas fa-sign-out-alt" })
+            ),
+            // Tên học sinh
+            React.createElement('div', { className: "mb-2 py-2 px-4 rounded-xl bg-blue-50 inline-block text-blue-700 text-sm font-semibold" },
+                React.createElement('i', { className: "fas fa-user mr-2" }),
+                student?.full_name + ' - ' + student?.class_name
+            ),
+            // Tiêu đề
+            React.createElement('h1', { className: "text-3xl font-black text-slate-800 mb-2" }, "CHƯƠNG 3: ĐIỆN TRƯỜNG"),
+            React.createElement('p', { className: "text-slate-500 mb-8" }, "Chọn hoạt động để bắt đầu"),
+            
+            // Grid các hoạt động
+            React.createElement('div', { className: "grid gap-6 md:grid-cols-3" },
+                // Lý thuyết
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('theory'); },
+                    className: "p-6 bg-white border-2 border-blue-200 rounded-2xl hover:border-blue-500 hover:bg-blue-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-book text-blue-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Lý thuyết"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Tóm tắt kiến thức về điện trường")
+                ),
+                
+                // Thí nghiệm ảo
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('experiments'); },
+                    className: "p-6 bg-white border-2 border-green-200 rounded-2xl hover:border-green-500 hover:bg-green-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-flask text-green-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Thí nghiệm ảo"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Thực hành các thí nghiệm tương tác")
+                ),
+                
+                // Bài tập trắc nghiệm
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('quiz'); },
+                    className: "p-6 bg-white border-2 border-purple-200 rounded-2xl hover:border-purple-500 hover:bg-purple-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-tasks text-purple-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Bài tập"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Làm bài tập trắc nghiệm")
+                )
+            ),
+            
+            // Nút quay lại
+            React.createElement('button', {
+                onClick: function() { onSelectActivity('back'); },
+                className: "w-full mt-8 pt-4 border-t border-slate-200 text-slate-400 text-sm hover:text-slate-600"
+            }, "Quay lại chọn chương")
+        )
+    );
+};
+
+// Component màn hình chọn thí nghiệm ảo
+window.ExperimentsScreen = function({ onSelectExperiment, onBack }) {
+    const experiments = [
+        {
+            id: 'coulomb',
+            name: 'Định luật Coulomb',
+            description: 'Khám phá lực tương tác giữa các điện tích',
+            icon: 'fa-bolt',
+            color: 'yellow',
+            file: 'dinhluatcoulomb.html'
+        },
+        {
+            id: 'electric-field',
+            name: 'Điện trường',
+            description: 'Trực quan hóa đường sức điện và điện trường',
+            icon: 'fa-project-diagram',
+            color: 'blue',
+            file: 'experiment-electric-field.html'
+        },
+        {
+            id: 'capacitor',
+            name: 'Tụ điện',
+            description: 'Tìm hiểu về tụ điện và năng lượng tích tụ',
+            icon: 'fa-microchip',
+            color: 'green',
+            file: 'experiment-capacitor.html'
+        }
+    ];
+    
+    return React.createElement('div', { className: "max-w-4xl mx-auto px-4 py-10" },
+        React.createElement('div', { className: "glass-panel p-8 md:p-10" },
+            // Header
+            React.createElement('div', { className: "flex items-center justify-between mb-8" },
+                React.createElement('div', null,
+                    React.createElement('h1', { className: "text-2xl md:text-3xl font-black text-slate-800" }, "THÍ NGHIỆM ẢO"),
+                    React.createElement('p', { className: "text-slate-500 font-semibold mt-1" }, "Chương 3: Điện trường")
+                ),
+                React.createElement('button', { onClick: onBack, className: "p-3 rounded-xl bg-slate-100 hover:bg-slate-200" },
+                    React.createElement('i', { className: "fas fa-arrow-left" })
+                )
+            ),
+            
+            // Grid các thí nghiệm
+            React.createElement('div', { className: "grid gap-6 md:grid-cols-3" },
+                experiments.map(function(exp) {
+                    return React.createElement('button', {
+                        key: exp.id,
+                        onClick: function() { onSelectExperiment(exp); },
+                        className: "p-6 bg-white border-2 border-" + exp.color + "-200 rounded-2xl hover:border-" + exp.color + "-500 hover:bg-" + exp.color + "-50 transition-all text-left"
+                    },
+                        React.createElement('div', { className: "w-16 h-16 bg-" + exp.color + "-100 rounded-xl flex items-center justify-center mb-4" },
+                            React.createElement('i', { className: "fas " + exp.icon + " text-" + exp.color + "-600 text-2xl" })
+                        ),
+                        React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, exp.name),
+                        React.createElement('div', { className: "text-slate-600 text-sm mb-4" }, exp.description),
+                        React.createElement('div', { className: "text-blue-600 font-semibold text-sm" },
+                            "Bắt đầu thí nghiệm ",
+                            React.createElement('i', { className: "fas fa-arrow-right ml-1" })
+                        )
+                    );
+                })
+            )
+        )
+    );
+};
 window.SummaryScreen = function({ chapter, onBack, onStart }) {
     var summary = window.getChapterSummary ? window.getChapterSummary(chapter) : { title: "", topics: [] };
     

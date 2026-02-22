@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vật lí 11 - Định luật Coulomb</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700;900&display=swap');
+        
+        html, body { 
+            background: #f1f5f9; 
+            color: #000000; 
+            font-family: 'Be Vietnam Pro', sans-serif; 
+            margin: 0; 
+            height: auto;
+            overflow-y: auto; 
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .neo-card {
+            background: #ffffff;
+            border: 3px solid #000000;
+            border-radius: 12px;
+            box-shadow: 6px 6px 0px #000000;
+            margin-bottom: 25px;
+        }
+
+        /* Thanh trượt to, dễ kéo */
+        .custom-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            border: 2px solid #000000;
+            outline: none;
+            margin: 20px 0;
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 32px;
+            height: 32px;
+            background: #ffffff;
+            border: 4px solid #000000;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 0px #000000;
+        }
+
+        #canvas-wrap {
+            width: 100%;
+            height: 320px;
+            background: #ffffff;
+            position: relative;
+            touch-action: none;
+        }
+
+        /* Đảm bảo menu chọn không bị khuất */
+        select {
+            border: 3px solid #000000 !important;
+            background: white !important;
+            padding: 12px !important;
+            font-weight: 900 !important;
+            font-size: 16px !important;
+            border-radius: 10px !important;
+        }
+
+        .label-text { font-weight: 900; text-transform: uppercase; font-size: 12px; color: #000000; }
+        .footer-space { height: 120px; } /* Tạo khoảng trống cuối trang */
+    </style>
+</head>
+<body class="p-4">
+
+    <header class="mb-6 text-center">
+        <h1 class="text-2xl font-black uppercase tracking-tighter">Định luật Coulomb</h1>
+        <div class="h-1 bg-black w-24 mx-auto"></div>
+    </header>
+
+    <div class="neo-card overflow-hidden">
+        <div id="canvas-wrap"></div>
+        <div class="bg-yellow-400 border-t-2 border-black p-3 flex justify-between font-black text-[11px] uppercase">
+            <span>Khoảng cách: <span id="dist-text">0</span> cm</span>
+            <span>Lực F: <span id="f-val">0.00</span> N</span>
+        </div>
+    </div>
+
+    <div class="flex flex-col">
+        <div class="neo-card p-4">
+            <div class="flex justify-between items-center">
+                <label class="label-text">Điện tích q₁ (Đỏ)</label>
+                <span class="text-2xl font-black text-red-600" id="q1t">5 µC</span>
+            </div>
+            <input type="range" id="q1s" min="-10" max="10" step="1" value="5" class="custom-slider">
+        </div>
+
+        <div class="neo-card p-4">
+            <div class="flex justify-between items-center">
+                <label class="label-text">Điện tích q₂ (Xanh)</label>
+                <span class="text-2xl font-black text-blue-600" id="q2t">-5 µC</span>
+            </div>
+            <input type="range" id="q2s" min="-10" max="10" step="1" value="-5" class="custom-slider">
+        </div>
+
+        <div class="neo-card p-4">
+            <label class="label-text block mb-2">Môi trường điện môi (ε)</label>
+            <select id="eps" class="w-full outline-none">
+                <option value="1">Không khí / Chân không (ε=1)</option>
+                <option value="2">Dầu hỏa (ε=2)</option>
+                <option value="2.1">Parafin (ε=2.1)</option>
+                <option value="3">Cao su (ε=3)</option>
+                <option value="6">Mica (ε=6)</option>
+                <option value="7">Thủy tinh (ε=7)</option>
+                <option value="81">Nước tinh khiết (ε=81)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="footer-space"></div>
+
+<script>
+    let q1, q2, dragging = null, audioCtx;
+    const k = 9e9;
+
+    function playTick() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        let o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine'; o.frequency.setValueAtTime(1000, audioCtx.currentTime);
+        g.gain.setValueAtTime(0.01, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.04);
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(); o.stop(audioCtx.currentTime + 0.04);
+    }
+
+    function setup() {
+        const wrap = document.getElementById('canvas-wrap');
+        let cnv = createCanvas(wrap.offsetWidth, wrap.offsetHeight);
+        cnv.parent('canvas-wrap');
+        q1 = { x: width * 0.25, y: height / 2, val: 5 };
+        q2 = { x: width * 0.75, y: height / 2, val: -5 };
+
+        document.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('input', () => {
+                document.getElementById('q1t').innerText = document.getElementById('q1s').value + " µC";
+                document.getElementById('q2t').innerText = document.getElementById('q2s').value + " µC";
+                playTick();
+            });
+        });
+    }
+
+    function draw() {
+        background(255);
+        q1.val = parseFloat(document.getElementById('q1s').value);
+        q2.val = parseFloat(document.getElementById('q2s').value);
+        let ep = parseFloat(document.getElementById('eps').value);
+
+        let dPx = dist(q1.x, q1.y, q2.x, q2.y);
+        let r_met = dPx / 4000; 
+        let r_cm = (dPx / 10).toFixed(1);
+        document.getElementById('dist-text').innerText = r_cm;
+
+        let F = k * Math.abs(q1.val * q2.val * 1e-12) / (ep * r_met * r_met);
+        if (isNaN(F) || !isFinite(F)) F = 0;
+        document.getElementById('f-val').innerText = F.toFixed(4);
+
+        // Lưới mờ
+        stroke(240); strokeWeight(1);
+        for(let i=0; i<width; i+=40) line(i,0,i,height);
+        for(let i=0; i<height; i+=40) line(0,i,width,i);
+
+        // Vector lực - Cải tiến độ dài linh hoạt
+        let isAttractive = (q1.val * q2.val < 0);
+        drawForceVector(q1, q2, isAttractive, F);
+        drawForceVector(q2, q1, isAttractive, F);
+
+        drawCharge(q1);
+        drawCharge(q2);
+    }
+
+    function drawCharge(q) {
+        push();
+        let col = q.val > 0 ? color(239, 68, 68) : (q.val < 0 ? color(37, 99, 235) : color(150));
+        stroke(0); strokeWeight(3); fill(col);
+        ellipse(q.x, q.y, 50);
+        fill(255, 120); noStroke(); ellipse(q.x-10, q.y-10, 15, 15);
+        fill(255); textAlign(CENTER, CENTER); textStyle(BOLD); textSize(26);
+        text(q.val > 0 ? "+" : (q.val < 0 ? "-" : "0"), q.x, q.y + 2);
+        pop();
+    }
+
+    function drawForceVector(from, to, attractive, val) {
+        if (val < 0.0001 || q1.val === 0 || q2.val === 0) return;
+        let angle = atan2(to.y - from.y, to.x - from.x);
+        if (!attractive) angle += PI;
+
+        // Độ dài mũi tên tỉ lệ với căn bậc hai của lực để phản ánh đúng hơn
+        let maxForce = 10; // Giả định lực tối đa 10N
+        let normalizedForce = constrain(val / maxForce, 0, 1);
+        let len = map(sqrt(normalizedForce), 0, 1, 20, 150);
+
+        push();
+        translate(from.x, from.y); rotate(angle);
+        stroke(0); strokeWeight(7); line(25, 0, 25 + len, 0);
+        stroke(attractive ? '#22c55e' : '#f97316'); strokeWeight(4); line(25, 0, 25 + len, 0);
+        fill(0); noStroke(); triangle(25+len+12, 0, 25+len, -10, 25+len, 10);
+        pop();
+    }
+
+    function handleStart(x, y) {
+        if(dist(x, y, q1.x, q1.y) < 40) dragging = q1;
+        else if(dist(x, y, q2.x, q2.y) < 40) dragging = q2;
+    }
+    function handleMove(x, y) {
+        if(dragging) {
+            dragging.x = constrain(x, 30, width - 30);
+            dragging.y = constrain(y, 30, height - 30);
+        }
+    }
+
+    function mousePressed() { if(mouseY < 320) handleStart(mouseX, mouseY); }
+    function mouseDragged() { handleMove(mouseX, mouseY); }
+    function mouseReleased() { dragging = null; }
+
+    function touchStarted() {
+        if(touches.length > 0) {
+            let tx = touches[0].x, ty = touches[0].y;
+            if(ty < 320) {
+                handleStart(tx, ty);
+                if(dragging) return false;
+            }
+        }
+    }
+    function touchMoved() {
+        if(dragging && touches.length > 0) {
+            handleMove(touches[0].x, touches[0].y);
+            return false;
+        }
+    }
+    function touchEnded() { dragging = null; }
+    function windowResized() {
+        const wrap = document.getElementById('canvas-wrap');
+        resizeCanvas(wrap.offsetWidth, wrap.offsetHeight);
+    }
+</script>
+</body>
+</html>
