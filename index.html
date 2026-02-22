@@ -245,8 +245,8 @@ const handleChapter3Activity = (activity) => {
 // Hàm xử lý khi chọn thí nghiệm
 const handleExperimentSelect = (experiment) => {
     setSelectedExperiment(experiment);
-    // Mở thí nghiệm trong tab mới
-    window.open(experiment.file, '_blank');
+    // Chuyển sang màn hình thí nghiệm trực tiếp
+    setGameState('experiment-detail');
 };
 
 // Hàm quay lại từ màn hình thí nghiệm
@@ -651,6 +651,14 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
             if (gameState === 'experiments') {
                 return <window.ExperimentsScreen 
                     onSelectExperiment={handleExperimentSelect}
+                    onBack={backToChapter3Activities}
+                />;
+            }
+
+            // Experiment Detail
+            if (gameState === 'experiment-detail') {
+                return <window.ExperimentDetailScreen 
+                    experiment={selectedExperiment}
                     onBack={backToChapter3Activities}
                 />;
             }

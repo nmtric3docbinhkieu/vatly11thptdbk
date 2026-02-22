@@ -181,6 +181,53 @@ window.ExperimentsScreen = function({ onSelectExperiment, onBack }) {
         )
     );
 };
+
+// Component màn hình chi tiết thí nghiệm
+window.ExperimentDetailScreen = function({ experiment, onBack }) {
+    // Nếu là thí nghiệm Coulomb, nhúng trực tiếp nội dung HTML
+    if (experiment.id === 'coulomb') {
+        return React.createElement('div', { className: "min-h-screen bg-slate-50" },
+            React.createElement('div', { className: "bg-white border-b-2 border-slate-200 px-4 py-3 flex items-center justify-between" },
+                React.createElement('div', { className: "flex items-center gap-3" },
+                    React.createElement('button', { 
+                        onClick: onBack, 
+                        className: "p-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors"
+                    }, React.createElement('i', { className: "fas fa-arrow-left text-slate-700" })),
+                    React.createElement('h1', { className: "text-lg font-black text-slate-800" }, experiment.name)
+                ),
+                React.createElement('div', { className: "text-sm text-slate-500" }, "Chương 3: Điện trường")
+            ),
+            React.createElement('div', { 
+                className: "w-full",
+                dangerouslySetInnerHTML: { __html: `
+                    <iframe 
+                        src="dinhluatcoulomb.html" 
+                        style="width: 100%; height: calc(100vh - 60px); border: none; display: block;"
+                        onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px'"
+                    ></iframe>
+                ` }
+            })
+        );
+    }
+    
+    // Các thí nghiệm khác (chưa có nội dung)
+    return React.createElement('div', { className: "max-w-4xl mx-auto px-4 py-10" },
+        React.createElement('div', { className: "glass-panel p-8 text-center" },
+            React.createElement('div', { className: "flex items-center justify-between mb-6" },
+                React.createElement('button', { onClick: onBack, className: "p-3 rounded-xl bg-slate-100 hover:bg-slate-200" },
+                    React.createElement('i', { className: "fas fa-arrow-left" })
+                ),
+                React.createElement('h1', { className: "text-2xl font-black text-slate-800" }, experiment.name)
+            ),
+            React.createElement('div', { className: "py-20" },
+                React.createElement('i', { className: "fas fa-tools text-6xl text-slate-300 mb-4" }),
+                React.createElement('h2', { className: "text-xl font-bold text-slate-600 mb-2" }, "Đang phát triển"),
+                React.createElement('p', { className: "text-slate-500" }, "Thí nghiệm này sẽ sớm có mặt!")
+            )
+        )
+    );
+};
+
 window.SummaryScreen = function({ chapter, onBack, onStart }) {
     var summary = window.getChapterSummary ? window.getChapterSummary(chapter) : { title: "", topics: [] };
     
