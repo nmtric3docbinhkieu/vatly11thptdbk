@@ -1,7 +1,7 @@
 // ==============================================
 // FILE: database-index.js
 // ==============================================
-// File tổng hợp tất cả câu hỏi từ các chương
+// File tổng hợp tất cả câu hỏi và kiến thức từ các chương
 
 // Hàm lấy câu hỏi theo chương
 window.getQuestionsByChapter = function(chapter, count = 50) {
@@ -43,10 +43,6 @@ window.getQuestionsByChapter = function(chapter, count = 50) {
 };
 
 // Hàm lấy tóm tắt kiến thức theo chương
-// ==============================================
-// FILE: database-index.js (BẢN ĐẦY ĐỦ - ÔN TẬP CHI TIẾT)
-// ==============================================
-
 window.getChapterSummary = function(chapter) {
     const summaries = {
         1: {
@@ -247,64 +243,159 @@ window.getChapterSummary = function(chapter) {
         3: {
             title: "ĐIỆN TRƯỜNG",
             topics: [
-                // BÀI 10: Điện tích – Định luật Coulomb
+                // BÀI 11: Định luật Coulomb về tương tác tĩnh điện
                 { 
-                    title: "📘 BÀI 10: ĐIỆN TÍCH – ĐỊNH LUẬT COULOMB", 
+                    title: "📘 BÀI 11: ĐỊNH LUẬT COULOMB VỀ TƯƠNG TÁC TĨNH ĐIỆN", 
                     content: `
                         <div class="space-y-3">
-                            <p><span class="font-bold">• Sự nhiễm điện:</span> Vật có thể bị nhiễm điện do cọ xát, tiếp xúc hoặc hưởng ứng. Điện tích có hai loại: dương (+) và âm (-). Các điện tích cùng dấu đẩy nhau, trái dấu hút nhau.</p>
-                            <p><span class="font-bold">• Định luật Coulomb:</span> Lực tương tác giữa hai điện tích điểm $q_1, q_2$ đặt cách nhau khoảng $r$ trong môi trường có hằng số điện môi $\\varepsilon$:</p>
-                            <p class="text-center">$F = k\\frac{|q_1q_2|}{\\varepsilon r^2}$</p>
-                            <p>với $k = 9.10^9 \\, Nm^2/C^2$ (hằng số Coulomb).</p>
-                            <p><span class="font-bold">• Đơn vị điện tích:</span> Coulomb (C). Điện tích nguyên tố: $e = 1,6.10^{-19} C$. Electron mang điện $-e$, proton mang điện $+e$.</p>
-                            <p><span class="font-bold">• Hằng số điện môi $\\varepsilon$:</span> Đặc trưng cho tính cách điện của môi trường. $\\varepsilon \\ge 1$, với chân không $\\varepsilon = 1$.</p>
-                            <p><span class="font-bold">• Thuyết electron:</span> Electron có thể di chuyển từ vật này sang vật khác, làm vật nhiễm điện âm (thừa e) hoặc dương (thiếu e).</p>
-                        </div>
-                    `
-                },
-                
-                // BÀI 11: Điện trường
-                { 
-                    title: "📘 BÀI 11: ĐIỆN TRƯỜNG", 
-                    content: `
-                        <div class="space-y-3">
-                            <p><span class="font-bold">• Khái niệm:</span> Điện trường là môi trường vật chất tồn tại xung quanh điện tích và tác dụng lực lên điện tích khác đặt trong nó.</p>
-                            <p><span class="font-bold">• Cường độ điện trường $\\vec{E}$:</span> Đặc trưng cho điện trường về mặt tác dụng lực. $\\vec{E} = \\frac{\\vec{F}}{q}$ (đơn vị: V/m hoặc N/C).</p>
-                            <p><span class="font-bold">• Cường độ điện trường của điện tích điểm Q:</span> $E = k\\frac{|Q|}{\\varepsilon r^2}$, hướng ra xa Q nếu Q > 0, hướng vào Q nếu Q < 0.</p>
-                            <p><span class="font-bold">• Nguyên lí chồng chất điện trường:</span> $\\vec{E} = \\vec{E_1} + \\vec{E_2} + ...$</p>
-                            <p><span class="font-bold">• Đường sức điện:</span> Là đường mà tiếp tuyến tại mỗi điểm trùng với vectơ cường độ điện trường tại điểm đó. Qua mỗi điểm chỉ có một đường sức. Đường sức điện xuất phát từ điện tích dương, kết thúc ở điện tích âm. Nơi E lớn thì đường sức dày.</p>
-                            <p><span class="font-bold">• Điện trường đều:</span> Có vectơ cường độ điện trường tại mọi điểm đều bằng nhau. Đường sức là những đường thẳng song song cách đều.</p>
-                        </div>
-                    `
-                },
-                
-                // BÀI 12: Điện thế – Thế năng điện
-                { 
-                    title: "📘 BÀI 12: ĐIỆN THẾ – THẾ NĂNG ĐIỆN", 
-                    content: `
-                        <div class="space-y-3">
-                            <p><span class="font-bold">• Công của lực điện:</span> Công của lực điện tác dụng lên điện tích q khi di chuyển trong điện trường đều: $A = qEd$, với d là hình chiếu của độ dời lên phương đường sức. Công không phụ thuộc hình dạng đường đi, chỉ phụ thuộc vị trí đầu và cuối.</p>
-                            <p><span class="font-bold">• Thế năng của điện tích trong điện trường:</span> $W_M = V_M q$, với $V_M$ là điện thế tại M.</p>
-                            <p><span class="font-bold">• Điện thế $V_M$:</span> $V_M = \\frac{W_M}{q} = k\\frac{Q}{\\varepsilon r}$ (đối với điện tích điểm Q). Đơn vị: Vôn (V).</p>
-                            <p><span class="font-bold">• Hiệu điện thế $U_{MN}$:</span> $U_{MN} = V_M - V_N = \\frac{A_{MN}}{q}$</p>
-                            <p><span class="font-bold">• Liên hệ giữa E và U trong điện trường đều:</span> $E = \\frac{U}{d}$ (d là khoảng cách giữa hai điểm theo phương đường sức).</p>
-                        </div>
-                    `
-                },
-                
-                // BÀI 13: Tụ điện
-                { 
-                    title: "📘 BÀI 13: TỤ ĐIỆN", 
-                    content: `
-                        <div class="space-y-3">
-                            <p><span class="font-bold">• Tụ điện:</span> Là hệ hai vật dẫn đặt gần nhau, ngăn cách bởi lớp điện môi. Dùng để tích trữ năng lượng điện.</p>
-                            <p><span class="font-bold">• Điện dung $C$:</span> $C = \\frac{Q}{U}$ (đơn vị: Fara – F). $1\\mu F = 10^{-6}F$, $1nF = 10^{-9}F$, $1pF = 10^{-12}F$.</p>
-                            <p><span class="font-bold">• Tụ điện phẳng:</span> $C = \\frac{\\varepsilon \\varepsilon_0 S}{d}$, với $\\varepsilon_0 = \\frac{1}{4\\pi k.10^9} = 8,85.10^{-12} F/m$.</p>
-                            <p><span class="font-bold">• Năng lượng tụ điện:</span> $W = \\frac{1}{2}QU = \\frac{1}{2}CU^2 = \\frac{Q^2}{2C}$</p>
-                            <p><span class="font-bold">• Ghép tụ điện:</span></p>
+                            <p><span class="font-bold text-red-600">1. HAI LOẠI ĐIỆN TÍCH</span></p>
+                            <p><span class="font-bold">• Điện tích:</span> Có 2 loại - điện tích dương (+) và điện tích âm (-). Các điện tích cùng dấu đẩy nhau, trái dấu hút nhau.</p>
+                            <p><span class="font-bold">• Điện tích điểm:</span> Vật tích điện có kích thước rất nhỏ so với khoảng cách đến vị trí ta xét.</p>
+                            <p><span class="font-bold">• Điện tích nguyên tố:</span> $e = 1,6.10^{-19} C$. Electron mang điện tích âm, có độ lớn bằng điện tích nguyên tố. Mọi điện tích Q đều là bội số của điện tích nguyên tố: $Q = n.e$ (n là số tự nhiên).</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. SỰ NHIỄM ĐIỆN CỦA CÁC VẬT</span></p>
                             <ul class="list-disc pl-6">
-                                <li><span class="font-bold">Song song:</span> $C_b = C_1 + C_2$, $U_b = U_1 = U_2$, $Q_b = Q_1 + Q_2$.</li>
-                                <li><span class="font-bold">Nối tiếp:</span> $\\frac{1}{C_b} = \\frac{1}{C_1} + \\frac{1}{C_2}$, $Q_b = Q_1 = Q_2$, $U_b = U_1 + U_2$.</li>
+                                <li><span class="font-bold">Do cọ xát:</span> Hai vật khác bản chất, trung hòa cọ xát → nhiễm điện trái dấu.</li>
+                                <li><span class="font-bold">Do tiếp xúc:</span> Vật trung hòa tiếp xúc vật nhiễm điện → nhiễm điện cùng dấu.</li>
+                                <li><span class="font-bold">Do hưởng ứng:</span> Vật dẫn trung hòa đặt gần vật nhiễm điện → hai đầu nhiễm điện trái dấu.</li>
+                            </ul>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">3. THUYẾT ELECTRON</span></p>
+                            <p>Nguyên tử gồm hạt nhân (mang điện dương) và electron (mang điện âm) chuyển động xung quanh. Electron có thể bứt khỏi nguyên tử và di chuyển từ vật này sang vật khác.</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">4. ĐỊNH LUẬT COULOMB</span></p>
+                            <p>Lực tương tác tĩnh điện giữa hai điện tích điểm đặt trong chân không:</p>
+                            <p class="text-center">$F = k\\frac{|q_1.q_2|}{r^2}$</p>
+                            <p>Trong đó: $k = 9.10^9 \\frac{Nm^2}{C^2}$ (hằng số Coulomb); $q_1, q_2$: độ lớn các điện tích (C); $r$: khoảng cách (m).</p>
+                            
+                            <p><span class="font-bold">• Trong môi trường điện môi:</span> $F = k\\frac{|q_1.q_2|}{\\varepsilon r^2}$</p>
+                            
+                            <p><span class="font-bold">• Hằng số điện môi của một số chất:</span> Chân không (1), Không khí (1,00059), Nước (81), Thủy tinh (5-10).</p>
+                            
+                            <p><span class="font-bold">• Nguyên lý chồng chất lực điện:</span> $\\vec{F}_q = \\vec{F}_{1q} + \\vec{F}_{2q} + ... + \\vec{F}_{nq}$</p>
+                        </div>
+                    `
+                },
+                
+                // BÀI 12: Điện trường
+                { 
+                    title: "📘 BÀI 12: ĐIỆN TRƯỜNG", 
+                    content: `
+                        <div class="space-y-3">
+                            <p><span class="font-bold text-red-600">1. CƯỜNG ĐỘ ĐIỆN TRƯỜNG</span></p>
+                            <p><span class="font-bold">• Khái niệm điện trường:</span> Điện trường là dạng vật chất bao quanh điện tích, truyền tương tác giữa các điện tích. Tính chất cơ bản: tác dụng lực điện lên các điện tích khác đặt trong nó.</p>
+                            <p><span class="font-bold">• Cường độ điện trường:</span> Đại lượng đặc trưng cho điện trường về mặt tác dụng lực tại một điểm.</p>
+                            <p class="text-center">$\\vec{E} = \\frac{\\vec{F}}{q}$; $E = \\frac{F}{q}$ (đơn vị: N/C hoặc V/m)</p>
+                            
+                            <p><span class="font-bold">• Cường độ điện trường của điện tích điểm Q:</span></p>
+                            <p class="text-center">$E = k\\frac{|Q|}{\\varepsilon r^2}$</p>
+                            <p>Chiều: hướng ra xa Q nếu Q > 0, hướng vào Q nếu Q < 0.</p>
+                            
+                            <p><span class="font-bold">• Nguyên lý chồng chất điện trường:</span> $\\vec{E} = \\vec{E}_1 + \\vec{E}_2 + ... + \\vec{E}_n$</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. ĐƯỜNG SỨC ĐIỆN</span></p>
+                            <p><span class="font-bold">• Đường sức điện:</span> Là đường mà tiếp tuyến tại mỗi điểm trùng với vectơ cường độ điện trường tại điểm đó, chiều trùng với chiều của vectơ cường độ điện trường.</p>
+                            <p><span class="font-bold">• Đặc điểm:</span> Tại mỗi điểm chỉ có một đường sức; là đường cong không kín; bắt đầu từ điện tích dương (hoặc vô cực) và kết thúc ở điện tích âm (hoặc vô cực).</p>
+                            
+                            <p><span class="font-bold">• Điện trường đều:</span> Có vectơ cường độ điện trường tại mọi điểm đều bằng nhau. Đường sức là những đường thẳng song song và cách đều nhau.</p>
+                        </div>
+                    `
+                },
+                
+                // BÀI 13: Điện thế và thế năng điện
+                { 
+                    title: "📘 BÀI 13: ĐIỆN THẾ VÀ THẾ NĂNG ĐIỆN", 
+                    content: `
+                        <div class="space-y-3">
+                            <p><span class="font-bold text-red-600">1. CÔNG CỦA LỰC ĐIỆN</span></p>
+                            <p>Trong điện trường đều: $A_{AB} = q.E.\\overline{A'B'}$ với $\\overline{A'B'}$ là hình chiếu của AB lên phương đường sức.</p>
+                            <p><span class="font-bold">Đặc điểm:</span> Công của lực điện không phụ thuộc vào dạng đường đi, chỉ phụ thuộc vào vị trí điểm đầu và điểm cuối. Lực điện là lực thế, điện trường là trường thế.</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. THẾ NĂNG ĐIỆN</span></p>
+                            <p>$W_A = A_{A\\infty}$; $A_{AB} = W_A - W_B$; $W_A = qV_A$ (đơn vị: Jun - J)</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">3. ĐIỆN THẾ</span></p>
+                            <p class="text-center">$V_A = \\frac{W_A}{q} = \\frac{A_{A\\infty}}{q} = \\frac{A'_{\\infty A}}{q}$ (đơn vị: Vôn - V)</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">4. HIỆU ĐIỆN THẾ</span></p>
+                            <p class="text-center">$U_{AB} = V_A - V_B = \\frac{A_{AB}}{q}$</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">5. LIÊN HỆ GIỮA CĐĐT VÀ HIỆU ĐIỆN THẾ</span></p>
+                            <p class="text-center">$E = \\frac{U}{d}$</p>
+                            <p>Với $d$ là khoảng cách giữa hai điểm trên phương của vectơ cường độ điện trường. $d > 0$ nếu cùng chiều $\\vec{E}$, $d < 0$ nếu ngược chiều.</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">6. CHUYỂN ĐỘNG CỦA ĐIỆN TÍCH TRONG ĐIỆN TRƯỜNG ĐỀU</span></p>
+                            <p><span class="font-bold">• Vận tốc ban đầu song song với $\\vec{E}$:</span> Chuyển động thẳng nhanh dần đều. $v = \\sqrt{\\frac{2qU}{m}}$</p>
+                            <p><span class="font-bold">• Vận tốc ban đầu vuông góc với $\\vec{E}$:</span> Quỹ đạo parabol (giống ném ngang). Trên Ox: thẳng đều; trên Oy: nhanh dần đều với $a = \\frac{qE}{m}$.</p>
+                        </div>
+                    `
+                },
+                
+                // BÀI 14: Tụ điện
+                { 
+                    title: "📘 BÀI 14: TỤ ĐIỆN", 
+                    content: `
+                        <div class="space-y-3">
+                            <p><span class="font-bold text-red-600">1. ĐIỆN MÔI TRONG ĐIỆN TRƯỜNG</span></p>
+                            <p><span class="font-bold">• Điện môi:</span> Vật cách điện, không cho điện tích chạy qua. Ví dụ: nhựa, cao su, thủy tinh, sứ.</p>
+                            <p><span class="font-bold">• Sự phân cực điện môi:</span> Khi đặt trong điện trường, các nguyên tử bị phân cực → hai mặt tích điện trái dấu → điện trường tổng hợp bên trong nhỏ hơn điện trường ngoài.</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. TỤ ĐIỆN</span></p>
+                            <p><span class="font-bold">• Khái niệm:</span> Tụ điện là linh kiện điện tử dùng để tích điện và phóng điện trong mạch. Gồm hai vật dẫn đặt gần nhau, ngăn cách bởi lớp điện môi.</p>
+                            <p><span class="font-bold">• Phân loại:</span> Theo hình dạng (tụ phẳng, tụ trụ, tụ cầu); theo điện môi (tụ không khí, tụ giấy, tụ hóa...).</p>
+                            <p><span class="font-bold">• Quá trình nạp - phóng:</span> Nạp: nối với nguồn; Phóng: nối với điện trở.</p>
+                            <p><span class="font-bold">• Đặc điểm:</span> Tụ điện không cho dòng điện một chiều đi qua, cho dòng xoay chiều đi qua.</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">3. ĐIỆN DUNG CỦA TỤ ĐIỆN</span></p>
+                            <p class="text-center">$C = \\frac{Q}{U}$ (đơn vị: Fara - F)</p>
+                            <p>$1 \\mu F = 10^{-6}F$, $1 nF = 10^{-9}F$, $1 pF = 10^{-12}F$.</p>
+                            <p><span class="font-bold">• Tính chất:</span> Điện dung chỉ phụ thuộc vào cấu tạo tụ điện (hình dạng, kích thước, điện môi), không phụ thuộc vào U và Q.</p>
+                            <p><span class="font-bold">• Hiệu điện thế giới hạn:</span> Mỗi tụ có hiệu điện thế tối đa có thể chịu được, nếu vượt quá tụ sẽ hỏng.</p>
+                            
+                            <p><span class="font-bold">• Tụ điện phẳng:</span> $C = \\frac{\\varepsilon S}{4\\pi k d}$ với $k = 9.10^9 Nm^2/C^2$</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">4. GHÉP TỤ ĐIỆN</span></p>
+                            <p><span class="font-bold">• Nối tiếp:</span> $\\frac{1}{C_b} = \\frac{1}{C_1} + \\frac{1}{C_2} + ...$; $Q = Q_1 = Q_2 = ...$; $U = U_1 + U_2 + ...$</p>
+                            <p><span class="font-bold">• Song song:</span> $C_b = C_1 + C_2 + ...$; $Q = Q_1 + Q_2 + ...$; $U = U_1 = U_2 = ...$</p>
+                        </div>
+                    `
+                },
+                
+                // BÀI 15: Năng lượng điện trường
+                { 
+                    title: "📘 BÀI 15: NĂNG LƯỢNG ĐIỆN TRƯỜNG", 
+                    content: `
+                        <div class="space-y-3">
+                            <p><span class="font-bold text-red-600">1. NĂNG LƯỢNG CỦA TỤ ĐIỆN</span></p>
+                            <p>Khi tích điện cho tụ, nguồn điện thực hiện công. Công này được dự trữ trong tụ dưới dạng năng lượng điện trường.</p>
+                            <p class="text-center">$W = \\frac{1}{2}QU = \\frac{1}{2}CU^2 = \\frac{Q^2}{2C}$</p>
+                            <p>Trong đó: W - năng lượng (J); C - điện dung (F); U - hiệu điện thế (V); Q - điện tích (C).</p>
+                            <p><span class="font-bold">Nhận xét:</span> Năng lượng tỉ lệ với bình phương hiệu điện thế và bình phương điện tích, tỉ lệ thuận với điện dung khi U không đổi.</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. SO SÁNH TỤ ĐIỆN VỚI PIN</span></p>
+                            <ul class="list-disc pl-6">
+                                <li>Tụ điện: nạp/xả nhanh, hàng triệu lần không hỏng, năng lượng nhỏ, không duy trì dòng lâu.</li>
+                                <li>Pin: nạp/xả chậm, số lần có hạn, năng lượng lớn, duy trì dòng lâu.</li>
+                            </ul>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">3. ỨNG DỤNG CỦA TỤ ĐIỆN</span></p>
+                            <ul class="list-disc pl-6">
+                                <li><span class="font-bold">Màn hình cảm ứng:</span> Cơ thể người tạo thành tụ điện với màn hình, vị trí chạm làm thay đổi điện dung.</li>
+                                <li><span class="font-bold">Xe ô tô điện:</span> Kết hợp với pin để tăng tốc, tái tạo năng lượng khi phanh, kéo dài tuổi thọ pin.</li>
+                                <li><span class="font-bold">Đèn flash máy ảnh:</span> Tích điện chậm, phóng nhanh tạo ánh sáng mạnh.</li>
+                                <li><span class="font-bold">Máy khử rung tim:</span> Tích trữ năng lượng, phóng qua tim bệnh nhân.</li>
+                                <li><span class="font-bold">Lọc nguồn, mạch dao động, micro điện dung,...</span></li>
+                            </ul>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">4. CÔNG THỨC QUAN TRỌNG CẦN NHỚ</span></p>
+                            <ul class="list-disc pl-6">
+                                <li>$C = \\frac{Q}{U}$</li>
+                                <li>$C = \\frac{\\varepsilon S}{4\\pi k d}$ (tụ phẳng)</li>
+                                <li>Ghép nối tiếp: $\\frac{1}{C_b} = \\frac{1}{C_1} + \\frac{1}{C_2}$</li>
+                                <li>Ghép song song: $C_b = C_1 + C_2$</li>
+                                <li>$W = \\frac{1}{2}QU = \\frac{1}{2}CU^2 = \\frac{Q^2}{2C}$</li>
+                                <li>Khi tụ mắc với nguồn: U không đổi</li>
+                                <li>Khi tụ tháo khỏi nguồn: Q không đổi</li>
                             </ul>
                         </div>
                     `
@@ -316,7 +407,7 @@ window.getChapterSummary = function(chapter) {
         4: {
             title: "TỪ TRƯỜNG",
             topics: [
-                // BÀI 14: Từ trường
+                // BÀI 14: Từ trường (bài gốc trong database-index)
                 { 
                     title: "📘 BÀI 14: TỪ TRƯỜNG", 
                     content: `
