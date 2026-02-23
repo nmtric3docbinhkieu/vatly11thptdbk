@@ -153,7 +153,12 @@
             // MathJax rerender
             useEffect(() => {
                 if (window.MathJax && window.MathJax.typesetPromise) {
-                    setTimeout(() => window.MathJax.typesetPromise(), 50);
+                    setTimeout(() => {
+                        const elements = document.querySelectorAll('.tex2jax_process');
+                        if (elements.length > 0) {
+                            window.MathJax.typesetPromise(Array.from(elements));
+                        }
+                    }, 100);
                 }
             }, [currentIdx, gameState, showExpl]);
 
@@ -238,6 +243,9 @@ const handleChapter3Activity = (activity) => {
             break;
         case 'quiz':
             startQuiz(3);
+            break;
+        case 'solve':
+            setGameState('solve-exercises');
             break;
     }
 };
@@ -660,6 +668,14 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
                 return <window.ExperimentDetailScreen 
                     experiment={selectedExperiment}
                     onBack={backToChapter3Activities}
+                />;
+            }
+
+            // Solve Exercises
+            if (gameState === 'solve-exercises') {
+                return <window.SolveExercisesScreen 
+                    onBack={backToChapter3Activities}
+                    chapter={3}
                 />;
             }
 
