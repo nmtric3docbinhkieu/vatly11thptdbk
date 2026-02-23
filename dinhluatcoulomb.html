@@ -6,117 +6,176 @@
     <title>Vật lí 11 - Định luật Coulomb</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700;900&display=swap');
-        
         html, body { 
             background: #f1f5f9; 
-            color: #000000; 
-            font-family: 'Be Vietnam Pro', sans-serif; 
+            color: #1e293b; 
+            font-family: 'Nunito', sans-serif; 
             margin: 0; 
             height: auto;
             overflow-y: auto; 
             -webkit-overflow-scrolling: touch;
         }
 
-        .neo-card {
-            background: #ffffff;
-            border: 3px solid #000000;
-            border-radius: 12px;
-            box-shadow: 6px 6px 0px #000000;
-            margin-bottom: 25px;
+        .glass-panel {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
 
-        /* Thanh trượt to, dễ kéo */
+        .glass-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        /* Thanh trượt hiện đại */
         .custom-slider {
             -webkit-appearance: none;
             appearance: none;
             width: 100%;
-            height: 12px;
+            height: 8px;
             background: #e2e8f0;
-            border-radius: 6px;
-            border: 2px solid #000000;
+            border-radius: 1rem;
             outline: none;
-            margin: 20px 0;
+            margin: 16px 0;
+            transition: all 0.3s ease;
         }
+
+        .custom-slider:hover {
+            background: #cbd5e1;
+        }
+
         .custom-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 32px;
-            height: 32px;
-            background: #ffffff;
-            border: 4px solid #000000;
+            width: 24px;
+            height: 24px;
+            background: #3b82f6;
+            border: 3px solid white;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 0px #000000;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .custom-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
         }
 
         #canvas-wrap {
             width: 100%;
             height: 320px;
-            background: #ffffff;
+            background: white;
+            border-radius: 1rem;
             position: relative;
             touch-action: none;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
         }
 
-        /* Đảm bảo menu chọn không bị khuất */
+        /* Menu chọn hiện đại */
         select {
-            border: 3px solid #000000 !important;
+            border: 2px solid #e2e8f0 !important;
             background: white !important;
-            padding: 12px !important;
-            font-weight: 900 !important;
-            font-size: 16px !important;
-            border-radius: 10px !important;
+            padding: 12px 16px !important;
+            font-weight: 600 !important;
+            font-size: 15px !important;
+            border-radius: 0.75rem !important;
+            transition: all 0.3s ease !important;
+            cursor: pointer !important;
         }
 
-        .label-text { font-weight: 900; text-transform: uppercase; font-size: 12px; color: #000000; }
+        select:hover {
+            border-color: #3b82f6 !important;
+        }
+
+        select:focus {
+            outline: none !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+        }
+
+        .label-text { 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            font-size: 13px; 
+            color: #64748b; 
+            letter-spacing: 0.05em;
+        }
         .footer-space { height: 120px; } /* Tạo khoảng trống cuối trang */
     </style>
 </head>
 <body class="p-4">
 
     <header class="mb-6 text-center">
-        <h1 class="text-2xl font-black uppercase tracking-tighter">Định luật Coulomb</h1>
-        <div class="h-1 bg-black w-24 mx-auto"></div>
+        <h1 class="text-3xl font-bold text-slate-800 mb-2">Định luật Coulomb</h1>
+        <p class="text-slate-500 font-semibold">Thí nghiệm ảo - Chương 3: Điện trường</p>
     </header>
 
-    <div class="neo-card overflow-hidden">
+    <div class="glass-panel overflow-hidden mb-6">
         <div id="canvas-wrap"></div>
-        <div class="bg-yellow-400 border-t-2 border-black p-3 flex justify-between font-black text-[11px] uppercase">
-            <span>Khoảng cách: <span id="dist-text">0</span> cm</span>
-            <span>Lực F: <span id="f-val">0.00</span> N</span>
+        <div class="bg-blue-50 border-t border-blue-100 p-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-ruler text-blue-600"></i>
+                <span class="font-semibold text-slate-700">Khoảng cách: <span id="dist-text" class="text-blue-600 font-bold">0</span> cm</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fas fa-bolt text-yellow-500"></i>
+                <span class="font-semibold text-slate-700">Lực F: <span id="f-val" class="text-blue-600 font-bold">0.00</span> N</span>
+            </div>
         </div>
     </div>
 
-    <div class="flex flex-col">
-        <div class="neo-card p-4">
-            <div class="flex justify-between items-center">
-                <label class="label-text">Điện tích q₁ (Đỏ)</label>
-                <span class="text-2xl font-black text-red-600" id="q1t">5 µC</span>
+    <div class="grid gap-6 md:grid-cols-2">
+        <div class="glass-panel stat-card p-6 border-l-4 border-red-500">
+            <div class="flex justify-between items-center mb-4">
+                <label class="label-text flex items-center gap-2">
+                    <i class="fas fa-plus-circle text-red-500"></i>
+                    Điện tích q₁ (Đỏ)
+                </label>
+                <span class="text-2xl font-bold text-red-600" id="q1t">5 µC</span>
             </div>
             <input type="range" id="q1s" min="-10" max="10" step="1" value="5" class="custom-slider">
         </div>
 
-        <div class="neo-card p-4">
-            <div class="flex justify-between items-center">
-                <label class="label-text">Điện tích q₂ (Xanh)</label>
-                <span class="text-2xl font-black text-blue-600" id="q2t">-5 µC</span>
+        <div class="glass-panel stat-card p-6 border-l-4 border-blue-500">
+            <div class="flex justify-between items-center mb-4">
+                <label class="label-text flex items-center gap-2">
+                    <i class="fas fa-minus-circle text-blue-500"></i>
+                    Điện tích q₂ (Xanh)
+                </label>
+                <span class="text-2xl font-bold text-blue-600" id="q2t">-5 µC</span>
             </div>
             <input type="range" id="q2s" min="-10" max="10" step="1" value="-5" class="custom-slider">
         </div>
+    </div>
 
-        <div class="neo-card p-4">
-            <label class="label-text block mb-2">Môi trường điện môi (ε)</label>
-            <select id="eps" class="w-full outline-none">
-                <option value="1">Không khí / Chân không (ε=1)</option>
-                <option value="2">Dầu hỏa (ε=2)</option>
-                <option value="2.1">Parafin (ε=2.1)</option>
-                <option value="3">Cao su (ε=3)</option>
-                <option value="6">Mica (ε=6)</option>
-                <option value="7">Thủy tinh (ε=7)</option>
-                <option value="81">Nước tinh khiết (ε=81)</option>
-            </select>
-        </div>
+    <div class="glass-panel p-6 mt-6">
+        <label class="label-text block mb-3 flex items-center gap-2">
+            <i class="fas fa-flask text-green-600"></i>
+            Môi trường điện môi (ε)
+        </label>
+        <select id="eps" class="w-full">
+            <option value="1">Không khí / Chân không (ε=1)</option>
+            <option value="2">Dầu hỏa (ε=2)</option>
+            <option value="2.1">Parafin (ε=2.1)</option>
+            <option value="3">Cao su (ε=3)</option>
+            <option value="6">Mica (ε=6)</option>
+            <option value="7">Thủy tinh (ε=7)</option>
+            <option value="81">Nước tinh khiết (ε=81)</option>
+        </select>
     </div>
 
     <div class="footer-space"></div>
