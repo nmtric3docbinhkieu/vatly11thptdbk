@@ -128,6 +128,14 @@ window.ExperimentsScreen = function({ onSelectExperiment, onBack }) {
             file: 'dinhluatcoulomb.html'
         },
         {
+            id: 'sunhiemdien',
+            name: 'Sự nhiễm điện',
+            description: 'Thí nghiệm cọ xát, tiếp xúc và hưởng ứng',
+            icon: 'fa-hand-sparkles',
+            color: 'purple',
+            file: 'sunhiemdien.html'
+        },
+        {
             id: 'electric-field',
             name: 'Điện trường',
             description: 'Trực quan hóa đường sức điện và điện trường',
@@ -184,8 +192,8 @@ window.ExperimentsScreen = function({ onSelectExperiment, onBack }) {
 
 // Component màn hình chi tiết thí nghiệm
 window.ExperimentDetailScreen = function({ experiment, onBack }) {
-    // Nếu là thí nghiệm Coulomb, nhúng trực tiếp nội dung HTML
-    if (experiment.id === 'coulomb') {
+    // Nếu là thí nghiệm Coulomb hoặc Sự nhiễm điện, nhúng trực tiếp nội dung HTML
+    if (experiment.id === 'coulomb' || experiment.id === 'sunhiemdien') {
         return React.createElement('div', { className: "min-h-screen bg-slate-50" },
             React.createElement('div', { className: "bg-white border-b-2 border-slate-200 px-4 py-3 flex items-center justify-between" },
                 React.createElement('div', { className: "flex items-center gap-3" },
@@ -201,7 +209,7 @@ window.ExperimentDetailScreen = function({ experiment, onBack }) {
                 className: "w-full",
                 dangerouslySetInnerHTML: { __html: `
                     <iframe 
-                        src="dinhluatcoulomb.html" 
+                        src="${experiment.file}" 
                         style="width: 100%; height: calc(100vh - 60px); border: none; display: block;"
                         onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px'"
                     ></iframe>
