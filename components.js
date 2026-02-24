@@ -339,6 +339,8 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
     const [showAnswer, setShowAnswer] = React.useState(false);
     const [score, setScore] = React.useState(0);
     const [answeredQuestions, setAnsweredQuestions] = React.useState(new Set());
+    const [userAnswers, setUserAnswers] = React.useState({}); // Lưu đáp án của từng câu
+    const [viewedAnswers, setViewedAnswers] = React.useState(new Set()); // Lưu các câu đã xem đáp án
     const [elapsedTime, setElapsedTime] = React.useState(0); // Thời gian đã trôi qua (giây)
     const [isTimerActive, setIsTimerActive] = React.useState(false);
     const [warningCount, setWarningCount] = React.useState(0);
@@ -360,6 +362,8 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
         setShowAnswer(false);
         setScore(0);
         setAnsweredQuestions(new Set());
+        setUserAnswers({}); // Reset đáp án
+        setViewedAnswers(new Set()); // Reset câu đã xem đáp án
         setElapsedTime(0);
         setIsTimerActive(true);
         setWarningCount(0);
@@ -377,6 +381,12 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
             }, 100);
         }
     }, [currentQuestionIndex, showAnswer, questions]);
+
+    // Khôi phục selectedAnswer và showAnswer khi chuyển câu
+    React.useEffect(() => {
+        setSelectedAnswer(userAnswers[currentQuestionIndex] || null);
+        setShowAnswer(viewedAnswers.has(currentQuestionIndex));
+    }, [currentQuestionIndex]);
 
     // Timer đếm thời gian thực thi
     React.useEffect(() => {
@@ -419,12 +429,22 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
     }, [isTimerActive]);
 
     const handleAnswerSelect = (answerIndex) => {
-        if (showAnswer) return;
+        // Nếu câu này đã có đáp án được lưu rồi thì không cho chọn lại
+        if (userAnswers[currentQuestionIndex] !== undefined) return;
+        
+        // Chỉ setSelectedAnswer, chưa lưu vào userAnswers
         setSelectedAnswer(answerIndex);
     };
 
     const handleShowAnswer = () => {
         if (selectedAnswer === null) return;
+        
+        // Lưu đáp án vào userAnswers khi bấm Xem đáp án
+        const newAnswers = { ...userAnswers, [currentQuestionIndex]: selectedAnswer };
+        setUserAnswers(newAnswers);
+        
+        // Đánh dấu câu đã xem đáp án
+        setViewedAnswers(prev => new Set(prev).add(currentQuestionIndex));
         
         setShowAnswer(true);
         const isCorrect = selectedAnswer === questions[currentQuestionIndex].a;
@@ -442,7 +462,6 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
     const handleNext = () => {
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(prev => prev + 1);
-            setSelectedAnswer(null);
             setShowAnswer(false);
         }
     };
@@ -450,14 +469,12 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
     const handlePrevious = () => {
         if (currentQuestionIndex > 0) {
             setCurrentQuestionIndex(prev => prev - 1);
-            setSelectedAnswer(null);
             setShowAnswer(false);
         }
     };
 
     const handleJumpToQuestion = (index) => {
         setCurrentQuestionIndex(index);
-        setSelectedAnswer(null);
         setShowAnswer(false);
     };
 
@@ -555,7 +572,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                 ),
                 React.createElement('div', { className: "grid grid-cols-10 gap-2 max-h-60 overflow-y-auto p-2 bg-slate-50 rounded-lg" },
                     questions.map((_, index) => {
-                        const isAnswered = answeredQuestions.has(index);
+                        const isAnswered = userAnswers[index] !== undefined;
                         const isCurrent = index === currentQuestionIndex;
                         return React.createElement('button', {
                             key: index,
@@ -609,28 +626,30 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                     // Options
                     React.createElement('div', { className: "space-y-3" },
                         currentQuestion.options.map((option, index) => {
-                            const isSelected = selectedAnswer === index;
-                            const isCorrect = showAnswer && index === currentQuestion.a;
-                            const isWrong = showAnswer && isSelected && index !== currentQuestion.a;
+                            const userAnswer = userAnswers[currentQuestionIndex];
+                            const hasViewedAnswer = viewedAnswers.has(currentQuestionIndex);
+                            const isSelected = userAnswer === index || (!hasViewedAnswer && selectedAnswer === index);
+                            const isCorrect = index === currentQuestion.a;
+                            const isWrong = isSelected && !isCorrect;
                             
                             return React.createElement('button', {
                                 key: index,
                                 onClick: () => handleAnswerSelect(index),
-                                disabled: showAnswer,
+                                disabled: userAnswers[currentQuestionIndex] !== undefined,
                                 className: `w-full text-left p-4 rounded-xl border-2 transition-all text-left ${
-                                    isCorrect ? 'bg-green-50 border-green-500 text-green-800' :
-                                    isWrong ? 'bg-red-50 border-red-500 text-red-800' :
-                                    isSelected ? 'bg-blue-50 border-blue-500 text-blue-800' :
+                                    isCorrect && hasViewedAnswer ? 'bg-green-50 border-green-500 text-green-800' :
+                                    isWrong && hasViewedAnswer ? 'bg-red-50 border-red-500 text-red-800' :
+                                    isSelected && !hasViewedAnswer ? 'bg-blue-50 border-blue-500 text-blue-800' :
                                     'bg-white border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700'
-                                } ${showAnswer ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-[1.02]'}`
+                                } ${userAnswers[currentQuestionIndex] !== undefined ? 'cursor-not-allowed' : 'cursor-pointer hover:scale-[1.02]'}`
                             },
                             React.createElement('div', { className: "flex items-center justify-between" },
                                 React.createElement('div', { className: "flex items-center gap-3" },
                                     React.createElement('span', { 
                                         className: `w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                                            isCorrect ? 'bg-green-600 text-white' :
-                                            isWrong ? 'bg-red-600 text-white' :
-                                            isSelected ? 'bg-blue-600 text-white' :
+                                            isCorrect && hasViewedAnswer ? 'bg-green-600 text-white' :
+                                            isWrong && hasViewedAnswer ? 'bg-red-600 text-white' :
+                                            isSelected && !hasViewedAnswer ? 'bg-blue-600 text-white' :
                                             'bg-slate-200 text-slate-600'
                                         }`
                                     }, String.fromCharCode(65 + index)),
@@ -639,7 +658,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                                         text: option
                                     })
                                 ),
-                                (isCorrect || isWrong) && React.createElement('i', {
+                                (isCorrect || isWrong) && hasViewedAnswer && React.createElement('i', {
                                     className: `fas ${isCorrect ? 'fa-check text-green-600' : 'fa-times text-red-600'}`
                                 })
                             )
