@@ -339,7 +339,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
     const [showAnswer, setShowAnswer] = React.useState(false);
     const [score, setScore] = React.useState(0);
     const [answeredQuestions, setAnsweredQuestions] = React.useState(new Set());
-    const [timeLeft, setTimeLeft] = React.useState(1800); // 30 phút
+    const [elapsedTime, setElapsedTime] = React.useState(0); // Thời gian đã trôi qua (giây)
     const [isTimerActive, setIsTimerActive] = React.useState(false);
     const [warningCount, setWarningCount] = React.useState(0);
     const [isFullscreen, setIsFullscreen] = React.useState(false);
@@ -360,7 +360,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
         setShowAnswer(false);
         setScore(0);
         setAnsweredQuestions(new Set());
-        setTimeLeft(1800);
+        setElapsedTime(0);
         setIsTimerActive(true);
         setWarningCount(0);
     }, [chapter]);
@@ -378,22 +378,16 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
         }
     }, [currentQuestionIndex, showAnswer, questions]);
 
-    // Timer
+    // Timer đếm thời gian thực thi
     React.useEffect(() => {
-        if (!isTimerActive || timeLeft <= 0) return;
+        if (!isTimerActive) return;
 
         const timer = setInterval(() => {
-            setTimeLeft(prev => {
-                if (prev <= 1) {
-                    setIsTimerActive(false);
-                    return 0;
-                }
-                return prev - 1;
-            });
+            setElapsedTime(prev => prev + 1);
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [isTimerActive, timeLeft]);
+    }, [isTimerActive]);
 
     // Format thời gian
     const formatTime = (seconds) => {
@@ -496,13 +490,13 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                 // Timer
                 React.createElement('div', { 
                     className: `flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-sm font-bold ${
-                        timeLeft < 300 ? 'bg-red-100 text-red-700' : 
-                        timeLeft < 600 ? 'bg-yellow-100 text-yellow-700' : 
+                        elapsedTime > 1800 ? 'bg-red-100 text-red-700' : 
+                        elapsedTime > 900 ? 'bg-yellow-100 text-yellow-700' : 
                         'bg-green-100 text-green-700'
                     }`
                 },
                     React.createElement('i', { className: "fas fa-clock" }),
-                    formatTime(timeLeft)
+                    formatTime(elapsedTime)
                 ),
                 // Score
                 React.createElement('div', { className: "flex items-center gap-2 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg font-mono text-sm font-bold" },
@@ -691,97 +685,6 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
             )
         )
     )
-    
-    return React.createElement('div', { className: "max-w-2xl mx-auto px-4 py-10 tex2jax_process" },
-        // Cảnh báo gian lận
-        showCheatAlert ? React.createElement('div', { className: "fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-red-600 text-white px-6 py-4 rounded-xl shadow-2xl animate-pulse" },
-            React.createElement('div', { className: "flex items-center gap-3" },
-                React.createElement('i', { className: "fas fa-exclamation-triangle text-2xl" }),
-                React.createElement('div', null,
-                    React.createElement('div', { className: "font-bold" }, "CẢNH BÁO GIAN LẬN!"),
-                    React.createElement('div', { className: "text-sm" }, "Bạn đã rời khỏi tab thi. Lần " + cheatWarnings)
-                )
-            )
-        ) : null,
-        
-        // Header
-        React.createElement('div', { className: "flex justify-between items-center mb-6" },
-            React.createElement('div', { className: "bg-white px-4 py-2 rounded-xl shadow-sm border font-bold" },
-                "Câu " + (currentIdx + 1) + "/" + totalQuestions
-            ),
-            React.createElement('div', { className: "flex items-center gap-2" },
-                React.createElement('div', { className: "bg-green-100 text-green-700 px-3 py-2 rounded-xl border text-sm" },
-                    React.createElement('i', { className: "fas fa-clock mr-1" }),
-                    formatTime(elapsedTime)
-                ),
-                cheatWarnings > 0 ? React.createElement('div', { className: "bg-red-100 text-red-600 px-3 py-2 rounded-xl border text-sm" },
-                    React.createElement('i', { className: "fas fa-exclamation-triangle mr-1" }),
-                    cheatWarnings
-                ) : null,
-                React.createElement('div', { className: "bg-blue-600 px-6 py-2 rounded-xl shadow-md text-white font-black" },
-                    React.createElement('i', { className: "fas fa-star mr-2 text-yellow-300" }),
-                    score.toFixed(1)  // Thêm .toFixed(1)
-                )
-            )
-        ),
-        
-        // Progress bar
-        React.createElement('div', { className: "w-full bg-slate-200 h-2 rounded-full mb-8 overflow-hidden" },
-            React.createElement('div', { 
-                className: "bg-blue-500 h-full rounded-full transition-all", 
-                style: { width: ((currentIdx + 1) / totalQuestions * 100) + '%' }
-            })
-        ),
-        
-        // Explanation
-        showExpl ? React.createElement('div', { className: "explanation-anim bg-white border-2 border-blue-500 p-8 rounded-3xl shadow-xl mb-8" },
-            React.createElement('div', { className: "flex items-center mb-4 text-blue-600 font-bold uppercase tracking-widest text-sm" },
-                React.createElement('div', { className: "w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3" },
-                    React.createElement('i', { className: "fas fa-brain text-xs" })
-                ),
-                "Phân tích"
-            ),
-            React.createElement('div', { className: "text-lg text-slate-700 leading-relaxed bg-slate-50 p-5 rounded-2xl border border-slate-100 italic" },
-                question?.expl
-            ),
-            React.createElement('button', { onClick: onNext, className: "mt-8 w-full bg-blue-600 text-white py-5 rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all" },
-                currentIdx === totalQuestions - 1 ? 'XEM KẾT QUẢ' : 'CÂU TIẾP THEO',
-                React.createElement('i', { className: "fas fa-chevron-right ml-3" })
-            )
-        ) : null,
-        
-        // Question
-        React.createElement('div', { className: "glass-panel p-8 md:p-12 mb-6" },
-            React.createElement('h2', { className: "text-xl md:text-2xl font-extrabold text-slate-800 mb-10 leading-snug" },
-                question?.q
-            ),
-            // Options
-            React.createElement('div', { className: "grid gap-4" },
-                (question?.options || []).map(function(opt, i) {
-                    var style = "border-slate-100 text-slate-700 hover:border-blue-200 hover:bg-blue-50";
-                    if (selected !== null) {
-                        if (i === question.a) style = "border-green-500 bg-green-50 text-green-700 font-bold ring-2 ring-green-100";
-                        else if (i === selected) style = "border-red-500 bg-red-50 text-red-700 font-bold ring-2 ring-red-100";
-                        else style = "border-transparent text-slate-300 opacity-50";
-                    }
-                    
-                    return React.createElement('button', {
-                        key: i,
-                        disabled: selected !== null,
-                        onClick: function() { onSelect(i); },
-                        className: "p-5 rounded-2xl border-2 text-left flex items-center shadow-sm transition-all " + style
-                    },
-                        React.createElement('div', { 
-                            className: "w-10 h-10 rounded-xl flex items-center justify-center mr-4 font-bold transition-colors " +
-                                (selected === null ? 'bg-slate-100 text-slate-500' : 
-                                (i === question.a ? 'bg-green-500 text-white' : 'bg-red-500 text-white'))
-                        }, String.fromCharCode(65 + i)),
-                        React.createElement('span', { className: "text-lg" }, opt)
-                    );
-                })
-            )
-        )
-    );
 };
 
 // QuizScreen component for regular quiz functionality
