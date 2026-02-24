@@ -287,7 +287,8 @@ window.SummaryScreen = function({ chapter, onBack, onStart }) {
                         React.createElement('h3', { className: "text-lg font-bold text-slate-800 mb-3" }, topic.title),
                         React.createElement(window.LaTeXText, { 
                             className: "text-slate-700",
-                            text: topic.content
+                            text: topic.content,
+                            isHTML: true
                         })
                     );
                 })
@@ -303,22 +304,31 @@ window.SummaryScreen = function({ chapter, onBack, onStart }) {
 
 // Component màn hình làm bài
 // Component để hiển thị text có LaTeX
-window.LaTeXText = function({ text, className }) {
+window.LaTeXText = function({ text, className, isHTML = false }) {
     const elementRef = React.useRef(null);
     
     React.useEffect(() => {
         if (elementRef.current && window.MathJax && window.MathJax.typesetPromise) {
+            const delay = isHTML ? 200 : 100; // Tăng delay cho HTML content
             setTimeout(() => {
                 window.MathJax.typesetPromise([elementRef.current])
                     .catch((err) => console.log('MathJax error:', err));
-            }, 50);
+            }, delay);
         }
     }, [text]);
     
-    return React.createElement('span', { 
-        ref: elementRef,
-        className: className 
-    }, text);
+    if (isHTML) {
+        return React.createElement('div', { 
+            ref: elementRef,
+            className: className,
+            dangerouslySetInnerHTML: { __html: text }
+        });
+    } else {
+        return React.createElement('span', { 
+            ref: elementRef,
+            className: className 
+        }, text);
+    }
 };
 
 // Component màn hình giải bài tập ôn
@@ -653,7 +663,8 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                         ),
                         React.createElement(window.LaTeXText, { 
                             className: "text-slate-700 leading-relaxed",
-                            text: currentQuestion.expl
+                            text: currentQuestion.expl,
+                            isHTML: true
                         })
                     ),
 
@@ -831,7 +842,8 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                 ),
                 React.createElement(window.LaTeXText, { 
                     className: "text-lg text-slate-700 leading-relaxed bg-slate-50 p-5 rounded-2xl border border-slate-100 italic",
-                    text: question?.expl
+                    text: question?.expl,
+                    isHTML: true
                 }),
                 React.createElement('button', { onClick: onNext, className: "mt-8 w-full bg-blue-600 text-white py-5 rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all" },
                     currentIdx === totalQuestions - 1 ? 'XEM KẾT QUẢ' : 'CÂU TIẾP THEO',

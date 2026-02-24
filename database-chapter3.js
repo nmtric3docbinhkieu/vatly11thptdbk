@@ -488,12 +488,12 @@ window.questionsChapter3 = [
     },
     
     // Câu 58: Vận dụng cao
-    { 
-        q: "Một electron bay vào điện trường đều của một tụ điện phẳng theo phương song song với các đường sức với vận tốc đầu $v_0 = 2.10^7 m/s$. Biết chiều dài mỗi bản tụ là 5 cm, khoảng cách giữa hai bản là 2 cm, hiệu điện thế giữa hai bản là 200 V. Electron sẽ ra khỏi tụ điện ở vị trí cách bản dương một khoảng bao nhiêu?", 
-        options: ["0,5 cm", "1 cm", "1,45 cm", "2 cm"], 
-        a: 2, 
-        expl: "$E = \\frac{U}{d} = \\frac{200}{0,02} = 10^4 V/m$. Gia tốc: $a = \\frac{eE}{m} = \\frac{1,6.10^{-19}.10^4}{9,1.10^{-31}} \\approx 1,76.10^{15} m/s^2$. Thời gian chuyển động trong tụ: $t = \\frac{l}{v_0} = \\frac{0,05}{2.10^7} = 2,5.10^{-9} s$. Độ lệch theo phương vuông góc: $y = \\frac{1}{2}at^2 = \\frac{1}{2}.1,76.10^{15}.(2,5.10^{-9})^2 = 0,5.1,76.10^{15}.6,25.10^{-18} = 5,5.10^{-3} m = 0,55 cm$. Electron bay vào từ bản âm, cách bản âm 0,55 cm. Vậy cách bản dương: $2 - 0,55 = 1,45 cm$." 
-    },
+{ 
+    q: "Một electron bay vào điện trường đều của một tụ điện phẳng theo phương song song với các đường sức với vận tốc đầu $v_0 = 2.10^7 m/s$. Biết chiều dài mỗi bản tụ là 5 cm, khoảng cách giữa hai bản là 2 cm, hiệu điện thế giữa hai bản là 200 V. Electron bay vào từ sát bản âm. Hỏi electron sẽ ra khỏi tụ điện ở vị trí cách bản dương một khoảng bao nhiêu? (Bỏ qua tác dụng của trọng lực)", 
+    options: ["0,5 cm", "1 cm", "1,45 cm", "2 cm"], 
+    a: 2, 
+    expl: "$E = \\frac{U}{d} = \\frac{200}{0,02} = 10^4 V/m$.<br>Gia tốc: $a = \\frac{eE}{m} = \\frac{1,6.10^{-19}.10^4}{9,1.10^{-31}} \\approx 1,76.10^{15} m/s^2$.<br>Thời gian chuyển động trong tụ: $t = \\frac{l}{v_0} = \\frac{0,05}{2.10^7} = 2,5.10^{-9} s$.<br>Độ lệch theo phương vuông góc (hướng về bản dương): $y = \\frac{1}{2}at^2 = \\frac{1}{2}.1,76.10^{15}.(2,5.10^{-9})^2 = 5,5.10^{-3} m = 0,55 cm$.<br>Electron bay vào từ sát bản âm (cách bản âm 0 cm), sau khi ra khỏi tụ nó đã lệch về phía bản dương một đoạn 0,55 cm.<br>Vậy khoảng cách từ electron đến bản dương lúc này là: $d - y = 2 - 0,55 = 1,45 cm$." 
+},
     
     // Câu 59: Vận dụng cao
     { 
