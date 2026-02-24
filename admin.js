@@ -125,7 +125,6 @@ window.exportExerciseResults = async function(adminPassword) {
                 "Lớp": attempt.students?.class_name || '',
                 "Số câu đúng": attempt.correct_answers || 0,
                 "Tổng số câu": attempt.total_questions || 60,
-                "Điểm": attempt.score || 0,
                 "Thời gian làm (phút)": Math.floor((attempt.time_taken || 0) / 60),
                 "Số lần cảnh báo": attempt.cheat_warnings || 0,
                 "Ngày làm": window.formatVNTime(attempt.created_at)

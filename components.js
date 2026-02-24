@@ -480,6 +480,49 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
         setShowAnswer(false);
     };
 
+    const handleComplete = async () => {
+        // Tính kết quả
+        let correctCount = 0;
+        Object.keys(userAnswers).forEach(questionIndex => {
+            if (userAnswers[questionIndex] === questions[questionIndex].a) {
+                correctCount++;
+            }
+        });
+        
+        const finalScore = Math.round((correctCount / questions.length) * 50); // Tối đa 50 điểm
+        const timeInMinutes = Math.floor(elapsedTime / 60);
+        
+        // Lưu kết quả vào Supabase
+        const supabase = window.getSupabase();
+        if (supabase && window.currentStudent) {
+            try {
+                const { data, error } = await supabase.from('exercise_attempts').insert([{
+                    student_id: window.currentStudent.id,
+                    correct_answers: correctCount,
+                    total_questions: questions.length,
+                    score: finalScore,
+                    time_taken: elapsedTime,
+                    cheat_warnings: warningCount,
+                    chapter: chapter,
+                    created_at: new Date().toISOString()
+                }]);
+                
+                if (error) {
+                    console.error('Lỗi khi lưu kết quả:', error);
+                    alert('Lỗi khi lưu kết quả: ' + error.message);
+                } else {
+                    alert(`Hoàn thành! Đúng ${correctCount}/${questions.length} câu.`);
+                    // Có thể chuyển về màn hình chính hoặc làm gì đó
+                }
+            } catch (err) {
+                console.error('Lỗi khi lưu kết quả:', err);
+                alert('Lỗi khi lưu kết quả: ' + err.message);
+            }
+        } else {
+            alert(`Hoàn thành! Đúng ${correctCount}/${questions.length} câu.`);
+        }
+    };
+
     if (questions.length === 0) {
         return React.createElement('div', { className: "min-h-screen bg-slate-50 flex items-center justify-center" },
             React.createElement('div', { className: "text-center" },
@@ -698,12 +741,12 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                             "Xem đáp án"
                         ),
                         showAnswer && React.createElement('button', {
-                            onClick: handleNext,
-                            disabled: currentQuestionIndex === questions.length - 1,
+                            onClick: currentQuestionIndex === questions.length - 1 ? handleComplete : handleNext,
+                            disabled: currentQuestionIndex === questions.length - 1 && !showAnswer,
                             className: "px-6 py-3 bg-green-600 hover:bg-green-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-all hover:scale-[1.02] flex items-center gap-2"
                         },
-                            React.createElement('i', { className: "fas fa-arrow-right" }),
-                            currentQuestionIndex === questions.length - 1 ? "Hoàn thành" : "Câu tiếp theo"
+                            React.createElement('i', { className: "fas fa-" + (currentQuestionIndex === questions.length - 1 ? "check" : "arrow-right") }),
+                            currentQuestionIndex === questions.length - 1 ? "Nộp bài" : "Câu tiếp theo"
                         )
                     )
                 )
