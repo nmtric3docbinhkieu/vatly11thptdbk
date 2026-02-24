@@ -96,3 +96,56 @@ window.exportToExcel = async function(adminPassword) {
         return { success: false, error: err.message };
     }
 };
+
+window.exportExerciseResults = async function(adminPassword) {
+    if (adminPassword !== window.CONFIG.adminPassword) {
+        return { success: false, error: 'Sai mật khẩu giáo viên.' };
+    }
+    
+    const supabase = window.getSupabase();
+    if (!supabase) {
+        return { success: false, error: 'Chưa cấu hình Supabase.' };
+    }
+    
+    try {
+        // Lấy dữ liệu bài tập ôn
+        const { data: exerciseAttempts } = await supabase
+            .from('exercise_attempts')
+            .select('*, students(*)')
+            .order('created_at', { ascending: false });
+        
+        if (!exerciseAttempts || exerciseAttempts.length === 0) {
+            return { success: false, error: 'Không có dữ liệu bài tập ôn.' };
+        }
+        
+        // Format dữ liệu
+        const summary = exerciseAttempts.map(attempt => {
+            return {
+                "Họ và tên": attempt.students?.full_name || '',
+                "Lớp": attempt.students?.class_name || '',
+                "Số câu đúng": attempt.correct_answers || 0,
+                "Tổng số câu": attempt.total_questions || 60,
+                "Điểm": attempt.score || 0,
+                "Thời gian làm (phút)": Math.floor((attempt.time_taken || 0) / 60),
+                "Số lần cảnh báo": attempt.cheat_warnings || 0,
+                "Ngày làm": window.formatVNTime(attempt.created_at)
+            };
+        });
+        
+        // Xuất Excel
+        const ws = window.XLSX.utils.json_to_sheet(summary);
+        const wb = window.XLSX.utils.book_new();
+        window.XLSX.utils.book_append_sheet(wb, ws, "BaiTapOn");
+        
+        const now = new Date();
+        const dateStr = now.toISOString().split('T')[0];
+        const timeStr = now.toTimeString().split(' ')[0].replace(/:/g, '-');
+        window.XLSX.writeFile(wb, `ket-qua-bai-tap-on-${dateStr}_${timeStr}.xlsx`);
+        
+        return { success: true };
+        
+    } catch (err) {
+        console.error('Lỗi xuất Excel bài tập ôn:', err);
+        return { success: false, error: err.message };
+    }
+};

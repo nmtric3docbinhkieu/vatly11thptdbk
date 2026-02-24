@@ -341,6 +341,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
     const [answeredQuestions, setAnsweredQuestions] = React.useState(new Set());
     const [userAnswers, setUserAnswers] = React.useState({}); // Lưu đáp án của từng câu
     const [viewedAnswers, setViewedAnswers] = React.useState(new Set()); // Lưu các câu đã xem đáp án
+    const [showResults, setShowResults] = React.useState(false); // Hiển thị kết quả cuối cùng
     const [elapsedTime, setElapsedTime] = React.useState(0); // Thời gian đã trôi qua (giây)
     const [isTimerActive, setIsTimerActive] = React.useState(false);
     const [warningCount, setWarningCount] = React.useState(0);
@@ -364,6 +365,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
         setAnsweredQuestions(new Set());
         setUserAnswers({}); // Reset đáp án
         setViewedAnswers(new Set()); // Reset câu đã xem đáp án
+        setShowResults(false); // Reset màn hình kết quả
         setElapsedTime(0);
         setIsTimerActive(true);
         setWarningCount(0);
