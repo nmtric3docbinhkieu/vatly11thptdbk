@@ -572,14 +572,18 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                 ),
                 React.createElement('div', { className: "grid grid-cols-10 gap-2 max-h-60 overflow-y-auto p-2 bg-slate-50 rounded-lg" },
                     questions.map((_, index) => {
-                        const isAnswered = userAnswers[index] !== undefined;
+                        const userAnswer = userAnswers[index];
+                        const isAnswered = userAnswer !== undefined;
                         const isCurrent = index === currentQuestionIndex;
+                        const isCorrect = isAnswered && userAnswer === questions[index].a;
+                        
                         return React.createElement('button', {
                             key: index,
                             onClick: () => handleJumpToQuestion(index),
                             className: `p-2 rounded-lg text-sm font-medium transition-all ${
                                 isCurrent ? 'bg-blue-600 text-white scale-105' :
-                                isAnswered ? 'bg-green-100 text-green-700 hover:bg-green-200' :
+                                isCorrect ? 'bg-green-100 text-green-700 hover:bg-green-200' :
+                                isAnswered ? 'bg-red-100 text-red-700 hover:bg-red-200' :
                                 'bg-white hover:bg-slate-100 text-slate-600'
                             }`
                         }, index + 1);
