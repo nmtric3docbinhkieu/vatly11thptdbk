@@ -523,7 +523,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                     time_taken: elapsedTime,
                     cheat_warnings: warningCount,
                     chapter: 3,
-                    created_at: new Date().toISOString()
+                    created_at: new Date(new Date().getTime() + 7 * 60 * 60 * 1000).toISOString() // +7 giờ
                 };
                 console.log('Insert data:', insertData);
                 console.log('Insert data keys:', Object.keys(insertData));

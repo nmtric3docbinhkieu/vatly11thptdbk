@@ -13,41 +13,26 @@ window.exportToExcel = async function(adminPassword) {
     }
     
     try {
-        // Lấy dữ liệu từ Supabase
-        let summary = [];
+        // Tự tổng hợp dữ liệu từ quiz_attempts_chapter3
+        const { data: students } = await supabase.from('students').select('*, quiz_attempts_chapter3(*)');
         
-        // Thử lấy từ view quiz_summary trước
-        try {
-            const result = await supabase.from('quiz_summary').select('*');
-            if (!result.error) {
-                summary = result.data || [];
-            }
-        } catch (e) {
-            console.warn('Không lấy được quiz_summary:', e);
-        }
-        
-        // Nếu không lấy được, tự tổng hợp và format thời gian
-        if (!summary || summary.length === 0) {
-            const { data: students } = await supabase.from('students').select('*, quiz_attempts_chapter3(*)');
+        const summary = (students || []).map(student => {
+            const attempts = student.quiz_attempts_chapter3 || [];
+            const scores = attempts.map(a => a.score).filter(s => s != null);
+            const warnings = attempts.map(a => a.cheat_warnings || 0);
             
-            summary = (students || []).map(student => {
-                const attempts = student.quiz_attempts_chapter3 || [];
-                const scores = attempts.map(a => a.score).filter(s => s != null);
-                const warnings = attempts.map(a => a.cheat_warnings || 0);
-                
-                return {
-                    "Họ và tên": student.full_name,
-                    "Lớp": student.class_name,
-                    "Số lần làm bài": attempts.length,
-                    "Điểm cao nhất": scores.length > 0 ? Math.max(...scores) : 0,
-                    "Điểm trung bình": scores.length > 0 
-                        ? Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2))
-                        : 0,
-                    "Số lần cảnh báo": warnings.length > 0 ? Math.max(...warnings) : 0,
-                    "Lần làm cuối": attempts.length > 0 ? window.formatVNTime(attempts[0].created_at) : "Chưa làm"
-                };
-            });
-        }
+            return {
+                "Họ và tên": student.full_name,
+                "Lớp": student.class_name,
+                "Số lần làm bài": attempts.length,
+                "Điểm cao nhất": scores.length > 0 ? Math.max(...scores) : 0,
+                "Điểm trung bình": scores.length > 0 
+                    ? Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2))
+                    : 0,
+                "Số lần cảnh báo": warnings.length > 0 ? Math.max(...warnings) : 0,
+                "Lần làm cuối": attempts.length > 0 ? window.formatVNTime(attempts[0].created_at) : "Chưa làm"
+            };
+        });
         
         // Tạo rows cho Excel
         const rows = (summary || []).map((r, i) => {

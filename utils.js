@@ -240,7 +240,8 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
             attempt_number: 1,
             time_taken: timeTaken,
             cheat_warnings: cheatWarnings,
-            chapter: 3
+            chapter: 3,
+            created_at: new Date(new Date().getTime() + 7 * 60 * 60 * 1000).toISOString() // +7 giờ
         }).select();
 
         if (error) {

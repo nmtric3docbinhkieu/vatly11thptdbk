@@ -9,14 +9,18 @@ window.fetchLeaderboard = async function() {
     
     try {
         const { data, error } = await supabase
-            .from('leaderboard')
+            .from('leaderboard_chapter3')
             .select('*')
             .limit(50);
         
-        if (error) throw error;
+        if (error) {
+            console.error('Lỗi leaderboard:', error);
+            return [];
+        }
+        
         return data || [];
     } catch (err) {
-        console.error('Lỗi lấy bảng xếp hạng:', err);
+        console.error('Lỗi fetchLeaderboard:', err);
         return [];
     }
 };
