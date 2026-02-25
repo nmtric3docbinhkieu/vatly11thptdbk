@@ -110,8 +110,9 @@ window.exportExerciseResults = async function(adminPassword) {
     try {
         // Lấy dữ liệu bài tập ôn
         const { data: exerciseAttempts } = await supabase
-            .from('exercise_attempts')
+            .from('quiz_attempts')
             .select('*, students(*)')
+            .eq('type', 'exercise') // Chỉ lấy bài tập ôn
             .order('created_at', { ascending: false });
         
         if (!exerciseAttempts || exerciseAttempts.length === 0) {

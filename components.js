@@ -492,20 +492,41 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
         const finalScore = Math.round((correctCount / questions.length) * 50); // Tối đa 50 điểm
         const timeInMinutes = Math.floor(elapsedTime / 60);
         
+        // Debug
+        console.log('=== DEBUG HANDLE COMPLETE ===');
+        console.log('Correct count:', correctCount);
+        console.log('Total questions:', questions.length);
+        console.log('Final score:', finalScore);
+        console.log('Elapsed time:', elapsedTime);
+        console.log('Warning count:', warningCount);
+        console.log('Current student:', window.currentStudent);
+        
         // Lưu kết quả vào Supabase
         const supabase = window.getSupabase();
-        if (supabase && window.currentStudent) {
+        console.log('Supabase:', supabase);
+        
+        // Lấy thông tin học sinh từ localStorage
+        const studentInfo = JSON.parse(localStorage.getItem(window.CONFIG.storageKey) || 'null');
+        console.log('Student info from localStorage:', studentInfo);
+        
+        if (supabase && studentInfo) {
+            console.log('Attempting to save to quiz_attempts (type=exercise)...');
             try {
-                const { data, error } = await supabase.from('exercise_attempts').insert([{
-                    student_id: window.currentStudent.id,
+                const insertData = {
+                    student_id: studentInfo.id,
                     correct_answers: correctCount,
                     total_questions: questions.length,
                     score: finalScore,
                     time_taken: elapsedTime,
                     cheat_warnings: warningCount,
                     chapter: chapter,
+                    type: 'exercise', // Phân biệt bài tập ôn
                     created_at: new Date().toISOString()
-                }]);
+                };
+                console.log('Insert data:', insertData);
+                
+                const { data, error } = await supabase.from('quiz_attempts').insert([insertData]);
+                console.log('Insert result:', { data, error });
                 
                 if (error) {
                     console.error('Lỗi khi lưu kết quả:', error);
@@ -519,7 +540,9 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                 alert('Lỗi khi lưu kết quả: ' + err.message);
             }
         } else {
-            alert(`Hoàn thành! Đúng ${correctCount}/${questions.length} câu.`);
+            console.log('Cannot save - missing supabase or studentInfo');
+            if (!supabase) alert('Chưa kết nối database.');
+            if (!studentInfo) alert('Chưa đăng nhập.');
         }
     };
 

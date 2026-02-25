@@ -113,6 +113,7 @@
                 const { data } = await supabase
                     .from('quiz_attempts')
                     .select('*, students(*)')
+                    .eq('type', 'quiz') // Chỉ lấy làm trắc nghiệm
                     .order('created_at', { ascending: false });
                 
                 if (data) {
@@ -126,8 +127,9 @@
                 if (!supabase) return;
                 
                 const { data } = await supabase
-                    .from('exercise_attempts')
+                    .from('quiz_attempts')
                     .select('*, students(*)')
+                    .eq('type', 'exercise') // Chỉ lấy bài tập ôn
                     .order('created_at', { ascending: false });
                 
                 if (data) setExerciseAttempts(data);

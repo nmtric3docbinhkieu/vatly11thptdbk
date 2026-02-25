@@ -239,7 +239,8 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
             total_questions: 50,
             attempt_number: 1,
             time_taken: timeTaken,
-            cheat_warnings: cheatWarnings
+            cheat_warnings: cheatWarnings,
+            type: 'quiz' // Phân biệt làm trắc nghiệm
         }).select();
 
         if (error) {
