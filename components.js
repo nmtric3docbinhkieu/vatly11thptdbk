@@ -519,7 +519,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                     student_id: studentInfo.id,
                     correct_answers: correctCount,
                     total_questions: questions.length,
-                    score: Math.round(finalScore), // Làm tròn thành integer
+                    score: parseInt(Math.round(finalScore)), // Chắc chắn là integer
                     time_taken: elapsedTime,
                     cheat_warnings: warningCount,
                     chapter: 3,

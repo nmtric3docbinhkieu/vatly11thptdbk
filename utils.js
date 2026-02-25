@@ -231,11 +231,13 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
         }
         
         console.log('Tìm thấy student UUID:', studentData.id);
+        console.log('FinalScore trước làm tròn:', finalScore, typeof finalScore);
+        console.log('FinalScore sau làm tròn:', Math.round(finalScore), typeof Math.round(finalScore));
         
         // Chèn dữ liệu với UUID thật
         const { data, error } = await supabase.from('quiz_attempts_chapter3').insert({
             student_id: studentData.id,  // UUID thật từ database
-            score: Math.round(finalScore), // Làm tròn thành integer
+            score: parseInt(Math.round(finalScore)), // Chắc chắn là integer
             total_questions: 50,
             attempt_number: 1,
             time_taken: timeTaken,
