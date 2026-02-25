@@ -235,7 +235,7 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
         // Chèn dữ liệu với UUID thật
         const { data, error } = await supabase.from('quiz_attempts_chapter3').insert({
             student_id: studentData.id,  // UUID thật từ database
-            score: finalScore,
+            score: Math.round(finalScore), // Làm tròn thành integer
             total_questions: 50,
             attempt_number: 1,
             time_taken: timeTaken,
