@@ -121,10 +121,12 @@ window.exportExerciseResults = async function(adminPassword) {
         
         // Format dữ liệu
         const summary = exerciseAttempts.map(attempt => {
+            const correctAnswers = attempt.correct_answers || Math.round((attempt.score / 50) * (attempt.total_questions || 60));
+            
             return {
                 "Họ và tên": attempt.students?.full_name || '',
                 "Lớp": attempt.students?.class_name || '',
-                "Số câu đúng": attempt.correct_answers || 0,
+                "Số câu đúng": correctAnswers,
                 "Tổng số câu": attempt.total_questions || 60,
                 "Thời gian làm (phút)": Math.floor((attempt.time_taken || 0) / 60),
                 "Số lần cảnh báo": attempt.cheat_warnings || 0,

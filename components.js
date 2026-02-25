@@ -517,23 +517,47 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                     correct_answers: correctCount,
                     total_questions: questions.length,
                     score: finalScore,
+                    attempt_number: 1,
                     time_taken: elapsedTime,
                     cheat_warnings: warningCount,
-                    chapter: chapter,
                     type: 'exercise', // Phân biệt bài tập ôn
                     created_at: new Date().toISOString()
                 };
                 console.log('Insert data:', insertData);
                 
+                // Thử insert
                 const { data, error } = await supabase.from('quiz_attempts').insert([insertData]);
                 console.log('Insert result:', { data, error });
                 
                 if (error) {
                     console.error('Lỗi khi lưu kết quả:', error);
-                    alert('Lỗi khi lưu kết quả: ' + error.message);
+                    // Nếu lỗi do cột không tồn tại, thử với các cột cơ bản
+                    if (error.message.includes('column')) {
+                        console.log('Thử lại với các cột cơ bản...');
+                        const basicData = {
+                            student_id: studentInfo.id,
+                            score: finalScore,
+                            total_questions: questions.length,
+                            attempt_number: 1,
+                            time_taken: elapsedTime,
+                            cheat_warnings: warningCount,
+                            type: 'exercise'
+                        };
+                        console.log('Basic data:', basicData);
+                        
+                        const { data: data2, error: error2 } = await supabase.from('quiz_attempts').insert([basicData]);
+                        console.log('Basic insert result:', { data: data2, error: error2 });
+                        
+                        if (error2) {
+                            alert('Lỗi khi lưu kết quả: ' + error2.message);
+                        } else {
+                            alert(`Hoàn thành! Đúng ${correctCount}/${questions.length} câu.`);
+                        }
+                    } else {
+                        alert('Lỗi khi lưu kết quả: ' + error.message);
+                    }
                 } else {
                     alert(`Hoàn thành! Đúng ${correctCount}/${questions.length} câu.`);
-                    // Có thể chuyển về màn hình chính hoặc làm gì đó
                 }
             } catch (err) {
                 console.error('Lỗi khi lưu kết quả:', err);
