@@ -591,7 +591,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                 // Score
                 React.createElement('div', { className: "flex items-center gap-2 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg font-mono text-sm font-bold" },
                     React.createElement('i', { className: "fas fa-star" }),
-                    `${score.toFixed(1)}đ`
+                    `${(score || 0).toFixed(1)}đ`
                 ),
                 // Progress
                 React.createElement('div', { className: "flex items-center gap-2 px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg text-sm font-bold" },
