@@ -508,54 +508,35 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
         // Lấy thông tin học sinh từ localStorage
         const studentInfo = JSON.parse(localStorage.getItem(window.CONFIG.storageKey) || 'null');
         console.log('Student info from localStorage:', studentInfo);
+        console.log('Student info type:', typeof studentInfo);
+        console.log('Student ID:', studentInfo?.id);
+        console.log('Student ID type:', typeof studentInfo?.id);
         
         if (supabase && studentInfo) {
-            console.log('Attempting to save to quiz_attempts (type=exercise)...');
+            console.log('Attempting to save to exercise_attempts_chapter3...');
             try {
                 const insertData = {
                     student_id: studentInfo.id,
                     correct_answers: correctCount,
                     total_questions: questions.length,
                     score: finalScore,
-                    attempt_number: 1,
                     time_taken: elapsedTime,
                     cheat_warnings: warningCount,
-                    type: 'exercise', // Phân biệt bài tập ôn
+                    chapter: 3,
                     created_at: new Date().toISOString()
                 };
                 console.log('Insert data:', insertData);
+                console.log('Insert data keys:', Object.keys(insertData));
+                console.log('Insert data types:', Object.entries(insertData).map(([k, v]) => [k, typeof v]));
                 
-                // Thử insert
-                const { data, error } = await supabase.from('quiz_attempts').insert([insertData]);
+                const { data, error } = await supabase.from('exercise_attempts_chapter3').insert([insertData]);
                 console.log('Insert result:', { data, error });
                 
                 if (error) {
                     console.error('Lỗi khi lưu kết quả:', error);
-                    // Nếu lỗi do cột không tồn tại, thử với các cột cơ bản
-                    if (error.message.includes('column')) {
-                        console.log('Thử lại với các cột cơ bản...');
-                        const basicData = {
-                            student_id: studentInfo.id,
-                            score: finalScore,
-                            total_questions: questions.length,
-                            attempt_number: 1,
-                            time_taken: elapsedTime,
-                            cheat_warnings: warningCount,
-                            type: 'exercise'
-                        };
-                        console.log('Basic data:', basicData);
-                        
-                        const { data: data2, error: error2 } = await supabase.from('quiz_attempts').insert([basicData]);
-                        console.log('Basic insert result:', { data: data2, error: error2 });
-                        
-                        if (error2) {
-                            alert('Lỗi khi lưu kết quả: ' + error2.message);
-                        } else {
-                            alert(`Hoàn thành! Đúng ${correctCount}/${questions.length} câu.`);
-                        }
-                    } else {
-                        alert('Lỗi khi lưu kết quả: ' + error.message);
-                    }
+                    console.error('Error details:', error.details);
+                    console.error('Error hint:', error.hint);
+                    alert('Lỗi khi lưu kết quả: ' + error.message);
                 } else {
                     alert(`Hoàn thành! Đúng ${correctCount}/${questions.length} câu.`);
                 }

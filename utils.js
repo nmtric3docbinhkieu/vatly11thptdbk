@@ -233,14 +233,14 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
         console.log('Tìm thấy student UUID:', studentData.id);
         
         // Chèn dữ liệu với UUID thật
-        const { data, error } = await supabase.from('quiz_attempts').insert({
+        const { data, error } = await supabase.from('quiz_attempts_chapter3').insert({
             student_id: studentData.id,  // UUID thật từ database
             score: finalScore,
             total_questions: 50,
             attempt_number: 1,
             time_taken: timeTaken,
             cheat_warnings: cheatWarnings,
-            type: 'quiz' // Phân biệt làm trắc nghiệm
+            chapter: 3
         }).select();
 
         if (error) {
@@ -307,53 +307,20 @@ window.fetchLeaderboard = async function() {
     }
     
     try {
-        // Lấy tất cả học sinh đã được duyệt và kết quả quiz của họ
+        // Lấy dữ liệu từ view leaderboard_chapter3
         const { data, error } = await supabase
-            .from('students')
-            .select(`
-                id,
-                full_name,
-                class_name,
-                quiz_attempts (
-                    score,
-                    created_at
-                )
-            `)
-            .eq('is_approved', true)
-            .order('full_name');
+            .from('leaderboard_chapter3')
+            .select('*')
+            .order('highest_score', { ascending: false })
+            .limit(20);
         
         if (error) {
-            console.error('Lỗi khi lấy dữ liệu:', error);
+            console.error('Lỗi khi lấy leaderboard:', error);
             return [];
         }
         
-        // Tính điểm cao nhất cho mỗi học sinh
-        const leaderboard = data
-            .map(student => {
-                // Lấy tất cả điểm từ quiz_attempts
-                const scores = (student.quiz_attempts || [])
-                    .map(attempt => attempt.score)
-                    .filter(score => score != null);
-                
-                // Tính điểm cao nhất
-                const highestScore = scores.length > 0 ? Math.max(...scores) : 0;
-                
-                return {
-                    full_name: student.full_name,
-                    class_name: student.class_name,
-                    score: highestScore,
-                    // Có thể thêm thời gian đạt điểm cao nhất nếu cần
-                    best_score_date: student.quiz_attempts
-                        ?.filter(a => a.score === highestScore)
-                        ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0]?.created_at
-                };
-            })
-            .filter(student => student.score > 0) // Chỉ hiển thị người có điểm > 0
-            .sort((a, b) => b.score - a.score) // Sắp xếp theo điểm từ cao xuống thấp
-            .slice(0, 20); // Chỉ lấy top 20
-        
-        console.log('Bảng xếp hạng:', leaderboard);
-        return leaderboard;
+        console.log('Bảng xếp hạng:', data);
+        return data;
         
     } catch (err) {
         console.error('Lỗi fetchLeaderboard:', err);

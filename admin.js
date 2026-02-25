@@ -28,18 +28,12 @@ window.exportToExcel = async function(adminPassword) {
         
         // Nếu không lấy được, tự tổng hợp và format thời gian
         if (!summary || summary.length === 0) {
-            const { data: students } = await supabase.from('students').select('*, quiz_attempts(*)');
+            const { data: students } = await supabase.from('students').select('*, quiz_attempts_chapter3(*)');
             
             summary = (students || []).map(student => {
-                const attempts = student.quiz_attempts || [];
+                const attempts = student.quiz_attempts_chapter3 || [];
                 const scores = attempts.map(a => a.score).filter(s => s != null);
                 const warnings = attempts.map(a => a.cheat_warnings || 0);
-                
-                // Format thời gian cho từng lần làm bài (nếu cần hiển thị chi tiết)
-                const formattedAttempts = attempts.map(a => ({
-                    ...a,
-                    created_at_vn: window.formatVNTime(a.created_at) // Thêm trường thời gian đã format
-                }));
                 
                 return {
                     "Họ và tên": student.full_name,
@@ -49,8 +43,8 @@ window.exportToExcel = async function(adminPassword) {
                     "Điểm trung bình": scores.length > 0 
                         ? Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2))
                         : 0,
-                    "Tổng cảnh báo gian lận": warnings.reduce((a, b) => a + b, 0),
-                    "Chi tiết thời gian làm bài": formattedAttempts.map(a => a.created_at_vn).join('; ') // Thêm thông tin thời gian
+                    "Số lần cảnh báo": warnings.length > 0 ? Math.max(...warnings) : 0,
+                    "Lần làm cuối": attempts.length > 0 ? window.formatVNTime(attempts[0].created_at) : "Chưa làm"
                 };
             });
         }
@@ -110,9 +104,8 @@ window.exportExerciseResults = async function(adminPassword) {
     try {
         // Lấy dữ liệu bài tập ôn
         const { data: exerciseAttempts } = await supabase
-            .from('quiz_attempts')
+            .from('exercise_attempts_chapter3')
             .select('*, students(*)')
-            .eq('type', 'exercise') // Chỉ lấy bài tập ôn
             .order('created_at', { ascending: false });
         
         if (!exerciseAttempts || exerciseAttempts.length === 0) {
