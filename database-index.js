@@ -39,6 +39,10 @@ window.getQuestionsByChapter = function(chapter, count = 50) {
     }
     
     // Trộn ngẫu nhiên và lấy đủ số lượng
+    // Đặc biệt cho chương 3: chỉ lấy 55 câu đầu tiên (bỏ 5 câu vận dụng cao)
+    if (chapter === 3) {
+        return [...questions].slice(0, 55).sort(() => Math.random() - 0.5);
+    }
     return [...questions].sort(() => Math.random() - 0.5).slice(0, count);
 };
 
