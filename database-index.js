@@ -408,65 +408,226 @@ window.getChapterSummary = function(chapter) {
         },
         
         // CHƯƠNG 4: TỪ TRƯỜNG
+                // CHƯƠNG 4: DÒNG ĐIỆN KHÔNG ĐỔI
         4: {
-            title: "TỪ TRƯỜNG",
+            title: "DÒNG ĐIỆN KHÔNG ĐỔI",
             topics: [
-                // BÀI 14: Từ trường (bài gốc trong database-index)
+                // BÀI 16: Dòng điện. Cường độ dòng điện
                 { 
-                    title: "📘 BÀI 14: TỪ TRƯỜNG", 
+                    title: "📘 BÀI 16: DÒNG ĐIỆN. CƯỜNG ĐỘ DÒNG ĐIỆN", 
                     content: `
                         <div class="space-y-3">
-                            <p><span class="font-bold">• Nam châm:</span> Nam châm có hai cực: Bắc (N) và Nam (S). Các cực cùng tên đẩy nhau, khác tên hút nhau.</p>
-                            <p><span class="font-bold">• Từ trường:</span> Là môi trường vật chất tồn tại xung quanh nam châm hoặc dòng điện, tác dụng lực từ lên nam châm hoặc dòng điện khác đặt trong nó.</p>
-                            <p><span class="font-bold">• Cảm ứng từ $\\vec{B}$:</span> Đặc trưng cho từ trường về mặt tác dụng lực. Đơn vị: Tesla (T).</p>
-                            <p><span class="font-bold">• Đường sức từ:</span> Là những đường cong vẽ trong không gian có từ trường, sao cho tiếp tuyến tại mỗi điểm trùng với vectơ cảm ứng từ tại điểm đó. Quy tắc: đường sức từ đi ra từ cực Bắc, đi vào cực Nam.</p>
-                            <p><span class="font-bold">• Từ trường đều:</span> Có các đường sức từ song song, cách đều, cùng chiều. Ví dụ: từ trường trong lòng nam châm chữ U.</p>
+                            <p><span class="font-bold text-red-600">1. KHÁI NIỆM DÒNG ĐIỆN</span></p>
+                            <p><span class="font-bold">• Định nghĩa:</span> Dòng điện là dòng dịch chuyển có hướng của các điện tích.</p>
+                            <p><span class="font-bold">• Quy ước chiều dòng điện:</span> Chiều dòng điện được quy ước là chiều dịch chuyển có hướng của các điện tích dương (ngược với chiều dịch chuyển có hướng của các điện tích âm).</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. CƯỜNG ĐỘ DÒNG ĐIỆN</span></p>
+                            <p><span class="font-bold">• Định nghĩa:</span> Cường độ dòng điện là đại lượng vật lí đặc trưng cho tác dụng mạnh hay yếu của dòng điện, được xác định bằng điện lượng dịch chuyển qua tiết diện thẳng S trong một đơn vị thời gian.</p>
+                            <p class="text-center">$I = \\frac{\\Delta q}{\\Delta t}$</p>
+                            <p><span class="font-bold">• Dòng điện không đổi:</span> Dòng điện có chiều và cường độ không thay đổi theo thời gian.</p>
+                            <p class="text-center">$I = \\frac{q}{t}$</p>
+                            <p><span class="font-bold">• Đơn vị:</span> Trong hệ SI, cường độ dòng điện có đơn vị là ampe (A).</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">3. ĐỊNH NGHĨA ĐƠN VỊ ĐIỆN TÍCH</span></p>
+                            <p>1 culông (1 C) là điện lượng chuyển qua tiết diện thẳng của dây dẫn trong 1 giây khi có dòng điện không đổi cường độ 1 A chạy qua.</p>
+                            <p class="text-center">$1 \\text{ C} = 1 \\text{ A} \\cdot 1 \\text{ s} = 1 \\text{ A} \\cdot \\text{s}$</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">4. VẬN TỐC TRÔI CỦA HẠT TẢI ĐIỆN</span></p>
+                            <p>Vận tốc trôi của các hạt tải điện tỉ lệ với cường độ dòng điện chạy trong vật dẫn:</p>
+                            <p class="text-center">$v = \\frac{I}{nS|q|}$</p>
+                            <p>Trong đó:</p>
+                            <ul class="list-disc pl-6">
+                                <li>$n$: mật độ hạt tải điện (hạt/m³)</li>
+                                <li>$S$: tiết diện thẳng của dây dẫn (m²)</li>
+                                <li>$q$: điện tích của mỗi hạt tải điện (C)</li>
+                            </ul>
+                            <p>Đối với kim loại, hạt tải điện là electron:</p>
+                            <p class="text-center">$I = nSve$</p>
+                            <p>Với $e = 1,6.10^{-19}$ C là điện tích của electron.</p>
+                            
+                            <p><span class="font-bold">Lưu ý:</span> Vận tốc trôi của electron rất nhỏ (cỡ 0,04 mm/s), nhưng đèn sáng gần như tức thời vì điện trường lan truyền với tốc độ rất lớn (gần bằng tốc độ ánh sáng).</p>
                         </div>
                     `
                 },
                 
-                // BÀI 15: Lực từ
+                // BÀI 17: Điện trở. Định luật Ohm
                 { 
-                    title: "📘 BÀI 15: LỰC TỪ", 
+                    title: "📘 BÀI 17: ĐIỆN TRỞ. ĐỊNH LUẬT OHM", 
                     content: `
                         <div class="space-y-3">
-                            <p><span class="font-bold">• Lực từ tác dụng lên đoạn dây dẫn mang dòng điện:</span> $F = BIl\\sin\\alpha$, với $\\alpha$ là góc giữa $\\vec{B}$ và đoạn dây.</p>
-                            <p><span class="font-bold">• Quy tắc bàn tay trái:</span> Đặt bàn tay trái sao cho các đường sức từ hướng vào lòng bàn tay, chiều từ cổ tay đến ngón tay giữa là chiều dòng điện. Khi đó ngón cái choãi ra 90° chỉ chiều của lực từ.</p>
-                            <p><span class="font-bold">• Lực Lo-ren-xơ:</span> Lực từ tác dụng lên hạt mang điện chuyển động trong từ trường. $f = |q|vB\\sin\\theta$, với $\\theta$ là góc giữa $\\vec{v}$ và $\\vec{B}$.</p>
-                            <p><span class="font-bold">• Quy tắc bàn tay trái cho lực Lo-ren-xơ:</span> Đặt bàn tay trái sao cho $\\vec{B}$ hướng vào lòng bàn tay, chiều từ cổ tay đến ngón tay giữa là chiều $\\vec{v}$ nếu $q > 0$ (ngược chiều $\\vec{v}$ nếu $q < 0$). Khi đó ngón cái chỉ chiều $\\vec{f}$.</p>
+                            <p><span class="font-bold text-red-600">1. ĐIỆN TRỞ</span></p>
+                            <p><span class="font-bold">• Khái niệm điện trở:</span> Điện trở của một vật dẫn là đại lượng đặc trưng cho khả năng cản trở dòng điện của vật dẫn.</p>
+                            <p class="text-center">$R = \\frac{U}{I}$</p>
+                            <p><span class="font-bold">• Đơn vị:</span> Trong hệ SI, điện trở có đơn vị là ôm (Ω). 1 Ω là điện trở của một vật dẫn mà khi đặt hiệu điện thế 1 V vào hai đầu thì dòng điện chạy qua có cường độ 1 A.</p>
+                            
+                            <p><span class="font-bold">• Nguyên nhân gây ra điện trở:</span> Sự va chạm giữa các electron chuyển động có hướng với các ion dương tại nút mạng tinh thể và giữa chúng với nhau.</p>
+                            
+                            <p><span class="font-bold">• Điện trở của một đoạn dây kim loại:</span> Ở nhiệt độ xác định, điện trở của dây dẫn kim loại phụ thuộc vào hình dạng, kích thước và bản chất vật liệu:</p>
+                            <p class="text-center">$R = \\rho \\frac{\\ell}{S}$</p>
+                            <p>Trong đó:</p>
+                            <ul class="list-disc pl-6">
+                                <li>$\\rho$: điện trở suất (Ωm), phụ thuộc vào bản chất vật liệu</li>
+                                <li>$\\ell$: chiều dài dây dẫn (m)</li>
+                                <li>$S$: tiết diện ngang của dây dẫn (m²)</li>
+                            </ul>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. ĐỊNH LUẬT OHM</span></p>
+                            <p><span class="font-bold">• Nội dung:</span> Cường độ dòng điện I chạy qua một điện trở R tỉ lệ thuận với hiệu điện thế U đặt vào hai đầu điện trở:</p>
+                            <p class="text-center">$I = \\frac{U}{R}$</p>
+                            <p><span class="font-bold">• Độ giảm thế:</span> $U = IR$ còn được gọi là độ giảm thế trên R.</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">3. ĐƯỜNG ĐẶC TRƯNG VÔN-AMPE</span></p>
+                            <p><span class="font-bold">• Định nghĩa:</span> Đường biểu diễn sự phụ thuộc của cường độ dòng điện I chạy qua vật dẫn vào hiệu điện thế U đặt vào hai đầu vật dẫn được gọi là đường đặc trưng vôn-ampe.</p>
+                            <p>Đối với vật dẫn kim loại ở nhiệt độ xác định, đường đặc trưng vôn-ampe là một đoạn thẳng đi qua gốc tọa độ.</p>
+                            <p><span class="font-bold">• Vật liệu thuần trở:</span> Các vật liệu có điện trở không phụ thuộc vào U và I (tuân theo định luật Ohm).</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">4. ĐÈN SỢI ĐỐT VÀ ĐIỆN TRỞ NHIỆT</span></p>
+                            <p><span class="font-bold">• Đèn sợi đốt:</span> Đèn chiếu sáng khi bị đốt nóng nhờ tác dụng nhiệt của dòng điện trong kim loại. Điện trở của đèn sợi đốt biến thiên chậm theo nhiệt độ (tăng gần như tuyến tính).</p>
+                            <p><span class="font-bold">• Điện trở nhiệt (Thermistor):</span> Linh kiện điện tử mà điện trở của nó biến thiên rất nhanh theo nhiệt độ.</p>
+                            <ul class="list-disc pl-6">
+                                <li><span class="font-bold">PTC (Positive Temperature Coefficient) - Hệ số dương:</span> Điện trở tăng khi nhiệt độ tăng.</li>
+                                <li><span class="font-bold">NTC (Negative Temperature Coefficient) - Hệ số âm:</span> Điện trở giảm khi nhiệt độ tăng.</li>
+                            </ul>
+                            <p><span class="font-bold">• Ứng dụng:</span> Làm cảm biến nhiệt trong các thiết bị đo lường, bảo vệ mạch điện.</p>
                         </div>
                     `
                 },
                 
-                // BÀI 16: Từ trường của dòng điện
+                // BÀI 18: Nguồn điện
                 { 
-                    title: "📘 BÀI 16: TỪ TRƯỜNG CỦA DÒNG ĐIỆN", 
+                    title: "📘 BÀI 18: NGUỒN ĐIỆN", 
                     content: `
                         <div class="space-y-3">
-                            <p><span class="font-bold">• Dòng điện thẳng dài vô hạn:</span> $B = 2.10^{-7}\\frac{I}{r}$ (tại điểm cách dây $r$). Đường sức từ là các đường tròn đồng tâm, chiều xác định bằng quy tắc nắm tay phải.</p>
-                            <p><span class="font-bold">• Dòng điện tròn:</span> $B = 2\\pi.10^{-7}\\frac{I}{R}$ (tại tâm vòng dây bán kính $R$). Chiều: quy tắc nắm tay phải.</p>
-                            <p><span class="font-bold">• Ống dây hình trụ (solenoid):</span> $B = 4\\pi.10^{-7}nI$, với $n = N/l$ là số vòng dây trên mét. Từ trường trong ống dây là từ trường đều.</p>
+                            <p><span class="font-bold text-red-600">1. KHÁI NIỆM NGUỒN ĐIỆN</span></p>
+                            <p><span class="font-bold">• Định nghĩa:</span> Nguồn điện là thiết bị tạo ra và duy trì sự chênh lệch điện thế, nhằm duy trì dòng điện trong mạch kín.</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. SUẤT ĐIỆN ĐỘNG CỦA NGUỒN ĐIỆN</span></p>
+                            <p><span class="font-bold">• Khái niệm:</span> Suất điện động $\\mathcal{E}$ của nguồn điện là đại lượng vật lí đặc trưng cho khả năng sinh công của nguồn điện.</p>
+                            <p class="text-center">$\\mathcal{E} = \\frac{A}{q}$</p>
+                            <p><span class="font-bold">• Đơn vị:</span> Vôn (V).</p>
+                            <p><span class="font-bold">• Lực lạ:</span> Lực tác dụng lên các điện tích trong việc di chuyển chúng về cực (có bản chất không phải lực điện trường), như hóa năng (pin, ắc quy), cơ năng (máy phát điện), quang năng (pin mặt trời).</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">3. ĐIỆN TRỞ TRONG CỦA NGUỒN ĐIỆN</span></p>
+                            <p><span class="font-bold">• Điện trở trong:</span> Đại lượng đặc trưng cho việc cản trở sự dịch chuyển của các điện tích bên trong nguồn điện, kí hiệu là r (Ω).</p>
+                            <p><span class="font-bold">• Hiệu điện thế giữa hai cực của nguồn:</span></p>
+                            <ul class="list-disc pl-6">
+                                <li>Khi mạch hở (không có dòng điện): $U = \\mathcal{E}$</li>
+                                <li>Khi mạch kín (nguồn phát dòng điện I): $U = \\mathcal{E} - Ir$</li>
+                            </ul>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">4. GHÉP NGUỒN ĐIỆN</span></p>
+                            <p><span class="font-bold">• Ghép nối tiếp:</span> Cực âm của nguồn trước nối với cực dương của nguồn sau.</p>
+                            <ul class="list-disc pl-6">
+                                <li>Suất điện động bộ nguồn: $\\mathcal{E}_b = \\mathcal{E}_1 + \\mathcal{E}_2 + \\dots + \\mathcal{E}_n$</li>
+                                <li>Điện trở trong bộ nguồn: $r_b = r_1 + r_2 + \\dots + r_n$</li>
+                            </ul>
+                            <p><span class="font-bold">• Ghép xung đối:</span> Cực âm (hoặc cực dương) của nguồn này nối với cực âm (hoặc cực dương) của nguồn kia.</p>
+                            <p>Giả sử $\\mathcal{E}_1 > \\mathcal{E}_2$: $\\mathcal{E}_b = \\mathcal{E}_1 - \\mathcal{E}_2$</p>
+                            <p>Nguồn có suất điện động lớn hơn đóng vai trò nguồn phát, nguồn còn lại đóng vai trò máy thu.</p>
                         </div>
                     `
                 },
                 
-                // BÀI 17: Cảm ứng điện từ
+                // BÀI 19: Năng lượng điện. Công suất điện
                 { 
-                    title: "📘 BÀI 17: CẢM ỨNG ĐIỆN TỪ", 
+                    title: "📘 BÀI 19: NĂNG LƯỢNG ĐIỆN. CÔNG SUẤT ĐIỆN", 
                     content: `
                         <div class="space-y-3">
-                            <p><span class="font-bold">• Từ thông $\\Phi$:</span> $\\Phi = BS\\cos\\alpha$, với $\\alpha$ là góc giữa $\\vec{B}$ và pháp tuyến $\\vec{n}$ của mặt phẳng $S$. Đơn vị: Vê-be (Wb).</p>
-                            <p><span class="font-bold">• Hiện tượng cảm ứng điện từ:</span> Khi từ thông qua mạch kín biến thiên thì trong mạch xuất hiện dòng điện cảm ứng.</p>
-                            <p><span class="font-bold">• Định luật Faraday:</span> Suất điện động cảm ứng $e_c = -\\frac{\\Delta\\Phi}{\\Delta t}$ (độ lớn $|e_c| = \\left|\\frac{\\Delta\\Phi}{\\Delta t}\\right|$).</p>
-                            <p><span class="font-bold">• Định luật Lenz:</span> Dòng điện cảm ứng có chiều sao cho từ trường do nó sinh ra có tác dụng chống lại sự biến thiên của từ thông sinh ra nó.</p>
-                            <p><span class="font-bold">• Hiện tượng tự cảm:</span> Là hiện tượng cảm ứng điện từ xảy ra trong một mạch có dòng điện biến thiên, do sự biến thiên từ thông qua mạch gây ra.</p>
-                            <p><span class="font-bold">• Suất điện động tự cảm:</span> $e_{tc} = -L\\frac{\\Delta i}{\\Delta t}$, với $L$ là độ tự cảm (đơn vị Henry – H). $L = 4\\pi.10^{-7}n^2V$ đối với ống dây.</p>
-                            <p><span class="font-bold">• Năng lượng từ trường trong ống dây:</span> $W = \\frac{1}{2}Li^2$.</p>
+                            <p><span class="font-bold text-red-600">1. NĂNG LƯỢNG VÀ CÔNG SUẤT TIÊU THỤ ĐIỆN CỦA ĐOẠN MẠCH</span></p>
+                            <p><span class="font-bold">• Năng lượng tiêu thụ điện:</span> Năng lượng tiêu thụ của một đoạn mạch bằng tích của hiệu điện thế giữa hai đầu đoạn mạch với cường độ dòng điện chạy qua đoạn mạch và với thời gian dòng điện chạy qua.</p>
+                            <p class="text-center">$A = UIt$</p>
+                            <p><span class="font-bold">• Đơn vị:</span> Jun (J).</p>
+                            
+                            <p><span class="font-bold">• Công suất tiêu thụ điện:</span> Công suất tiêu thụ của một đoạn mạch là năng lượng mà đoạn mạch tiêu thụ trong một đơn vị thời gian.</p>
+                            <p class="text-center">$\\mathcal{P} = \\frac{A}{t} = UI$</p>
+                            <p><span class="font-bold">• Đơn vị:</span> Oát (W).</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. TRƯỜNG HỢP ĐOẠN MẠCH LÀ ĐIỆN TRỞ (ĐỊNH LUẬT JOULE - LENZ)</span></p>
+                            <p><span class="font-bold">• Nhiệt lượng tỏa ra trên điện trở R:</span></p>
+                            <p class="text-center">$Q = A = UIt = RI^2t = \\frac{U^2}{R}t$</p>
+                            <p><span class="font-bold">• Công suất tỏa nhiệt:</span></p>
+                            <p class="text-center">$\\mathcal{P} = \\frac{Q}{t} = UI = RI^2 = \\frac{U^2}{R}$</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">3. NĂNG LƯỢNG VÀ CÔNG SUẤT CỦA NGUỒN ĐIỆN</span></p>
+                            <p><span class="font-bold">• Năng lượng toàn phần của nguồn điện:</span></p>
+                            <p class="text-center">$A_0 = \\mathcal{E}It = UIt + rI^2t$</p>
+                            <p><span class="font-bold">• Công suất toàn phần:</span></p>
+                            <p class="text-center">$\\mathcal{P}_0 = \\frac{A_0}{t} = \\mathcal{E}I$</p>
+                            <p><span class="font-bold">• Hiệu suất của nguồn điện:</span></p>
+                            <p class="text-center">$H = \\frac{\\mathcal{P}}{\\mathcal{P}_0} = \\frac{U}{\\mathcal{E}} = 1 - \\frac{rI}{\\mathcal{E}}$</p>
+                        </div>
+                    `
+                },
+                
+                // BÀI 20: Thực hành xác định suất điện động và điện trở trong của pin
+                { 
+                    title: "📘 BÀI 20: THỰC HÀNH XÁC ĐỊNH SUẤT ĐIỆN ĐỘNG VÀ ĐIỆN TRỞ TRONG CỦA PIN", 
+                    content: `
+                        <div class="space-y-3">
+                            <p><span class="font-bold text-red-600">1. MỤC ĐÍCH THÍ NGHIỆM</span></p>
+                            <p>Đo suất điện động và điện trở trong của pin chưa qua sử dụng và pin đã qua sử dụng.</p>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">2. CƠ SỞ LÍ THUYẾT</span></p>
+                            <p>Xét mạch điện gồm nguồn điện ($\\mathcal{E}$, r) mắc nối tiếp với mạch ngoài gồm điện trở R₀ đã biết và biến trở R mắc nối tiếp.</p>
+                            <p><span class="font-bold">• Cường độ dòng điện trong mạch:</span></p>
+                            <p class="text-center">$I = \\frac{\\mathcal{E}}{R + R_0 + r}$</p>
+                            <p><span class="font-bold">• Hiệu điện thế giữa hai đầu biến trở R:</span></p>
+                            <p class="text-center">$U = IR = \\mathcal{E} - I(r + R_0)$</p>
+                            <p><span class="font-bold">• Đồ thị mô tả mối quan hệ giữa I và U:</span> là một đoạn thẳng:</p>
+                            <ul class="list-disc pl-6">
+                                <li>Cắt trục tung OU (khi I = 0) tại điểm có giá trị $U_m = \\mathcal{E}$</li>
+                                <li>Cắt trục hoành OI (khi U = 0) tại điểm có giá trị $I_m = \\frac{\\mathcal{E}}{r + R_0}$</li>
+                            </ul>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">3. DỤNG CỤ THÍ NGHIỆM</span></p>
+                            <ul class="list-disc pl-6">
+                                <li>2 pin (1 pin chưa sử dụng, 1 pin đã qua sử dụng) và hộp đựng pin</li>
+                                <li>1 biến trở R</li>
+                                <li>1 điện trở R₀ đã biết giá trị</li>
+                                <li>2 đồng hồ đo điện đa năng hiện số (làm ampe kế và vôn kế)</li>
+                                <li>Khóa K, bảng điện và dây nối</li>
+                            </ul>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">4. TIẾN HÀNH THÍ NGHIỆM</span></p>
+                            <ul class="list-disc pl-6">
+                                <li>Lắp mạch điện theo sơ đồ (nguồn nối tiếp với R₀ và biến trở R, ampe kế mắc nối tiếp, vôn kế mắc song song với biến trở)</li>
+                                <li>Chọn pin cần đo, chọn thang đo thích hợp</li>
+                                <li>Đóng khóa K, đọc giá trị I và U, ghi vào bảng số liệu</li>
+                                <li>Thay đổi giá trị biến trở, thực hiện ít nhất 5 lần đo</li>
+                                <li>Ngắt khóa K sau mỗi lần đo</li>
+                            </ul>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">5. XỬ LÍ SỐ LIỆU</span></p>
+                            <ul class="list-disc pl-6">
+                                <li>Vẽ đồ thị mô tả mối quan hệ giữa I và U</li>
+                                <li>Xác định suất điện động $\\mathcal{E}$ từ giao điểm của đồ thị với trục tung</li>
+                                <li>Xác định điện trở trong r từ độ dốc của đồ thị</li>
+                            </ul>
+                            
+                            <p><span class="font-bold text-red-600 mt-2">6. CÁCH TÍNH SAI SỐ CỦA ĐỒNG HỒ ĐO ĐIỆN ĐA NĂNG HIỆN SỐ</span></p>
+                            <p><span class="font-bold">• Đo hiệu điện thế một chiều:</span></p>
+                            <table class="min-w-full border-collapse border border-gray-300">
+                                <tr><th class="border border-gray-300 px-2">Giới hạn đo</th><th class="border border-gray-300 px-2">ĐCNN</th><th class="border border-gray-300 px-2">Sai số</th></tr>
+                                <tr><td class="border border-gray-300 px-2">200 mV</td><td class="border border-gray-300 px-2">100 μV</td><td class="border border-gray-300 px-2">± (0,8% số đọc + 10 × ĐCNN)</td></tr>
+                                <tr><td class="border border-gray-300 px-2">2 V</td><td class="border border-gray-300 px-2">1 mV</td><td class="border border-gray-300 px-2">± (0,5% số đọc + 10 × ĐCNN)</td></tr>
+                                <tr><td class="border border-gray-300 px-2">20 V</td><td class="border border-gray-300 px-2">10 mV</td><td class="border border-gray-300 px-2">± (0,5% số đọc + 10 × ĐCNN)</td></tr>
+                                <tr><td class="border border-gray-300 px-2">200 V</td><td class="border border-gray-300 px-2">100 mV</td><td class="border border-gray-300 px-2">± (0,5% số đọc + 10 × ĐCNN)</td></tr>
+                                <tr><td class="border border-gray-300 px-2">1000 V</td><td class="border border-gray-300 px-2">1 V</td><td class="border border-gray-300 px-2">± (1,0% số đọc + 5 × ĐCNN)</td></tr>
+                            </table>
+                            
+                            <p class="mt-2"><span class="font-bold">• Đo cường độ dòng điện một chiều:</span></p>
+                            <table class="min-w-full border-collapse border border-gray-300">
+                                <tr><th class="border border-gray-300 px-2">Giới hạn đo</th><th class="border border-gray-300 px-2">ĐCNN</th><th class="border border-gray-300 px-2">Sai số</th></tr>
+                                <tr><td class="border border-gray-300 px-2">20 μA, 200 μA</td><td class="border border-gray-300 px-2">10 nA, 0,1 μA</td><td class="border border-gray-300 px-2">± (2,0% số đọc + 10 × ĐCNN)</td></tr>
+                                <tr><td class="border border-gray-300 px-2">2 mA, 20 mA</td><td class="border border-gray-300 px-2">1 μA, 10 μA</td><td class="border border-gray-300 px-2">± (1,2% số đọc + 10 × ĐCNN)</td></tr>
+                                <tr><td class="border border-gray-300 px-2">200 mA</td><td class="border border-gray-300 px-2">100 μA</td><td class="border border-gray-300 px-2">± (1,5% số đọc + 10 × ĐCNN)</td></tr>
+                                <tr><td class="border border-gray-300 px-2">2 A, 20 A</td><td class="border border-gray-300 px-2">1 mA, 10 mA</td><td class="border border-gray-300 px-2">± (3,5% số đọc + 10 × ĐCNN)</td></tr>
+                            </table>
                         </div>
                     `
                 }
             ]
-        }
+        },
     };
     
     return summaries[chapter] || summaries[1];
