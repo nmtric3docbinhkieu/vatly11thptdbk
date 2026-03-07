@@ -3,6 +3,11 @@
 // ==============================================
 // File tổng hợp tất cả câu hỏi và kiến thức từ các chương
 
+// Hàm lấy câu hỏi kiểm tra giữa học kỳ 2
+window.getQuestionsKTGHK2 = function() {
+    return window.questionsChapter3 || [];
+};
+
 // Hàm lấy câu hỏi theo chương
 window.getQuestionsByChapter = function(chapter, count = 50) {
     let questions = [];

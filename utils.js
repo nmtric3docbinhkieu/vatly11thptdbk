@@ -234,15 +234,25 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
         console.log('FinalScore trước làm tròn:', finalScore, typeof finalScore);
         console.log('FinalScore sau làm tròn:', Math.round(finalScore), typeof Math.round(finalScore));
         
+        // Xác định số câu và chapter dựa trên loại bài kiểm tra
+        let totalQuestions, chapterNumber;
+        if (chapter === 'ktghk2') {
+            totalQuestions = 25; // KTGHK2 có 25 câu
+            chapterNumber = 3; // Vẫn là chương 3
+        } else {
+            totalQuestions = 50; // Quiz thường có 50 câu
+            chapterNumber = chapter;
+        }
+        
         // Chèn dữ liệu với UUID thật
         const { data, error } = await supabase.from('quiz_attempts_chapter3').insert({
             student_id: studentData.id,  // UUID thật từ database
             score: parseInt(Math.round(finalScore)), // Chắc chắn là integer
-            total_questions: 50,
+            total_questions: totalQuestions,
             attempt_number: 1,
             time_taken: timeTaken,
             cheat_warnings: cheatWarnings,
-            chapter: 3,
+            chapter: chapterNumber,
             created_at: new Date(new Date().getTime() + 7 * 60 * 60 * 1000).toISOString() // +7 giờ
         }).select();
 

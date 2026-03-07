@@ -54,7 +54,7 @@ window.ChapterSelectionScreen = function({ onSelectChapter, onLogout, student })
 // Component màn hình chọn hoạt động cho chương 3 (có thí nghiệm ảo)
 window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }) {
     return React.createElement('div', { className: "flex items-center justify-center min-h-screen p-4" },
-        React.createElement('div', { className: "glass-panel p-10 text-center max-w-2xl w-full relative" },
+        React.createElement('div', { className: "glass-panel p-10 text-center max-w-4xl w-full relative" },
             // Nút đăng xuất
             React.createElement('button', { onClick: onLogout, className: "absolute top-4 right-4 p-2 rounded-lg text-slate-400 hover:bg-slate-100" },
                 React.createElement('i', { className: "fas fa-sign-out-alt" })
@@ -68,8 +68,8 @@ window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }
             React.createElement('h1', { className: "text-3xl font-black text-slate-800 mb-2" }, "CHƯƠNG 3: ĐIỆN TRƯỜNG"),
             React.createElement('p', { className: "text-slate-500 mb-8" }, "Chọn hoạt động để bắt đầu"),
             
-            // Grid các hoạt động
-            React.createElement('div', { className: "grid gap-6 md:grid-cols-3" },
+            // Grid các hoạt động (2x3)
+            React.createElement('div', { className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3" },
                 // Lý thuyết
                 React.createElement('button', {
                     onClick: function() { onSelectActivity('theory'); },
@@ -109,13 +109,25 @@ window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }
                 // Giải Bài tập ôn
                 React.createElement('button', {
                     onClick: function() { onSelectActivity('solve'); },
-                    className: "p-6 bg-white border-2 border-green-200 rounded-2xl hover:border-green-500 hover:bg-green-50 transition-all text-left"
+                    className: "p-6 bg-white border-2 border-orange-200 rounded-2xl hover:border-orange-500 hover:bg-orange-50 transition-all text-left"
                 },
-                    React.createElement('div', { className: "w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4" },
-                        React.createElement('i', { className: "fas fa-chalkboard-teacher text-green-600 text-xl" })
+                    React.createElement('div', { className: "w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-chalkboard-teacher text-orange-600 text-xl" })
                     ),
                     React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Giải Bài tập ôn"),
                     React.createElement('div', { className: "text-slate-600 text-sm" }, "Giải chi tiết 60 câu hỏi")
+                ),
+                
+                // Kiểm tra giữa học kỳ 2
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('ktghk2'); },
+                    className: "p-6 bg-white border-2 border-red-200 rounded-2xl hover:border-red-500 hover:bg-red-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-clipboard-check text-red-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Kiểm tra GHK 2"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "25 câu theo 4 dạng bài tập")
                 )
             ),
             
