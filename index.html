@@ -199,7 +199,9 @@ const goToSummary = (chapter) => {
 
 const startQuiz = (chapter) => {
     initAudio();
-    const chapterQuestions = window.getQuestionsByChapter?.(chapter, 50) || [];
+    // Chương 4 chỉ có 38 câu, các chương khác 50 câu
+    const questionCount = chapter === 4 ? 38 : 50;
+    const chapterQuestions = window.getQuestionsByChapter?.(chapter, questionCount) || [];
     setQuestions(chapterQuestions);
     setSelectedChapter(chapter);
     setCurrentIdx(0);
@@ -263,11 +265,66 @@ const backToChapter3Activities = () => {
     setSelectedExperiment(null);
 };
 
-            const handleSelect = (idx) => {
+            const handleSelect = (answer) => {
                 if (selected !== null) return;
-                setSelected(idx);
-                if (idx === questions[currentIdx].a) {
-                    setScore(s => s + 0.2);
+                setSelected(answer);
+                
+                const currentQuestion = questions[currentIdx];
+                const questionType = currentQuestion?.type || 'multiple-choice';
+                let isCorrect = false;
+                let points = 0;
+                
+                switch (questionType) {
+                    case 'multiple-choice':
+                        isCorrect = answer === currentQuestion.a;
+                        points = isCorrect ? 0.2 : 0;
+                        break;
+                        
+                    case 'true-false':
+                        // answer là object với key là index và value là 'true'/'false'
+                        if (typeof answer === 'object' && answer !== null) {
+                            let correctCount = 0;
+                            const totalParts = currentQuestion.parts.length;
+                            
+                            // Kiểm tra từng phần
+                            for (let i = 0; i < totalParts; i++) {
+                                const userAnswer = answer[i];
+                                const part = currentQuestion.parts[i];
+                                const partCorrect = (userAnswer === 'true' && part.correct) || 
+                                                  (userAnswer === 'false' && !part.correct);
+                                if (partCorrect) correctCount++;
+                            }
+                            
+                            // Tính điểm: mỗi phần đúng được 0.05 điểm
+                            points = correctCount * 0.05;
+                            isCorrect = correctCount === totalParts; // Cả câu đúng khi tất cả các phần đều đúng
+                        }
+                        break;
+                        
+                    case 'short-answer':
+                        // Kiểm tra câu trả lời ngắn (đơn giản hóa)
+                        const userAnswer = answer.toLowerCase().trim();
+                        const correctAnswer = currentQuestion.answer.toLowerCase().trim();
+                        // Cho phép một số sai lệch nhỏ
+                        isCorrect = userAnswer === correctAnswer || 
+                                  userAnswer.replace(/\s/g, '') === correctAnswer.replace(/\s/g, '') ||
+                                  userAnswer.includes(correctAnswer) || correctAnswer.includes(userAnswer);
+                        points = isCorrect ? 0.2 : 0;
+                        break;
+                        
+                    case 'essay':
+                        // Tự luận luôn được điểm hoàn thành khi học sinh bấm "Hoàn thành"
+                        isCorrect = answer === 'essay-completed';
+                        points = isCorrect ? 0.2 : 0;
+                        break;
+                        
+                    default:
+                        isCorrect = answer === currentQuestion.a;
+                        points = isCorrect ? 0.2 : 0;
+                }
+                
+                if (points > 0) {
+                    setScore(s => s + points);
                     playCorrect();
                 } else {
                     playWrong();
@@ -804,7 +861,7 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
                 <window.QuizScreen
                     question={questions[currentIdx]}
                     currentIdx={currentIdx}
-                    totalQuestions={50}
+                    totalQuestions={questions.length}
                     score={score}
                     elapsedTime={elapsedTime}
                     cheatWarnings={cheatWarnings}

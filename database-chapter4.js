@@ -1,667 +1,440 @@
 // ==============================================
 // FILE: database-chapter4.js
 // ==============================================
-// Ngân hàng câu hỏi chương 4: Dòng điện, mạch điện (50 câu)
-// Theo sách giáo khoa Vật lí 11 - Chân trời sáng tạo
+// Ngân hàng câu hỏi chương 4: Dòng điện không đổi
+// Vật lí 11 - Chân trời sáng tạo
+// 38 câu hỏi theo 4 dạng của Công văn 7991/BGDĐT-GDTrH
+// ==============================================
 
 window.questionsChapter4 = [
-    // ========== BÀI 16: DÒNG ĐIỆN - CƯỜNG ĐỘ DÒNG ĐIỆN (10 CÂU) ==========
+    // ============================================
+    // DẠNG 1: TRẮC NGHIỆM NHIỀU LỰA CHỌN (16 CÂU)
+    // ============================================
     
-    // Câu 1
-    { 
-        q: "Dòng điện là:", 
+    // Câu 1 (NB - Bài 16)
+    {
+        type: "multiple-choice",
+        q: "Dòng điện là:",
         options: [
-            "Dòng dịch chuyển có hướng của các điện tích", 
-            "Dòng chuyển động của các electron", 
-            "Dòng chuyển động của các ion", 
-            "Dòng chuyển động của các proton"
-        ], 
-        a: 0, 
-        expl: "Dòng điện là dòng dịch chuyển có hướng của các điện tích." 
+            "Dòng dịch chuyển có hướng của các điện tích",
+            "Dòng chuyển động của các electron",
+            "Dòng chuyển động của các ion dương",
+            "Dòng chuyển động của các điện tích tự do"
+        ],
+        a: 0,
+        expl: "Dòng điện là dòng dịch chuyển có hướng của các điện tích."
     },
     
-    // Câu 2
-    { 
-        q: "Chiều dòng điện được quy ước là:", 
+    // Câu 2 (NB - Bài 16)
+    {
+        type: "multiple-choice",
+        q: "Cường độ dòng điện không đổi được xác định bằng công thức:",
         options: [
-            "Chiều dịch chuyển có hướng của các điện tích dương", 
-            "Chiều dịch chuyển của các electron", 
-            "Chiều từ cực âm sang cực dương", 
-            "Chiều dịch chuyển của các ion âm"
-        ], 
-        a: 0, 
-        expl: "Chiều dòng điện được quy ước là chiều dịch chuyển có hướng của các điện tích dương (ngược với chiều dịch chuyển của electron)." 
+            "$I = \\frac{q}{t}$",
+            "$I = \\frac{U}{R}$",
+            "$I = \\frac{A}{q}$",
+            "$I = \\frac{P}{U}$"
+        ],
+        a: 0,
+        expl: "Cường độ dòng điện không đổi: $I = \\frac{q}{t}$."
     },
     
-    // Câu 3
-    { 
-        q: "Cường độ dòng điện là đại lượng đặc trưng cho:", 
+    // Câu 3 (NB - Bài 16)
+    {
+        type: "multiple-choice",
+        q: "Chiều dòng điện được quy ước là:",
         options: [
-            "Tác dụng mạnh hay yếu của dòng điện", 
-            "Tốc độ dịch chuyển của điện tích", 
-            "Khả năng sinh công của dòng điện", 
-            "Mật độ điện tích"
-        ], 
-        a: 0, 
-        expl: "Cường độ dòng điện là đại lượng đặc trưng cho tác dụng mạnh hay yếu của dòng điện." 
+            "Chiều dịch chuyển có hướng của các điện tích dương",
+            "Chiều dịch chuyển có hướng của các điện tích âm",
+            "Chiều dịch chuyển có hướng của các electron",
+            "Chiều dịch chuyển có hướng của các ion"
+        ],
+        a: 0,
+        expl: "Chiều dòng điện được quy ước là chiều dịch chuyển có hướng của các điện tích dương (ngược với chiều dịch chuyển của electron)."
     },
     
-    // Câu 4
-    { 
-        q: "Công thức xác định cường độ dòng điện là:", 
-        options: [
-            "$I = \\frac{\\Delta q}{\\Delta t}$", 
-            "$I = q.t$", 
-            "$I = \\frac{\\Delta t}{\\Delta q}$", 
-            "$I = q^2 t$"
-        ], 
-        a: 0, 
-        expl: "$I = \\frac{\\Delta q}{\\Delta t}$, với $\\Delta q$ là điện lượng dịch chuyển qua tiết diện thẳng trong thời gian $\\Delta t$." 
+    // Câu 4 (TH - Bài 16)
+    {
+        type: "multiple-choice",
+        q: "Đơn vị của cường độ dòng điện trong hệ SI là:",
+        options: ["Ampe (A)", "Vôn (V)", "Ôm (Ω)", "Oát (W)"],
+        a: 0,
+        expl: "Cường độ dòng điện có đơn vị là ampe (A)."
     },
     
-    // Câu 5
-    { 
-        q: "Đơn vị của cường độ dòng điện trong hệ SI là:", 
+    // Câu 5 (TH - Bài 16)
+    {
+        type: "multiple-choice",
+        q: "Dòng điện không đổi là dòng điện có:",
         options: [
-            "Ampe (A)", 
-            "Vôn (V)", 
-            "Ôm (Ω)", 
-            "Culông (C)"
-        ], 
-        a: 0, 
-        expl: "Cường độ dòng điện có đơn vị là ampe (A)." 
+            "Chiều và cường độ không thay đổi theo thời gian",
+            "Chiều không đổi, cường độ thay đổi theo thời gian",
+            "Chiều thay đổi, cường độ không đổi",
+            "Chiều và cường độ luôn thay đổi"
+        ],
+        a: 0,
+        expl: "Dòng điện không đổi là dòng điện có chiều và cường độ không thay đổi theo thời gian."
     },
     
-    // Câu 6
-    { 
-        q: "Dòng điện không đổi là dòng điện có:", 
-        options: [
-            "Chiều và cường độ không thay đổi theo thời gian", 
-            "Chiều không đổi, cường độ thay đổi", 
-            "Cường độ không đổi, chiều thay đổi", 
-            "Chiều và cường độ đều thay đổi"
-        ], 
-        a: 0, 
-        expl: "Dòng điện không đổi là dòng điện có chiều và cường độ không thay đổi theo thời gian." 
+    // Câu 6 (NB - Bài 17)
+    {
+        type: "multiple-choice",
+        q: "Điện trở của một vật dẫn được xác định bằng công thức:",
+        options: ["$R = \\frac{U}{I}$", "$R = \\frac{I}{U}$", "$R = U.I$", "$R = \\frac{U^2}{I}$"],
+        a: 0,
+        expl: "Điện trở $R = \\frac{U}{I}$."
     },
     
-    // Câu 7
-    { 
-        q: "1 Culông (C) được định nghĩa là:", 
-        options: [
-            "Điện lượng chuyển qua tiết diện thẳng của dây dẫn trong 1s khi có dòng điện không đổi cường độ 1A chạy qua", 
-            "Điện tích của $6,25.10^{18}$ electron", 
-            "Điện tích của 1 proton", 
-            "Cả A và B"
-        ], 
-        a: 3, 
-        expl: "1 C là điện lượng chuyển qua tiết diện thẳng của dây dẫn trong 1s khi có dòng điện không đổi cường độ 1A chạy qua, cũng tương đương điện tích của $6,25.10^{18}$ electron: $1C = 1A.1s = 1A.s$." 
+    // Câu 7 (NB - Bài 17)
+    {
+        type: "multiple-choice",
+        q: "Đơn vị của điện trở trong hệ SI là:",
+        options: ["Ôm (Ω)", "Ampe (A)", "Vôn (V)", "Oát (W)"],
+        a: 0,
+        expl: "Điện trở có đơn vị là ôm (Ω): $1 \\Omega = 1 V/A$."
     },
     
-    // Câu 8
-    { 
-        q: "Một dòng điện không đổi có cường độ 2A chạy qua dây dẫn. Điện lượng chuyển qua tiết diện thẳng trong 5 giây là:", 
+    // Câu 8 (TH - Bài 17)
+    {
+        type: "multiple-choice",
+        q: "Phát biểu nào sau đây là **đúng** với nội dung định luật Ohm?",
         options: [
-            "10 C", 
-            "2,5 C", 
-            "0,4 C", 
-            "7 C"
-        ], 
-        a: 0, 
-        expl: "$q = I.t = 2 \\times 5 = 10$ C." 
+            "Cường độ dòng điện chạy qua dây dẫn tỉ lệ thuận với hiệu điện thế đặt vào hai đầu dây dẫn và tỉ lệ nghịch với điện trở của dây.",
+            "Cường độ dòng điện chạy qua dây dẫn tỉ lệ thuận với điện trở của dây dẫn.",
+            "Cường độ dòng điện chạy qua dây dẫn tỉ lệ nghịch với hiệu điện thế đặt vào hai đầu dây dẫn.",
+            "Cường độ dòng điện chạy qua dây dẫn không phụ thuộc vào hiệu điện thế."
+        ],
+        a: 0,
+        expl: "Định luật Ohm: $I = \\frac{U}{R}$, cường độ dòng điện tỉ lệ thuận với hiệu điện thế và tỉ lệ nghịch với điện trở."
     },
     
-    // Câu 9
-    { 
-        q: "Vận tốc trôi của các hạt tải điện tỉ lệ với:", 
+    // Câu 9 (NB - Bài 17)
+    {
+        type: "multiple-choice",
+        q: "Điện trở của một dây dẫn kim loại phụ thuộc vào yếu tố nào?",
         options: [
-            "Cường độ dòng điện", 
-            "Hiệu điện thế", 
-            "Điện trở", 
-            "Nhiệt độ"
-        ], 
-        a: 0, 
-        expl: "Vận tốc trôi của các hạt tải điện tỉ lệ với cường độ dòng điện chạy trong vật dẫn." 
+            "Chiều dài, tiết diện và bản chất vật liệu.",
+            "Chiều dài và hiệu điện thế.",
+            "Tiết diện và cường độ dòng điện.",
+            "Bản chất vật liệu và thời gian dòng điện chạy qua."
+        ],
+        a: 0,
+        expl: "$R = \\rho \\frac{l}{S}$, phụ thuộc vào điện trở suất $\\rho$ (bản chất vật liệu), chiều dài $l$, tiết diện $S$."
     },
     
-    // Câu 10
-    { 
-        q: "Công thức liên hệ giữa vận tốc trôi $v$ và cường độ dòng điện $I$ là:", 
+    // Câu 10 (TH - Bài 17)
+    {
+        type: "multiple-choice",
+        q: "Điện trở suất của vật liệu càng lớn thì:",
         options: [
-            "$v = \\frac{I}{nS|q|}$", 
-            "$v = \\frac{nS|q|}{I}$", 
-            "$v = I.nS|q|$", 
-            "$v = \\frac{I.nS}{|q|}$"
-        ], 
-        a: 0, 
-        expl: "$v = \\frac{I}{nS|q|}$, với $n$ là mật độ hạt tải điện, $S$ là tiết diện, $q$ là điện tích mỗi hạt." 
-    },
-
-    // ========== BÀI 17: ĐIỆN TRỞ - ĐỊNH LUẬT OHM (10 CÂU) ==========
-    
-    // Câu 11
-    { 
-        q: "Điện trở của một vật dẫn là đại lượng đặc trưng cho:", 
-        options: [
-            "Khả năng cản trở dòng điện của vật dẫn", 
-            "Khả năng dẫn điện của vật dẫn", 
-            "Tốc độ dịch chuyển của điện tích", 
-            "Mật độ electron tự do"
-        ], 
-        a: 0, 
-        expl: "Điện trở của một vật dẫn là đại lượng đặc trưng cho khả năng cản trở dòng điện của vật dẫn." 
+            "Vật liệu dẫn điện càng kém.",
+            "Vật liệu dẫn điện càng tốt.",
+            "Vật liệu có khả năng cách điện càng kém.",
+            "Vật liệu có khối lượng riêng càng lớn."
+        ],
+        a: 0,
+        expl: "Điện trở suất đặc trưng cho khả năng cản trở dòng điện. Điện trở suất càng lớn, vật dẫn điện càng kém."
     },
     
-    // Câu 12
-    { 
-        q: "Công thức xác định điện trở là:", 
+    // Câu 11 (NB - Bài 18)
+    {
+        type: "multiple-choice",
+        q: "Suất điện động của nguồn điện đặc trưng cho:",
         options: [
-            "$R = \\frac{U}{I}$", 
-            "$R = \\frac{I}{U}$", 
-            "$R = U.I$", 
-            "$R = \\frac{U^2}{I}$"
-        ], 
-        a: 0, 
-        expl: "Điện trở $R = \\frac{U}{I}$." 
+            "Khả năng sinh công của nguồn điện.",
+            "Khả năng tích điện của nguồn điện.",
+            "Khả năng tác dụng lực của nguồn điện.",
+            "Khả năng dự trữ năng lượng của nguồn điện."
+        ],
+        a: 0,
+        expl: "Suất điện động của nguồn điện là đại lượng vật lí đặc trưng cho khả năng sinh công của nguồn điện."
     },
     
-    // Câu 13
-    { 
-        q: "Đơn vị của điện trở trong hệ SI là:", 
+    // Câu 12 (NB - Bài 18)
+    {
+        type: "multiple-choice",
+        q: "Công thức tính suất điện động của nguồn điện là:",
         options: [
-            "Ôm (Ω)", 
-            "Vôn (V)", 
-            "Ampe (A)", 
-            "Oát (W)"
-        ], 
-        a: 0, 
-        expl: "Điện trở có đơn vị là ôm (Ω): $1 \\Omega = 1 V/A$." 
+            "$\\mathcal{E} = \\frac{A}{q}$",
+            "$\\mathcal{E} = \\frac{q}{A}$",
+            "$\\mathcal{E} = A.q$",
+            "$\\mathcal{E} = \\frac{U}{I}$"
+        ],
+        a: 0,
+        expl: "$\\mathcal{E} = \\frac{A}{q}$, với $A$ là công của lực lạ làm di chuyển điện tích $q$ từ cực âm đến cực dương bên trong nguồn điện."
     },
     
-    // Câu 14
-    { 
-        q: "Nguyên nhân chính gây ra điện trở của kim loại là:", 
+    // Câu 13 (TH - Bài 18)
+    {
+        type: "multiple-choice",
+        q: "Mắc hai đầu một nguồn điện có suất điện động ε và điện trở trong r vào một mạch điện kín. Hiệu điện thế giữa hai cực của nguồn điện là:",
         options: [
-            "Sự va chạm của các electron với các ion dương ở nút mạng", 
-            "Sự chuyển động nhiệt của các electron", 
-            "Sự mất trật tự của mạng tinh thể", 
-            "Cả A, B, C"
-        ], 
-        a: 3, 
-        expl: "Các electron va chạm với ion dương ở nút mạng, chuyển động nhiệt của electron và sự mất trật tự mạng tinh thể đều gây cản trở dòng điện, tạo ra điện trở." 
+            "$U = \\varepsilon - Ir$",
+            "$U = \\varepsilon + Ir$",
+            "$U = \\frac{\\varepsilon}{r}$",
+            "$U = \\varepsilon$"
+        ],
+        a: 0,
+        expl: "$U = \\varepsilon - Ir$, với $r$ là điện trở trong của nguồn."
     },
     
-    // Câu 15
-    { 
-        q: "Điện trở của một đoạn dây dẫn kim loại phụ thuộc vào:", 
+    // Câu 14 (TH - Bài 18)
+    {
+        type: "multiple-choice",
+        q: "Khi mạch ngoài hở, hiệu điện thế giữa hai cực của nguồn điện:",
         options: [
-            "Chiều dài dây", 
-            "Tiết diện dây", 
-            "Bản chất vật liệu", 
-            "Cả A, B, C"
-        ], 
-        a: 3, 
-        expl: "$R = \\rho \\frac{l}{S}$, phụ thuộc vào điện trở suất $\\rho$ (bản chất vật liệu), chiều dài $l$, tiết diện $S$." 
+            "Bằng suất điện động của nguồn.",
+            "Lớn hơn suất điện động của nguồn.",
+            "Nhỏ hơn suất điện động của nguồn.",
+            "Bằng 0."
+        ],
+        a: 0,
+        expl: "Khi mạch hở, không có dòng điện, hiệu điện thế giữa hai cực bằng suất điện động của nguồn."
     },
     
-    // Câu 16
-    { 
-        q: "Định luật Ohm phát biểu rằng:", 
-        options: [
-            "Cường độ dòng điện qua điện trở tỉ lệ thuận với hiệu điện thế đặt vào hai đầu điện trở", 
-            "Cường độ dòng điện tỉ lệ nghịch với điện trở", 
-            "$I = \\frac{U}{R}$", 
-            "Cả A, B, C"
-        ], 
-        a: 3, 
-        expl: "Định luật Ohm: $I = \\frac{U}{R}$, cường độ dòng điện tỉ lệ thuận với hiệu điện thế và tỉ lệ nghịch với điện trở." 
+    // Câu 15 (NB - Bài 19)
+    {
+        type: "multiple-choice",
+        q: "Công thức tính công suất tiêu thụ điện của một đoạn mạch là:",
+        options: ["$P = UI$", "$P = \\frac{U}{I}$", "$P = \\frac{I}{U}$", "$P = \\frac{U}{I^2}$"],
+        a: 0,
+        expl: "Công suất $P = UI$."
     },
     
-    // Câu 17
-    { 
-        q: "Đường đặc trưng vôn - ampe của vật dẫn kim loại ở nhiệt độ xác định có dạng:", 
-        options: [
-            "Đường thẳng đi qua gốc tọa độ", 
-            "Đường cong", 
-            "Đường thẳng song song với trục U", 
-            "Đường thẳng song song với trục I"
-        ], 
-        a: 0, 
-        expl: "Đường đặc trưng vôn - ampe của vật dẫn kim loại ở nhiệt độ xác định là đường thẳng đi qua gốc tọa độ." 
+    // Câu 16 (NB - Bài 19)
+    {
+        type: "multiple-choice",
+        q: "Đơn vị của công suất điện trong hệ SI là:",
+        options: ["Oát (W)", "Jun (J)", "Vôn (V)", "Ampe (A)"],
+        a: 0,
+        expl: "Công suất có đơn vị là oát (W)."
     },
     
-    // Câu 18
-    { 
-        q: "Khi nhiệt độ tăng, điện trở của kim loại:", 
-        options: [
-            "Tăng", 
-            "Giảm", 
-            "Không đổi", 
-            "Có thể tăng hoặc giảm"
-        ], 
-        a: 0, 
-        expl: "Khi nhiệt độ tăng, các ion dao động mạnh hơn, cản trở electron nhiều hơn, điện trở tăng." 
+    // ============================================
+    // DẠNG 2: TRẮC NGHIỆM ĐÚNG - SAI (8 CÂU)
+    // ============================================
+    
+    // Câu 17 (Bài 16)
+    {
+        type: "true-false",
+        q: "Cho dòng điện không đổi có cường độ I = 2 A chạy qua một dây dẫn kim loại. Biết điện tích electron là e = 1,6.10⁻¹⁹ C.",
+        parts: [
+            { content: "Điện lượng dịch chuyển qua tiết diện thẳng của dây dẫn trong 5 giây là 10 C.", correct: true },
+            { content: "Số electron dịch chuyển qua tiết diện thẳng trong 1 giây là 1,25.10¹⁹ hạt.", correct: true },
+            { content: "Chiều dòng điện trong dây dẫn kim loại cùng chiều với chiều dịch chuyển của các electron.", correct: false },
+            { content: "Nếu mật độ electron trong dây dẫn là n = 8,5.10²⁸ hạt/m³ và tiết diện dây là 2 mm² thì vận tốc trôi của electron xấp xỉ 0,074 mm/s.", correct: true }
+        ],
+        expl: "a) q = I.t = 2.5 = 10 C → Đúng. b) N = I/e = 2/(1,6.10⁻¹⁹) = 1,25.10¹⁹ → Đúng. c) Trong kim loại, chiều dòng điện ngược chiều electron → Sai. d) v = I/(nSe) = 2/(8,5.10²⁸.2.10⁻⁶.1,6.10⁻¹⁹) ≈ 0,074 mm/s → Đúng."
     },
     
-    // Câu 19
-    { 
-        q: "Điện trở nhiệt PTC (Positive Temperature Coefficient) có đặc điểm:", 
-        options: [
-            "Điện trở tăng khi nhiệt độ tăng", 
-            "Điện trở giảm khi nhiệt độ tăng", 
-            "Điện trở không đổi", 
-            "Điện trở thay đổi không theo quy luật"
-        ], 
-        a: 0, 
-        expl: "PTC là điện trở nhiệt hệ số dương, điện trở tăng khi nhiệt độ tăng." 
+    // Câu 18 (Bài 16)
+    {
+        type: "true-false",
+        q: "Một dòng điện không đổi chạy qua một dây dẫn kim loại. Biết trong thời gian 2 phút, điện lượng dịch chuyển qua tiết diện thẳng của dây là 120 C.",
+        parts: [
+            { content: "Cường độ dòng điện qua dây dẫn là 1 A.", correct: true },
+            { content: "Số electron dịch chuyển qua tiết diện thẳng trong 1 giây là 6,25.10¹⁸ hạt.", correct: true },
+            { content: "Nếu thời gian dòng điện chạy tăng lên gấp đôi thì điện lượng dịch chuyển cũng tăng gấp đôi.", correct: true },
+            { content: "Nếu tiết diện dây dẫn tăng lên 2 lần, các yếu tố khác không đổi thì vận tốc trôi của electron giảm 2 lần.", correct: true }
+        ],
+        expl: "a) I = q/t = 120/120 = 1 A → Đúng. b) N = I/e = 1/(1,6.10⁻¹⁹) = 6,25.10¹⁸ → Đúng. c) q = I.t, I không đổi, t tăng 2 lần → q tăng 2 lần → Đúng. d) v = I/(nSe), S tăng 2 lần → v giảm 2 lần → Đúng."
     },
     
-    // Câu 20
-    { 
-        q: "Điện trở nhiệt NTC (Negative Temperature Coefficient) có đặc điểm:", 
-        options: [
-            "Điện trở tăng khi nhiệt độ tăng", 
-            "Điện trở giảm khi nhiệt độ tăng", 
-            "Điện trở không đổi", 
-            "Điện trở thay đổi không theo quy luật"
-        ], 
-        a: 1, 
-        expl: "NTC là điện trở nhiệt hệ số âm, điện trở giảm khi nhiệt độ tăng." 
-    },
-
-    // ========== BÀI 18: NGUỒN ĐIỆN (10 CÂU) ==========
-    
-    // Câu 21
-    { 
-        q: "Nguồn điện là thiết bị:", 
-        options: [
-            "Tạo ra và duy trì hiệu điện thế để duy trì dòng điện trong mạch", 
-            "Cung cấp điện tích cho mạch", 
-            "Tạo ra dòng điện", 
-            "Biến đổi các dạng năng lượng thành điện năng"
-        ], 
-        a: 0, 
-        expl: "Nguồn điện là thiết bị tạo ra và duy trì sự chênh lệch điện thế, nhằm duy trì dòng điện trong mạch kín." 
+    // Câu 19 (Bài 17)
+    {
+        type: "true-false",
+        q: "Một dây dẫn bằng đồng có chiều dài 100 m, tiết diện 2 mm². Điện trở suất của đồng là ρ = 1,7.10⁻⁸ Ωm.",
+        parts: [
+            { content: "Điện trở của dây dẫn được tính bằng công thức $R = \\rho \\frac{\\ell}{S}$.", correct: true },
+            { content: "Điện trở của dây dẫn trên có giá trị 0,85 Ω.", correct: true },
+            { content: "Nếu đặt hiệu điện thế 12 V vào hai đầu dây thì cường độ dòng điện qua dây xấp xỉ 14,12 A.", correct: true },
+            { content: "Đường đặc trưng vôn-ampe của dây dẫn kim loại ở nhiệt độ không đổi là một đường cong đi qua gốc tọa độ.", correct: false }
+        ],
+        expl: "a) Công thức đúng → Đúng. b) R = 1,7.10⁻⁸ × 100/(2.10⁻⁶) = 0,85 Ω → Đúng. c) I = U/R = 12/0,85 ≈ 14,12 A → Đúng. d) Đường đặc trưng vôn-ampe là đường thẳng, không phải đường cong → Sai."
     },
     
-    // Câu 22
-    { 
-        q: "Suất điện động của nguồn điện đặc trưng cho:", 
-        options: [
-            "Khả năng sinh công của nguồn điện", 
-            "Khả năng tạo ra dòng điện lớn", 
-            "Điện trở trong của nguồn", 
-            "Hiệu điện thế giữa hai cực"
-        ], 
-        a: 0, 
-        expl: "Suất điện động của nguồn điện là đại lượng vật lí đặc trưng cho khả năng sinh công của nguồn điện." 
+    // Câu 20 (Bài 17)
+    {
+        type: "true-false",
+        q: "Một dây dẫn bằng nhôm có điện trở suất ρ = 2,8.10⁻⁸ Ωm, chiều dài 50 m, tiết diện 0,5 mm².",
+        parts: [
+            { content: "Điện trở của dây dẫn là 2,8 Ω.", correct: true },
+            { content: "Nếu tăng chiều dài dây lên 2 lần thì điện trở tăng 2 lần.", correct: true },
+            { content: "Nếu tăng tiết diện dây lên 2 lần thì điện trở giảm 2 lần.", correct: true },
+            { content: "Nếu thay dây nhôm bằng dây đồng có cùng kích thước thì điện trở giảm.", correct: true }
+        ],
+        expl: "a) R = 2,8.10⁻⁸ × 50/(0,5.10⁻⁶) = 2,8 Ω → Đúng. b) R ∼ l → Đúng. c) R ∼ 1/S → Đúng. d) Đồng có điện trở suất nhỏ hơn nhôm → Đúng."
     },
     
-    // Câu 23
-    { 
-        q: "Công thức xác định suất điện động $\\mathcal{E}$ là:", 
-        options: [
-            "$\\mathcal{E} = \\frac{A}{q}$", 
-            "$\\mathcal{E} = \\frac{q}{A}$", 
-            "$\\mathcal{E} = A.q$", 
-            "$\\mathcal{E} = \\frac{A^2}{q}$"
-        ], 
-        a: 0, 
-        expl: "$\\mathcal{E} = \\frac{A}{q}$, với $A$ là công của lực lạ làm di chuyển điện tích $q$ từ cực âm đến cực dương bên trong nguồn điện." 
+    // Câu 21 (Bài 18)
+    {
+        type: "true-false",
+        q: "Một nguồn điện có suất điện động ε = 12 V và điện trở trong r = 1 Ω được mắc với mạch ngoài là điện trở R = 5 Ω tạo thành mạch kín.",
+        parts: [
+            { content: "Cường độ dòng điện trong mạch là 2 A.", correct: true },
+            { content: "Hiệu điện thế giữa hai cực của nguồn điện là 10 V.", correct: true },
+            { content: "Công của lực lạ khi dịch chuyển điện tích 5 C bên trong nguồn là 60 J.", correct: true },
+            { content: "Nếu nối tắt hai cực của nguồn bằng dây dẫn có điện trở không đáng kể thì cường độ dòng điện trong mạch là 12 A.", correct: true }
+        ],
+        expl: "a) I = ε/(R+r) = 12/(5+1) = 2 A → Đúng. b) U = ε - Ir = 12 - 2.1 = 10 V → Đúng. c) A = ε.q = 12.5 = 60 J → Đúng. d) Khi nối tắt, I = ε/r = 12/1 = 12 A → Đúng."
     },
     
-    // Câu 24
-    { 
-        q: "Đơn vị của suất điện động là:", 
-        options: [
-            "Vôn (V)", 
-            "Ampe (A)", 
-            "Ôm (Ω)", 
-            "Oát (W)"
-        ], 
-        a: 0, 
-        expl: "Suất điện động có đơn vị là vôn (V), cùng đơn vị với hiệu điện thế." 
+    // Câu 22 (Bài 18)
+    {
+        type: "true-false",
+        q: "Một nguồn điện có suất điện động ε = 24 V, điện trở trong r = 2 Ω. Mắc nguồn với mạch ngoài là điện trở R.",
+        parts: [
+            { content: "Khi R = 10 Ω, cường độ dòng điện trong mạch là 2 A.", correct: true },
+            { content: "Khi R = 10 Ω, hiệu điện thế hai cực nguồn là 20 V.", correct: true },
+            { content: "Khi R = 0 (ngắn mạch), cường độ dòng điện trong mạch là 12 A.", correct: true },
+            { content: "Hiệu suất của nguồn khi R = 10 Ω là khoảng 83,3%.", correct: true }
+        ],
+        expl: "a) I = 24/(10+2) = 2 A → Đúng. b) U = 24 - 2.2 = 20 V → Đúng. c) I = 24/2 = 12 A → Đúng. d) H = U/ε = 20/24 = 0,833 = 83,3% → Đúng."
     },
     
-    // Câu 25
-    { 
-        q: "Điện trở trong của nguồn điện là:", 
-        options: [
-            "Đại lượng đặc trưng cho sự cản trở dòng điện bên trong nguồn", 
-            "Điện trở của dây dẫn nối với nguồn", 
-            "Điện trở của mạch ngoài", 
-            "Điện trở của các thiết bị tiêu thụ"
-        ], 
-        a: 0, 
-        expl: "Điện trở trong của nguồn là đại lượng đặc trưng cho việc cản trở sự dịch chuyển của các điện tích bên trong nguồn điện, thường kí hiệu là $r$ (Ω)." 
+    // Câu 23 (Bài 19)
+    {
+        type: "true-false",
+        q: "Một bóng đèn có ghi 220V - 100W được mắc vào hiệu điện thế 220 V.",
+        parts: [
+            { content: "Điện trở của đèn khi hoạt động bình thường là 484 Ω.", correct: true },
+            { content: "Cường độ dòng điện qua đèn khi hoạt động bình thường xấp xỉ 0,455 A.", correct: true },
+            { content: "Nhiệt lượng tỏa ra trên đèn trong 1 giờ là 360.000 J.", correct: true },
+            { content: "Nếu mắc đèn vào hiệu điện thế 110 V, công suất tiêu thụ của đèn là 50 W.", correct: false }
+        ],
+        expl: "a) R = U²/P = 220²/100 = 484 Ω → Đúng. b) I = P/U = 100/220 ≈ 0,455 A → Đúng. c) Q = P.t = 100.3600 = 360.000 J → Đúng. d) Khi U giảm 2 lần, P giảm 4 lần → P = 25 W, không phải 50 W → Sai."
     },
     
-    // Câu 26
-    { 
-        q: "Khi nguồn điện không nối với mạch ngoài, hiệu điện thế giữa hai cực của nguồn:", 
-        options: [
-            "Bằng suất điện động của nguồn", 
-            "Nhỏ hơn suất điện động", 
-            "Lớn hơn suất điện động", 
-            "Bằng 0"
-        ], 
-        a: 0, 
-        expl: "Khi mạch hở, không có dòng điện, hiệu điện thế giữa hai cực bằng suất điện động của nguồn." 
+    // Câu 24 (Bài 19)
+    {
+        type: "true-false",
+        q: "Một bếp điện có điện trở 40 Ω hoạt động với hiệu điện thế 220 V.",
+        parts: [
+            { content: "Công suất của bếp là 1210 W.", correct: true },
+            { content: "Cường độ dòng điện qua bếp là 5,5 A.", correct: true },
+            { content: "Nhiệt lượng bếp tỏa ra trong 30 phút là 2.178.000 J.", correct: true },
+            { content: "Nếu mắc bếp vào hiệu điện thế 110 V, công suất giảm 4 lần so với ban đầu.", correct: true }
+        ],
+        expl: "a) P = U²/R = 220²/40 = 48400/40 = 1210 W → Đúng. b) I = U/R = 220/40 = 5,5 A → Đúng. c) Q = P.t = 1210.1800 = 2.178.000 J → Đúng. d) P ∼ U², U giảm 2 lần → P giảm 4 lần → Đúng."
     },
     
-    // Câu 27
-    { 
-        q: "Hiệu điện thế giữa hai cực của nguồn điện khi phát dòng điện $I$ được xác định:", 
-        options: [
-            "$U = \\mathcal{E} - Ir$", 
-            "$U = \\mathcal{E} + Ir$", 
-            "$U = \\mathcal{E}$", 
-            "$U = Ir$"
-        ], 
-        a: 0, 
-        expl: "$U = \\mathcal{E} - Ir$, với $r$ là điện trở trong của nguồn." 
+    // ============================================
+    // DẠNG 3: TRẮC NGHIỆM TRẢ LỜI NGẮN (8 CÂU)
+    // ============================================
+    
+    // Câu 25 (Bài 16)
+    {
+        type: "short-answer",
+        q: "Dòng điện không đổi có cường độ 1,5 A chạy qua một dây dẫn. Tính số electron dịch chuyển qua tiết diện thẳng của dây dẫn trong 1 phút. (Điền kết quả dưới dạng a.bc × 10²⁰)",
+        answer: "5,62 × 10²⁰",
+        expl: "Điện lượng: q = I.t = 1,5.60 = 90 C. Số electron: N = q/e = 90/(1,6.10⁻¹⁹) = 5,625.10²⁰ hạt."
     },
     
-    // Câu 28
-    { 
-        q: "Khi ghép nối tiếp $n$ nguồn điện giống nhau ($\\mathcal{E}$, $r$), suất điện động của bộ nguồn là:", 
-        options: [
-            "$\\mathcal{E}_b = n\\mathcal{E}$", 
-            "$\\mathcal{E}_b = \\mathcal{E}$", 
-            "$\\mathcal{E}_b = \\frac{\\mathcal{E}}{n}$", 
-            "$\\mathcal{E}_b = n^2\\mathcal{E}$"
-        ], 
-        a: 0, 
-        expl: "$\\mathcal{E}_b = \\mathcal{E}_1 + \\mathcal{E}_2 + ... + \\mathcal{E}_n = n\\mathcal{E}$." 
+    // Câu 26 (Bài 16)
+    {
+        type: "short-answer",
+        q: "Một dây dẫn kim loại có tiết diện 1 mm², mật độ electron tự do là 8,5.10²⁸ hạt/m³. Dòng điện qua dây có cường độ 2 A. Tính vận tốc trôi của electron. (Đơn vị: mm/s, lấy 2 chữ số thập phân)",
+        answer: "0,15 mm/s",
+        expl: "v = I/(nSe) = 2/(8,5.10²⁸ × 10⁻⁶ × 1,6.10⁻¹⁹) = 2/(13,6.10³) = 1,47.10⁻⁴ m/s = 0,147 mm/s ≈ 0,15 mm/s"
     },
     
-    // Câu 29
-    { 
-        q: "Khi ghép nối tiếp $n$ nguồn điện giống nhau ($\\mathcal{E}$, $r$), điện trở trong của bộ nguồn là:", 
-        options: [
-            "$r_b = nr$", 
-            "$r_b = \\frac{r}{n}$", 
-            "$r_b = r$", 
-            "$r_b = n^2r$"
-        ], 
-        a: 0, 
-        expl: "$r_b = r_1 + r_2 + ... + r_n = nr$." 
+    // Câu 27 (Bài 17)
+    {
+        type: "short-answer",
+        q: "Một dây dẫn bằng nhôm có điện trở suất ρ = 2,8.10⁻⁸ Ωm, chiều dài 200 m, tiết diện 1 mm². Tính điện trở của dây dẫn này. (Đơn vị: Ω)",
+        answer: "5,6 Ω",
+        expl: "R = ρ.l/S = 2,8.10⁻⁸ × 200/(1.10⁻⁶) = 2,8.10⁻⁸ × 2.10⁸ = 5,6 Ω"
     },
     
-    // Câu 30
-    { 
-        q: "Một pin có suất điện động 1,5 V, điện trở trong 0,5 Ω. Khi nối pin với điện trở ngoài 2,5 Ω, hiệu điện thế giữa hai cực pin là:", 
-        options: [
-            "1,25 V", 
-            "1,5 V", 
-            "1,75 V", 
-            "2,0 V"
-        ], 
-        a: 0, 
-        expl: "$I = \\frac{\\mathcal{E}}{R + r} = \\frac{1,5}{2,5 + 0,5} = \\frac{1,5}{3} = 0,5$ A. $U = IR = 0,5 \\times 2,5 = 1,25$ V." 
-    },
-
-    // ========== BÀI 19: NĂNG LƯỢNG ĐIỆN - CÔNG SUẤT ĐIỆN (10 CÂU) ==========
-    
-    // Câu 31
-    { 
-        q: "Năng lượng tiêu thụ của một đoạn mạch được xác định bởi công thức:", 
-        options: [
-            "$A = UIt$", 
-            "$A = \\frac{U^2}{R}t$", 
-            "$A = I^2Rt$", 
-            "Cả A, B, C"
-        ], 
-        a: 3, 
-        expl: "$A = UIt = I^2Rt = \\frac{U^2}{R}t$." 
+    // Câu 28 (Bài 17)
+    {
+        type: "short-answer",
+        q: "Một dây dẫn bằng đồng có điện trở 10 Ω ở 20°C. Biết hệ số nhiệt điện trở của đồng là 0,004 K⁻¹. Tính điện trở của dây dẫn ở 50°C. (Đơn vị: Ω, lấy 1 chữ số thập phân)",
+        answer: "11,2 Ω",
+        expl: "R_t = R₀[1 + α(t - t₀)] = 10[1 + 0,004.(50-20)] = 10(1 + 0,12) = 11,2 Ω"
     },
     
-    // Câu 32
-    { 
-        q: "Công suất tiêu thụ điện của một đoạn mạch được xác định bởi:", 
-        options: [
-            "$\\mathcal{P} = UI$", 
-            "$\\mathcal{P} = \\frac{A}{t}$", 
-            "$\\mathcal{P} = I^2R$", 
-            "Cả A, B, C"
-        ], 
-        a: 3, 
-        expl: "Công suất $\\mathcal{P} = \\frac{A}{t} = UI = I^2R = \\frac{U^2}{R}$." 
+    // Câu 29 (Bài 18)
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 24 V và điện trở trong 2 Ω. Mắc nguồn với một điện trở R = 10 Ω thành mạch kín. Tính hiệu điện thế giữa hai cực của nguồn. (Đơn vị: V)",
+        answer: "20 V",
+        expl: "I = ε/(R+r) = 24/(10+2) = 2 A; U = ε - Ir = 24 - 2.2 = 20 V"
     },
     
-    // Câu 33
-    { 
-        q: "Đơn vị của công suất trong hệ SI là:", 
-        options: [
-            "Oát (W)", 
-            "Jun (J)", 
-            "Vôn (V)", 
-            "Ampe (A)"
-        ], 
-        a: 0, 
-        expl: "Công suất có đơn vị là oát (W)." 
+    // Câu 30 (Bài 18)
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 12 V. Khi mắc nguồn với mạch ngoài là điện trở R = 5 Ω thì hiệu điện thế hai cực nguồn là 10 V. Tính điện trở trong của nguồn. (Đơn vị: Ω)",
+        answer: "1 Ω",
+        expl: "I = U/R = 10/5 = 2 A; r = (ε - U)/I = (12 - 10)/2 = 1 Ω"
     },
     
-    // Câu 34
-    { 
-        q: "Nhiệt lượng tỏa ra trên điện trở $R$ khi có dòng điện $I$ chạy qua trong thời gian $t$ được tính bằng:", 
-        options: [
-            "$Q = I^2Rt$", 
-            "$Q = UIt$", 
-            "$Q = \\frac{U^2}{R}t$", 
-            "Cả A, B, C"
-        ], 
-        a: 3, 
-        expl: "Theo định luật Joule - Lenz: $Q = I^2Rt = UIt = \\frac{U^2}{R}t$." 
+    // Câu 31 (Bài 19)
+    {
+        type: "short-answer",
+        q: "Một bếp điện có điện trở 50 Ω hoạt động với hiệu điện thế 220 V. Tính nhiệt lượng mà bếp tỏa ra trong 15 phút. (Đơn vị: kJ, lấy số nguyên)",
+        answer: "871 kJ",
+        expl: "P = U²/R = 220²/50 = 48400/50 = 968 W; Q = P.t = 968 × 15 × 60 = 871.200 J = 871,2 kJ ≈ 871 kJ"
     },
     
-    // Câu 35
-    { 
-        q: "Định luật Joule - Lenz phát biểu rằng:", 
-        options: [
-            "Nhiệt lượng tỏa ra trên điện trở tỉ lệ thuận với bình phương cường độ dòng điện, điện trở và thời gian dòng điện chạy qua", 
-            "Nhiệt lượng tỏa ra trên điện trở tỉ lệ thuận với hiệu điện thế và thời gian", 
-            "Nhiệt lượng tỏa ra trên điện trở tỉ lệ nghịch với điện trở", 
-            "Cả A và B"
-        ], 
-        a: 3, 
-        expl: "Định luật Joule - Lenz: $Q = I^2Rt = UIt$, cả hai dạng đều đúng." 
+    // Câu 32 (Bài 19)
+    {
+        type: "short-answer",
+        q: "Một động cơ điện có công suất 500 W hoạt động liên tục trong 2 giờ. Tính điện năng tiêu thụ. (Đơn vị: kWh)",
+        answer: "1 kWh",
+        expl: "A = P.t = 0,5 kW × 2 h = 1 kWh"
     },
     
-    // Câu 36
-    { 
-        q: "Công suất tỏa nhiệt trên điện trở $R$ được xác định:", 
-        options: [
-            "$\\mathcal{P} = I^2R$", 
-            "$\\mathcal{P} = \\frac{U^2}{R}$", 
-            "$\\mathcal{P} = UI$", 
-            "Cả A, B, C"
-        ], 
-        a: 3, 
-        expl: "$\\mathcal{P} = UI = I^2R = \\frac{U^2}{R}$." 
+    // ============================================
+    // DẠNG 4: TỰ LUẬN (6 CÂU)
+    // ============================================
+    
+    // Câu 33 (Bài 16 - 2 điểm)
+    {
+        type: "essay",
+        q: "Một dòng điện không đổi có cường độ 3 A chạy qua một dây dẫn kim loại.\na) Tính điện lượng dịch chuyển qua tiết diện thẳng của dây dẫn trong 2 phút.\nb) Tính số electron dịch chuyển qua tiết diện thẳng trong thời gian trên.\nc) Biết dây dẫn có tiết diện 1,5 mm², mật độ electron tự do là 8,5.10²⁸ hạt/m³. Tính vận tốc trôi của electron.",
+        answer: "a) q = I.t = 3 × 120 = 360 C\nb) N = q/e = 360/(1,6.10⁻¹⁹) = 2,25.10²¹ hạt\nc) v = I/(nSe) = 3/(8,5.10²⁸ × 1,5.10⁻⁶ × 1,6.10⁻¹⁹) = 3/(20,4.10³) = 1,47.10⁻⁴ m/s = 0,147 mm/s",
+        expl: "Áp dụng công thức I = q/t → q = I.t. Số electron N = q/e. Vận tốc trôi v = I/(nSe)."
     },
     
-    // Câu 37
-    { 
-        q: "Năng lượng toàn phần của nguồn điện khi phát dòng điện $I$ trong thời gian $t$ là:", 
-        options: [
-            "$A_0 = \\mathcal{E}It$", 
-            "$A_0 = UIt$", 
-            "$A_0 = I^2rt$", 
-            "$A_0 = \\frac{U^2}{R}t$"
-        ], 
-        a: 0, 
-        expl: "$A_0 = \\mathcal{E}It$, đây là công của lực lạ thực hiện, cũng là năng lượng toàn phần do nguồn cung cấp." 
+    // Câu 34 (Bài 16 - 2 điểm)
+    {
+        type: "essay",
+        q: "Một dây dẫn kim loại có tiết diện 2 mm², mật độ electron tự do là 8,5.10²⁸ hạt/m³. Khi có dòng điện chạy qua, vận tốc trôi của electron là 0,1 mm/s.\na) Tính cường độ dòng điện qua dây.\nb) Tính điện lượng dịch chuyển qua tiết diện thẳng của dây trong 10 phút.\nc) Tính số electron dịch chuyển qua tiết diện thẳng trong thời gian trên.",
+        answer: "a) I = nSve = 8,5.10²⁸ × 2.10⁻⁶ × 0,1.10⁻³ × 1,6.10⁻¹⁹ = 8,5.10²⁸ × 2.10⁻⁶ × 10⁻⁴ × 1,6.10⁻¹⁹ = 8,5 × 2 × 1,6 × 10⁻¹ = 27,2 × 10⁻¹ = 2,72 A\nb) q = I.t = 2,72 × 600 = 1632 C\nc) N = q/e = 1632/(1,6.10⁻¹⁹) = 1,02.10²² hạt",
+        expl: "Áp dụng công thức I = nSve, q = I.t, N = q/e."
     },
     
-    // Câu 38
-    { 
-        q: "Công suất toàn phần của nguồn điện là:", 
-        options: [
-            "$\\mathcal{P}_0 = \\mathcal{E}I$", 
-            "$\\mathcal{P}_0 = UI$", 
-            "$\\mathcal{P}_0 = I^2r$", 
-            "$\\mathcal{P}_0 = \\frac{\\mathcal{E}^2}{R}$"
-        ], 
-        a: 0, 
-        expl: "$\\mathcal{P}_0 = \\mathcal{E}I$." 
+    // Câu 35 (Bài 17 - 2 điểm)
+    {
+        type: "essay",
+        q: "Một dây dẫn bằng constantan có chiều dài 50 m, tiết diện 0,5 mm². Điện trở suất của constantan là 0,5.10⁻⁶ Ωm.\na) Tính điện trở của dây dẫn.\nb) Nếu đặt hiệu điện thế 24 V vào hai đầu dây, tính cường độ dòng điện qua dây.\nc) Mắc dây dẫn này vào một nguồn điện có suất điện động 30 V, điện trở trong 2 Ω. Tính cường độ dòng điện trong mạch và hiệu điện thế giữa hai đầu dây.",
+        answer: "a) R = ρ.l/S = 0,5.10⁻⁶ × 50/(0,5.10⁻⁶) = 0,5.10⁻⁶ × 10⁸ = 50 Ω\nb) I = U/R = 24/50 = 0,48 A\nc) I = ε/(R+r) = 30/(50+2) = 30/52 ≈ 0,577 A; U = I.R = 0,577 × 50 ≈ 28,85 V (hoặc U = ε - Ir = 30 - 0,577.2 = 28,85 V)",
+        expl: "Áp dụng công thức R = ρ.l/S, định luật Ohm I = U/R, và công thức mạch kín."
     },
     
-    // Câu 39
-    { 
-        q: "Hiệu suất của nguồn điện được xác định bởi:", 
-        options: [
-            "$H = \\frac{U}{\\mathcal{E}}$", 
-            "$H = \\frac{\\mathcal{E}}{U}$", 
-            "$H = \\frac{\\mathcal{P}}{\\mathcal{P}_0}$", 
-            "Cả A và C"
-        ], 
-        a: 3, 
-        expl: "Hiệu suất $H = \\frac{\\mathcal{P}}{\\mathcal{P}_0} = \\frac{U}{\\mathcal{E}}$. Thường tính bằng phần trăm: $H = \\frac{U}{\\mathcal{E}} \\times 100\\%$." 
+    // Câu 36 (Bài 18 - 2 điểm)
+    {
+        type: "essay",
+        q: "Cho mạch điện gồm nguồn điện có suất điện động ε = 18 V, điện trở trong r = 1 Ω, mạch ngoài gồm điện trở R₁ = 4 Ω và R₂ = 5 Ω mắc nối tiếp.\na) Tính cường độ dòng điện trong mạch.\nb) Tính hiệu điện thế giữa hai đầu mỗi điện trở.\nc) Tính công suất của nguồn và công suất tiêu thụ ở mạch ngoài.\nd) Tính hiệu suất của nguồn điện.",
+        answer: "a) R_N = R₁ + R₂ = 4 + 5 = 9 Ω; I = ε/(R_N + r) = 18/(9 + 1) = 18/10 = 1,8 A\nb) U₁ = I.R₁ = 1,8.4 = 7,2 V; U₂ = I.R₂ = 1,8.5 = 9 V; U = U₁ + U₂ = 7,2 + 9 = 16,2 V\nc) P_ng = ε.I = 18.1,8 = 32,4 W; P = U.I = 16,2.1,8 = 29,16 W\nd) H = U/ε = 16,2/18 = 0,9 = 90%",
+        expl: "Áp dụng định luật Ohm cho mạch kín và các công thức công suất."
     },
     
-    // Câu 40
-    { 
-        q: "Một bóng đèn có ghi 220V - 100W. Điện trở của đèn khi hoạt động bình thường là:", 
-        options: [
-            "484 Ω", 
-            "242 Ω", 
-            "220 Ω", 
-            "100 Ω"
-        ], 
-        a: 0, 
-        expl: "$R = \\frac{U^2}{\\mathcal{P}} = \\frac{220^2}{100} = \\frac{48400}{100} = 484$ Ω." 
-    },
-
-    // ========== BÀI 20: THỰC HÀNH XÁC ĐỊNH SUẤT ĐIỆN ĐỘNG VÀ ĐIỆN TRỞ TRONG CỦA PIN (10 CÂU) ==========
-    
-    // Câu 41
-    { 
-        q: "Để đo suất điện động của pin, ta có thể dùng vôn kế mắc như thế nào?", 
-        options: [
-            "Mắc trực tiếp vào hai cực của pin khi mạch ngoài hở", 
-            "Mắc nối tiếp với pin", 
-            "Mắc song song với điện trở ngoài", 
-            "Mắc nối tiếp với điện trở ngoài"
-        ], 
-        a: 0, 
-        expl: "Khi mạch hở, hiệu điện thế giữa hai cực của nguồn bằng suất điện động. Nếu vôn kế có điện trở rất lớn (cỡ MΩ) thì số chỉ gần đúng bằng $\\mathcal{E}$." 
+    // Câu 37 (Bài 18 - 2 điểm)
+    {
+        type: "essay",
+        q: "Cho mạch điện gồm hai nguồn điện ghép nối tiếp, mỗi nguồn có suất điện động 6 V và điện trở trong 0,5 Ω. Mạch ngoài gồm điện trở R₁ = 8 Ω và R₂ = 12 Ω mắc song song.\na) Tính suất điện động và điện trở trong của bộ nguồn.\nb) Tính điện trở tương đương mạch ngoài.\nc) Tính cường độ dòng điện qua mạch chính.\nd) Tính hiệu điện thế giữa hai đầu mỗi điện trở.",
+        answer: "a) ε_b = ε₁ + ε₂ = 6 + 6 = 12 V; r_b = r₁ + r₂ = 0,5 + 0,5 = 1 Ω\nb) 1/R_N = 1/R₁ + 1/R₂ = 1/8 + 1/12 = (3+2)/24 = 5/24 → R_N = 24/5 = 4,8 Ω\nc) I = ε_b/(R_N + r_b) = 12/(4,8 + 1) = 12/5,8 ≈ 2,07 A\nd) U = I.R_N = 2,07 × 4,8 ≈ 9,94 V; Vì R₁ // R₂ nên U₁ = U₂ = U = 9,94 V",
+        expl: "Áp dụng công thức ghép nguồn nối tiếp, ghép điện trở song song và định luật Ohm."
     },
     
-    // Câu 42
-    { 
-        q: "Trong thí nghiệm đo suất điện động và điện trở trong của pin, cần đo các đại lượng:", 
-        options: [
-            "Cường độ dòng điện $I$ và hiệu điện thế $U$ giữa hai đầu biến trở", 
-            "Điện trở $R$", 
-            "Công suất", 
-            "Nhiệt lượng"
-        ], 
-        a: 0, 
-        expl: "Cần đo các cặp giá trị $(I, U)$ ứng với các giá trị khác nhau của biến trở để vẽ đồ thị $U(I)$." 
-    },
-    
-    // Câu 43
-    { 
-        q: "Đồ thị $U$ theo $I$ trong thí nghiệm xác định suất điện động và điện trở trong có dạng:", 
-        options: [
-            "Đường thẳng", 
-            "Đường cong", 
-            "Đường tròn", 
-            "Parabol"
-        ], 
-        a: 0, 
-        expl: "$U = \\mathcal{E} - Ir$, đồ thị $U(I)$ là đường thẳng có hệ số góc là $-r$." 
-    },
-    
-    // Câu 44
-    { 
-        q: "Từ đồ thị $U(I)$, suất điện động $\\mathcal{E}$ được xác định là:", 
-        options: [
-            "Giao điểm của đường thẳng với trục tung (khi $I = 0$)", 
-            "Giao điểm với trục hoành", 
-            "Độ dốc của đường thẳng", 
-            "Diện tích dưới đồ thị"
-        ], 
-        a: 0, 
-        expl: "Khi $I = 0$, $U = \\mathcal{E}$. Do đó, giao điểm của đường thẳng với trục tung cho giá trị $\\mathcal{E}$." 
-    },
-    
-    // Câu 45
-    { 
-        q: "Từ đồ thị $U(I)$, điện trở trong $r$ được xác định là:", 
-        options: [
-            "Độ dốc của đường thẳng (lấy giá trị tuyệt đối)", 
-            "Giao điểm với trục tung", 
-            "Giao điểm với trục hoành", 
-            "Diện tích dưới đồ thị"
-        ], 
-        a: 0, 
-        expl: "$U = \\mathcal{E} - Ir$, độ dốc của đường thẳng là $-r$, do đó $r$ bằng giá trị tuyệt đối của độ dốc." 
-    },
-    
-    // Câu 46
-    { 
-        q: "Trong thí nghiệm đo suất điện động và điện trở trong, cần lấy ít nhất bao nhiêu cặp số liệu $(I, U)$?", 
-        options: [
-            "5 cặp", 
-            "2 cặp", 
-            "3 cặp", 
-            "10 cặp"
-        ], 
-        a: 0, 
-        expl: "Cần lấy ít nhất 5 cặp số liệu để giảm sai số trong quá trình xử lí số liệu." 
-    },
-    
-    // Câu 47
-    { 
-        q: "Vai trò của biến trở trong thí nghiệm là:", 
-        options: [
-            "Thay đổi cường độ dòng điện trong mạch", 
-            "Bảo vệ mạch điện", 
-            "Đo cường độ dòng điện", 
-            "Đo hiệu điện thế"
-        ], 
-        a: 0, 
-        expl: "Biến trở dùng để thay đổi cường độ dòng điện, từ đó thu được các cặp giá trị $(I, U)$ khác nhau." 
-    },
-    
-    // Câu 48
-    { 
-        q: "Khi đo suất điện động bằng vôn kế mắc trực tiếp vào hai cực pin, số chỉ vôn kế:", 
-        options: [
-            "Gần đúng bằng suất điện động nếu vôn kế có điện trở rất lớn", 
-            "Chính xác bằng suất điện động", 
-            "Nhỏ hơn suất điện động", 
-            "Lớn hơn suất điện động"
-        ], 
-        a: 0, 
-        expl: "Nếu vôn kế có điện trở rất lớn (cỡ MΩ), dòng điện qua vôn kế rất nhỏ, số chỉ gần đúng bằng $\\mathcal{E}$." 
-    },
-    
-    // Câu 49
-    { 
-        q: "Nguyên nhân gây sai số trong thí nghiệm có thể là:", 
-        options: [
-            "Dụng cụ đo có sai số", 
-            "Đọc kết quả không chính xác", 
-            "Pin cũ có điện trở trong thay đổi", 
-            "Cả A, B, C"
-        ], 
-        a: 3, 
-        expl: "Có nhiều nguyên nhân gây sai số như dụng cụ đo (sai số của đồng hồ), cách đọc kết quả, pin cũ có điện trở trong thay đổi." 
-    },
-    
-    // Câu 50
-    { 
-        q: "Khi pin đã qua sử dụng, điện trở trong của pin thường:", 
-        options: [
-            "Tăng lên", 
-            "Giảm xuống", 
-            "Không đổi", 
-            "Bằng 0"
-        ], 
-        a: 0, 
-        expl: "Pin cũ có điện trở trong lớn hơn pin mới do các phản ứng hóa học làm suy giảm chất lượng, các chất điện phân bị cạn kiệt." 
+    // Câu 38 (Bài 19 - 2 điểm)
+    {
+        type: "essay",
+        q: "Một bình nóng lạnh có ghi 220V - 2000W được sử dụng với hiệu điện thế 220 V.\na) Tính điện trở của bình nóng lạnh.\nb) Tính cường độ dòng điện qua bình.\nc) Tính tiền điện phải trả cho việc sử dụng bình trong 30 ngày, mỗi ngày 45 phút, biết giá điện là 2.500 đồng/kWh.\nd) Giả sử dây đốt nóng của bình được làm bằng niken có điện trở suất 0,4.10⁻⁶ Ωm, tiết diện 0,5 mm². Tính chiều dài của dây đốt nóng.",
+        answer: "a) R = U²/P = 220²/2000 = 48400/2000 = 24,2 Ω\nb) I = P/U = 2000/220 ≈ 9,09 A\nc) t = 30 × 45 × 60 = 81.000 s = 22,5 giờ; A = P.t = 2 × 22,5 = 45 kWh; Tiền = 45 × 2500 = 112.500 đồng\nd) l = R.S/ρ = (24,2 × 0,5.10⁻⁶)/(0,4.10⁻⁶) = 12,1/0,4 = 30,25 m",
+        expl: "Áp dụng các công thức về công suất, điện năng tiêu thụ và điện trở dây dẫn."
     }
 ];

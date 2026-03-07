@@ -785,6 +785,9 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
 
 // QuizScreen component for regular quiz functionality
 window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elapsedTime, cheatWarnings, onSelect, onNext, showExpl }) {
+    // State for true-false selections
+    const [trueFalseSelections, setTrueFalseSelections] = React.useState({});
+    
     // Process MathJax when component updates
     React.useEffect(() => {
         if (window.MathJax && window.MathJax.typesetPromise) {
@@ -798,14 +801,181 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
         }
     }, [currentIdx, showExpl, question]);
 
+    // Reset true-false selections when question changes
+    React.useEffect(() => {
+        setTrueFalseSelections({});
+    }, [currentIdx, question]);
+
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
         return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     };
 
+    // Handle true-false selection
+    const handleTrueFalseSelect = (partIndex, value) => {
+        const newSelections = { ...trueFalseSelections, [partIndex]: value };
+        setTrueFalseSelections(newSelections);
+        
+        // Check if all parts are selected
+        const questionType = question?.type || 'multiple-choice';
+        if (questionType === 'true-false' && Object.keys(newSelections).length === question.parts.length) {
+            // All parts selected, submit all answers
+            onSelect(newSelections);
+        }
+    };
+
+    // Render different question types
+    const renderQuestionOptions = () => {
+        const questionType = question?.type || 'multiple-choice';
+        
+        switch (questionType) {
+            case 'multiple-choice':
+                return React.createElement('div', { className: "grid gap-4" },
+                    (question?.options || []).map(function(opt, i) {
+                        var style = "border-slate-100 text-slate-700 hover:border-blue-200 hover:bg-blue-50";
+                        
+                        return React.createElement('button', {
+                            key: i,
+                            onClick: function() { onSelect(i); },
+                            className: "p-5 rounded-2xl border-2 text-left flex items-center shadow-sm transition-all " + style
+                        },
+                            React.createElement('div', { 
+                                className: "w-10 h-10 rounded-xl flex items-center justify-center mr-4 font-bold transition-colors bg-slate-100 text-slate-500"
+                            }, String.fromCharCode(65 + i)),
+                            React.createElement(window.LaTeXText, { 
+                                className: "text-lg",
+                                text: opt
+                            })
+                        );
+                    })
+                );
+                
+            case 'true-false':
+                return React.createElement('div', { className: "grid gap-4" },
+                    (question?.parts || []).map(function(part, i) {
+                        const isSelected = trueFalseSelections[i] !== undefined;
+                        const selectedValue = trueFalseSelections[i];
+                        
+                        return React.createElement('div', { 
+                            key: i, 
+                            className: "p-5 rounded-2xl border-2 border-slate-200 bg-white shadow-sm" 
+                        },
+                            React.createElement('div', { className: "flex items-start gap-4" },
+                                React.createElement('div', { 
+                                    className: "flex gap-3 mt-1"
+                                },
+                                    React.createElement('button', {
+                                        onClick: function() { handleTrueFalseSelect(i, 'true'); },
+                                        disabled: isSelected,
+                                        className: `px-4 py-2 rounded-lg border-2 font-bold transition-colors ${
+                                            selectedValue === 'true' 
+                                                ? 'bg-green-500 text-white border-green-500' 
+                                                : 'border-green-200 text-green-700 hover:bg-green-50'
+                                        } ${isSelected ? 'cursor-not-allowed opacity-50' : ''}`
+                                    }, "ĐÚNG"),
+                                    React.createElement('button', {
+                                        onClick: function() { handleTrueFalseSelect(i, 'false'); },
+                                        disabled: isSelected,
+                                        className: `px-4 py-2 rounded-lg border-2 font-bold transition-colors ${
+                                            selectedValue === 'false' 
+                                                ? 'bg-red-500 text-white border-red-500' 
+                                                : 'border-red-200 text-red-700 hover:bg-red-50'
+                                        } ${isSelected ? 'cursor-not-allowed opacity-50' : ''}`
+                                    }, "SAI")
+                                ),
+                                React.createElement('div', { className: "flex-1" },
+                                    React.createElement('div', { className: "font-bold text-slate-800 mb-2" },
+                                        "Câu " + (i + 1) + "."
+                                    ),
+                                    React.createElement(window.LaTeXText, { 
+                                        className: "text-slate-700",
+                                        text: part.content
+                                    })
+                                )
+                            )
+                        );
+                    }),
+                    // Progress indicator for true-false
+                    React.createElement('div', { className: "mt-4 p-4 bg-blue-50 rounded-xl border-2 border-blue-200" },
+                        React.createElement('div', { className: "flex items-center justify-between" },
+                            React.createElement('span', { className: "text-blue-700 font-bold" }, 
+                                "Đã chọn: " + Object.keys(trueFalseSelections).length + "/" + question.parts.length
+                            ),
+                            Object.keys(trueFalseSelections).length === question.parts.length && 
+                                React.createElement('span', { className: "text-green-600 font-bold animate-pulse" }, 
+                                    "✓ Hoàn thành - Đang kiểm tra..."
+                                )
+                        )
+                    )
+                );
+                
+            case 'short-answer':
+                return React.createElement('div', { className: "space-y-6" },
+                    React.createElement('div', { className: "bg-blue-50 border-2 border-blue-200 p-6 rounded-2xl" },
+                        React.createElement('div', { className: "flex items-center gap-2 mb-3 text-blue-700" },
+                            React.createElement('i', { className: "fas fa-edit" }),
+                            React.createElement('span', { className: "font-bold" }, "Nhập câu trả lời của bạn:")
+                        ),
+                        React.createElement('input', {
+                            type: "text",
+                            placeholder: "Nhập đáp án...",
+                            className: "w-full px-4 py-3 rounded-xl border-2 border-blue-200 text-lg focus:border-blue-400 focus:outline-none",
+                            onKeyDown: function(e) {
+                                if (e.key === 'Enter' && e.target.value.trim()) {
+                                    onSelect(e.target.value.trim());
+                                }
+                            }
+                        })
+                    ),
+                    React.createElement('div', { className: "bg-amber-50 border-2 border-amber-200 p-4 rounded-2xl" },
+                        React.createElement('div', { className: "flex items-center gap-2 text-amber-700" },
+                            React.createElement('i', { className: "fas fa-info-circle" }),
+                            React.createElement('span', { className: "font-bold" }, "Gợi ý:")
+                        ),
+                        React.createElement('div', { className: "text-amber-800 mt-2" },
+                            "Nhập đáp án và nhấn Enter. Đáp án có thể chứa số, đơn vị và công thức."
+                        )
+                    )
+                );
+                
+            case 'essay':
+                return React.createElement('div', { className: "space-y-6" },
+                    React.createElement('div', { className: "bg-green-50 border-2 border-green-200 p-6 rounded-2xl" },
+                        React.createElement('div', { className: "flex items-center gap-2 mb-4 text-green-700" },
+                            React.createElement('i', { className: "fas fa-pen" }),
+                            React.createElement('span', { className: "font-bold text-lg" }, "Dạng bài tự luận")
+                        ),
+                        React.createElement('div', { className: "bg-white p-4 rounded-xl border border-green-100" },
+                            React.createElement('div', { className: "flex items-center gap-2 text-green-600 mb-2" },
+                                React.createElement('i', { className: "fas fa-lightbulb" }),
+                                React.createElement('span', { className: "font-bold" }, "Hướng dẫn:")
+                            ),
+                            React.createElement('ul', { className: "list-disc list-inside text-green-800 space-y-1" },
+                                React.createElement('li', null, "Làm bài trên giấy nháp"),
+                                React.createElement('li', null, "Soạn thảo câu trả lời đầy đủ, rõ ràng"),
+                                React.createElement('li', null, "Khi đã hoàn thành, bấm nút bên dưới")
+                            )
+                        )
+                    ),
+                    React.createElement('button', {
+                        onClick: function() { onSelect('essay-completed'); },
+                        className: "w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl font-bold text-xl transition-all flex items-center justify-center gap-3"
+                    },
+                        React.createElement('i', { className: "fas fa-check-circle" }),
+                        "ĐÃ HOÀN THÀNH BÀI LÀM"
+                    )
+                );
+                
+            default:
+                return React.createElement('div', { className: "text-center py-8 text-slate-500" },
+                    "Đang tải câu hỏi..."
+                );
+        }
+    };
+
     return React.createElement('div', { className: "min-h-screen bg-slate-50" },
-        React.createElement('div', { className: "max-w-2xl mx-auto px-4 py-10 tex2jax_process" },
+        React.createElement('div', { className: "max-w-4xl mx-auto px-4 py-10 tex2jax_process" },
             // Header
             React.createElement('div', { className: "flex justify-between items-center mb-6" },
                 React.createElement('div', { className: "bg-white px-4 py-2 rounded-xl shadow-sm border font-bold" },
@@ -829,6 +999,31 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                     className: "bg-blue-500 h-full rounded-full transition-all", 
                     style: { width: ((currentIdx + 1) / totalQuestions * 100) + '%' }
                 })
+            ),
+            
+            // Question type indicator
+            React.createElement('div', { className: "mb-6" },
+                function() {
+                    const type = question?.type || 'multiple-choice';
+                    const typeInfo = {
+                        'multiple-choice': { icon: 'fa-list-check', color: 'blue', text: 'Trắc nghiệm nhiều lựa chọn' },
+                        'true-false': { icon: 'fa-check-circle', color: 'purple', text: 'Trắc nghiệm Đúng - Sai' },
+                        'short-answer': { icon: 'fa-edit', color: 'orange', text: 'Trắc nghiệm trả lời ngắn' },
+                        'essay': { icon: 'fa-pen', color: 'green', text: 'Tự luận' }
+                    };
+                    const info = typeInfo[type] || typeInfo['multiple-choice'];
+                    
+                    return React.createElement('div', { 
+                        className: `bg-${info.color}-100 border-2 border-${info.color}-200 px-4 py-3 rounded-xl flex items-center gap-3` 
+                    },
+                        React.createElement('i', { 
+                            className: `fas ${info.icon} text-${info.color}-600 font-bold` 
+                        }),
+                        React.createElement('span', { 
+                            className: `font-bold text-${info.color}-700` 
+                        }, info.text)
+                    );
+                }()
             ),
             
             // Explanation
@@ -856,26 +1051,7 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                     className: "text-xl md:text-2xl font-extrabold text-slate-800 mb-10 leading-snug",
                     text: question?.q
                 }),
-                // Options
-                React.createElement('div', { className: "grid gap-4" },
-                    (question?.options || []).map(function(opt, i) {
-                        var style = "border-slate-100 text-slate-700 hover:border-blue-200 hover:bg-blue-50";
-                        
-                        return React.createElement('button', {
-                            key: i,
-                            onClick: function() { onSelect(i); },
-                            className: "p-5 rounded-2xl border-2 text-left flex items-center shadow-sm transition-all " + style
-                        },
-                            React.createElement('div', { 
-                                className: "w-10 h-10 rounded-xl flex items-center justify-center mr-4 font-bold transition-colors bg-slate-100 text-slate-500"
-                            }, String.fromCharCode(65 + i)),
-                            React.createElement(window.LaTeXText, { 
-                                className: "text-lg",
-                                text: opt
-                            })
-                        );
-                    })
-                )
+                renderQuestionOptions()
             )
         )
     );

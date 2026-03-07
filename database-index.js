@@ -43,6 +43,10 @@ window.getQuestionsByChapter = function(chapter, count = 50) {
     if (chapter === 3) {
         return [...questions].slice(0, 55).sort(() => Math.random() - 0.5);
     }
+    // Đặc biệt cho chương 4: giữ nguyên thứ tự (4 dạng bài tập khác nhau)
+    if (chapter === 4) {
+        return [...questions].slice(0, count); // Giữ nguyên thứ tự 1-38
+    }
     return [...questions].sort(() => Math.random() - 0.5).slice(0, count);
 };
 
