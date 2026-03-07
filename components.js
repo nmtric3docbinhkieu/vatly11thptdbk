@@ -68,7 +68,7 @@ window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }
             React.createElement('h1', { className: "text-3xl font-black text-slate-800 mb-2" }, "CHƯƠNG 3: ĐIỆN TRƯỜNG"),
             React.createElement('p', { className: "text-slate-500 mb-8" }, "Chọn hoạt động để bắt đầu"),
             
-            // Grid các hoạt động (2x3)
+            // Grid các hoạt động (2x3) - Đã sắp xếp lại thứ tự
             React.createElement('div', { className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3" },
                 // Lý thuyết
                 React.createElement('button', {
@@ -94,19 +94,7 @@ window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }
                     React.createElement('div', { className: "text-slate-600 text-sm" }, "Thực hành các thí nghiệm tương tác")
                 ),
                 
-                // Bài tập trắc nghiệm
-                React.createElement('button', {
-                    onClick: function() { onSelectActivity('quiz'); },
-                    className: "p-6 bg-white border-2 border-purple-200 rounded-2xl hover:border-purple-500 hover:bg-purple-50 transition-all text-left"
-                },
-                    React.createElement('div', { className: "w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4" },
-                        React.createElement('i', { className: "fas fa-tasks text-purple-600 text-xl" })
-                    ),
-                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Bài tập"),
-                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Làm bài tập trắc nghiệm")
-                ),
-                
-                // Giải Bài tập ôn
+                // Ôn tập chương (đổi tên từ Giải Bài tập ôn)
                 React.createElement('button', {
                     onClick: function() { onSelectActivity('solve'); },
                     className: "p-6 bg-white border-2 border-orange-200 rounded-2xl hover:border-orange-500 hover:bg-orange-50 transition-all text-left"
@@ -114,8 +102,20 @@ window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }
                     React.createElement('div', { className: "w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4" },
                         React.createElement('i', { className: "fas fa-chalkboard-teacher text-orange-600 text-xl" })
                     ),
-                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Giải Bài tập ôn"),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Ôn tập chương"),
                     React.createElement('div', { className: "text-slate-600 text-sm" }, "Giải chi tiết 60 câu hỏi")
+                ),
+                
+                // Ôn tập tại nhà (đổi tên từ Bài tập)
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('quiz'); },
+                    className: "p-6 bg-white border-2 border-purple-200 rounded-2xl hover:border-purple-500 hover:bg-purple-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-tasks text-purple-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Ôn tập tại nhà"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Làm bài tập trắc nghiệm")
                 ),
                 
                 // Kiểm tra giữa học kỳ 2
@@ -144,36 +144,68 @@ window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }
 window.ExperimentsScreen = function({ onSelectExperiment, onBack }) {
     const experiments = [
         {
-            id: 'coulomb',
-            name: 'Định luật Coulomb',
-            description: 'Khám phá lực tương tác giữa các điện tích',
-            icon: 'fa-bolt',
-            color: 'yellow',
-            file: 'dinhluatcoulomb.html'
-        },
-        {
             id: 'sunhiemdien',
-            name: 'Sự nhiễm điện',
+            name: 'Thí nghiệm nhiễm điện cho các vật',
             description: 'Thí nghiệm cọ xát, tiếp xúc và hưởng ứng',
             icon: 'fa-hand-sparkles',
             color: 'purple',
             file: 'sunhiemdien.html'
         },
         {
-            id: 'electric-field',
-            name: 'Điện trường',
+            id: 'coulomb',
+            name: 'Mô phỏng lực tương tác Coulomb',
+            description: 'Khám phá lực tương tác giữa các điện tích',
+            icon: 'fa-bolt',
+            color: 'yellow',
+            file: 'dinhluatcoulomb.html'
+        },
+        {
+            id: 'dientro',
+            name: 'Điện phổ và đường sức điện',
             description: 'Trực quan hóa đường sức điện và điện trường',
             icon: 'fa-project-diagram',
             color: 'blue',
             file: 'experiment-electric-field.html'
         },
         {
-            id: 'capacitor',
-            name: 'Tụ điện',
-            description: 'Tìm hiểu về tụ điện và năng lượng tích tụ',
-            icon: 'fa-microchip',
+            id: 'diem-diem',
+            name: 'Điện trường của điện tích điểm',
+            description: 'Tính cường độ điện trường của điện tích điểm',
+            icon: 'fa-dot-circle',
+            color: 'indigo',
+            file: 'experiment-diem-diem.html'
+        },
+        {
+            id: 'chuyendong',
+            name: 'Chuyển động của điện tích trong điện trường đều',
+            description: 'Mô phỏng chuyển động của điện tích trong điện trường đều',
+            icon: 'fa-rocket',
+            color: 'orange',
+            file: 'experiment-chuyendong.html'
+        },
+        {
+            id: 'tudien',
+            name: 'Quá trình nạp và phóng điện của tụ điện',
+            description: 'Tìm hiểu quá trình nạp và phóng điện tụ',
+            icon: 'fa-battery-full',
             color: 'green',
-            file: 'experiment-capacitor.html'
+            file: 'experiment-tudien.html'
+        },
+        {
+            id: 'ghetudien',
+            name: 'Ghép tụ điện nối tiếp và song song',
+            description: 'Khám phá cách ghép tụ điện và điện dung tương đương',
+            icon: 'fa-link',
+            color: 'teal',
+            file: 'experiment-ghetudien.html'
+        },
+        {
+            id: 'nangluong',
+            name: 'Năng lượng của tụ điện',
+            description: 'Tính toán và trực quan hóa năng lượng tụ điện',
+            icon: 'fa-battery-three-quarters',
+            color: 'red',
+            file: 'experiment-nangluong.html'
         }
     ];
     
@@ -190,8 +222,8 @@ window.ExperimentsScreen = function({ onSelectExperiment, onBack }) {
                 )
             ),
             
-            // Grid các thí nghiệm
-            React.createElement('div', { className: "grid gap-6 md:grid-cols-3" },
+            // Grid các thí nghiệm (8 thí nghiệm)
+            React.createElement('div', { className: "grid gap-6 md:grid-cols-2 lg:grid-cols-4" },
                 experiments.map(function(exp) {
                     return React.createElement('button', {
                         key: exp.id,
