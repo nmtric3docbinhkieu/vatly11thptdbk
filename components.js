@@ -624,7 +624,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                     className: "p-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors"
                 }, React.createElement('i', { className: "fas fa-arrow-left text-slate-700" })),
                 React.createElement('div', null,
-                    React.createElement('h1', { className: "text-lg font-black text-slate-800" }, "Giải Bài tập ôn"),
+                    React.createElement('h1', { className: "text-lg font-black text-slate-800" }, "Giải Bài tập ôn chương"),
                     React.createElement('p', { className: "text-sm text-slate-500" }, `Chương ${chapter}: Điện trường`)
                 )
             ),
@@ -1124,7 +1124,8 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
             React.createElement('div', { className: "glass-panel p-8 md:p-12 mb-6" },
                 React.createElement(window.LaTeXText, { 
                     className: "text-xl md:text-2xl font-extrabold text-slate-800 mb-10 leading-snug",
-                    text: question?.q
+                    text: question?.q,
+                    isHTML: true
                 }),
                 renderQuestionOptions()
             )
