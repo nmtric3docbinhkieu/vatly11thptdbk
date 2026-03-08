@@ -46,6 +46,32 @@
         .btn-opt:active { transform: scale(0.98); }
         .explanation-anim { animation: slideIn 0.4s ease-out; }
         @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Fix MathJax overflow */
+        .explanation-anim * {
+            overflow-wrap: break-word !important;
+            word-break: break-word !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        
+        .explanation-anim .MathJax,
+        .explanation-anim .MathJax_Preview,
+        .explanation-anim .MathJax_SVG,
+        .explanation-anim .MathJax_CHTML,
+        .explanation-anim mjx-container,
+        .explanation-anim mjx-math,
+        .explanation-anim svg {
+            max-width: 100% !important;
+            overflow-wrap: break-word !important;
+            word-break: break-word !important;
+            display: inline-block !important;
+        }
+        
+        .explanation-anim .latex-text {
+            overflow-wrap: break-word !important;
+            word-break: break-word !important;
+        }
     </style>
 </head>
 <body>
