@@ -1,12 +1,12 @@
 // ==============================================
-// FILE: database-chapter3.js
+// FILE: ktghk2.js
 // ==============================================
-// Ngân hàng câu hỏi chương 3: Điện trường
+// Ngân hàng câu hỏi kiểm tra giữa học kỳ 2
 // Vật lí 11 - Chân trời sáng tạo
 // Cấu trúc: 12 câu nhiều lựa chọn + 2 câu đúng-sai + 8 câu trả lời ngắn + 3 câu tự luận
 // ==============================================
 
-window.questionsChapter3 = [
+window.questionsKTGHK2 = [
     // ============================================
     // PHẦN I: TRẮC NGHIỆM NHIỀU LỰA CHỌN (12 CÂU)
     // ============================================

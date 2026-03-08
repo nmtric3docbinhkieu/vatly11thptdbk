@@ -5,7 +5,7 @@
 
 // Hàm lấy câu hỏi kiểm tra giữa học kỳ 2
 window.getQuestionsKTGHK2 = function() {
-    return window.questionsChapter3 || [];
+    return window.questionsKTGHK2 || [];
 };
 
 // Hàm lấy câu hỏi theo chương

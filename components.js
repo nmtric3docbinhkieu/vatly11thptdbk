@@ -828,7 +828,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
 };
 
 // QuizScreen component for regular quiz functionality
-window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elapsedTime, cheatWarnings, onSelect, onNext, showExpl }) {
+window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elapsedTime, cheatWarnings, onSelect, onNext, showExpl, selected }) {
     // State for true-false selections
     const [trueFalseSelections, setTrueFalseSelections] = React.useState({});
     
@@ -877,20 +877,36 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
             case 'multiple-choice':
                 return React.createElement('div', { className: "grid gap-4" },
                     (question?.options || []).map(function(opt, i) {
+                        var isCorrect = showExpl && i === question.a;
+                        var isSelected = selected === i;
                         var style = "border-slate-100 text-slate-700 hover:border-blue-200 hover:bg-blue-50";
+                        
+                        if (showExpl && isCorrect) {
+                            style = "border-green-500 bg-green-50 text-green-800";
+                        } else if (showExpl && isSelected && !isCorrect) {
+                            style = "border-red-500 bg-red-50 text-red-800";
+                        } else if (isSelected) {
+                            style = "border-blue-500 bg-blue-50 text-blue-800";
+                        }
                         
                         return React.createElement('button', {
                             key: i,
                             onClick: function() { onSelect(i); },
+                            disabled: showExpl,
                             className: "p-5 rounded-2xl border-2 text-left flex items-center shadow-sm transition-all " + style
                         },
                             React.createElement('div', { 
-                                className: "w-10 h-10 rounded-xl flex items-center justify-center mr-4 font-bold transition-colors bg-slate-100 text-slate-500"
-                            }, String.fromCharCode(65 + i)),
-                            React.createElement(window.LaTeXText, { 
-                                className: "text-lg",
-                                text: opt
-                            })
+                                className: "w-10 h-10 rounded-xl flex items-center justify-center mr-4 font-bold transition-colors " + 
+                                    (isCorrect ? "bg-green-500 text-white" : "bg-slate-100 text-slate-500")
+                            }, 
+                                isCorrect ? "✓" : String.fromCharCode(65 + i)
+                            ),
+                            React.createElement('div', { className: "flex-1" },
+                                React.createElement(window.LaTeXText, { 
+                                    className: "text-lg",
+                                    text: opt
+                                })
+                            )
                         );
                     })
                 );
@@ -900,10 +916,13 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                     (question?.parts || []).map(function(part, i) {
                         const isSelected = trueFalseSelections[i] !== undefined;
                         const selectedValue = trueFalseSelections[i];
+                        const isCorrect = part.correct; // true/false from database
                         
                         return React.createElement('div', { 
                             key: i, 
-                            className: "p-5 rounded-2xl border-2 border-slate-200 bg-white shadow-sm" 
+                            className: "p-5 rounded-2xl border-2 " + 
+                                (showExpl && isCorrect ? "border-green-500 bg-green-50" : "border-slate-200 bg-white") + 
+                                " shadow-sm" 
                         },
                             React.createElement('div', { className: "flex items-start gap-4" },
                                 React.createElement('div', { 
@@ -911,21 +930,25 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                                 },
                                     React.createElement('button', {
                                         onClick: function() { handleTrueFalseSelect(i, 'true'); },
-                                        disabled: isSelected,
+                                        disabled: isSelected || showExpl,
                                         className: `px-4 py-2 rounded-lg border-2 font-bold transition-colors ${
-                                            selectedValue === 'true' 
+                                            showExpl && isCorrect
                                                 ? 'bg-green-500 text-white border-green-500' 
-                                                : 'border-green-200 text-green-700 hover:bg-green-50'
-                                        } ${isSelected ? 'cursor-not-allowed opacity-50' : ''}`
+                                                : selectedValue === 'true'
+                                                    ? 'bg-green-500 text-white border-green-500' 
+                                                    : 'border-green-200 text-green-700 hover:bg-green-50'
+                                        } ${isSelected || showExpl ? 'cursor-not-allowed opacity-50' : ''}`
                                     }, "ĐÚNG"),
                                     React.createElement('button', {
                                         onClick: function() { handleTrueFalseSelect(i, 'false'); },
-                                        disabled: isSelected,
+                                        disabled: isSelected || showExpl,
                                         className: `px-4 py-2 rounded-lg border-2 font-bold transition-colors ${
-                                            selectedValue === 'false' 
+                                            showExpl && !isCorrect
                                                 ? 'bg-red-500 text-white border-red-500' 
-                                                : 'border-red-200 text-red-700 hover:bg-red-50'
-                                        } ${isSelected ? 'cursor-not-allowed opacity-50' : ''}`
+                                                : selectedValue === 'false'
+                                                    ? 'bg-red-500 text-white border-red-500' 
+                                                    : 'border-red-200 text-red-700 hover:bg-red-50'
+                                        } ${isSelected || showExpl ? 'cursor-not-allowed opacity-50' : ''}`
                                     }, "SAI")
                                 ),
                                 React.createElement('div', { className: "flex-1" },
