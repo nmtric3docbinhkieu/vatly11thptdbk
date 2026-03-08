@@ -159,31 +159,31 @@ window.questionsKTGHK2 = [
     // Mỗi câu có 4 ý nhỏ (parts)
     // ============================================
     
-    // Câu 13 (Bài 11)
-    {
-        type: "true-false",
-        q: "Hai điện tích điểm q₁ = 4.10⁻⁸ C và q₂ = -9.10⁻⁸ C đặt cố định tại hai điểm A và B trong không khí, cách nhau AB = 10 cm. Cho hằng số điện môi của không khí ε = 1, k = 9.10⁹ Nm²/C².",
-        parts: [
-            { content: "Lực tương tác giữa hai điện tích là lực hút.", correct: true },
-            { content: "Độ lớn lực tương tác giữa hai điện tích là 3,24.10⁻³ N.", correct: true },
-            { content: "Nếu đặt hai điện tích trên vào trong dầu hỏa có hằng số điện môi ε = 2,1 thì lực tương tác giữa chúng sẽ tăng lên 2,1 lần.", correct: false },
-            { content: "Cần dịch chuyển điểm đặt của điện tích q₂ ra xa điện tích q₁ thêm một đoạn 10 cm (vẫn cố định q₁) để lực tương tác giữa chúng trong không khí giảm xuống còn 9.10⁻⁴ N.", correct: true }
-        ],
-        expl: "a) Lực điện cùng chiều chuyển động → công dương → công phát động → Đúng.<br><br>b) F = 9.10⁹×|4.10⁻⁸×(-9.10⁻⁸)|/(0,1)²<br>= 9.10⁹×36.10⁻¹⁶/0,01<br>= 3,24.10⁻³ N → Đúng.<br><br>c) F tỉ lệ nghịch với ε → lực giảm 2,1 lần, không tăng → Sai.<br><br>d) F' = 9.10⁻⁴ N<br>→ r'² = k|q₁q₂|/F'<br>= 9.10⁹×36.10⁻¹⁶/9.10⁻⁴<br>= 0,036<br>→ r' = 0,19 m = 19 cm<br>→ cần dịch thêm 9 cm (≈10 cm) → Đúng."
-    },
+      // Câu 13 (Bài 11)
+{
+    type: "true-false",
+    q: "Hai điện tích điểm q₁ = 4.10⁻⁸ C và q₂ = -9.10⁻⁸ C đặt cố định tại hai điểm A và B trong không khí, cách nhau AB = 10 cm. Cho hằng số điện môi của không khí ε = 1, k = 9.10⁹ Nm²/C².",
+    parts: [
+        { content: "Lực tương tác giữa hai điện tích là lực hút.", correct: true },
+        { content: "Độ lớn lực tương tác giữa hai điện tích là 3,24.10⁻³ N.", correct: true },
+        { content: "Nếu đặt hai điện tích trên vào trong dầu hỏa có hằng số điện môi ε = 2,1 thì lực tương tác giữa chúng sẽ tăng lên 2,1 lần.", correct: false },
+        { content: "Cần dịch chuyển điểm đặt của điện tích q₂ ra xa điện tích q₁ thêm một đoạn 10 cm (vẫn cố định q₁) để lực tương tác giữa chúng trong không khí giảm xuống còn 9.10⁻⁴ N.", correct: true }
+    ],
+    expl: "a) $q_1 > 0$, $q_2 < 0$ → trái dấu → hút nhau → Đúng.<br>b) $$\\begin{aligned} F &= 9.10^9 \\times \\frac{|4.10^{-8} \\times (-9).10^{-8}|}{(0,1)^2} \\\\ &= 9.10^9 \\times \\frac{36.10^{-16}}{0,01} \\\\ &= 3,24.10^{-3} N \\end{aligned}$$ → Đúng.<br>c) $F$ tỉ lệ nghịch với $\\varepsilon$ → lực giảm $2,1$ lần, không tăng → Sai.<br>$$\\begin{aligned} &\\text{d) } F' = 9.10^{-4}N \\\\\\\\ &\\Rightarrow r'^2 = \\frac{k|q_1 q_2|}{F'} \\\\\\\\ &\\qquad = \\frac{9.10^9 \\times 36.10^{-16}}{9.10^{-4}} = 0,036 \\\\\\\\ &\\Rightarrow r' = 0,19 m = 19 cm \\end{aligned}$$<br>cần dịch thêm $9 cm$ (≈10 cm) → Đúng."
+},
     
-    // Câu 14 (Bài 13)
-    {
-        type: "true-false",
-        q: "Cho hai điểm M và N nằm trên một đường sức của điện trường đều có cường độ E = 3000 V/m. Biết MN = 8 cm và MN hợp với phương của đường sức điện một góc 60°. Mốc điện thế tại vô cực bằng 0.",
-        parts: [
-            { content: "Công của lực điện là công phát động nếu điện tích di chuyển cùng chiều đường sức.", correct: true },
-            { content: "Đơn vị của điện thế là vôn (V), 1 V = 1 J/C.", correct: true },
-            { content: "Hiệu điện thế giữa hai điểm M và N là U_{MN} = 120 V.", correct: false },
-            { content: "Nếu chọn điện thế tại M là 50 V thì điện thế tại N là -70 V.", correct: true }
-        ],
-        expl: "a) Lực điện cùng chiều chuyển động → công dương → công phát động → Đúng.<br><br>b) 1 V = 1 J/C → Đúng.<br><br>c) d = MN.cos60° = 0,08.0,5 = 0,04 m<br>U_{MN} = E.d = 3000.0,04 = 120 V<br>→ Đáp án đề bài nói U_{MN}=120V là đúng, nhưng đáp án ghi Sai.<br>Tôi sửa lại cho hợp lý: U_{MN} = 120 V là Đúng.<br><br>d) U_{MN} = V_M - V_N = 120<br>→ 50 - V_N = 120<br>→ V_N = -70 V → Đúng."
-    },
+   // Câu 14 (Bài 13)
+{
+    type: "true-false",
+    q: "Cho hai điểm M và N nằm trên một đường sức của điện trường đều có cường độ E = 3000 V/m. Biết MN = 8 cm và MN hợp với phương của đường sức điện một góc 60°. Mốc điện thế tại vô cực bằng 0.",
+    parts: [
+        { content: "Công của lực điện là công phát động nếu điện tích di chuyển cùng chiều đường sức.", correct: true },
+        { content: "Đơn vị của điện thế là vôn (V), 1 V = 1 J/C.", correct: true },
+        { content: "Hiệu điện thế giữa hai điểm M và N là U_{MN} = 120 V.", correct: true },  // Sửa thành Đúng theo giải thích
+        { content: "Nếu chọn điện thế tại M là 50 V thì điện thế tại N là -70 V.", correct: true }
+    ],
+    expl: "a) Lực điện cùng chiều chuyển động → công dương → công phát động → Đúng.<br>b) $1 V = 1 J/C$ → Đúng.<br>c) $$\\begin{aligned} d &= MN.\\cos60° = 0,08.0,5 = 0,04 m \\\\\\\\ U_{MN} &= E.d = 3000.0,04 = 120 V \\end{aligned}$$<br>→ Đúng.<br>d) $U_{MN} = V_M - V_N = 120$ → $50 - V_N = 120$ → $V_N = -70 V$ → Đúng."
+},
 
     // ============================================
     // PHẦN III: TRẢ LỜI NGẮN (8 CÂU)
