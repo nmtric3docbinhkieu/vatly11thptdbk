@@ -352,14 +352,22 @@ window.LaTeXText = function({ text, className, isHTML = false }) {
     const elementRef = React.useRef(null);
     
     React.useEffect(() => {
+        let mounted = true;
         if (elementRef.current && window.MathJax && window.MathJax.typesetPromise) {
             const delay = isHTML ? 200 : 100; // Tăng delay cho HTML content
-            setTimeout(() => {
-                window.MathJax.typesetPromise([elementRef.current])
-                    .catch((err) => console.log('MathJax error:', err));
+            const timer = setTimeout(() => {
+                if (mounted && elementRef.current) {
+                    window.MathJax.typesetPromise([elementRef.current])
+                        .catch((err) => console.log('MathJax error:', err));
+                }
             }, delay);
+            return () => {
+                mounted = false;
+                clearTimeout(timer);
+            };
         }
-    }, [text]);
+        return () => { mounted = false; };
+    }, [text, isHTML]);
     
     if (isHTML) {
         return React.createElement('div', { 
