@@ -182,7 +182,7 @@ window.questionsKTGHK2 = [
         { content: "Hiệu điện thế giữa hai điểm M và N là U_{MN} = 120 V.", correct: true },  // Sửa thành Đúng theo giải thích
         { content: "Nếu chọn điện thế tại M là 50 V thì điện thế tại N là -70 V.", correct: true }
     ],
-    expl: "a) Lực điện cùng chiều chuyển động → công dương → công phát động → Đúng.<br>b) $1 V = 1 J/C$ → Đúng.<br>c) $$\\begin{aligned} d &= MN.\\cos60° = 0,08.0,5 = 0,04 m \\\\\\\\ U_{MN} &= E.d = 3000.0,04 = 120 V \\end{aligned}$$<br>→ Đúng.<br>d) $U_{MN} = V_M - V_N = 120$ → $50 - V_N = 120$ → $V_N = -70 V$ → Đúng."
+    expl: "a) Lực điện cùng chiều chuyển động → công dương → công phát động → Đúng.<br>b) $1 V = 1 J/C$ → Đúng.<br>c) $$\\begin{aligned} d &= MN.\\cos60° \\\\\\\\&= 0,08.0,5 = 0,04 m \\\\\\\\ U_{MN} &= E.d = 3000.0,04 = 120 V \\end{aligned}$$<br>→ Đúng.<br>d) $U_{MN} = V_M - V_N = 120$ → $50 - V_N = 120$ → $V_N = -70 V$ → Đúng."
 },
 
     // ============================================
@@ -262,9 +262,8 @@ window.questionsKTGHK2 = [
         type: "essay",
         q: "Cho hai điện tích điểm q₁ = 9.10⁻⁸ C và q₂ = -4.10⁻⁸ C đặt cố định tại hai điểm A và B trong không khí, cách nhau AB = 20 cm. Xác định vị trí điểm C trên đường thẳng AB (điểm C không trùng với A và B) tại đó cường độ điện trường tổng hợp bằng không.",
         answer: "Điểm C nằm trên đường thẳng AB, ngoài đoạn AB và gần phía B (vì |q₁| > |q₂|), cách B một khoảng 40 cm và cách A 60 cm.",
-        expl: "Vì q₁ và q₂ trái dấu nên để $\vec{E}_C = \vec{0}$ thì C phải nằm ngoài đoạn AB và gần điện tích có độ lớn nhỏ hơn (q₂).<br><br>Gọi CB = x > 0, AC = AB + CB = 20 + x.<br><br>Điều kiện: $E_1 = E_2$<br><br>$\\Rightarrow k\\frac{|q_1|}{AC^2} = k\\frac{|q_2|}{CB^2}$<br><br>$\\Rightarrow \\frac{9.10^{-8}}{(20+x)^2} = \\frac{4.10^{-8}}{x^2}$<br><br>$\\Rightarrow \\frac{9}{4} = \\left(\\frac{20+x}{x}\\right)^2$<br><br>$\\Rightarrow \\frac{20+x}{x} = \\frac{3}{2}$<br><br>$\\Rightarrow 40 + 2x = 3x$<br><br>$\\Rightarrow x = 40 cm$<br><br>Vậy C cách B 40 cm, cách A 60 cm."
+        expl: "Vì $q_1$ và $q_2$ trái dấu nên để $\\vec{E}_C = \\vec{0}$ thì C phải nằm ngoài đoạn AB và gần điện tích có độ lớn nhỏ hơn ($q_2$). <br>Gọi $CB = x > 0$, $AC = AB + CB = 20 + x$. <br>Điều kiện: $E_1 = E_2$ <br>$$\\begin{aligned} k\\frac{|q_1|}{AC^2} &= k\\frac{|q_2|}{CB^2} \\\\ \\frac{9.10^{-8}}{(20+x)^2} &= \\frac{4.10^{-8}}{x^2} \\\\ \\frac{9}{4} &= \\left(\\frac{20+x}{x}\\right)^2 \\\\ \\frac{20+x}{x} &= \\frac{3}{2} \\\\ 40 + 2x &= 3x \\\\ x &= 40\\,cm \\end{aligned}$$ <br>Vậy C cách B $40\\,cm$, cách A $60\\,cm$."
     },
-    
     // Câu 24 (VD - Bài 13)
     {
         type: "essay",
