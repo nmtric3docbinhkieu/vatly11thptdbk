@@ -51,6 +51,243 @@ window.ChapterSelectionScreen = function({ onSelectChapter, onLogout, student })
     );
 };
 
+// Component màn hình chọn hoạt động cho chương 4 (tương tự chương 3)
+window.Chapter4ActivityScreen = function({ onSelectActivity, onLogout, student }) {
+    return React.createElement('div', { className: "flex items-center justify-center min-h-screen p-4" },
+        React.createElement('div', { className: "glass-panel p-10 text-center max-w-4xl w-full relative" },
+            // Nút đăng xuất
+            React.createElement('button', { onClick: onLogout, className: "absolute top-4 right-4 p-2 rounded-lg text-slate-400 hover:bg-slate-100" },
+                React.createElement('i', { className: "fas fa-sign-out-alt" })
+            ),
+            // Tên học sinh
+            React.createElement('div', { className: "mb-2 py-2 px-4 rounded-xl bg-blue-50 inline-block text-blue-700 text-sm font-semibold" },
+                React.createElement('i', { className: "fas fa-user mr-2" }),
+                student?.full_name + ' - ' + student?.class_name
+            ),
+            // Tiêu đề
+            React.createElement('h1', { className: "text-3xl font-black text-slate-800 mb-2" }, "CHƯƠNG 4: DÒNG ĐIỆN KHÔNG ĐỔI"),
+            React.createElement('p', { className: "text-slate-500 mb-8" }, "Chọn hoạt động để bắt đầu"),
+            
+            // Grid các hoạt động (2x3)
+            React.createElement('div', { className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3" },
+                // Lý thuyết
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('theory'); },
+                    className: "p-6 bg-white border-2 border-orange-200 rounded-2xl hover:border-orange-500 hover:bg-orange-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-book text-orange-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Lý thuyết"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Tóm tắt kiến thức về các dạng năng lượng")
+                ),
+                
+                // Thí nghiệm ảo
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('experiments'); },
+                    className: "p-6 bg-white border-2 border-teal-200 rounded-2xl hover:border-teal-500 hover:bg-teal-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-flask text-teal-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Thí nghiệm ảo"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Thực hành các thí nghiệm tương tác")
+                ),
+                
+                // Ôn tập chương
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('solve'); },
+                    className: "p-6 bg-white border-2 border-amber-200 rounded-2xl hover:border-amber-500 hover:bg-amber-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-chalkboard-teacher text-amber-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Ôn tập chương"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Giải chi tiết các bài tập")
+                ),
+                
+                // Ôn tập tại nhà
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('quiz'); },
+                    className: "p-6 bg-white border-2 border-indigo-200 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-tasks text-indigo-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Bài tập về nhà"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Làm bài tập trắc nghiệm")
+                ),
+                
+                // Kiểm tra chương 4
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('ktchuong4'); },
+                    className: "p-6 bg-white border-2 border-red-200 rounded-2xl hover:border-red-500 hover:bg-red-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-clipboard-check text-red-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Kiểm tra chương 4"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Kiểm tra tổng kết chương 4")
+                )
+            ),
+            
+            // Nút quay lại
+            React.createElement('button', {
+                onClick: function() { onSelectActivity('back'); },
+                className: "w-full mt-8 pt-4 border-t border-slate-200 text-slate-400 text-sm hover:text-slate-600"
+            }, "Quay lại chọn chương")
+        )
+    );
+};
+
+// Component màn hình chọn thí nghiệm ảo cho chương 4
+window.Chapter4ExperimentsScreen = function({ onSelectExperiment, onBack }) {
+    const experiments = [
+        {
+            id: 'tac-dong-dong-dien',
+            name: 'Tác dụng mạnh yếu của dòng điện',
+            description: 'Khám phá tác dụng nhiệt, hóa học và từ của dòng điện',
+            icon: 'fa-fire',
+            color: 'red',
+            file: 'experiment-tacdongdongdien.html'
+        },
+        {
+            id: 'chuyen-dong-electron',
+            name: 'Chuyển động của electron',
+            description: 'Mô phỏng chuyển động electron trong kim loại và chất bán dẫn',
+            icon: 'fa-atom',
+            color: 'blue',
+            file: 'experiment-chuyendongelectron.html'
+        },
+        {
+            id: 'dinh-luat-ohm',
+            name: 'Định luật Ohm - Đường V-A',
+            description: 'Thí nghiệm xác định mối quan hệ V-A và điện trở',
+            icon: 'fa-chart-line',
+            color: 'green',
+            file: 'experiment-dinhluatohm.html'
+        },
+        {
+            id: 'nhiet-do-dien-tro',
+            name: 'Ảnh hưởng của nhiệt độ lên điện trở',
+            description: 'Khám phá sự thay đổi điện resist của kim loại khi nhiệt',
+            icon: 'fa-temperature-high',
+            color: 'orange',
+            file: 'experiment-nhietdodientro.html'
+        },
+        {
+            id: 'mach-kinh-hieu-dien-the',
+            name: 'Mạch kín - Hiệu điện thế hai cực',
+            description: 'Thí nghiệm về mạch điện và hiệu điện thế giữa hai điểm',
+            icon: 'fa-project-diagram',
+            color: 'purple',
+            file: 'experiment-machkinhieudienthe.html'
+        },
+        {
+            id: 'ghep-nguon-dien',
+            name: 'Ghép nguồn điện',
+            description: 'Thí nghiệm ghép nối tiếp và song song các nguồn điện',
+            icon: 'fa-battery-full',
+            color: 'yellow',
+            file: 'experiment-ghepnguondien.html'
+        },
+        {
+            id: 'cong-suat-nang-luong',
+            name: 'Công suất và năng lượng',
+            description: 'Đo công suất tiêu thụ và năng lượng điện của thiết bị',
+            icon: 'fa-bolt',
+            color: 'indigo',
+            file: 'experiment-congsuatnangluong.html'
+        },
+        {
+            id: 'do-e-r-cua-pin',
+            name: 'Đo E và r của pin',
+            description: 'Thí nghiệm đo suất điện động và điện trở nội tại của pin',
+            icon: 'fa-voltmeter',
+            color: 'teal',
+            file: 'experiment-doerpin.html'
+        }
+    ];
+    
+    return React.createElement('div', { className: "max-w-4xl mx-auto px-4 py-10" },
+        React.createElement('div', { className: "glass-panel p-8 md:p-10" },
+            // Header
+            React.createElement('div', { className: "flex items-center justify-between mb-8" },
+                React.createElement('div', null,
+                    React.createElement('h1', { className: "text-2xl md:text-3xl font-black text-slate-800" }, "THÍ NGHIỆM ẢO"),
+                    React.createElement('p', { className: "text-slate-500 font-semibold mt-1" }, "Chương 4: Các dạng năng lượng")
+                ),
+                React.createElement('button', { onClick: onBack, className: "p-3 rounded-xl bg-slate-100 hover:bg-slate-200" },
+                    React.createElement('i', { className: "fas fa-arrow-left" })
+                )
+            ),
+            
+            // Grid các thí nghiệm (8 thí nghiệm)
+            React.createElement('div', { className: "grid gap-6 md:grid-cols-2 lg:grid-cols-4" },
+                experiments.map(function(exp) {
+                    return React.createElement('button', {
+                        key: exp.id,
+                        onClick: function() { onSelectExperiment(exp); },
+                        className: "p-6 bg-white border-2 border-" + exp.color + "-200 rounded-2xl hover:border-" + exp.color + "-500 hover:bg-" + exp.color + "-50 transition-all text-left"
+                    },
+                        React.createElement('div', { className: "w-16 h-16 bg-" + exp.color + "-100 rounded-xl flex items-center justify-center mb-4" },
+                            React.createElement('i', { className: "fas " + exp.icon + " text-" + exp.color + "-600 text-2xl" })
+                        ),
+                        React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, exp.name),
+                        React.createElement('div', { className: "text-slate-600 text-sm mb-4" }, exp.description),
+                        React.createElement('div', { className: "text-blue-600 font-semibold text-sm" },
+                            "Bắt đầu thí nghiệm ",
+                            React.createElement('i', { className: "fas fa-arrow-right ml-1" })
+                        )
+                    );
+                })
+            )
+        )
+    );
+};
+
+// Component màn hình chi tiết thí nghiệm cho chương 4
+window.Chapter4ExperimentDetailScreen = function({ experiment, onBack }) {
+    return React.createElement('div', { className: "min-h-screen bg-slate-50" },
+        React.createElement('div', { className: "bg-white border-b-2 border-slate-200 px-4 py-3 flex items-center justify-between" },
+            React.createElement('div', { className: "flex items-center gap-3" },
+                React.createElement('button', { 
+                    onClick: onBack, 
+                    className: "p-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition-colors"
+                }, React.createElement('i', { className: "fas fa-arrow-left text-slate-700" })),
+                React.createElement('h1', { className: "text-lg font-black text-slate-800" }, experiment.name)
+            ),
+            React.createElement('div', { className: "text-sm text-slate-500" }, "Chương 4: Các dạng năng lượng")
+        ),
+        React.createElement('div', { className: "p-8 text-center" },
+            React.createElement('div', { className: "max-w-2xl mx-auto" },
+                React.createElement('div', { className: "w-24 h-24 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6" },
+                    React.createElement('i', { className: "fas " + experiment.icon + " text-blue-600 text-4xl" })
+                ),
+                React.createElement('h2', { className: "text-2xl font-bold text-slate-800 mb-4" }, experiment.name),
+                React.createElement('p', { className: "text-slate-600 mb-8" }, experiment.description),
+                React.createElement('div', { className: "bg-amber-50 border-2 border-amber-200 rounded-2xl p-6" },
+                    React.createElement('div', { className: "flex items-center gap-3 mb-3" },
+                        React.createElement('i', { className: "fas fa-tools text-amber-600 text-xl" }),
+                        React.createElement('h3', { className: "font-bold text-amber-800" }, "Thí nghiệm đang được phát triển")
+                    ),
+                    React.createElement('p', { className: "text-amber-700 text-sm" }, 
+                        "Nội dung thí nghiệm '" + experiment.name + "' sẽ được bổ sung sau. " +
+                        "Vui lòng quay lại sau để trải nghiệm thí nghiệm đầy đủ!"
+                    )
+                ),
+                React.createElement('button', { 
+                    onClick: onBack, 
+                    className: "mt-8 px-6 py-3 bg-slate-600 text-white rounded-xl hover:bg-slate-700 transition-colors"
+                }, 
+                    React.createElement('i', { className: "fas fa-arrow-left mr-2" }),
+                    "Quay lại danh sách thí nghiệm"
+                )
+            )
+        )
+    );
+};
+
 // Component màn hình chọn hoạt động cho chương 3 (có thí nghiệm ảo)
 window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }) {
     return React.createElement('div', { className: "flex items-center justify-center min-h-screen p-4" },
@@ -126,7 +363,7 @@ window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }
                     React.createElement('div', { className: "w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4" },
                         React.createElement('i', { className: "fas fa-clipboard-check text-red-600 text-xl" })
                     ),
-                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Kiểm tra GHK 2"),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Kiểm tra Chương 3"),
                     React.createElement('div', { className: "text-slate-600 text-sm" }, "25 câu theo 4 dạng bài tập")
                 )
             ),

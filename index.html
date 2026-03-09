@@ -21,7 +21,7 @@
     <script src="database-chapter2.js"></script>
     <script src="database-chapter3.js"></script>
     <script src="database-chapter4.js"></script>
-    <script src="ktghk2.js"></script>
+    <script src="kiemtrachuong3.js"></script>
     <script src="database-index.js"></script>
     <script src="components.js"></script>
     <script src="admin.js"></script>
@@ -94,6 +94,10 @@
             // States cho chương 3 (thí nghiệm ảo)
             const [chapter3Activity, setChapter3Activity] = useState(null); // 'theory' | 'experiments' | 'quiz'
             const [selectedExperiment, setSelectedExperiment] = useState(null);
+            
+            // States cho chương 4
+            const [chapter4Activity, setChapter4Activity] = useState(null); // 'theory' | 'experiments' | 'quiz' | 'solve' | 'ktchuong4'
+            const [selectedChapter4Experiment, setSelectedChapter4Experiment] = useState(null);
             
             // Cheat detection
             const [cheatWarnings, setCheatWarnings] = useState(0);
@@ -265,6 +269,9 @@ const handleChapterSelect = (chapter) => {
     if (chapter === 3) {
         // Chương 3 có màn hình chọn hoạt động riêng
         setGameState('chapter3-activities');
+    } else if (chapter === 4) {
+        // Chương 4 có màn hình chọn hoạt động riêng
+        setGameState('chapter4-activities');
     } else {
         // Các chương khác đi thẳng đến tóm tắt lý thuyết
         goToSummary(chapter);
@@ -299,6 +306,34 @@ const handleChapter3Activity = (activity) => {
     }
 };
 
+// Hàm xử lý hoạt động chương 4
+const handleChapter4Activity = (activity) => {
+    if (activity === 'back') {
+        setGameState('start');
+        return;
+    }
+    
+    setChapter4Activity(activity);
+    
+    switch (activity) {
+        case 'theory':
+            goToSummary(4);
+            break;
+        case 'experiments':
+            setGameState('chapter4-experiments');
+            break;
+        case 'quiz':
+            startQuiz(4);
+            break;
+        case 'solve':
+            setGameState('chapter4-solve');
+            break;
+        case 'ktchuong4':
+            setGameState('chapter4-quiz');
+            break;
+    }
+};
+
 // Hàm xử lý khi chọn thí nghiệm
 const handleExperimentSelect = (experiment) => {
     setSelectedExperiment(experiment);
@@ -306,10 +341,23 @@ const handleExperimentSelect = (experiment) => {
     setGameState('experiment-detail');
 };
 
+// Hàm xử lý khi chọn thí nghiệm chương 4
+const handleChapter4ExperimentSelect = (experiment) => {
+    setSelectedChapter4Experiment(experiment);
+    // Chuyển sang màn hình thí nghiệm chi tiết chương 4
+    setGameState('chapter4-experiment-detail');
+};
+
 // Hàm quay lại từ màn hình thí nghiệm
 const backToChapter3Activities = () => {
     setGameState('chapter3-activities');
     setSelectedExperiment(null);
+};
+
+// Hàm quay lại từ màn hình thí nghiệm chương 4
+const backToChapter4Activities = () => {
+    setGameState('chapter4-activities');
+    setSelectedChapter4Experiment(null);
 };
 
             const handleSelect = (answer) => {
@@ -756,6 +804,31 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
                     onSelectActivity={handleChapter3Activity}
                     onLogout={logout}
                     student={student}
+                />;
+            }
+
+            // Chapter 4 Activities
+            if (gameState === 'chapter4-activities') {
+                return <window.Chapter4ActivityScreen 
+                    onSelectActivity={handleChapter4Activity}
+                    onLogout={logout}
+                    student={student}
+                />;
+            }
+
+            // Chapter 4 Experiments
+            if (gameState === 'chapter4-experiments') {
+                return <window.Chapter4ExperimentsScreen 
+                    onSelectExperiment={handleChapter4ExperimentSelect}
+                    onBack={backToChapter4Activities}
+                />;
+            }
+
+            // Chapter 4 Experiment Detail
+            if (gameState === 'chapter4-experiment-detail') {
+                return <window.Chapter4ExperimentDetailScreen 
+                    experiment={selectedChapter4Experiment}
+                    onBack={backToChapter4Activities}
                 />;
             }
 

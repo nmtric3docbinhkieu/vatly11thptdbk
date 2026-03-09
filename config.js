@@ -19,25 +19,25 @@ window.CONFIG = {
     // Thông tin các chương
     chapters: {
         1: { 
-            name: 'Chương 1: Dao động cơ',
+            name: 'Dao động',
             color: 'blue',
             icon: 'fa-wave-square',
             description: 'Dao động điều hòa, con lắc lò xo, con lắc đơn'
         },
         2: { 
-            name: 'Chương 2: Sóng cơ',
+            name: 'Sóng',
             color: 'green',
             icon: 'fa-water',
             description: 'Sóng cơ và sự truyền sóng, giao thoa sóng'
         },
         3: { 
-            name: 'Chương 3: Điện trường',
+            name: 'Điện trường',
             color: 'purple',
             icon: 'fa-bolt',
             description: 'Điện tích, điện trường, tụ điện'
         },
         4: { 
-            name: 'Chương 4: Từ trường',
+            name: 'Dòng điện không đổi',
             color: 'orange',
             icon: 'fa-magnet',
             description: 'Từ trường, cảm ứng điện từ'
