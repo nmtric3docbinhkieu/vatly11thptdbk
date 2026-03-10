@@ -25,6 +25,10 @@
     <script src="database-index.js"></script>
     <script src="components.js"></script>
     <script src="admin.js"></script>
+    <script src="check-supabase.js"></script>
+    <script src="analyze-chapter3.js"></script>
+    <script src="test-separate-tables.js"></script>
+    <script src="simple-debug.js"></script>
     
     <!-- MathJax -->
     <script>
@@ -448,7 +452,17 @@ const backToChapter4Activities = () => {
                     setIsTestActive(false);
                     
                     setTimeout(async () => {
-                        const data = await window.fetchLeaderboard?.() || [];
+                        // Xác định testType dựa trên chapter
+                        let testType = 'quiz'; // mặc định
+                        if (selectedChapter === 'ktghk2') {
+                            testType = 'ktghk2';
+                        } else if (selectedChapter === 3 && chapter3Activity === 'solve') {
+                            testType = 'solve';
+                        } else if (selectedChapter === 3 && chapter3Activity === 'quiz') {
+                            testType = 'quiz';
+                        }
+                        
+                        const data = await window.fetchLeaderboard?.(testType) || [];
                         setLeaderboard(data);
                         setShowLeaderboard(true);
                         setGameState('end');

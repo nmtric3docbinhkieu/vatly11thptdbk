@@ -203,7 +203,7 @@ window.notifyAdmin = async function(type, data) {
     return true;
 };
 
-// Lưu kết quả quiz - ĐÃ SỬA LỖI UUID
+// Lưu kết quả quiz - ĐÃ CẬP NHẬT TÁCH BIỆT 3 BẢNG
 window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeTaken, chapter) {
     const supabase = window.getSupabase();
     if (!supabase || !student) {
@@ -224,8 +224,6 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
         
         if (findError || !studentData) {
             console.error('Không tìm thấy student trong database:', findError);
-            
-            // Fallback: Nếu không tìm thấy, không lưu nữa
             console.log('Bỏ qua lưu kết quả do không tìm thấy student ID');
             return;
         }
@@ -234,18 +232,32 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
         console.log('FinalScore trước làm tròn:', finalScore, typeof finalScore);
         console.log('FinalScore sau làm tròn:', Math.round(finalScore), typeof Math.round(finalScore));
         
-        // Xác định số câu và chapter dựa trên loại bài kiểm tra
-        let totalQuestions, chapterNumber;
+        // Xác định bảng và số câu dựa trên loại bài kiểm tra
+        let tableName, totalQuestions, chapterNumber;
+        
         if (chapter === 'ktghk2') {
+            tableName = 'quiz_attempts_chapter3_ktghk2';
             totalQuestions = 25; // KTGHK2 có 25 câu
-            chapterNumber = 3; // Vẫn là chương 3
+            chapterNumber = 3;
+        } else if (chapter === 'solve') {
+            tableName = 'quiz_attempts_chapter3_solve';
+            totalQuestions = 50; // Ôn tập chương có 50 câu
+            chapterNumber = 3;
+        } else if (chapter === 3 || chapter === 'quiz') {
+            tableName = 'quiz_attempts_chapter3_quiz';
+            totalQuestions = 50; // Bài tập về nhà có 50 câu
+            chapterNumber = 3;
         } else {
-            totalQuestions = 50; // Quiz thường có 50 câu
+            // Các chương khác giữ nguyên bảng cũ
+            tableName = 'quiz_attempts_chapter3';
+            totalQuestions = chapter === 4 ? 38 : 50;
             chapterNumber = chapter;
         }
         
-        // Chèn dữ liệu với UUID thật
-        const { data, error } = await supabase.from('quiz_attempts_chapter3').insert({
+        console.log('Sẽ lưu vào bảng:', tableName, 'với', totalQuestions, 'câu');
+        
+        // Chèn dữ liệu vào đúng bảng
+        const { data, error } = await supabase.from(tableName).insert({
             student_id: studentData.id,  // UUID thật từ database
             score: parseInt(Math.round(finalScore)), // Chắc chắn là integer
             total_questions: totalQuestions,
@@ -261,11 +273,12 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
             throw error;
         }
         
-        console.log('Lưu kết quả thành công:', data);
+        console.log('Lưu kết quả thành công vào', tableName + ':', data);
     } catch (err) {
         console.error('Không lưu được kết quả:', err);
     }
 };
+
 // ===== HÀM XỬ LÝ THỜI GIAN VIỆT NAM =====
 
 // Hàm chuyển đổi thời gian UTC sang giờ Việt Nam và định dạng dd/mm/yyyy HH:MM:SS
@@ -289,7 +302,7 @@ window.formatVNTime = function(utcTimeString) {
         
         return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
     } catch (e) {
-        console.error('Lỗi format thời gian:', e);
+        console.error('Lỗi format thởi gian:', e);
         return utcTimeString;
     }
 };
@@ -311,8 +324,9 @@ window.formatVNDate = function(utcTimeString) {
         return utcTimeString;
     }
 };
+
 // ===== HÀM LẤY BẢNG XẾP HẠNG =====
-window.fetchLeaderboard = async function() {
+window.fetchLeaderboard = async function(testType = 'quiz') {
     const supabase = window.getSupabase();
     if (!supabase) {
         console.error('Không thể kết nối Supabase');
@@ -320,9 +334,22 @@ window.fetchLeaderboard = async function() {
     }
     
     try {
-        // Lấy dữ liệu từ view leaderboard_chapter3
+        // Xác định view dựa trên loại bài kiểm tra
+        let viewName;
+        if (testType === 'ktghk2') {
+            viewName = 'leaderboard_chapter3_ktghk2';
+        } else if (testType === 'solve') {
+            viewName = 'leaderboard_chapter3_solve';
+        } else if (testType === 'quiz') {
+            viewName = 'leaderboard_chapter3_quiz';
+        } else {
+            viewName = 'leaderboard_chapter3'; // Mặc định cũ
+        }
+        
+        console.log('Lấy leaderboard từ view:', viewName);
+        
         const { data, error } = await supabase
-            .from('leaderboard_chapter3')
+            .from(viewName)
             .select('*')
             .order('highest_score', { ascending: false })
             .limit(20);
