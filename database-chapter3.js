@@ -179,7 +179,7 @@ window.questionsChapter3 = [
         q: "Điện trường đều là điện trường có:", 
         options: [
             "Vectơ cường độ điện trường tại mọi điểm bằng nhau",
-            "Cả A, B, C",
+            "Tất cả đều đúng",
             "Đường sức là những đường thẳng song song cách đều",
             "Cường độ điện trường tại mọi điểm bằng nhau"
         ], 
@@ -399,7 +399,7 @@ window.questionsChapter3 = [
     { 
         q: "Cho hai điện tích $q_1 = 5.10^{-8} C$ và $q_2 = -5.10^{-8} C$ đặt tại hai điểm A, B cách nhau 8 cm trong chân không. Xác định vectơ cường độ điện trường tổng hợp tại trung điểm M của AB.", 
         options: ["$E = 5,625.10^5 V/m$, hướng từ M đến A", "$E = 0$", "$E = 1,125.10^6 V/m$, hướng từ M đến B", "$E = 5,625.10^5 V/m$, hướng từ M đến B"], 
-        a: 2, 
+        a: 3, 
         expl: "$E_1 = k\\frac{|q_1|}{r^2}$<br>$= 9.10^9\\frac{5.10^{-8}}{(0,04)^2}$<br>$= 2,8125.10^5 V/m$.<br><br>$E_2 = k\\frac{|q_2|}{r^2}$<br>$= 9.10^9\\frac{5.10^{-8}}{(0,04)^2}$<br>$= 2,8125.10^5 V/m$.<br><br>Vì $q_1 > 0$ nên $\\vec{E_1}$ hướng ra xa A (từ M đến B),<br>$q_2 < 0$ nên $\\vec{E_2}$ hướng về B (từ M đến B).<br>Hai vectơ cùng hướng nên:<br>$E = E_1 + E_2 = 5,625.10^5 V/m$,<br>hướng từ M đến B." 
     },
     
