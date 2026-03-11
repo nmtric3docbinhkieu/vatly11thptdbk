@@ -46,7 +46,7 @@ window.ChapterSelectionScreen = function({ onSelectChapter, onLogout, student })
             React.createElement('button', {
                 onClick: function() { if (window.setAdminMode) window.setAdminMode(true); },
                 className: "w-full mt-6 pt-4 border-t border-slate-200 text-slate-400 text-xs hover:text-slate-600"
-            }, "Giáo viên: Xuất Excel kết quả")
+            }, "Chúc các em học tốt!")
         )
     );
 };

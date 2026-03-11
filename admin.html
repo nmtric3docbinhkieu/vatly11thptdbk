@@ -46,6 +46,7 @@
             const [pendingStudents, setPendingStudents] = useState([]);
             const [quizAttempts, setQuizAttempts] = useState([]);
             const [exerciseAttempts, setExerciseAttempts] = useState([]);
+            const [allQuizData, setAllQuizData] = useState({}); // NEW: Tất cả dữ liệu quiz
             const [selectedTab, setSelectedTab] = useState('dashboard');
             const [searchTerm, setSearchTerm] = useState('');
             
@@ -65,20 +66,11 @@
 
             useEffect(() => {
                 if (isLoggedIn) {
-                    loadAllData();
+                    loadStudents();
+                    loadPendingStudents();
+                    loadQuizAttempts(); // Sẽ tự động phát hiện và load tất cả các bảng
                 }
             }, [isLoggedIn]);
-
-            const loadAllData = async () => {
-                setLoading(true);
-                await Promise.all([
-                    loadStudents(),
-                    loadPendingStudents(),
-                    loadQuizAttempts(),
-                    loadExerciseAttempts()
-                ]);
-                setLoading(false);
-            };
 
             const loadStudents = async () => {
                 const supabase = window.getSupabase();
@@ -106,19 +98,81 @@
                 if (data) setPendingStudents(data);
             };
 
-            const loadQuizAttempts = async () => {
+            // ===== HÀM TỰ ĐỘNG PHÁT HIỆN CÁC BẢNG KIỂM TRA =====
+            const discoverQuizTables = async () => {
                 const supabase = window.getSupabase();
-                if (!supabase) return;
+                if (!supabase) return [];
                 
-                const { data } = await supabase
-                    .from('quiz_attempts_chapter3')
-                    .select('*, students(*)')
-                    .order('created_at', { ascending: false });
+                // Danh sách các bảng quiz_attempts có thể có
+                const possibleTables = [
+                    'quiz_attempts_chapter1',
+                    'quiz_attempts_chapter2', 
+                    'quiz_attempts_chapter3',
+                    'quiz_attempts_chapter4',
+                    'quiz_attempts_chapter3_solve',
+                    'quiz_attempts_chapter3_quiz',
+                    'quiz_attempts_chapter3_ktghk2',
+                    'quiz_attempts_chapter4_solve',
+                    'quiz_attempts_chapter4_quiz',
+                    'quiz_attempts_chapter4_ktghk2',
+                    'quiz_attempts_chapter4_ktchuong4',
+                    'quiz_attempts_chapter4_kthk2'
+                ];
                 
-                if (data) {
-                    setQuizAttempts(data);
-                    calculateStats(data);
+                const existingTables = [];
+                
+                // Kiểm tra từng bảng
+                for (const tableName of possibleTables) {
+                    try {
+                        const { data, error } = await supabase
+                            .from(tableName)
+                            .select('id')
+                            .limit(1);
+                        
+                        if (!error && data) {
+                            existingTables.push(tableName);
+                        }
+                    } catch (err) {
+                        console.log(`Bảng ${tableName} không tồn tại`);
+                    }
                 }
+                
+                return existingTables;
+            };
+            
+            // ===== LOAD DỮ LIỆU TỪ TẤT CẢ CÁC BẢNG =====
+            const loadAllQuizData = async () => {
+                const tables = await discoverQuizTables();
+                const allData = {};
+                
+                for (const tableName of tables) {
+                    try {
+                        const supabase = window.getSupabase();
+                        const { data } = await supabase
+                            .from(tableName)
+                            .select('*, students(*)')
+                            .order('created_at', { ascending: false })
+                            .limit(100);
+                        
+                        if (data) {
+                            allData[tableName] = data;
+                        }
+                    } catch (err) {
+                        console.error(`Lỗi load bảng ${tableName}:`, err);
+                    }
+                }
+                
+                return allData;
+            };
+
+            const loadQuizAttempts = async () => {
+                const allData = await loadAllQuizData();
+                setAllQuizData(allData);
+                
+                // Tính tổng số attempts
+                const totalAttempts = Object.values(allData).flat().length;
+                const allAttempts = Object.values(allData).flat();
+                calculateStats(allAttempts);
             };
 
             const loadExerciseAttempts = async () => {
@@ -210,7 +264,27 @@
                 }
             };
 
-            // ===== XỬ LÝ RESET MẬT KHẨU =====
+            // ===== HÀM ĐỔI TÊN BẢNG THÂN THIỆN =====
+            const getTableDisplayName = (tableName) => {
+                const nameMap = {
+                    'quiz_attempts_chapter1': 'Chương 1',
+                    'quiz_attempts_chapter2': 'Chương 2',
+                    'quiz_attempts_chapter3': 'Chương 3',
+                    'quiz_attempts_chapter4': 'Chương 4',
+                    'quiz_attempts_chapter3_solve': 'Ch3 - Ôn tập',
+                    'quiz_attempts_chapter3_quiz': 'Ch3 - Bài tập về nhà',
+                    'quiz_attempts_chapter3_ktghk2': 'Ch3 - Kiểm tra GHK2',
+                    'quiz_attempts_chapter4_solve': 'Ch4 - Ôn tập',
+                    'quiz_attempts_chapter4_quiz': 'Ch4 - Bài tập về nhà',
+                    'quiz_attempts_chapter4_ktghk2': 'Ch4 - Kiểm tra GHK2',
+                    'quiz_attempts_chapter4_ktchuong4': 'Ch4 - Kiểm tra chương 4',
+                    'quiz_attempts_chapter4_kthk2': 'Ch4 - Kiểm tra HK2'
+                };
+                
+                return nameMap[tableName] || tableName;
+            };
+
+            // ===== HÀM XỬ LÝ RESET MẬT KHẨU =====
             const handleResetPassword = async () => {
                 if (!selectedStudent || !newPassword) return;
                 
@@ -228,6 +302,26 @@
                     setSelectedStudent(null);
                     setNewPassword('');
                 }
+            };
+
+            // ===== XUẤT EXCEL CHO TỪNG BẢNG ĐỘNG =====
+            const exportTableToExcel = (tableName, displayName) => {
+                const data = allQuizData[tableName] || [];
+                
+                const rows = data.map((attempt, index) => ({
+                    'STT': index + 1,
+                    'Họ tên': attempt.students?.full_name || '',
+                    'Lớp': attempt.students?.class_name || '',
+                    'Điểm': attempt.score || 0,
+                    'TG làm bài (giây)': attempt.time_taken || 0,
+                    'Cảnh báo': attempt.cheat_warnings || 0,
+                    'Ngày làm': new Date(attempt.created_at).toLocaleString('vi-VN')
+                }));
+                
+                const ws = window.XLSX.utils.json_to_sheet(rows);
+                const wb = window.XLSX.utils.book_new();
+                window.XLSX.utils.book_append_sheet(wb, ws, displayName);
+                window.XLSX.writeFile(wb, `ket-qua-${displayName}-${new Date().toISOString().slice(0,10)}.xlsx`);
             };
 
             // ===== XUẤT EXCEL =====
@@ -372,26 +466,29 @@
                             >
                                 <i className="fas fa-users mr-2"></i>Học sinh
                             </button>
-                            <button
-                                onClick={() => setSelectedTab('results')}
-                                className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                                    selectedTab === 'results' 
-                                    ? 'bg-blue-600 text-white shadow-lg' 
-                                    : 'bg-white text-slate-600 hover:bg-slate-50'
-                                }`}
-                            >
-                                <i className="fas fa-clipboard-list mr-2"></i>Kết quả
-                            </button>
-                            <button
-                                onClick={() => setSelectedTab('exercises')}
-                                className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                                    selectedTab === 'exercises' 
-                                    ? 'bg-blue-600 text-white shadow-lg' 
-                                    : 'bg-white text-slate-600 hover:bg-slate-50'
-                                }`}
-                            >
-                                <i className="fas fa-book mr-2"></i>Bài tập ôn
-                            </button>
+                            
+                            {/* DYNAMIC TABS - TỰ ĐỘNG PHÁT HIỆN CÁC BẢNG QUIZ */}
+                            {Object.keys(allQuizData).map((tableName, index) => {
+                                const displayName = getTableDisplayName(tableName);
+                                return (
+                                    <button
+                                        key={tableName}
+                                        onClick={() => setSelectedTab(`quiz_${tableName}`)}
+                                        className={`px-6 py-3 rounded-xl font-semibold transition-all whitespace-nowrap ${
+                                            selectedTab === `quiz_${tableName}` 
+                                            ? 'bg-blue-600 text-white shadow-lg' 
+                                            : 'bg-white text-slate-600 hover:bg-slate-50'
+                                        }`}
+                                    >
+                                        <i className="fas fa-clipboard-list mr-2"></i>
+                                        {displayName}
+                                        <span className="ml-1 bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full">
+                                            {allQuizData[tableName]?.length || 0}
+                                        </span>
+                                    </button>
+                                );
+                            })}
+                            
                             <button
                                 onClick={() => setSelectedTab('stats')}
                                 className={`px-6 py-3 rounded-xl font-semibold transition-all ${
@@ -733,6 +830,81 @@
                                         </div>
                                     </div>
                                 )}
+
+                                {/* DYNAMIC QUIZ TABS */}
+                                {Object.keys(allQuizData).map((tableName) => {
+                                    const isSelected = selectedTab === `quiz_${tableName}`;
+                                    if (!isSelected) return null;
+                                    
+                                    const data = allQuizData[tableName] || [];
+                                    const displayName = getTableDisplayName(tableName);
+                                    
+                                    return (
+                                        <div key={tableName} className="glass-panel p-6">
+                                            <div className="flex justify-between items-center mb-6">
+                                                <h3 className="font-bold text-lg text-slate-800">
+                                                    <i className="fas fa-clipboard-list mr-2 text-blue-500"></i>
+                                                    Kết quả {displayName} ({data.length})
+                                                </h3>
+                                                <button
+                                                    onClick={() => exportTableToExcel(tableName, displayName)}
+                                                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                                                >
+                                                    <i className="fas fa-file-excel mr-2"></i>Xuất Excel
+                                                </button>
+                                            </div>
+                                            
+                                            {data.length === 0 ? (
+                                                <p className="text-center text-slate-500 py-8">Chưa có dữ liệu</p>
+                                            ) : (
+                                                <div className="overflow-x-auto">
+                                                    <table className="w-full">
+                                                        <thead className="bg-slate-50">
+                                                            <tr>
+                                                                <th className="px-4 py-3 text-left">STT</th>
+                                                                <th className="px-4 py-3 text-left">Họ tên</th>
+                                                                <th className="px-4 py-3 text-left">Lớp</th>
+                                                                <th className="px-4 py-3 text-center">Điểm</th>
+                                                                <th className="px-4 py-3 text-center">TG (giây)</th>
+                                                                <th className="px-4 py-3 text-center">Cảnh báo</th>
+                                                                <th className="px-4 py-3 text-left">Ngày làm</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {data.map((attempt, index) => (
+                                                                <tr key={attempt.id} className="border-b hover:bg-slate-50">
+                                                                    <td className="px-4 py-3">{index + 1}</td>
+                                                                    <td className="px-4 py-3 font-medium">
+                                                                        {attempt.students?.full_name || 'N/A'}
+                                                                    </td>
+                                                                    <td className="px-4 py-3">
+                                                                        {attempt.students?.class_name || 'N/A'}
+                                                                    </td>
+                                                                    <td className="px-4 py-3 text-center">
+                                                                        <span className={`font-bold ${
+                                                                            attempt.score >= 40 ? 'text-green-600' : 'text-red-600'
+                                                                        }`}>
+                                                                            {attempt.score || 0}
+                                                                        </span>
+                                                                    </td>
+                                                                    <td className="px-4 py-3 text-center">
+                                                                        {attempt.time_taken || 0}
+                                                                    </td>
+                                                                    <td className="px-4 py-3 text-center">
+                                                                        {attempt.cheat_warnings || 0}
+                                                                    </td>
+                                                                    <td className="px-4 py-3 text-sm">
+                                                                        {new Date(attempt.created_at).toLocaleString('vi-VN')}
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
 
                                 {/* TAB: THỐNG KÊ */}
                                 {selectedTab === 'stats' && (
