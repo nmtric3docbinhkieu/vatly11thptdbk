@@ -182,7 +182,7 @@
         <p class="text-slate-500 font-semibold text-xs md:text-sm">Thí nghiệm ảo - Vật lí 11</p>
     </header>
     
-    <!-- Tabs - KHÔNG CÒN THANH CUỘN NGANG -->
+    <!-- Tabs -->
     <div class="flex gap-1 md:gap-2 mb-4">
         <button id="tab1" class="tab-btn active">
             <i class="fas fa-hand-sparkles text-xs"></i>
@@ -259,7 +259,9 @@
 <script>
     let currentTab = 1, charge = 0, isDragging = false, dragOffset;
     let ruler, cloth, sphere, scraps = [], audioCtx;
-    let scaleFactor = 1; // Hệ số tỉ lệ cho mobile
+    let scaleFactor = 1;
+    // BIẾN MỚI: ghi nhớ trạng thái nhiễm điện của vải
+    let clothIsCharged = false; // false = trung hòa, true = đã nhiễm điện dương
 
     // Audio functions
     function playSfx(freq, type = 'sine') {
@@ -281,20 +283,19 @@
         let cnv = createCanvas(p.offsetWidth, p.offsetHeight);
         cnv.parent('canvas-parent');
         
-        // GIẢM 10% SO VỚI KÍCH THƯỚC HIỆN TẠI
-        scaleFactor = min(1.6, width / 330); // Giảm từ 1.8 xuống 1.6 (khoảng 10%)
+        scaleFactor = min(1.6, width / 330);
         initSim();
     }
 
     function initSim() {
         charge = 0;
+        clothIsCharged = false; // Reset trạng thái vải
         
-        // GIẢM 10% SO VỚI KÍCH THƯỚC TRƯỚC ĐÓ
-        let rulerHeight = 160 * scaleFactor; // Giảm từ 180 xuống 160
-        let rulerWidth = 40 * scaleFactor;   // Giảm từ 45 xuống 40
-        let clothWidth = 145 * scaleFactor;   // Giảm từ 160 xuống 145
-        let clothHeight = 100 * scaleFactor;  // Giảm từ 110 xuống 100
-        let sphereRadius = 100 * scaleFactor; // Giảm từ 110 xuống 100
+        let rulerHeight = 160 * scaleFactor;
+        let rulerWidth = 40 * scaleFactor;
+        let clothWidth = 145 * scaleFactor;
+        let clothHeight = 100 * scaleFactor;
+        let sphereRadius = 100 * scaleFactor;
         
         ruler = { 
             x: width/2, 
@@ -336,7 +337,6 @@
         playSfx(400 + t*100, 'triangle');
         currentTab = t;
         
-        // Update tab buttons
         document.querySelectorAll('.tab-btn').forEach((btn, index) => {
             if(index + 1 === t) {
                 btn.classList.add('active');
@@ -381,13 +381,15 @@
         textSize(12 * scaleFactor);
         text("VẢI KHÔ", cloth.x, cloth.y + 10 * scaleFactor);
         
-        // Dấu + trên vải
-        fill(239, 68, 68);
-        textSize(20 * scaleFactor);
-        textStyle(BOLD);
-        let spacing = 30 * scaleFactor;
-        for(let i=0; i<3; i++) {
-            text("+", cloth.x - spacing + i*spacing, cloth.y - 15 * scaleFactor);
+        // Dấu + trên vải - HIỂN THỊ VĨNH VIỄN KHI VẢI ĐÃ NHIỄM ĐIỆN
+        if (clothIsCharged) {
+            fill(239, 68, 68);
+            textSize(20 * scaleFactor);
+            textStyle(BOLD);
+            let spacing = 30 * scaleFactor;
+            for(let i=0; i<3; i++) {
+                text("+", cloth.x - spacing + i*spacing, cloth.y - 15 * scaleFactor);
+            }
         }
         pop();
 
@@ -418,6 +420,12 @@
         // Sạc điện bằng cọ xát
         if(isDragging && dist(ruler.x, ruler.y + ruler.h/2, cloth.x, cloth.y) < 60 * scaleFactor) {
             charge = min(charge + 1.5, 100);
+            
+            // Khi charge đạt ngưỡng, đánh dấu vải đã nhiễm điện
+            if (charge > 20) {
+                clothIsCharged = true;
+            }
+            
             if(frameCount % 8 === 0) playSfx(200 + charge*5, 'sine');
             updateUI();
         }
@@ -557,7 +565,11 @@
         const infoText = document.getElementById('info-text');
 
         if(currentTab === 1) {
-            guideText.innerText = charge < 80 ? "👉 CỌ XÁT THƯỚC VÀO VẢI" : "✅ THƯỚC ĐÃ NHIỄM ĐIỆN";
+            if (charge < 80) {
+                guideText.innerText = "👉 CỌ XÁT THƯỚC VÀO VẢI";
+            } else {
+                guideText.innerText = "✅ THƯỚC ĐÃ NHIỄM ĐIỆN";
+            }
             infoText.innerText = "Khi cọ xát, electron từ vải chuyển sang thước nhựa, làm thước thừa electron (nhiễm điện âm).";
         } else if(currentTab === 2) {
             guideText.innerText = "👉 CHẠM ĐẦU THƯỚC VÀO QUẢ CẦU";
@@ -612,7 +624,6 @@
 
     // Event listeners
     document.addEventListener('DOMContentLoaded', function() {
-        // Tab buttons
         document.getElementById('tab1').addEventListener('click', (e) => { e.preventDefault(); switchTab(1); });
         document.getElementById('tab1').addEventListener('touchstart', (e) => { e.preventDefault(); switchTab(1); });
 
@@ -622,7 +633,6 @@
         document.getElementById('tab3').addEventListener('click', (e) => { e.preventDefault(); switchTab(3); });
         document.getElementById('tab3').addEventListener('touchstart', (e) => { e.preventDefault(); switchTab(3); });
 
-        // Reset button
         document.getElementById('resetBtn').addEventListener('click', (e) => { e.preventDefault(); resetSim(); });
         document.getElementById('resetBtn').addEventListener('touchstart', (e) => { e.preventDefault(); resetSim(); });
     });
