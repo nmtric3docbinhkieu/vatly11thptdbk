@@ -351,8 +351,7 @@ window.fetchLeaderboard = async function(testType = 'quiz') {
         const { data, error } = await supabase
             .from(viewName)
             .select('*')
-            .order('highest_score', { ascending: false })
-            .limit(20);
+            .order('highest_score', { ascending: false });
         
         if (error) {
             console.error('Lỗi khi lấy leaderboard:', error);
@@ -360,6 +359,10 @@ window.fetchLeaderboard = async function(testType = 'quiz') {
         }
         
         console.log('Bảng xếp hạng:', data);
+        if (data && data.length > 0) {
+            console.log('Sample item structure:', data[0]);
+            console.log('highest_score value:', data[0].highest_score);
+        }
         return data;
         
     } catch (err) {

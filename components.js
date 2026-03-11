@@ -1369,3 +1369,179 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
         )
     );
 };
+
+// Component hiển thị kết quả và bảng xếp hạng
+window.LeaderboardScreen = function({ score, elapsedTime, cheatWarnings, leaderboard, onRestart, onHome }) {
+    const [sortBy, setSortBy] = React.useState('score');
+    const [sortOrder, setSortOrder] = React.useState('desc');
+    
+    // Format thời gian
+    const formatTime = (seconds) => {
+        if (!seconds) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    };
+    
+    // Sắp xếp leaderboard
+    const sortedLeaderboard = React.useMemo(() => {
+        if (!leaderboard || leaderboard.length === 0) return [];
+        
+        return [...leaderboard].sort((a, b) => {
+            if (sortBy === 'score') {
+                return sortOrder === 'desc' 
+                    ? b.highest_score - a.highest_score
+                    : a.highest_score - b.highest_score;
+            } else if (sortBy === 'name') {
+                return sortOrder === 'desc'
+                    ? b.full_name.localeCompare(a.full_name)
+                    : a.full_name.localeCompare(b.full_name);
+            } else if (sortBy === 'class') {
+                return sortOrder === 'desc'
+                    ? b.class_name.localeCompare(a.class_name)
+                    : a.class_name.localeCompare(b.class_name);
+            }
+            return 0;
+        });
+    }, [leaderboard, sortBy, sortOrder]);
+    
+    // Toggle sort
+    const toggleSort = (field) => {
+        if (sortBy === field) {
+            setSortOrder(prev => prev === 'desc' ? 'asc' : 'desc');
+        } else {
+            setSortBy(field);
+            setSortOrder('desc');
+        }
+    };
+    
+    return React.createElement('div', { className: "max-w-4xl mx-auto px-4 py-10" },
+        React.createElement('div', { className: "glass-panel p-8 border-t-8 border-yellow-500" },
+            // Header
+            React.createElement('h1', { className: "text-3xl font-black text-center mb-8" }, "KẾT QUẢ & BẢNG XẾP HẠNG"),
+            
+            // Kết quả của học sinh
+            React.createElement('div', { className: "bg-blue-50 rounded-2xl p-6 mb-8" },
+                React.createElement('div', { className: "grid grid-cols-2 md:grid-cols-4 gap-4" },
+                    React.createElement('div', null,
+                        React.createElement('div', { className: "text-2xl font-black text-blue-600" }, (score || 0).toFixed(1)),
+                        React.createElement('div', { className: "text-sm" }, "Điểm của bạn")
+                    ),
+                    React.createElement('div', null,
+                        React.createElement('div', { className: "text-2xl font-black text-blue-600" }, formatTime(elapsedTime)),
+                        React.createElement('div', { className: "text-sm" }, "Thời gian")
+                    ),
+                    React.createElement('div', null,
+                        React.createElement('div', { className: "text-2xl font-black text-red-600" }, cheatWarnings || 0),
+                        React.createElement('div', { className: "text-sm" }, "Cảnh báo")
+                    ),
+                    React.createElement('div', null,
+                        React.createElement('div', { className: "text-2xl font-black text-green-600" }, leaderboard?.length || 0),
+                        React.createElement('div', { className: "text-sm" }, "Người tham gia")
+                    )
+                )
+            ),
+            
+            // Bảng xếp hạng
+            React.createElement('div', { className: "mb-6" },
+                React.createElement('div', { className: "flex justify-between items-center mb-4" },
+                    React.createElement('h2', { className: "text-xl font-bold" }, "Bảng xếp hạng"),
+                    React.createElement('div', { className: "flex gap-2 text-sm" },
+                        React.createElement('button', {
+                            onClick: () => toggleSort('score'),
+                            className: `px-3 py-1 rounded-lg ${sortBy === 'score' ? 'bg-blue-600 text-white' : 'bg-slate-100'}` 
+                        }, "Điểm", sortBy === 'score' && (sortOrder === 'desc' ? ' ↓' : ' ↑')),
+                        React.createElement('button', {
+                            onClick: () => toggleSort('name'),
+                            className: `px-3 py-1 rounded-lg ${sortBy === 'name' ? 'bg-blue-600 text-white' : 'bg-slate-100'}` 
+                        }, "Tên", sortBy === 'name' && (sortOrder === 'desc' ? ' ↓' : ' ↑')),
+                        React.createElement('button', {
+                            onClick: () => toggleSort('class'),
+                            className: `px-3 py-1 rounded-lg ${sortBy === 'class' ? 'bg-blue-600 text-white' : 'bg-slate-100'}` 
+                        }, "Lớp", sortBy === 'class' && (sortOrder === 'desc' ? ' ↓' : ' ↑'))
+                    )
+                ),
+                
+                leaderboard && leaderboard.length === 0 
+                    ? React.createElement('div', { className: "text-center py-12 text-slate-500" },
+                        React.createElement('i', { className: "fas fa-trophy text-6xl text-slate-300 mb-4" }),
+                        React.createElement('p', null, "Chưa có dữ liệu bảng xếp hạng"),
+                        React.createElement('p', { className: "text-sm mt-2" }, "Hãy là người đầu tiên làm bài!")
+                      )
+                    : React.createElement('div', { className: "overflow-x-auto" },
+                        React.createElement('table', { className: "w-full" },
+                            React.createElement('thead', { className: "bg-slate-50" },
+                                React.createElement('tr', null,
+                                    React.createElement('th', { className: "px-4 py-3 text-left" }, "#"),
+                                    React.createElement('th', { className: "px-4 py-3 text-left" }, "Họ tên"),
+                                    React.createElement('th', { className: "px-4 py-3 text-left" }, "Lớp"),
+                                    React.createElement('th', { className: "px-4 py-3 text-center" }, "Điểm cao nhất")
+                                )
+                            ),
+                            React.createElement('tbody', null,
+                                sortedLeaderboard.map((item, idx) => 
+                                    React.createElement('tr', { 
+                                        key: idx, 
+                                        className: "border-b hover:bg-slate-50" 
+                                    },
+                                        React.createElement('td', { className: "px-4 py-3 font-bold" },
+                                            idx === 0 && React.createElement('span', { className: "text-yellow-500 mr-1" }, "🥇"),
+                                            idx === 1 && React.createElement('span', { className: "text-gray-400 mr-1" }, "🥈"),
+                                            idx === 2 && React.createElement('span', { className: "text-amber-600 mr-1" }, "🥉"),
+                                            idx + 1
+                                        ),
+                                        React.createElement('td', { className: "px-4 py-3 font-medium" }, item.full_name),
+                                        React.createElement('td', { className: "px-4 py-3" }, item.class_name),
+                                        React.createElement('td', { className: "px-4 py-3 text-center font-bold text-blue-600" },
+                                            (item.highest_score || 0).toFixed(1)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                      )
+            ),
+            
+            // Buttons
+            React.createElement('div', { className: "flex gap-4 mt-8" },
+                React.createElement('button', { 
+                    onClick: onRestart,
+                    className: "flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition"
+                },
+                    React.createElement('i', { className: "fas fa-redo-alt mr-2" }),
+                    "Làm lại"
+                ),
+                React.createElement('button', { 
+                    onClick: onHome,
+                    className: "flex-1 bg-slate-100 py-4 rounded-xl font-bold hover:bg-slate-200 transition"
+                },
+                    React.createElement('i', { className: "fas fa-home mr-2" }),
+                    "Về trang chủ"
+                )
+            )
+        )
+    );
+};
+
+// Component đơn giản cho trường hợp không có leaderboard
+window.SimpleEndScreen = function({ score, cheatWarnings, onRestart, onHome }) {
+    return React.createElement('div', { className: "flex items-center justify-center min-h-screen p-4" },
+        React.createElement('div', { className: "glass-panel p-10 text-center max-w-md" },
+            React.createElement('i', { className: "fas fa-trophy text-6xl text-yellow-500 mb-6" }),
+            React.createElement('h2', { className: "text-2xl font-bold mb-2" }, "HOÀN THÀNH"),
+            React.createElement('div', { className: "text-7xl font-black text-blue-600 mb-4" }, (score || 0).toFixed(1)),
+            React.createElement('p', { className: "text-slate-400 mb-6" }, "Điểm số của bạn"),
+            cheatWarnings > 0 && React.createElement('div', { className: "mb-4 p-4 bg-red-50 rounded-xl text-red-600" },
+                "Cảnh báo gian lận: " + cheatWarnings + " lần"
+            ),
+            React.createElement('button', { 
+                onClick: onRestart,
+                className: "w-full bg-slate-800 text-white py-4 rounded-xl mb-3"
+            }, "LÀM LẠI"),
+            React.createElement('button', { 
+                onClick: onHome,
+                className: "w-full bg-slate-100 py-3 rounded-xl"
+            }, "VỀ TRANG CHỦ")
+        )
+    );
+};
