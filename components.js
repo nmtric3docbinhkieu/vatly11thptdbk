@@ -364,7 +364,7 @@ window.Chapter3ActivityScreen = function({ onSelectActivity, onLogout, student }
                         React.createElement('i', { className: "fas fa-clipboard-check text-red-600 text-xl" })
                     ),
                     React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Kiểm tra Chương 3"),
-                    React.createElement('div', { className: "text-slate-600 text-sm" }, "25 câu theo 4 dạng bài tập")
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "40 câu theo 4 dạng bài tập")
                 )
             ),
             
