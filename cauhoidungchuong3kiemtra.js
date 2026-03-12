@@ -1,7 +1,7 @@
 // ==============================================
-// FILE: kiemtrachuong3.js - 40 câu hoàn chỉnh
+// FILE: kiem_tra_giua_HK2_day_du.js
 // ==============================================
-// Ngân hàng câu hỏi kiểm tra chương 3 - 40 câu
+// Ngân hàng câu hỏi kiểm tra giữa học kỳ 2
 // Vật lí 11 - Năm học 2025-2026
 // Cấu trúc: 
 // - Phần I: Trắc nghiệm nhiều lựa chọn (24 câu)
@@ -14,7 +14,7 @@
 // - Phần IV: Tự luận (4 câu)
 // ==============================================
 
-window.questionsChapter3 = [
+window.questionsKiemTraGiuaHK2 = [
     // ============================================
     // PHẦN I: TRẮC NGHIỆM NHIỀU LỰA CHỌN (24 CÂU)
     // ============================================
@@ -50,7 +50,7 @@ window.questionsChapter3 = [
             "Tổng độ lớn của hai điện tích."
         ],
         a: 2,
-        expl: "Công thức $F = \\frac{k|q_1q_2|}{r^2}$ cho thấy $F \\propto |q_1q_2|$."
+        expl: "Công thức $F = k\\frac{|q_1q_2|}{r^2}$ cho thấy $F \\propto |q_1q_2|$."
     },
     
     // Câu 4 (TH - Bài 11)
@@ -477,8 +477,4 @@ window.questionsChapter3 = [
         answer: "$E = k\\frac{Q}{\\varepsilon r^2} \\Rightarrow r = \\sqrt{\\frac{kQ}{\\varepsilon E}} = \\sqrt{\\frac{9.10^9.2}{2.4500}} = \\sqrt{2.10^6} \\approx 1414 m$",
         expl: "Công thức tính cường độ điện trường trong môi trường điện môi: $E = k\\frac{|Q|}{\\varepsilon r^2}$"
     }
-    
 ];
-
-// Dành riêng cho kiểm tra giữa học kỳ 2
-window.questionsKTGHK2 = [...window.questionsChapter3];
