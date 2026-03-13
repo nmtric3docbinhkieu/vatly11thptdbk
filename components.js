@@ -1169,14 +1169,14 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                                 (showExpl && isCorrect ? "border-green-500 bg-green-50" : "border-slate-200 bg-white") + 
                                 " shadow-sm" 
                         },
-                            React.createElement('div', { className: "flex items-start gap-4" },
+                            React.createElement('div', { className: "flex flex-col gap-3" },
                                 React.createElement('div', { 
-                                    className: "flex gap-3 mt-1"
+                                    className: "flex gap-3 justify-center"
                                 },
                                     React.createElement('button', {
                                         onClick: function() { handleTrueFalseSelect(i, 'true'); },
                                         disabled: isSelected || showExpl,
-                                        className: `px-4 py-2 rounded-lg border-2 font-bold transition-colors ${
+                                        className: `px-6 py-2 rounded-lg border-2 font-bold transition-colors ${
                                             showExpl && isCorrect
                                                 ? 'bg-green-500 text-white border-green-500' 
                                                 : selectedValue === 'true'
@@ -1187,7 +1187,7 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                                     React.createElement('button', {
                                         onClick: function() { handleTrueFalseSelect(i, 'false'); },
                                         disabled: isSelected || showExpl,
-                                        className: `px-4 py-2 rounded-lg border-2 font-bold transition-colors ${
+                                        className: `px-6 py-2 rounded-lg border-2 font-bold transition-colors ${
                                             showExpl && !isCorrect
                                                 ? 'bg-red-500 text-white border-red-500' 
                                                 : selectedValue === 'false'
@@ -1196,7 +1196,7 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                                         } ${isSelected || showExpl ? 'cursor-not-allowed opacity-50' : ''}`
                                     }, "SAI")
                                 ),
-                                React.createElement('div', { className: "flex-1" },
+                                React.createElement('div', { className: "text-center" },
                                     React.createElement('div', { className: "font-bold text-slate-800 mb-2" },
                                         "Câu " + (i + 1) + "."
                                     ),
