@@ -1166,7 +1166,11 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                         return React.createElement('div', { 
                             key: i, 
                             className: "p-5 rounded-2xl border-2 " + 
-                                (showExpl && isCorrect ? "border-green-500 bg-green-50" : "border-slate-200 bg-white") + 
+                                (showExpl 
+                                    ? (selectedValue === String(part.correct) 
+                                        ? "border-green-500 bg-green-50" 
+                                        : "border-red-500 bg-red-50")
+                                    : "border-slate-200 bg-white") + 
                                 " shadow-sm" 
                         },
                             React.createElement('div', { className: "flex flex-col gap-3" },
@@ -1177,23 +1181,31 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                                         onClick: function() { handleTrueFalseSelect(i, 'true'); },
                                         disabled: isSelected || showExpl,
                                         className: `px-6 py-2 rounded-lg border-2 font-bold transition-colors ${
-                                            showExpl && isCorrect
-                                                ? 'bg-green-500 text-white border-green-500' 
+                                            showExpl
+                                                ? isCorrect 
+                                                    ? 'bg-green-500 text-white border-green-500 shadow-lg' 
+                                                    : selectedValue === 'true'
+                                                        ? 'bg-green-200 text-green-800 border-green-300' 
+                                                        : 'bg-gray-100 text-gray-400 border-gray-200'
                                                 : selectedValue === 'true'
                                                     ? 'bg-green-500 text-white border-green-500' 
                                                     : 'border-green-200 text-green-700 hover:bg-green-50'
-                                        } ${isSelected || showExpl ? 'cursor-not-allowed opacity-50' : ''}`
+                                        } ${isSelected || showExpl ? 'cursor-not-allowed' : ''}`
                                     }, "ĐÚNG"),
                                     React.createElement('button', {
                                         onClick: function() { handleTrueFalseSelect(i, 'false'); },
                                         disabled: isSelected || showExpl,
                                         className: `px-6 py-2 rounded-lg border-2 font-bold transition-colors ${
-                                            showExpl && !isCorrect
-                                                ? 'bg-red-500 text-white border-red-500' 
+                                            showExpl
+                                                ? !isCorrect 
+                                                    ? 'bg-green-500 text-white border-green-500 shadow-lg' 
+                                                    : selectedValue === 'false'
+                                                        ? 'bg-red-200 text-red-800 border-red-300' 
+                                                        : 'bg-gray-100 text-gray-400 border-gray-200'
                                                 : selectedValue === 'false'
                                                     ? 'bg-red-500 text-white border-red-500' 
                                                     : 'border-red-200 text-red-700 hover:bg-red-50'
-                                        } ${isSelected || showExpl ? 'cursor-not-allowed opacity-50' : ''}`
+                                        } ${isSelected || showExpl ? 'cursor-not-allowed' : ''}`
                                     }, "SAI")
                                 ),
                                 React.createElement('div', { className: "text-center" },
