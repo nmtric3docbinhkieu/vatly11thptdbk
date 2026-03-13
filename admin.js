@@ -19,7 +19,22 @@ window.exportToExcel = async function(adminPassword) {
         const summary = (students || []).map(student => {
             const attempts = student.quiz_attempts_chapter3 || [];
             const scores = attempts.map(a => a.score).filter(s => s != null);
-            const warnings = attempts.map(a => a.cheat_warnings || 0);
+            
+            // Format thời gian cho từng attempt
+            const attemptTimes = attempts.map(a => {
+                if (!a.created_at) return '';
+                const date = new Date(a.created_at);
+                return date.toLocaleString('vi-VN', {
+                    timeZone: 'Asia/Ho_Chi_Minh',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                });
+            }).join('; ');
             
             return {
                 "Họ và tên": student.full_name,
@@ -29,8 +44,8 @@ window.exportToExcel = async function(adminPassword) {
                 "Điểm trung bình": scores.length > 0 
                     ? Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2))
                     : 0,
-                "Số lần cảnh báo": warnings.length > 0 ? Math.max(...warnings) : 0,
-                "Lần làm cuối": attempts.length > 0 ? window.formatVNTime(attempts[0].created_at) : "Chưa làm"
+                "Lần làm cuối": attempts.length > 0 ? attemptTimes.split('; ')[0] : "Chưa làm",
+                "Chi tiết thời gian làm bài (VN)": attemptTimes
             };
         });
         
@@ -43,7 +58,7 @@ window.exportToExcel = async function(adminPassword) {
             const diemCaoNhat = r['Điểm cao nhất'] || 0;
             const diemTrungBinh = r['Điểm trung bình'] || 0;
             const canhBao = r['Tổng cảnh báo gian lận'] || 0;
-            const thoiGianChiTiet = r['Chi tiết thời gian làm bài'] || '';
+            const thoiGianChiTiet = r['Chi tiết thời gian làm bài (VN)'] || '';
             
             return {
                 'STT': i + 1,
@@ -101,6 +116,19 @@ window.exportExerciseResults = async function(adminPassword) {
         const summary = exerciseAttempts.map(attempt => {
             const correctAnswers = attempt.correct_answers || Math.round((attempt.score / 50) * (attempt.total_questions || 60));
             
+            // Format thời gian
+            const formattedTime = attempt.created_at ? 
+                new Date(attempt.created_at).toLocaleString('vi-VN', {
+                    timeZone: 'Asia/Ho_Chi_Minh',
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                }) : '';
+            
             return {
                 "Họ và tên": attempt.students?.full_name || '',
                 "Lớp": attempt.students?.class_name || '',
@@ -108,19 +136,23 @@ window.exportExerciseResults = async function(adminPassword) {
                 "Tổng số câu": attempt.total_questions || 60,
                 "Thời gian làm (phút)": Math.floor((attempt.time_taken || 0) / 60),
                 "Số lần cảnh báo": attempt.cheat_warnings || 0,
-                "Ngày làm": window.formatVNTime(attempt.created_at)
+                "Ngày làm (VN)": formattedTime
             };
         });
         
         // Xuất Excel
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('vi-VN', {
+            timeZone: 'Asia/Ho_Chi_Minh',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        }).replace(/\//g, '-');
+        
         const ws = window.XLSX.utils.json_to_sheet(summary);
         const wb = window.XLSX.utils.book_new();
         window.XLSX.utils.book_append_sheet(wb, ws, "BaiTapOn");
-        
-        const now = new Date();
-        const dateStr = now.toISOString().split('T')[0];
-        const timeStr = now.toTimeString().split(' ')[0].replace(/:/g, '-');
-        window.XLSX.writeFile(wb, `ket-qua-bai-tap-on-${dateStr}_${timeStr}.xlsx`);
+        window.XLSX.writeFile(wb, `ket-qua-bai-tap-on-${dateStr}.xlsx`);
         
         return { success: true };
         

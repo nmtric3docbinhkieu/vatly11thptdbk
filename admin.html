@@ -55,6 +55,111 @@
             const [selectedStudent, setSelectedStudent] = useState(null);
             const [newPassword, setNewPassword] = useState('');
             
+            // Function format thời gian Việt Nam (GMT+7) - ĐÃ SỬA LỖI
+            const formatTimeVN = (dateString, showTime = true) => {
+                if (!dateString) return '';
+                
+                try {
+                    let processedDateString = dateString;
+                    
+                    // Nếu có +00:00 (UTC timezone), loại bỏ nó để JavaScript hiểu là local time
+                    if (typeof dateString === 'string' && dateString.includes('+00:00')) {
+                        // Chuyển "2026-03-13T19:40:42.933+00:00" thành "2026-03-13T19:40:42.933"
+                        processedDateString = dateString.replace('+00:00', '');
+                    }
+                    
+                    // Tạo Date object với processed string
+                    const date = new Date(processedDateString);
+                    
+                    // Kiểm tra date hợp lệ
+                    if (isNaN(date.getTime())) {
+                        console.log('Invalid date:', dateString);
+                        return '';
+                    }
+                    
+                    // Sử dụng toLocaleString với timeZone: 'Asia/Ho_Chi_Minh'
+                    if (showTime) {
+                        return date.toLocaleString('vi-VN', {
+                            timeZone: 'Asia/Ho_Chi_Minh',
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            hour12: false
+                        });
+                    } else {
+                        return date.toLocaleDateString('vi-VN', {
+                            timeZone: 'Asia/Ho_Chi_Minh',
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        });
+                    }
+                } catch (err) {
+                    console.error('Error in formatTimeVN:', err);
+                    return '';
+                }
+            };
+
+            // Format chỉ hiển thị giờ:phút
+            const formatTimeOnly = (dateString) => {
+                if (!dateString) return '';
+                
+                try {
+                    let processedDateString = dateString;
+                    
+                    // Loại bỏ +00:00 nếu có
+                    if (typeof dateString === 'string' && dateString.includes('+00:00')) {
+                        processedDateString = dateString.replace('+00:00', '');
+                    }
+                    
+                    const date = new Date(processedDateString);
+                    if (isNaN(date.getTime())) return '';
+                    
+                    return date.toLocaleTimeString('vi-VN', {
+                        timeZone: 'Asia/Ho_Chi_Minh',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                    });
+                } catch (err) {
+                    console.error('Error in formatTimeOnly:', err);
+                    return '';
+                }
+            };
+
+            // Format cho bảng xếp hạng
+            const formatDateTimeVN = (dateString) => {
+                if (!dateString) return '';
+                
+                try {
+                    let processedDateString = dateString;
+                    
+                    // Loại bỏ +00:00 nếu có
+                    if (typeof dateString === 'string' && dateString.includes('+00:00')) {
+                        processedDateString = dateString.replace('+00:00', '');
+                    }
+                    
+                    const date = new Date(processedDateString);
+                    if (isNaN(date.getTime())) return '';
+                    
+                    return date.toLocaleString('vi-VN', {
+                        timeZone: 'Asia/Ho_Chi_Minh',
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                    });
+                } catch (err) {
+                    console.error('Error in formatDateTimeVN:', err);
+                    return '';
+                }
+            };
+            
             // Thống kê
             const [stats, setStats] = useState({
                 totalStudents: 0,
@@ -148,6 +253,7 @@
                 for (const tableName of tables) {
                     try {
                         const supabase = window.getSupabase();
+                        
                         const { data } = await supabase
                             .from(tableName)
                             .select('*, students(*)')
@@ -314,7 +420,7 @@
                     'Điểm': attempt.score || 0,
                     'TG làm bài (giây)': attempt.time_taken || 0,
                     'Cảnh báo': attempt.cheat_warnings || 0,
-                    'Ngày làm': new Date(attempt.created_at).toLocaleString('vi-VN')
+                    'Ngày làm': formatTimeVN(attempt.created_at)
                 }));
                 
                 const ws = window.XLSX.utils.json_to_sheet(rows);
@@ -332,7 +438,7 @@
                     'Điểm': a.score,
                     'TG làm bài (giây)': a.time_taken || 0,
                     'Cảnh báo': a.cheat_warnings || 0,
-                    'Ngày làm': new Date(a.created_at).toLocaleString('vi-VN')
+                    'Ngày làm': formatTimeVN(a.created_at)
                 }));
                 
                 const ws = window.XLSX.utils.json_to_sheet(rows);
@@ -347,7 +453,7 @@
                     'STT': i + 1,
                     'Họ tên': s.full_name,
                     'Lớp': s.class_name,
-                    'Ngày tạo': new Date(s.created_at).toLocaleString('vi-VN')
+                    'Ngày tạo': formatTimeVN(s.created_at)
                 }));
                 
                 const ws = window.XLSX.utils.json_to_sheet(rows);
@@ -415,7 +521,7 @@
                             <div className="flex items-center gap-4">
                                 <span className="text-sm text-slate-500">
                                     <i className="far fa-clock mr-1"></i>
-                                    {new Date().toLocaleDateString('vi-VN')}
+                                    {formatTimeVN(new Date(), false)}
                                 </span>
                                 <button
                                     onClick={() => setIsLoggedIn(false)}
@@ -560,7 +666,7 @@
                                                         </div>
                                                         <div className="text-right">
                                                             <p className="text-xl font-bold text-blue-600">{s.score}</p>
-                                                            <p className="text-xs text-slate-400">{new Date(s.date).toLocaleDateString()}</p>
+                                                            <p className="text-xs text-slate-400">{formatTimeVN(s.date, false)}</p>
                                                         </div>
                                                     </div>
                                                 ))}
@@ -615,7 +721,7 @@
                                                             <p className="font-bold">{s.full_name}</p>
                                                             <p className="text-sm text-slate-500">Lớp: {s.class_name}</p>
                                                             <p className="text-xs text-slate-400">
-                                                                Đăng ký: {new Date(s.created_at).toLocaleString('vi-VN')}
+                                                                Đăng ký: {formatTimeVN(s.created_at)}
                                                             </p>
                                                         </div>
                                                         <div className="flex gap-2">
@@ -682,7 +788,7 @@
                                                             <td className="px-4 py-3 font-medium">{s.full_name}</td>
                                                             <td className="px-4 py-3">{s.class_name}</td>
                                                             <td className="px-4 py-3 text-sm text-slate-500">
-                                                                {new Date(s.created_at).toLocaleDateString()}
+                                                                {formatTimeVN(s.created_at, false)}
                                                             </td>
                                                             <td className="px-4 py-3 text-center">
                                                                 <button
@@ -754,7 +860,7 @@
                                                                 )}
                                                             </td>
                                                             <td className="px-4 py-3 text-sm text-slate-500">
-                                                                {new Date(a.created_at).toLocaleString()}
+                                                                {formatDateTimeVN(a.created_at)}
                                                             </td>
                                                         </tr>
                                                     ))}
@@ -893,7 +999,7 @@
                                                                         {attempt.cheat_warnings || 0}
                                                                     </td>
                                                                     <td className="px-4 py-3 text-sm">
-                                                                        {new Date(attempt.created_at).toLocaleString('vi-VN')}
+                                                                        {formatDateTimeVN(attempt.created_at)}
                                                                     </td>
                                                                 </tr>
                                                             ))}
