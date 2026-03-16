@@ -322,252 +322,275 @@ window.questionsChapter3 = [
     // PHẦN II: TRẮC NGHIỆM ĐÚNG - SAI (4 CÂU)
     // ============================================
     
-    // Câu 25 (Bài 11) - Câu 1 phần Đúng-Sai trong PDF
+    // Câu 25 (Bài 11) - Câu 1 phần Đúng-Sai
     {
         type: "true-false",
-        q: "Xét hai điện tích điểm q₁ = 2·10⁻⁸ C và q₂ = −4·10⁻⁸ C đặt cố định tại hai điểm cách nhau r = 3 cm trong chân không. Biết ε = 1, k = 9·10⁹ Nm²/C².",
+        q: "Xét hai điện tích điểm q₁ = 2·10⁻⁸ C và q₂ = −8·10⁻⁸ C đặt cố định tại hai điểm cách nhau r = 4 cm trong chân không. Biết ε = 1, k = 9·10⁹ Nm²/C².",
         parts: [
-            { content: "Độ lớn lực tương tác tĩnh điện giữa hai điện tích này khi đặt trong chân không là 8·10⁻³ N.", correct: true },
+            { content: "Độ lớn lực tương tác tĩnh điện giữa hai điện tích này khi đặt trong chân không là 9·10⁻³ N.", correct: true },
             { content: "Nếu giữ nguyên khoảng cách và độ lớn điện tích nhưng đưa chúng vào môi trường điện môi, lực tương tác sẽ luôn lớn hơn lực tương tác trong chân không.", correct: false },
             { content: "Lực tương tác giữa hai điện tích này là lực hút vì chúng trái dấu nhau.", correct: true },
-            { content: "Để lực tương tác giữa hai điện tích này có độ lớn là 2·10⁻³ N, ta cần thay đổi khoảng cách giữa chúng thành 6 cm.", correct: true }
+            { content: "Để lực tương tác giữa hai điện tích này có độ lớn là 2,25·10⁻³ N, ta cần thay đổi khoảng cách giữa chúng thành 8 cm.", correct: true }
         ],
         expl: [
             "a) $F = k\\frac{|q_1q_2|}{r^2}$",
-            "$= 9.10^9\\frac{8.10^{-16}}{(0,03)^2}$",
-            "$= 8.10^{-3} N$ → Đúng.",
+            "$= 9.10^9\\frac{2.10^{-8}.8.10^{-8}}{(0,04)^2}$",
+            "$= 9.10^9\\frac{16.10^{-16}}{0,0016}$",
+            "$= 9.10^9.10^{-12} = 9.10^{-3} N$ → Đúng.",
             "b) Trong điện môi $\\varepsilon > 1$, $F' = F/\\varepsilon < F$ → Sai.",
             "c) $q_1 > 0$, $q_2 < 0$ trái dấu → hút nhau → Đúng.",
-            "d) $F' = F/4 \\Rightarrow r' = 2r = 6$ cm (vì $F \\propto 1/r^2$) → Đúng."
+            "d) $F' = F/4 \\Rightarrow r' = 2r = 8$ cm (vì $F \\propto 1/r^2$) → Đúng."
         ].join("<br>")
     },
     
-    // Câu 26 (Bài 11) - Câu 2 phần Đúng-Sai trong PDF
+    // Câu 26 (Bài 11) - Câu 2 phần Đúng-Sai
     {
-    type: "true-false",
-    q: "Hai điện tích điểm giống nhau có độ lớn q₁ = q₂ = q đặt cách nhau một khoảng r trong một môi trường có hằng số điện môi ε.",
-    parts: [
-        { content: "Khi đặt hai điện tích này vào trong dầu hòa ε = 2 mà vẫn giữ nguyên khoảng cách r lực tương tác giữa chúng sẽ giảm đi 2 lần so với khi đặt trong chân không.", correct: true },
-        { content: "Trong tất cả các môi trường cách điện, lực tương tác giữa hai điện tích điểm (với cùng khoảng cách và độ lớn) đạt giá trị lớn nhất khi chúng được đặt trong môi trường chân không.", correct: true },
-        { content: "Đơn vị của điện tích trong công thức định luật Coulomb là Coulomb (C).", correct: true },
-        { content: "Nếu đặt hai điện tích q₁ = q₂ = 10⁻⁷ C trong chân không và lực đẩy giữa chúng đo được là 0,1 N, thì khoảng cách giữa hai điện tích đó xấp xỉ là 3 cm.", correct: true }
-    ],
-    expl: [
-    "a) $F' = F/\\varepsilon = F/2$ → Đúng.",
-    "b) $\\varepsilon \\geq 1$, nhỏ nhất ở chân không ⇒ $F$ lớn nhất → Đúng.",
-    "c) Đơn vị SI của điện tích là Coulomb → Đúng.",
-    "d) $r = \\sqrt{\\frac{kq^2}{F}}$",
-    "$= \\sqrt{\\frac{9.10^9.10^{-14}}{0,1}}$",
-    "$= 0,03 m = 3 cm$ → Đúng."
-].join("<br>")
-},
+        type: "true-false",
+        q: "Hai điện tích điểm giống nhau có độ lớn q₁ = q₂ = 2·10⁻⁷ C đặt cách nhau một khoảng r = 6 cm trong một môi trường có hằng số điện môi ε.",
+        parts: [
+            { content: "Khi đặt hai điện tích này vào trong dầu hòa ε = 2 mà vẫn giữ nguyên khoảng cách r lực tương tác giữa chúng sẽ giảm đi 2 lần so với khi đặt trong chân không.", correct: true },
+            { content: "Trong tất cả các môi trường cách điện, lực tương tác giữa hai điện tích điểm (với cùng khoảng cách và độ lớn) đạt giá trị lớn nhất khi chúng được đặt trong môi trường chân không.", correct: true },
+            { content: "Đơn vị của điện tích trong công thức định luật Coulomb là Coulomb (C).", correct: true },
+            { content: "Nếu đặt hai điện tích q₁ = q₂ = 2·10⁻⁷ C trong chân không và lực đẩy giữa chúng đo được là 0,1 N, thì khoảng cách giữa hai điện tích đó xấp xỉ là 6 cm.", correct: true }
+        ],
+        expl: [
+            "a) $F' = F/\\varepsilon = F/2$ → Đúng.",
+            "b) $\\varepsilon \\geq 1$, nhỏ nhất ở chân không ⇒ $F$ lớn nhất → Đúng.",
+            "c) Đơn vị SI của điện tích là Coulomb → Đúng.",
+            "d) $r = \\sqrt{\\frac{kq^2}{F}}$",
+            "$= \\sqrt{\\frac{9.10^9.(2.10^{-7})^2}{0,1}}$",
+            "$= \\sqrt{\\frac{9.10^9.4.10^{-14}}{0,1}}$",
+            "$= \\sqrt{\\frac{3,6.10^{-4}}{0,1}} = \\sqrt{3,6.10^{-3}}$",
+            "$= \\sqrt{0,0036} = 0,06 m = 6 cm$ → Đúng."
+        ].join("<br>")
+    },
 
-// Câu 27 (Bài 13) - Câu 1 phần Đúng-Sai trong PDF
-{
-    type: "true-false",
-    q: "Cho hai điểm M và N nằm trên một đường sức của điện trường đều có cường độ E = 3000 V/m. Biết MN = 8 cm và MN hợp với phương của đường sức điện một góc 60°. Mốc điện thế tại vô cực bằng 0.",
-    parts: [
-        { content: "Công của lực điện là công phát động nếu điện tích di chuyển cùng chiều đường sức.", correct: true },
-        { content: "Đơn vị của điện thế là vôn (V), 1V = 1J/C.", correct: true },
-        { content: "Hiệu điện thế giữa hai điểm M và N là UMN = 120 V.", correct: true },
-        { content: "Nếu chọn điện thế tại M là 50 V thì điện thế tại N là −70 V.", correct: true }
-    ],
-    expl: [
-        "a) Điện tích dương di chuyển cùng chiều đường sức ⇒ công dương → Đúng.",
-        "b) Định nghĩa chuẩn: $1V = 1J/C$ → Đúng.",
-        "c) $U_{MN} = E·(MN\\cos60°)$",
-        "$= 3000·0,08·0,5$",
-        "$= 120 V$ → Đúng.",
-        "d) $V_N = V_M - U_{MN}$",
-        "$= 50 - 120$",
-        "$= -70 V$ → Đúng."
-    ].join("<br>")
-},
+    // Câu 27 (Bài 13) - Câu 1 phần Đúng-Sai
+    {
+        type: "true-false",
+        q: "Cho hai điểm M và N nằm trên một đường sức của điện trường đều có cường độ E = 4000 V/m. Biết MN = 10 cm và MN hợp với phương của đường sức điện một góc 60°. Mốc điện thế tại vô cực bằng 0.",
+        parts: [
+            { content: "Công của lực điện là công phát động nếu điện tích di chuyển cùng chiều đường sức.", correct: true },
+            { content: "Đơn vị của điện thế là vôn (V), 1V = 1J/C.", correct: true },
+            { content: "Hiệu điện thế giữa hai điểm M và N là UMN = 200 V.", correct: true },
+            { content: "Nếu chọn điện thế tại M là 50 V thì điện thế tại N là −150 V.", correct: true }
+        ],
+        expl: [
+            "a) Điện tích dương di chuyển cùng chiều đường sức ⇒ công dương → Đúng.",
+            "b) Định nghĩa chuẩn: $1V = 1J/C$ → Đúng.",
+            "c) $U_{MN} = E·(MN\\cos60°)$",
+            "$= 4000·0,1·0,5$",
+            "$= 200 V$ → Đúng.",
+            "d) $V_N = V_M - U_{MN}$",
+            "$= 50 - 200$",
+            "$= -150 V$ → Đúng."
+        ].join("<br>")
+    },
 
-// Câu 28 (Bài 13) - Câu 2 phần Đúng-Sai trong PDF
-{
-    type: "true-false",
-    q: "Giả sử có một đám mây phân thành hai tầng: tầng trên tích điện dương (điện thế cao Vₐ) và tầng dưới tích điện âm (điện thế thấp V₆). Khoảng không gian giữa hai tầng mây có một điện trường hướng từ trên xuống dưới.",
-    parts: [
-        { content: "Nếu biết khoảng cách giữa hai tầng mây là 500 m và hiệu điện thế giữa chúng là 1.000.000 V, thì cường độ điện trường trung bình giữa hai tầng mây là 2000 V/m.", correct: true },
-        { content: "Cường độ điện trường giữa hai tầng mây tỉ lệ thuận với hiệu điện thế giữa chúng nếu khoảng cách không đổi.", correct: true },
-        { content: "Khi đặt một điện tích dương q vào khoảng không gian giữa hai tầng mây này, điện tích q sẽ có xu hướng dịch chuyển từ nơi có điện thế cao (tầng trên) xuống nơi có điện thế thấp (tầng dưới).", correct: true },
-        { content: "Nếu hiệu điện thế giữa tầng trên và tầng dưới là Uₐ₆ = 500.000 V và điện thế tại tầng dưới được chọn làm mốc V₆ = 0 V, thì điện thế tại tầng trên là 500.000 V.", correct: true }
-    ],
-    expl: [
-        "a) $E = U/d$",
-        "$= 10^6/500$",
-        "$= 2000 V/m$ → Đúng.",
-        "b) $E = U/d$ (điện trường đều) → Đúng.",
-        "c) Điện tích dương chuyển từ nơi điện thế cao đến nơi điện thế thấp → Đúng.",
-        "d) $V_A = V_B + U_{AB}$",
-        "$= 500.000 V$ → Đúng."
-    ].join("<br>")
-},
+    // Câu 28 (Bài 13) - Câu 2 phần Đúng-Sai
+    {
+        type: "true-false",
+        q: "Giả sử có một đám mây phân thành hai tầng: tầng trên tích điện dương (điện thế cao Vₐ) và tầng dưới tích điện âm (điện thế thấp V₆). Khoảng không gian giữa hai tầng mây có một điện trường hướng từ trên xuống dưới.",
+        parts: [
+            { content: "Nếu biết khoảng cách giữa hai tầng mây là 800 m và hiệu điện thế giữa chúng là 1.600.000 V, thì cường độ điện trường trung bình giữa hai tầng mây là 2000 V/m.", correct: true },
+            { content: "Cường độ điện trường giữa hai tầng mây tỉ lệ thuận với hiệu điện thế giữa chúng nếu khoảng cách không đổi.", correct: true },
+            { content: "Khi đặt một điện tích dương q vào khoảng không gian giữa hai tầng mây này, điện tích q sẽ có xu hướng dịch chuyển từ nơi có điện thế cao (tầng trên) xuống nơi có điện thế thấp (tầng dưới).", correct: true },
+            { content: "Nếu hiệu điện thế giữa tầng trên và tầng dưới là Uₐ₆ = 800.000 V và điện thế tại tầng dưới được chọn làm mốc V₆ = 0 V, thì điện thế tại tầng trên là 800.000 V.", correct: true }
+        ],
+        expl: [
+            "a) $E = U/d$",
+            "$= 1.600.000/800$",
+            "$= 2000 V/m$ → Đúng.",
+            "b) $E = U/d$ (điện trường đều) → Đúng.",
+            "c) Điện tích dương chuyển từ nơi điện thế cao đến nơi điện thế thấp → Đúng.",
+            "d) $V_A = V_B + U_{AB}$",
+            "$= 800.000 V$ → Đúng."
+        ].join("<br>")
+    },
 
-// Câu 29 (VD - Bài 11) - Câu 1 phần Trả lời ngắn trong PDF
-{
-    type: "short-answer",
-    q: "Hai quả cầu A, B có kích thước nhỏ được đặt cách nhau một khoảng 12 cm trong chân không. Biết quả cầu A có điện tích −3,2·10⁻⁷ C và quả cầu B có điện tích 2,4·10⁻⁷ C. Tính lực tương tác giữa hai quả cầu (theo đơn vị N, làm tròn đến 3 chữ số thập phân).",
-    answer: "0,048 N",
-    expl: [
-        "$F = k\\frac{|q_Aq_B|}{r^2}$",
-        "$= 9.10^9.\\frac{3,2.10^{-7}.2,4.10^{-7}}{(0,12)^2}$",
-        "$= 9.10^9.\\frac{7,68.10^{-14}}{0,0144}$",
-        "$= 0,048 N$"
-    ].join("<br>")
-},
+    // ============================================
+    // PHẦN III: TRẢ LỜI NGẮN (8 CÂU)
+    // ============================================
 
-// Câu 30 (TH - Bài 11) - Câu 2 phần Trả lời ngắn trong PDF
-{
-    type: "short-answer",
-    q: "Cho hai điện tích điểm q₁ = 2·10⁻⁷ C và q₂ = 3·10⁻⁷ C đặt tại hai điểm A và B trong chân không, cách nhau 6 cm. Lực tương tác giữa chúng có độ lớn là bao nhiêu niutơn (N)? (Làm tròn kết quả đến 2 chữ số thập phân)",
-    answer: "0,15 N",
-    expl: [
-        "$F = 9.10^9.\\frac{2.10^{-7}.3.10^{-7}}{(0,06)^2}$",
-        "$= 9.10^9.\\frac{6.10^{-14}}{0,0036}$",
-        "$= 0,15 N$"
-    ].join("<br>")
-},
+    // Câu 29 (VD - Bài 11)
+    {
+        type: "short-answer",
+        q: "Hai quả cầu A, B có kích thước nhỏ được đặt cách nhau một khoảng 12 cm trong chân không. Biết quả cầu A có điện tích −6,0·10⁻⁷ C và quả cầu B có điện tích 4,0·10⁻⁷ C. Tính lực tương tác giữa hai quả cầu (theo đơn vị N, làm tròn đến 3 chữ số thập phân).",
+        answer: "0,150 N",
+        expl: [
+            "$F = k\\frac{|q_Aq_B|}{r^2}$",
+            "$= 9.10^9.\\frac{6,0.10^{-7}.4,0.10^{-7}}{(0,12)^2}$",
+            "$= 9.10^9.\\frac{24.10^{-14}}{0,0144}$",
+            "$= 9.10^9.\\frac{2,4.10^{-13}}{0,0144}$",
+            "$= 9.10^9.1,6667.10^{-11}$",
+            "$= 0,15 N$ (chính xác 0,15)"
+        ].join("<br>")
+    },
 
-// Câu 31 (VD - Bài 11) - Câu 3 phần Trả lời ngắn trong PDF
-{
-    type: "short-answer",
-    q: "Hai quả cầu kim loại nhỏ giống hệt nhau, mang điện tích lần lượt là q₁ = 6·10⁻⁹ C và q₂ = −2·10⁻⁹ C. Cho hai quả cầu tiếp xúc với nhau rồi tách chúng ra. Điện tích của mỗi quả cầu sau khi tiếp xúc là bao nhiêu (nC)?",
-    answer: "2 nC",
-    expl: [
-        "Tổng điện tích bảo toàn: $6.10^{-9} + (-2.10^{-9}) = 4.10^{-9}$ C.",
-        "Hai quả giống nhau ⇒ mỗi quả: $2.10^{-9}$ C = 2 nC."
-    ].join("<br>")
-},
+    // Câu 30 (TH - Bài 11)
+    {
+        type: "short-answer",
+        q: "Cho hai điện tích điểm q₁ = 1·10⁻⁷ C và q₂ = 2·10⁻⁷ C đặt tại hai điểm A và B trong chân không, cách nhau 3 cm. Lực tương tác giữa chúng có độ lớn là bao nhiêu niutơn (N)? (Làm tròn kết quả đến 2 chữ số thập phân)",
+        answer: "0,20 N",
+        expl: [
+            "$F = 9.10^9.\\frac{1.10^{-7}.2.10^{-7}}{(0,03)^2}$",
+            "$= 9.10^9.\\frac{2.10^{-14}}{0,0009}$",
+            "$= 9.10^9.2,222.10^{-11}$",
+            "$= 0,2 N$"
+        ].join("<br>")
+    },
 
-// Câu 32 (TH - Bài 12) - Câu 4 phần Trả lời ngắn trong PDF
-{
-    type: "short-answer",
-    q: "Một điện tích thử q = 2·10⁻⁶ C đặt tại một điểm trong điện trường chịu tác dụng của lực điện có độ lớn F = 3·10⁻³ N. Cường độ điện trường tại điểm đó có độ lớn là bao nhiêu (V/m)?",
-    answer: "1500 V/m",
-    expl: [
-        "$E = \\frac{F}{q}$",
-        "$= \\frac{3.10^{-3}}{2.10^{-6}}$",
-        "$= 1500 V/m$"
-    ].join("<br>")
-},
+    // Câu 31 (VD - Bài 11)
+    {
+        type: "short-answer",
+        q: "Hai quả cầu kim loại nhỏ giống hệt nhau, mang điện tích lần lượt là q₁ = 5·10⁻⁹ C và q₂ = −3·10⁻⁹ C. Cho hai quả cầu tiếp xúc với nhau rồi tách chúng ra. Điện tích của mỗi quả cầu sau khi tiếp xúc là bao nhiêu (nC)?",
+        answer: "1 nC",
+        expl: [
+            "Tổng điện tích bảo toàn: $5.10^{-9} + (-3.10^{-9}) = 2.10^{-9}$ C.",
+            "Hai quả giống nhau ⇒ mỗi quả: $1.10^{-9}$ C = 1 nC."
+        ].join("<br>")
+    },
 
-// Câu 33 (VD - Bài 12) - Câu 5 phần Trả lời ngắn trong PDF
-{
-    type: "short-answer",
-    q: "Một điện tích điểm Q đặt trong chân không. Điểm M cách Q một đoạn 10 cm có cường độ điện trường 9000 V/m. Độ lớn của điện tích Q là bao nhiêu (µC)? (k = 9·10⁹ Nm²/C²)",
-    answer: "0,01 µC",
-    expl: [
-        "$E = k\\frac{Q}{r^2} \\Rightarrow Q = \\frac{E r^2}{k}$",
-        "$= \\frac{9000.(0,1)^2}{9.10^9}$",
-        "$= 10^{-8} C = 0,01 \\mu C$"
-    ].join("<br>")
-},
+    // Câu 32 (TH - Bài 12)
+    {
+        type: "short-answer",
+        q: "Một điện tích thử q = 5·10⁻⁶ C đặt tại một điểm trong điện trường chịu tác dụng của lực điện có độ lớn F = 0,01 N. Cường độ điện trường tại điểm đó có độ lớn là bao nhiêu (V/m)?",
+        answer: "2000 V/m",
+        expl: [
+            "$E = \\frac{F}{q}$",
+            "$= \\frac{0,01}{5.10^{-6}}$",
+            "$= 2000 V/m$"
+        ].join("<br>")
+    },
 
-// Câu 34 (TH - Bài 13) - Câu 6 phần Trả lời ngắn trong PDF
-{
-    type: "short-answer",
-    q: "Để dịch chuyển một điện tích q = 10⁻⁶ C từ điểm rất xa (vô cực) đến điểm M trong điện trường, cần thực hiện một công A′ = 2·10⁻⁴ J. Bỏ qua vận tốc đầu của điện tích. Điện thế tại M có giá trị là bao nhiêu vôn (V)? (Chọn gốc điện thế tại vô cực)",
-    answer: "200 V",
-    expl: [
-        "$A' = qV_M \\Rightarrow V_M = \\frac{A'}{q}$",
-        "$= \\frac{2.10^{-4}}{10^{-6}}$",
-        "$= 200 V$"
-    ].join("<br>")
-},
+    // Câu 33 (VD - Bài 12)
+    {
+        type: "short-answer",
+        q: "Một điện tích điểm Q đặt trong chân không. Điểm M cách Q một đoạn 10 cm có cường độ điện trường 4500 V/m. Độ lớn của điện tích Q là bao nhiêu (µC)? (k = 9·10⁹ Nm²/C²)",
+        answer: "0,005 µC",
+        expl: [
+            "$E = k\\frac{Q}{r^2} \\Rightarrow Q = \\frac{E r^2}{k}$",
+            "$= \\frac{4500.(0,1)^2}{9.10^9}$",
+            "$= \\frac{4500.0,01}{9.10^9}$",
+            "$= \\frac{45}{9.10^9} = 5.10^{-9} C = 0,005 \\mu C$"
+        ].join("<br>")
+    },
 
-// Câu 35 (TH - Bài 14) - Câu 7 phần Trả lời ngắn trong PDF
-{
-    type: "short-answer",
-    q: "Trên vỏ một tụ điện có ghi 20 µF – 200 V. Điện tích tối đa mà tụ điện trên có thể tích được là bao nhiêu (C)?",
-    answer: "0,004 C",
-    expl: [
-        "$Q_{max} = C.U_{max}$",
-        "$= 20.10^{-6}.200$",
-        "$= 0,004 C$"
-    ].join("<br>")
-},
+    // Câu 34 (TH - Bài 13)
+    {
+        type: "short-answer",
+        q: "Để dịch chuyển một điện tích q = 2·10⁻⁶ C từ điểm rất xa (vô cực) đến điểm M trong điện trường, cần thực hiện một công A′ = 4·10⁻⁴ J. Bỏ qua vận tốc đầu của điện tích. Điện thế tại M có giá trị là bao nhiêu vôn (V)? (Chọn gốc điện thế tại vô cực)",
+        answer: "200 V",
+        expl: [
+            "$A' = qV_M \\Rightarrow V_M = \\frac{A'}{q}$",
+            "$= \\frac{4.10^{-4}}{2.10^{-6}}$",
+            "$= 200 V$"
+        ].join("<br>")
+    },
 
-// Câu 36 (TH - Bài 14) - Câu 8 phần Trả lời ngắn trong PDF
-{
-    type: "short-answer",
-    q: "Một tụ điện phẳng có điện dung 5 µF được tích điện dước hiệu điện thế 100 V. Điện tích của tụ điện này là bao nhiêu (mC)?",
-    answer: "0,5 mC",
-    expl: [
-        "$Q = C.U$",
-        "$= 5.10^{-6}.100$",
-        "$= 5.10^{-4} C = 0,5 mC$"
-    ].join("<br>")
-},
+    // Câu 35 (TH - Bài 14)
+    {
+        type: "short-answer",
+        q: "Trên vỏ một tụ điện có ghi 25 µF – 200 V. Điện tích tối đa mà tụ điện trên có thể tích được là bao nhiêu (C)?",
+        answer: "0,005 C",
+        expl: [
+            "$Q_{max} = C.U_{max}$",
+            "$= 25.10^{-6}.200$",
+            "$= 5000.10^{-6} = 0,005 C$"
+        ].join("<br>")
+    },
 
-// Câu 37 (VD - Bài 14) - Bài 1 phần Tự luận trong PDF
-{
-    type: "essay",
-    q: "Cho mạch điện gồm ba tụ điện được mắc như hình vẽ. Biết: C₁ = 2 µF, C₂ = 3 µF, C₃ = 4 µF. Hiệu điện thế đặt vào hai đầu A và B là Uₐ₆ = 24 V. (Cấu hình: C₁ và C₂ mắc nối tiếp, cả bộ song song với C₃).<br><br>a) Tính điện dung tương đương của bộ tụ.<br><br>b) Tính điện tích của tụ C₃.",
-    answer: [
-        "a) $C_{12} = \\frac{C_1C_2}{C_1+C_2}$",
-        "$= \\frac{2.3}{2+3}$",
-        "$= 1,2 \\mu F$",
-        "$C_{td} = C_{12} + C_3$",
-        "$= 1,2 + 4$",
-        "$= 5,2 \\mu F$",
-        "",
-        "b) $U_3 = U_{AB} = 24 V$",
-        "$Q_3 = C_3U_3$",
-        "$= 4.10^{-6}.24$",
-        "$= 96 \\mu C$"
-    ].join("<br>"),
-    expl: [
-        "a) Tính $C_{12}$ nối tiếp: $C_{12} = \\frac{C_1C_2}{C_1+C_2}$",
-        "C₁₂ song song với C₃: $C_{td} = C_{12} + C_3$",
-        "",
-        "b) Trong mạch song song, hiệu điện thế bằng nhau: $U_3 = U_{AB}$",
-        "$Q_3 = C_3U_3$"
-    ].join("<br>")
-},
+    // Câu 36 (TH - Bài 14)
+    {
+        type: "short-answer",
+        q: "Một tụ điện phẳng có điện dung 4 µF được tích điện dưới hiệu điện thế 200 V. Điện tích của tụ điện này là bao nhiêu (mC)?",
+        answer: "0,8 mC",
+        expl: [
+            "$Q = C.U$",
+            "$= 4.10^{-6}.200$",
+            "$= 800.10^{-6} C = 0,8 mC$"
+        ].join("<br>")
+    },
 
-// Câu 38 (VD - Bài 13) - Bài 2 phần Tự luận trong PDF
-{
-    type: "essay",
-    q: "Một electron chuyển động không vận tốc đầu từ bản âm về bản dương của hai bản kim loại phẳng, tích điện trái dấu, đặt song song, cách nhau 2 cm trong chân không. Biết hiệu điện thế giữa hai bản là 200 V. Bỏ qua tác dụng của trọng lực.<br><br>a) Tính công của lực điện tác dụng lên electron khi nó di chuyển từ bản âm sang bản dương.<br><br>b) Tính vận tốc của electron khi nó đập vào bản dương.<br><br>Cho: $m_e = 9,1.10^{-31} kg$; $e = 1,6.10^{-19} C$.",
-    answer: [
-        "a) $A = |q|U$",
-        "$= 1,6.10^{-19}.200$",
-        "$= 3,2.10^{-17} J$",
-        "",
-        "b) $\\frac{1}{2}mv^2 = A \\Rightarrow v = \\sqrt{\\frac{2A}{m}}$",
-        "$= \\sqrt{\\frac{2.3,2.10^{-17}}{9,1.10^{-31}}}$",
-        "$\\approx 8,4.10^6 m/s$"
-    ].join("<br>"),
-    expl: "a) Công của lực điện: A = q.U, với q là điện tích của electron.<br><br>b) Định lý động năng: Độ biến thiên động năng bằng công của ngoại lực."
-},
+    // ============================================
+    // PHẦN IV: TỰ LUẬN (4 CÂU)
+    // ============================================
 
-// Câu 39 (VD - Bài 12) - Bài 3 phần Tự luận trong PDF
-{
-    type: "essay",
-    q: "Tại một điểm M trong chân không, cách điện tích điểm Q một khoảng r = 15 cm, người ta đo được điện trường có độ lớn là E = 12000 V/m. Hãy xác định độ lớn của điện tích Q.",
-    answer: [
-        "$E = k\\frac{Q}{r^2} \\Rightarrow Q = \\frac{E r^2}{k}$",
-        "$= \\frac{12000.(0,15)^2}{9.10^9}$",
-        "$= 3.10^{-8} C$"
-    ].join("<br>"),
-    expl: "Công thức tính cường độ điện trường do điện tích điểm gây ra: $E = k\\frac{|Q|}{r^2}$"
-},
+    // Câu 37 (VD - Bài 14) - Cấu hình mới: C1//C2 nối tiếp C3
+    {
+        type: "essay",
+        q: "Cho mạch điện gồm ba tụ điện được mắc như hình vẽ. Biết: C₁ = 2 µF, C₂ = 3 µF, C₃ = 4 µF. Hiệu điện thế đặt vào hai đầu A và B là Uₐ₆ = 24 V. (Cấu hình: C₁ và C₂ mắc song song, cả bộ nối tiếp với C₃).<br><br>a) Tính điện dung tương đương của bộ tụ.<br><br>b) Tính điện tích của tụ C₃.",
+        answer: [
+            "a) $C_{12} = C_1 + C_2$",
+            "$= 2 + 3 = 5 \\mu F$",
+            "$C_{td} = \\frac{C_{12} \\cdot C_3}{C_{12} + C_3}$",
+            "$= \\frac{5 \\cdot 4}{5 + 4} = \\frac{20}{9} \\approx 2,222 \\mu F$",
+            "",
+            "b) $U_{AB} = 24 V$, điện tích của bộ: $Q = C_{td} \\cdot U_{AB}$",
+            "$= \\frac{20}{9} \\cdot 24 = \\frac{480}{9} = \\frac{160}{3} \\approx 53,33 \\mu C$",
+            "Vì mạch nối tiếp nên điện tích trên C₃ bằng điện tích của bộ: $Q_3 = Q = 53,33 \\mu C$"
+        ].join("<br>"),
+        expl: [
+            "a) Tính $C_{12}$ song song: $C_{12} = C_1 + C_2$",
+            "Sau đó $C_{12}$ nối tiếp với $C_3$: $C_{td} = \\frac{C_{12}C_3}{C_{12}+C_3}$",
+            "",
+            "b) Trong mạch nối tiếp, điện tích trên các tụ bằng nhau và bằng điện tích của bộ. Tính $Q = C_{td}U$."
+        ].join("<br>")
+    },
 
-// Câu 40 (VD - Bài 12) - Bài 4 phần Tự luận trong PDF
-{
-    type: "essay",
-    q: "Một điện tích điểm Q = 2 C đặt trong một môi trường dầu hỏa có hằng số điện môi ε = 2. Tại điểm P, cường độ điện trường do điện tích Q gây ra có độ lớn là 4500 V/m. Hãy tính khoảng cách từ điện tích Q đến điểm P.",
-    answer: [
-        "$E = k\\frac{Q}{\\varepsilon r^2} \\Rightarrow r = \\sqrt{\\frac{kQ}{\\varepsilon E}}$",
-        "$= \\sqrt{\\frac{9.10^9.2}{2.4500}}$",
-        "$= \\sqrt{2.10^6}$",
-        "$\\approx 1414 m$"
-    ].join("<br>"),
-    expl: "Công thức tính cường độ điện trường trong môi trường điện môi: $E = k\\frac{|Q|}{\\varepsilon r^2}$"
-}
+    // Câu 38 (VD - Bài 13)
+    {
+        type: "essay",
+        q: "Một electron chuyển động không vận tốc đầu từ bản âm về bản dương của hai bản kim loại phẳng, tích điện trái dấu, đặt song song, cách nhau 2 cm trong chân không. Biết hiệu điện thế giữa hai bản là 100 V. Bỏ qua tác dụng của trọng lực.<br><br>a) Tính công của lực điện tác dụng lên electron khi nó di chuyển từ bản âm sang bản dương.<br><br>b) Tính vận tốc của electron khi nó đập vào bản dương.<br><br>Cho: $m_e = 9,1.10^{-31} kg$; $e = 1,6.10^{-19} C$.",
+        answer: [
+            "a) $A = |q|U$",
+            "$= 1,6.10^{-19}.100$",
+            "$= 1,6.10^{-17} J$",
+            "",
+            "b) $\\frac{1}{2}mv^2 = A \\Rightarrow v = \\sqrt{\\frac{2A}{m}}$",
+            "$= \\sqrt{\\frac{2.1,6.10^{-17}}{9,1.10^{-31}}}$",
+            "$= \\sqrt{\\frac{3,2.10^{-17}}{9,1.10^{-31}}}$",
+            "$= \\sqrt{3,516.10^{13}} \\approx 5,93.10^6 m/s$"
+        ].join("<br>"),
+        expl: [
+            "a) Công của lực điện: A = qU, với q là điện tích của electron (lấy độ lớn).",
+            "b) Định lý động năng: Độ biến thiên động năng bằng công của lực điện."
+        ].join("<br>")
+    },
 
+    // Câu 39 (VD - Bài 12)
+    {
+        type: "essay",
+        q: "Tại một điểm M trong chân không, cách điện tích điểm Q một khoảng r = 20 cm, người ta đo được điện trường có độ lớn là E = 9000 V/m. Hãy xác định độ lớn của điện tích Q.",
+        answer: [
+            "$E = k\\frac{Q}{r^2} \\Rightarrow Q = \\frac{E r^2}{k}$",
+            "$= \\frac{9000.(0,2)^2}{9.10^9}$",
+            "$= \\frac{9000.0,04}{9.10^9}$",
+            "$= \\frac{360}{9.10^9} = 4.10^{-8} C$"
+        ].join("<br>"),
+        expl: "Công thức tính cường độ điện trường do điện tích điểm gây ra: $E = k\\frac{|Q|}{r^2}$"
+    },
+
+    // Câu 40 (VD - Bài 12) - Dạng tìm vị trí E tổng hợp bằng 0
+    {
+        type: "essay",
+        q: "Hai điện tích điểm q₁ = 9.10⁻⁸ C và q₂ = 4.10⁻⁸ C đặt tại hai điểm A và B cách nhau 10 cm trong chân không. Xác định vị trí điểm C trên đường thẳng AB mà tại đó cường độ điện trường tổng hợp bằng không.",
+        answer: [
+            "Gọi C là điểm cần tìm, đặt CA = x, CB = y, với x + y = 10 cm (nếu C nằm giữa A và B).",
+            "Tại C, cường độ điện trường do q₁ và q₂ gây ra cùng phương, ngược chiều và có độ lớn bằng nhau:",
+            "$E_1 = E_2 \\Rightarrow k\\frac{|q_1|}{x^2} = k\\frac{|q_2|}{y^2}$",
+            "$\\Rightarrow \\frac{x}{y} = \\sqrt{\\frac{q_1}{q_2}} = \\sqrt{\\frac{9.10^{-8}}{4.10^{-8}}} = \\sqrt{\\frac{9}{4}} = \\frac{3}{2}$",
+            "Vậy $x = \\frac{3}{2}y$.",
+            "Kết hợp $x + y = 10$ cm, ta có:",
+            "$\\frac{3}{2}y + y = 10 \\Rightarrow \\frac{5}{2}y = 10 \\Rightarrow y = 4$ cm, $x = 6$ cm.",
+            "Vậy điểm C nằm trên đoạn AB, cách A 6 cm và cách B 4 cm."
+        ].join("<br>"),
+        expl: [
+            "Điều kiện để cường độ điện trường tổng hợp bằng 0 là các vectơ cường độ điện trường do từng điện tích gây ra tại C phải cùng phương, ngược chiều và cùng độ lớn.",
+            "Vì hai điện tích cùng dấu nên điểm C nằm giữa A và B.",
+            "Giải hệ phương trình từ tỉ lệ và khoảng cách."
+        ].join("<br>")
+    }
 ];
 
 // Dành riêng cho kiểm tra giữa học kỳ 2

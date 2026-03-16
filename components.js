@@ -1044,7 +1044,20 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
                             className: "text-slate-700 leading-relaxed",
                             text: currentQuestion.expl,
                             isHTML: true
-                        })
+                        }),
+                        
+                        // Với essay questions, hiển thị thêm answer (giải chi tiết)
+                        currentQuestion.type === 'essay' && currentQuestion.answer && React.createElement('div', { className: "mt-4" },
+                            React.createElement('div', { className: "flex items-center gap-2 text-green-600 mb-2" },
+                                React.createElement('i', { className: "fas fa-calculator" }),
+                                React.createElement('h4', { className: "font-bold text-green-800" }, "Giải chi tiết")
+                            ),
+                            React.createElement(window.LaTeXText, { 
+                                className: "text-slate-700 leading-relaxed bg-green-50 p-4 rounded-lg border border-green-200",
+                                text: currentQuestion.answer,
+                                isHTML: true
+                            })
+                        )
                     ),
 
                     // Action buttons
@@ -1363,6 +1376,19 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                     text: question?.expl,
                     isHTML: true
                 }),
+                
+                // Với essay questions, hiển thị thêm answer (giải chi tiết)
+                question?.type === 'essay' && question?.answer && React.createElement('div', { className: "mt-4" },
+                    React.createElement('div', { className: "flex items-center gap-2 text-green-600 mb-2" },
+                        React.createElement('i', { className: "fas fa-calculator" }),
+                        React.createElement('h4', { className: "font-bold text-green-800" }, "Giải chi tiết")
+                    ),
+                    React.createElement(window.LaTeXText, { 
+                        className: "text-lg text-slate-700 leading-relaxed bg-green-50 p-5 rounded-2xl border border-green-200",
+                        text: question.answer,
+                        isHTML: true
+                    })
+                ),
                 React.createElement('button', { onClick: onNext, className: "mt-8 w-full bg-blue-600 text-white py-5 rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all" },
                     currentIdx === totalQuestions - 1 ? 'XEM KẾT QUẢ' : 'CÂU TIẾP THEO',
                     React.createElement('i', { className: "fas fa-chevron-right ml-3" })
