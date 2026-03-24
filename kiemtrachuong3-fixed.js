@@ -14,7 +14,7 @@
 // - Phần IV: Tự luận (4 câu)
 // ==============================================
 
-window.questionsChapter3 = [
+window.questionsKTGHK2 = [
     // ============================================
     // PHẦN I: TRẮC NGHIỆM NHIỀU LỰA CHỌN (24 CÂU)
     // ============================================
@@ -50,62 +50,57 @@ window.questionsChapter3 = [
             "Tổng độ lớn của hai điện tích."
         ],
         a: 2,
-        expl: "Công thức $F = \\frac{k|q_1q_2|}{r^2}$ cho thấy $F \\propto |q_1q_2|$."
+        expl: "Định luật Coulomb: $F = k\\frac{|q_1q_2|}{r^2}$, trong đó $k = 9.10^9 \\frac{Nm^2}{C^2}$"
     },
     
-    // Câu 4 (TH - Bài 11)
+    // Câu 4 (NB - Bài 11)
     {
         type: "multiple-choice",
-        q: "Nếu giữ nguyên độ lớn điện tích nhưng tăng khoảng cách giữa hai điện tích điểm lên 3 lần thì lực Coulomb sẽ:",
-        options: ["Tăng lên 3 lần.", "Giảm đi 3 lần.", "Tăng lên 9 lần.", "Giảm đi 9 lần."],
+        q: "Hai điện tích trái dấu khi đặt gần nhau trong chân không sẽ:",
+        options: ["Lúc hút, lúc đẩy", "Không tương tác", "Đẩy nhau", "Hút nhau"],
         a: 3,
-        expl: "Vì $F \\propto \\frac{1}{r^2}$, khi $r \\to 3r$ thì $F \\to \\frac{F}{9}$."
+        expl: "Theo định luật Coulomb, hai điện tích trái dấu hút nhau."
     },
     
     // Câu 5 (NB - Bài 11)
     {
         type: "multiple-choice",
-        q: "Phương của lực tương tác giữa hai điện tích điểm có đặc điểm:",
-        options: [
-            "Luôn nằm theo phương thẳng đứng.",
-            "Trùng với đường thẳng nối hai điện tích điểm đó.",
-            "Vuông góc với đường thẳng nối hai điện tích điểm.",
-            "Luôn nằm theo phương ngang."
-        ],
-        a: 1,
-        expl: "Lực Coulomb tác dụng dọc theo đường nối hai điện tích (vector $\\vec{r}$)."
+        q: "Hằng số Coulomb trong hệ SI có giá trị xấp xỉ bằng:",
+        options: ["$9.10^9 \\frac{Nm^2}{C^2}$", "$6.10^9 \\frac{Nm^2}{C^2}$", "$3.10^9 \\frac{Nm^2}{C^2}$", "$1.10^9 \\frac{Nm^2}{C^2}$"],
+        a: 0,
+        expl: "Hằng số Coulomb $k = 9.10^9 \\frac{Nm^2}{C^2}$ trong chân không."
     },
     
     // Câu 6 (NB - Bài 11)
     {
         type: "multiple-choice",
-        q: "Hằng số điện môi của môi trường chân không được quy ước bằng:",
-        options: ["0", "1", "9", "2"],
+        q: "Khi đặt hai điện tích vào môi trường điện môi, lực tương tác giữa chúng sẽ:",
+        options: ["Tăng lên", "Giảm đi", "Không đổi", "Phụ thuộc vào điện môi"],
         a: 1,
-        expl: "Theo quy ước, $\\varepsilon = 1$ cho chân không."
+        expl: "Trong điện môi, lực tương tác giảm đi: $F = k\\frac{|q_1q_2|}{\\varepsilon r^2}$"
     },
     
-    // Câu 7 (TH - Bài 11)
+    // Câu 7 (NB - Bài 11)
     {
         type: "multiple-choice",
-        q: "Khi đưa hai điện tích điểm từ chân không vào trong một chất lỏng điện môi có hằng số điện môi = 2 (giữ nguyên khoảng cách), lực tương tác giữa chúng sẽ:",
-        options: ["Giảm đi 2 lần.", "Tăng lên 2 lần.", "Giảm đi 4 lần.", "Không thay đổi."],
+        q: "Đơn vị của hằng số Coulomb trong hệ SI là:",
+        options: ["$\\frac{Nm^2}{C^2}$", "$\\frac{N}{C}$", "$\\frac{C^2}{Nm^2}$", "$\\frac{Nm}{C}$"],
         a: 0,
-        expl: "$F = \\frac{k|q_1q_2|}{\\varepsilon r^2}$, $\\varepsilon = 2$ nên $F' = \\frac{F}{2}$."
+        expl: "Hằng số Coulomb có đơn vị $\\frac{Nm^2}{C^2}$."
     },
     
     // Câu 8 (NB - Bài 11)
     {
         type: "multiple-choice",
-        q: "Yếu tố nào sau đây không ảnh hưởng đến độ lớn của lực tương tác tĩnh điện giữa hai điện tích điểm?",
+        q: "Phát biểu nào sau đây đúng khi nói về định luật Coulomb?",
         options: [
-            "Khoảng cách giữa hai điện tích.",
-            "Độ lớn của các điện tích.",
-            "Bản chất của môi trường (điện môi).",
-            "Khối lượng của các hạt mang điện."
+            "Lực tương tác giữa hai điện tích điểm tỉ lệ thuận với tích độ lớn của hai điện tích.",
+            "Lực tương tác giữa hai điện tích điểm tỉ lệ thuận với bình phương khoảng cách giữa hai điện tích.",
+            "Lực tương tác giữa hai điện tích điểm tỉ lệ thuận với khoảng cách giữa hai điện tích.",
+            "Đều đúng."
         ],
-        a: 3,
-        expl: "Định luật Coulomb không phụ thuộc vào khối lượng."
+        a: 1,
+        expl: "Định luật Coulomb: $F = k\\frac{|q_1q_2|}{r^2}$ - lực tỉ lệ thuận tích độ lớn và nghịch biến với bình phương khoảng cách."
     },
     
     // ========== BÀI 12: ĐIỆN TRƯỜNG (6 CÂU) ==========
@@ -115,117 +110,122 @@ window.questionsChapter3 = [
         type: "multiple-choice",
         q: "Điện trường là:",
         options: [
-            "Một dạng vật chất bao quanh các hạt mang điện và truyền tương tác giữa các điện tích.",
-            "Một môi trường chất lỏng đặc biệt dùng để hòa tan các điện tích.",
-            "Một lực hút hoặc đẩy xuất hiện khi các vật mang điện chạm vào nhau.",
-            "Một vùng không gian bao quanh các vật có khối lượng lớn."
+            "Lực tác dụng lên điện tích đặt trong điện trường.",
+            "Đại lượng đặc trưng cho khả năng tác dụng lực của điện trường tại một điểm.",
+            "Năng lượng mà điện trường có tại một điểm.",
+            "Công suất của điện trường."
         ],
-        a: 0,
-        expl: "Điện trường là dạng vật chất đặc biệt bao quanh điện tích và truyền tương tác giữa các điện tích."
+        a: 1,
+        expl: "Điện trường là đại lượng vectơ đặc trưng cho khả năng tác dụng lực của điện trường tại một điểm trong không gian."
     },
     
     // Câu 10 (NB - Bài 12)
     {
         type: "multiple-choice",
-        q: "Đại lượng đặc trưng cho độ mạnh yếu của điện trường tại một điểm về phương diện tác dụng lực là cường độ điện trường. Trong hệ SI, đơn vị của cường độ điện trường là:",
-        options: ["Newton trên mét (N/m)", "Coulomb trên mét (C/m)", "Vôn trên mét (V/m)", "Vôn (V)"],
-        a: 2,
-        expl: "Đơn vị của cường độ điện trường là V/m (tương đương N/C)."
+        q: "Cường độ điện trường tại một điểm có độ lớn bằng:",
+        options: [
+            "Lực tác dụng lên điện tích thử đặt tại điểm đó chia cho độ lớn điện tích thử.",
+            "Độ lớn vectơ cường độ điện trường tại điểm đó.",
+            "Thế năng điện tại điểm đó.",
+            "Hiệu điện thế giữa điểm đó và vô cực."
+        ],
+        a: 1,
+        expl: "Cường độ điện trường $\\vec{E} = \\frac{\\vec{F}}{q}$, độ lớn $E = \\frac{F}{|q|}$"
     },
     
     // Câu 11 (NB - Bài 12)
     {
         type: "multiple-choice",
-        q: "Điện trường của một điện tích điểm có đặc điểm là:",
-        options: [
-            "Luôn là điện trường đều ở mọi điểm trong không gian.",
-            "Có cường độ điện trường tại các điểm khác nhau là như nhau.",
-            "Điện trường tồn tại trong vùng không gian bao quanh điện tích điểm đó.",
-            "Chỉ xuất hiện khi có một điện tích khác đặt vào gần nó."
-        ],
-        a: 2,
-        expl: "Điện trường tồn tại quanh điện tích điểm, không phụ thuộc vào điện tích thử."
+        q: "Đơn vị của cường độ điện trường trong hệ SI là:",
+        options: ["N/C", "V/m", "C/m", "N·m²/C"],
+        a: 0,
+        expl: "Cường độ điện trường có đơn vị N/C (Newton trên Culông) hoặc V/m (Vôn trên mét)."
     },
     
     // Câu 12 (NB - Bài 12)
     {
         type: "multiple-choice",
-        q: "Hình dạng đường sức điện trường của một điện tích điểm dương là:",
+        q: "Đường sức điện là:",
         options: [
-            "Những đường thẳng song song cách đều nhau.",
-            "Những đường thẳng có hướng đi vào điện tích.",
-            "Những đường tròn đồng tâm nằm xung quanh điện tích.",
-            "Những đường thẳng có hướng đi ra xa điện tích."
+            "Đường nối các điểm có cùng thế năng điện.",
+            "Đường mà tại mỗi điểm, tiếp tuyến của nó trùng với phương của vectơ cường độ điện trường.",
+            "Đường mà vectơ cường độ điện trường tại các điểm trên đường có cùng độ lớn.",
+            "Đường cong mà điện tích dương di chuyển theo đó."
         ],
-        a: 3,
-        expl: "Đường sức của điện tích dương hướng ra ngoài từ điện tích."
+        a: 1,
+        expl: "Đường sức điện là đường mà tại mỗi điểm, tiếp tuyến của nó trùng với phương của vectơ cường độ điện trường."
     },
     
     // Câu 13 (NB - Bài 12)
     {
         type: "multiple-choice",
-        q: "Đặc điểm đường sức điện của một điện tích điểm âm là:",
+        q: "Đặc điểm nào sau đây KHÔNG phải là đặc điểm của đường sức điện?",
         options: [
-            "Các đường thẳng có chiều hướng về phía điện tích âm.",
-            "Các đường thẳng có chiều hướng ra xa điện tích âm.",
-            "Các đường cong khép kín không có điểm đầu và điểm cuối.",
-            "Các đường thẳng nằm ngang song song với nhau."
+            "Các đường sức không bao giờ cắt nhau.",
+            "Đường sức bắt đầu từ điện tích dương và kết thúc ở điện tích âm.",
+            "Tại mỗi điểm chỉ có một đường sức đi qua.",
+            "Đường sức của điện tích điểm là những đường thẳng."
         ],
-        a: 0,
-        expl: "Đường sức của điện tích âm hướng vào điện tích."
+        a: 2,
+        expl: "Đường sức của điện tích điểm là những đường cong, không phải đường thẳng."
     },
     
     // Câu 14 (NB - Bài 12)
     {
         type: "multiple-choice",
-        q: "Điện trường đều thường tồn tại trong vùng không gian:",
+        q: "Điện trường đều là điện trường mà:",
         options: [
-            "Ở xung quanh một quả cầu tích điện đều.",
-            "Giữa hai bản kim loại phẳng, đặt song song và tích điện trái dấu.",
-            "Giữa hai điện tích điểm có độ lớn bằng nhau nhưng trái dấu.",
-            "Ở gần một sợi dây dẫn thẳng dài vô hạn tích điện."
+            "Các đường sức của nó song song với nhau.",
+            "Vectơ cường độ điện trường tại mọi điểm đều bằng nhau.",
+            "Các đường sức của nó cách đều nhau.",
+            "Điện thế tại mọi điểm bằng nhau."
         ],
         a: 1,
-        expl: "Giữa hai bản tụ phẳng song song tích điện trái dấu tạo ra điện trường đều."
+        expl: "Điện trường đều có vectơ cường độ điện trường không đổi về độ lớn và phương."
     },
     
-    // ========== BÀI 13: THẾ NĂNG ĐIỆN – ĐIỆN THẾ (3 CÂU) ==========
+    // ========== BÀI 13: THẾ NĂNG ĐIỆN - ĐIỆN THẾ (3 CÂU) ==========
     
     // Câu 15 (NB - Bài 13)
     {
         type: "multiple-choice",
-        q: "Trong hệ SI, đơn vị của điện thế và hiệu điện thế là:",
-        options: ["Jun (J)", "Vôn (V)", "Vôn trên mét (V/m)", "Coulomb (C)"],
-        a: 1,
-        expl: "Đơn vị của điện thế là Vôn (V). 1 V = 1 J/C."
+        q: "Công của lực điện khi dịch chuyển điện tích q trong điện trường từ điểm A đến điểm B được tính bằng:",
+        options: [
+            "$q(U_A - U_B)$",
+            "$q\\vec{E} \\cdot \\vec{AB}$",
+            "$\\frac{q}{2}(U_A + U_B)$",
+            "$q(U_B - U_A)$"
+        ],
+        a: 0,
+        expl: "Công của lực điện: $A_{AB} = q\\vec{E} \\cdot \\vec{AB} = qE\\cdot d\\cos\\alpha = q(U_A - U_B)$"
     },
     
     // Câu 16 (NB - Bài 13)
     {
         type: "multiple-choice",
-        q: "Đặc điểm nào sau đây là đặc điểm của công của lực điện trường khi điện tích di chuyển trong điện trường tĩnh?",
+        q: "Thế năng điện tại một điểm được định nghĩa là:",
         options: [
-            "Phụ thuộc vào hình dạng đường đi của điện tích.",
-            "Chỉ phụ thuộc vào vị trí điểm đầu và điểm cuối của đường đi.",
-            "Luôn dương nếu điện tích dương di chuyển.",
-            "Luôn âm nếu điện tích âm di chuyển."
+            "Công cần để dịch điện tích đơn vị từ vô cực đến điểm đó.",
+            "Lực tác dụng lên điện tích đơn vị đặt tại điểm đó.",
+            "Cường độ điện trường tại điểm đó.",
+            "Hiệu điện thế giữa điểm đó và một điểm mốc khác."
         ],
-        a: 1,
-        expl: "Lực điện là lực thế, công của lực điện không phụ thuộc vào hình dạng đường đi mà chỉ phụ thuộc vào vị trí điểm đầu và điểm cuối."
+        a: 0,
+        expl: "Thế năng điện $W_A = A_{A\\infty} = qV_A$ là công cần để dịch điện tích đơn vị từ vô cực đến điểm A."
     },
     
     // Câu 17 (NB - Bài 13)
     {
         type: "multiple-choice",
-        q: "Thế năng của một điện tích q đặt tại điểm M trong điện trường đặc trưng cho:",
+        q: "Điện thế tại một điểm được định nghĩa là:",
         options: [
-            "Khả năng tích điện của điện tích q.",
-            "Độ lớn của điện trường tại điểm M.",
-            "Khả năng sinh công của điện trường khi đặt điện tích q tại điểm M.",
-            "Lực tác dụng lên điện tích q tại điểm M."
+            "Thế năng điện tại điểm đó chia cho điện tích đơn vị.",
+            "Cường độ điện trường tại điểm đó.",
+            "Công của lực điện khi dịch điện tích đơn vị từ điểm đó.",
+            "Hiệu điện thế giữa điểm đó và vô cực."
         ],
-        a: 2,
-        expl: "Thế năng W = qV, thể hiện khả năng sinh công của điện trường."
+        a: 3,
+        expl: "Điện thế $V_A = \\frac{W_A}{q} = \\frac{A_{A\\infty}}{q}$ là hiệu điện thế giữa điểm A và vô cực."
     },
     
     // ========== BÀI 14: TỤ ĐIỆN (7 CÂU) ==========
@@ -233,161 +233,155 @@ window.questionsChapter3 = [
     // Câu 18 (NB - Bài 14)
     {
         type: "multiple-choice",
-        q: "Tụ điện là một hệ thống gồm:",
+        q: "Tụ điện là linh kiện điện tử dùng để:",
         options: [
-            "Hai vật dẫn đặt tiếp xúc với nhau và được bao quanh bởi môi trường dẫn điện.",
-            "Hai vật dẫn đặt gần nhau và ngăn cách nhau bằng một lớp cách điện (điện môi).",
-            "Hai vật cách điện đặt gần nhau và ngăn cách nhau bằng một lớp vật dẫn.",
-            "Một vật dẫn và một vật cách điện đặt xen kẽ nhau."
+            "Tăng điện thế trong mạch.",
+            "Lưu trữ năng lượng điện và phóng năng lượng đó nhanh chóng.",
+            "Chuyển đổi dòng xoay chiều thành dòng một chiều.",
+            "Đo cường độ dòng điện."
         ],
         a: 1,
-        expl: "Định nghĩa chuẩn của tụ điện: hệ hai vật dẫn đặt gần nhau, ngăn cách bằng lớp điện môi."
+        expl: "Tụ điện có khả năng tích điện và phóng điện rất nhanh, dùng để lưu trữ năng lượng điện."
     },
     
     // Câu 19 (NB - Bài 14)
     {
         type: "multiple-choice",
-        q: "Trong cấu tạo của tụ điện, lớp môi trường nằm giữa hai bản tụ phải là:",
+        q: "Điện dung của tụ điện được định nghĩa là:",
         options: [
-            "Môi trường dẫn điện tốt (như đồng, nhôm).",
-            "Môi trường điện môi (cách điện).",
-            "Môi trường chân không có dòng điện chạy qua.",
-            "Dung dịch axit hoặc muối dẫn điện."
+            "Khả năng tích điện của tụ.",
+            "Điện tích tối đa mà tụ có thể tích được.",
+            "Hiệu điện thế tối đa mà tụ chịu được.",
+            "Khả năng phóng điện của tụ."
         ],
-        a: 1,
-        expl: "Lớp giữa hai bản tụ phải là điện môi (cách điện) để tích điện."
+        a: 0,
+        expl: "Điện dung $C = \\frac{Q}{U}$ là độ lớn điện tích mà tụ có tích được khi đặt dưới hiệu điện thế 1V."
     },
     
     // Câu 20 (NB - Bài 14)
     {
         type: "multiple-choice",
-        q: "Điện dung của tụ điện là đại lượng đặc trưng cho:",
-        options: [
-            "Khả năng tích điện của tụ điện ở một hiệu điện thế nhất định.",
-            "Khả năng chịu nhiệt của tụ điện khi làm việc.",
-            "Độ lớn điện tích mà tụ điện luôn luôn có sẵn.",
-            "Khả năng dẫn điện của tụ điện khi nối vào nguồn điện."
-        ],
+        q: "Đơn vị của điện dung trong hệ SI là:",
+        options: ["Farad (F)", "Culomb (C)", "Volt (V)", "Henry (H)"],
         a: 0,
-        expl: "Điện dung đặc trưng cho khả năng tích điện: Q = CU."
+        expl: "Điện dung có đơn vị Farad (F), trong thực tế thường dùng µF, nF, pF."
     },
     
     // Câu 21 (NB - Bài 14)
     {
         type: "multiple-choice",
-        q: "Trong hệ SI, đơn vị đo điện dung của tụ điện là:",
-        options: ["Coulomb (C)", "Vôn trên mét (V/m)", "Fara (F)", "Vôn (V)"],
-        a: 2,
-        expl: "Đơn vị điện dung là Fara (F)."
+        q: "Khi hai tụ điện mắc nối tiếp, điện dung tương đương được tính bằng:",
+        options: [
+            "$C_1 + C_2$",
+            "$\\frac{C_1 C_2}{C_1 + C_2}$",
+            "$\\frac{C_1 + C_2}{C_1 C_2}$",
+            "$\\frac{C_1 C_2}{C_1 - C_2}$"
+        ],
+        a: 1,
+        expl: "Nối tiếp: $\\frac{1}{C_{td}} = \\frac{1}{C_1} + \\frac{1}{C_2} \\Rightarrow C_{td} = \\frac{C_1 C_2}{C_1 + C_2}$"
     },
     
     // Câu 22 (NB - Bài 14)
     {
         type: "multiple-choice",
-        q: "Công thức liên hệ giữa điện tích Q, điện dung C và hiệu điện thế U của một tụ điện là:",
-        options: ["Q = C/U", "Q = CU", "Q = U/C", "Q = C + U"],
+        q: "Khi hai tụ điện mắc song song, điện dung tương đương được tính bằng:",
+        options: [
+            "$C_1 + C_2$",
+            "$\\frac{C_1 C_2}{C_1 + C_2}$",
+            "$\\frac{C_1 + C_2}{C_1 C_2}$",
+            "$\\frac{C_1 C_2}{C_1 - C_2}$"
+        ],
         a: 1,
-        expl: "Điện dung được định nghĩa: $C = \\frac{Q}{U} \\Rightarrow Q = CU$."
+        expl: "Song song: $C_{td} = C_1 + C_2$"
     },
     
     // Câu 23 (NB - Bài 14)
     {
         type: "multiple-choice",
-        q: "Nguyên tắc để tích điện cho tụ điện là:",
+        q: "Năng lượng của tụ điện được tính bằng công thức:",
         options: [
-            "Nối hai bản của tụ điện với hai cực của một nguồn điện.",
-            "Cọ xát hai bản của tụ điện vào nhau.",
-            "Đặt tụ điện vào trong một điện trường đều.",
-            "Nối một bản của tụ điện với nguồn điện, bản còn lại để hở."
+            "$W = \\frac{1}{2}CU^2$",
+            "$W = \\frac{1}{2}C^2U$",
+            "$W = \\frac{1}{2}QU^2$",
+            "$W = \\frac{1}{2}Q^2U$"
         ],
-        a: 0,
-        expl: "Nối tụ với nguồn điện tạo hiệu điện thế giữa hai bản tụ."
+        a: 1,
+        expl: "Năng lượng tụ điện: $W = \\frac{1}{2}CU^2 = \\frac{1}{2}Q^2U = \\frac{1}{2}CV^2$"
     },
     
-    // Câu 24 (TH - Bài 14)
+    // Câu 24 (NB - Bài 14)
     {
         type: "multiple-choice",
-        q: "Điện dung của một tụ điện phẳng phụ thuộc vào yếu tố nào sau đây?",
+        q: "So sánh với pin, tụ điện có ưu điểm gì?",
         options: [
-            "Điện tích đã tích được trên tụ điện.",
-            "Hiệu điện thế giữa hai bản tụ điện.",
-            "Bản chất điện môi, diện tích đối diện và khoảng cách giữa hai bản tụ.",
-            "Thời gian tụ điện được nối với nguồn điện."
+            "Năng lượng lưu trữ lớn hơn.",
+            "Tích/phóng điện nhanh hơn.",
+            "Tuổi thọ cao hơn.",
+            "Duy trì dòng điện lâu hơn."
         ],
-        a: 2,
-        expl: "Điện dung tụ phẳng: $C = \\frac{\\varepsilon \\varepsilon_0 S}{d}$ phụ thuộc vào ε (bản chất điện môi), S (diện tích đối diện), d (khoảng cách)."
+        a: 1,
+        expl: "Tụ điện có thể tích/phóng điện hàng triệu lần, nhanh hơn pin rất nhiều."
     },
-
+    
     // ============================================
-    // PHẦN II: TRẮC NGHIỆM ĐÚNG - SAI (4 CÂU)
+    // PHẦN II: ĐÚNG - SAI (4 CÂU)
     // ============================================
     
-    // Câu 25 (Bài 11) - Câu 1 phần Đúng-Sai
+    // Câu 25 (VD - Bài 11) - Câu 1 phần Đúng-Sai
     {
         type: "true-false",
-        q: "Xét hai điện tích điểm q₁ = 2·10⁻⁸ C và q₂ = −8·10⁻⁸ C đặt cố định tại hai điểm cách nhau r = 4 cm trong chân không. Biết ε = 1, k = 9·10⁹ Nm²/C².",
+        q: "Trong chân không, hai điện tích điểm cùng dấu sẽ đẩy nhau. Đúng hay Sai?",
         parts: [
-            { content: "Độ lớn lực tương tác tĩnh điện giữa hai điện tích này khi đặt trong chân không là 9·10⁻³ N.", correct: true },
-            { content: "Nếu giữ nguyên khoảng cách và độ lớn điện tích nhưng đưa chúng vào môi trường điện môi, lực tương tác sẽ luôn lớn hơn lực tương tác trong chân không.", correct: false },
-            { content: "Lực tương tác giữa hai điện tích này là lực hút vì chúng trái dấu nhau.", correct: true },
-            { content: "Để lực tương tác giữa hai điện tích này có độ lớn là 2,25·10⁻³ N, ta cần thay đổi khoảng cách giữa chúng thành 8 cm.", correct: true }
+            { content: "Hai điện tích cùng dấu trong chân không luôn đẩy nhau.", correct: true },
+            { content: "Độ lớn lực đẩy tỉ lệ thuận với tích độ lớn của hai điện tích.", correct: true },
+            { content: "Nếu khoảng cách giữa hai điện tích tăng gấp đôi thì lực đẩy giảm đi một nửa.", correct: false },
+            { content: "Hai điện tích dương đẩy nhau mạnh hơn hai điện tích âm.", correct: false }
         ],
         expl: [
-            "a) $F = k\\frac{|q_1q_2|}{r^2}$",
-            "$= 9.10^9\\frac{2.10^{-8}.8.10^{-8}}{(0,04)^2}$",
-            "$= 9.10^9\\frac{16.10^{-16}}{0,0016}$",
-            "$= 9.10^9.10^{-12} = 9.10^{-3} N$ → Đúng.",
-            "b) Trong điện môi $\\varepsilon > 1$, $F' = F/\\varepsilon < F$ → Sai.",
-            "c) $q_1 > 0$, $q_2 < 0$ trái dấu → hút nhau → Đúng.",
-            "d) $F' = F/4 \\Rightarrow r' = 2r = 8$ cm (vì $F \\propto 1/r^2$) → Đúng."
+            "a) Đúng - Định luật Coulomb.",
+            "b) Đúng - $F = k\\frac{|q_1q_2|}{r^2}$.",
+            "c) Sai - $F$ tỉ lệ nghịch với $r^2$.",
+            "d) Sai - Lực đẩy không phụ thuộc vào dấu điện tích."
         ].join("<br>")
     },
     
-    // Câu 26 (Bài 11) - Câu 2 phần Đúng-Sai
+    // Câu 26 (VD - Bài 12) - Câu 2 phần Đúng-Sai
     {
         type: "true-false",
-        q: "Hai điện tích điểm giống nhau có độ lớn q₁ = q₂ = 2·10⁻⁷ C đặt cách nhau một khoảng r = 6 cm trong một môi trường có hằng số điện môi ε.",
+        q: "Đường sức điện của điện tích điểm là những đường thẳng. Đúng hay Sai?",
         parts: [
-            { content: "Khi đặt hai điện tích này vào trong dầu hòa ε = 2 mà vẫn giữ nguyên khoảng cách r lực tương tác giữa chúng sẽ giảm đi 2 lần so với khi đặt trong chân không.", correct: true },
-            { content: "Trong tất cả các môi trường cách điện, lực tương tác giữa hai điện tích điểm (với cùng khoảng cách và độ lớn) đạt giá trị lớn nhất khi chúng được đặt trong môi trường chân không.", correct: true },
-            { content: "Đơn vị của điện tích trong công thức định luật Coulomb là Coulomb (C).", correct: true },
-            { content: "Nếu đặt hai điện tích q₁ = q₂ = 2·10⁻⁷ C trong chân không và lực đẩy giữa chúng đo được là 0,1 N, thì khoảng cách giữa hai điện tích đó xấp xỉ là 6 cm.", correct: true }
+            { content: "Đường sức điện của điện tích điểm là những đường thẳng.", correct: false },
+            { content: "Các đường sức không bao giờ cắt nhau.", correct: true },
+            { content: "Đường sức bắt đầu từ điện tích dương.", correct: true },
+            { content: "Đường sức kết thúc ở điện tích âm.", correct: true }
         ],
         expl: [
-            "a) $F' = F/\\varepsilon = F/2$ → Đúng.",
-            "b) $\\varepsilon \\geq 1$, nhỏ nhất ở chân không ⇒ $F$ lớn nhất → Đúng.",
-            "c) Đơn vị SI của điện tích là Coulomb → Đúng.",
-            "d) $r = \\sqrt{\\frac{kq^2}{F}}$",
-            "$= \\sqrt{\\frac{9.10^9.(2.10^{-7})^2}{0,1}}$",
-            "$= \\sqrt{\\frac{9.10^9.4.10^{-14}}{0,1}}$",
-            "$= \\sqrt{\\frac{3,6.10^{-4}}{0,1}} = \\sqrt{3,6.10^{-3}}$",
-            "$= \\sqrt{0,0036} = 0,06 m = 6 cm$ → Đúng."
+            "a) Sai - Đường sức của điện tích điểm là những đường cong.",
+            "b) Đúng - Đặc điểm của đường sức.",
+            "c) Đúng - Các đường sức không cắt nhau.",
+            "d) Đúng - Đặc điểm của đường sức."
         ].join("<br>")
     },
-
-    // Câu 27 (Bài 13) - Câu 1 phần Đúng-Sai
+    
+    // Câu 27 (VD - Bài 13) - Câu 3 phần Đúng-Sai
     {
         type: "true-false",
-        q: "Cho hai điểm M và N nằm trên một đường sức của điện trường đều có cường độ E = 4000 V/m. Biết MN = 10 cm và MN hợp với phương của đường sức điện một góc 60°. Mốc điện thế tại vô cực bằng 0.",
+        q: "Công của lực điện khi dịch chuyển điện tích trong điện trường không phụ thuộc vào đường đi. Đúng hay Sai?",
         parts: [
-            { content: "Công của lực điện là công phát động nếu điện tích di chuyển cùng chiều đường sức.", correct: true },
-            { content: "Đơn vị của điện thế là vôn (V), 1V = 1J/C.", correct: true },
-            { content: "Hiệu điện thế giữa hai điểm M và N là UMN = 200 V.", correct: true },
-            { content: "Nếu chọn điện thế tại M là 50 V thì điện thế tại N là −150 V.", correct: true }
+            { content: "Công của lực điện chỉ phụ thuộc vào vị trí đầu và cuối.", correct: true },
+            { content: "Công của lực điện có thể âm hoặc dương.", correct: true },
+            { content: "Công của lực điện khi dịch chuyển theo đường sức điện thì bằng 0.", correct: true },
+            { content: "Công của lực điện khi dịch chuyển ngược hướng với điện trường thì âm.", correct: true }
         ],
         expl: [
-            "a) Điện tích dương di chuyển cùng chiều đường sức ⇒ công dương → Đúng.",
-            "b) Định nghĩa chuẩn: $1V = 1J/C$ → Đúng.",
-            "c) $U_{MN} = E·(MN\\cos60°)$",
-            "$= 4000·0,1·0,5$",
-            "$= 200 V$ → Đúng.",
-            "d) $V_N = V_M - U_{MN}$",
-            "$= 50 - 200$",
-            "$= -150 V$ → Đúng."
+            "a) Đúng - Lực điện là lực thế, công chỉ phụ thuộc vào vị trí.",
+            "b) Đúng - $A = \\Delta W = q\\Delta V$.",
+            "c) Đúng - Khi $\\Delta V = 0$ thì $A = 0$.",
+            "d) Đúng - Khi $\\Delta V < 0$ thì $A < 0$."
         ].join("<br>")
     },
-
-    // Câu 28 (Bài 13) - Câu 2 phần Đúng-Sai
+    
+    // Câu 28 (VD - Bài 13) - Câu 4 phần Đúng-Sai
     {
         type: "true-false",
         q: "Giả sử có một đám mây phân thành hai tầng: tầng trên tích điện dương (điện thế cao Vₐ) và tầng dưới tích điện âm (điện thế thấp V₆). Khoảng không gian giữa hai tầng mây có một điện trường hướng từ trên xuống dưới.",
@@ -407,11 +401,11 @@ window.questionsChapter3 = [
             "$= 800.000 V$ → Đúng."
         ].join("<br>")
     },
-
+    
     // ============================================
     // PHẦN III: TRẢ LỜI NGẮN (8 CÂU)
     // ============================================
-
+    
     // Câu 29 (VD - Bài 11)
     {
         type: "short-answer",
@@ -426,7 +420,7 @@ window.questionsChapter3 = [
             "$= 0,15 N$ (chính xác 0,15)"
         ].join("<br>")
     },
-
+    
     // Câu 30 (TH - Bài 11)
     {
         type: "short-answer",
@@ -439,18 +433,18 @@ window.questionsChapter3 = [
             "$= 0,2 N$"
         ].join("<br>")
     },
-
+    
     // Câu 31 (VD - Bài 11)
     {
         type: "short-answer",
-        q: "Hai quả cầu kim loại nhỏ giống hệt nhau, mang điện tích lần lượt là q₁ = 5·10⁻⁹ C và q₂ = −3·10⁻⁹ C. Cho hai quả cầu tiếp xúc với nhau rồi tách chúng ra. Điện tích của mỗi quả cầu sau khi tiếp xúc là bao nhiêu (nC)?",
+        q: "Hai quả cầu kim loại nhỏ giống hệt nhau, mang điện tích lần lượt là q₁ = 5·10⁻⁹ C và q₂ = −3·10⁻⁹ C. Cho hai quả cầu tiếp xúc với nhau rồi tách chúng ra. Điện tích của mỗi quả cầu sau khi tiếp xúc là bao nhiêu (nội)?",
         answer: "1 nC",
         expl: [
             "Tổng điện tích bảo toàn: $5.10^{-9} + (-3.10^{-9}) = 2.10^{-9}$ C.",
             "Hai quả giống nhau ⇒ mỗi quả: $1.10^{-9}$ C = 1 nC."
         ].join("<br>")
     },
-
+    
     // Câu 32 (TH - Bài 12)
     {
         type: "short-answer",
@@ -462,7 +456,7 @@ window.questionsChapter3 = [
             "$= 2000 V/m$"
         ].join("<br>")
     },
-
+    
     // Câu 33 (VD - Bài 12)
     {
         type: "short-answer",
@@ -475,7 +469,7 @@ window.questionsChapter3 = [
             "$= \\frac{45}{9.10^9} = 5.10^{-9} C = 0,005 \\mu C$"
         ].join("<br>")
     },
-
+    
     // Câu 34 (TH - Bài 13)
     {
         type: "short-answer",
@@ -487,7 +481,7 @@ window.questionsChapter3 = [
             "$= 200 V$"
         ].join("<br>")
     },
-
+    
     // Câu 35 (TH - Bài 14)
     {
         type: "short-answer",
@@ -499,7 +493,7 @@ window.questionsChapter3 = [
             "$= 5000.10^{-6} = 0,005 C$"
         ].join("<br>")
     },
-
+    
     // Câu 36 (TH - Bài 14)
     {
         type: "short-answer",
@@ -511,11 +505,11 @@ window.questionsChapter3 = [
             "$= 800.10^{-6} C = 0,8 mC$"
         ].join("<br>")
     },
-
+    
     // ============================================
     // PHẦN IV: TỰ LUẬN (4 CÂU)
     // ============================================
-
+    
     // Câu 37 (VD - Bài 14) - Cấu hình mới: C1//C2 nối tiếp C3
     {
         type: "essay",
@@ -537,7 +531,7 @@ window.questionsChapter3 = [
             "b) Trong mạch nối tiếp, điện tích trên các tụ bằng nhau và bằng điện tích của bộ. Tính $Q = C_{td}U$."
         ].join("<br>")
     },
-
+    
     // Câu 38 (VD - Bài 13)
     {
         type: "essay",
@@ -557,7 +551,7 @@ window.questionsChapter3 = [
             "b) Định lý động năng: Độ biến thiên động năng bằng công của lực điện."
         ].join("<br>")
     },
-
+    
     // Câu 39 (VD - Bài 12)
     {
         type: "essay",
@@ -570,7 +564,7 @@ window.questionsChapter3 = [
         ].join("<br>"),
         expl: "Công thức tính cường độ điện trường do điện tích điểm gây ra: $E = k\\frac{|Q|}{r^2}$"
     },
-
+    
     // Câu 40 (VD - Bài 12) - Dạng tìm vị trí E tổng hợp bằng 0
     {
         type: "essay",
@@ -586,12 +580,8 @@ window.questionsChapter3 = [
             "Vậy điểm C nằm trên đoạn AB, cách A 6 cm và cách B 4 cm."
         ].join("<br>"),
         expl: [
-            "Điều kiện để cường độ điện trường tổng hợp bằng 0 là các vectơ cường độ điện trường do từng điện tích gây ra tại C phải cùng phương, ngược chiều và cùng độ lớn.",
-            "Vì hai điện tích cùng dấu nên điểm C nằm giữa A và B.",
-            "Giải hệ phương trình từ tỉ lệ và khoảng cách."
+            "Công thức tính cường độ điện trường do điện tích điểm gây ra: $E = k\\frac{|Q|}{r^2}$",
+            "Khi có hai điện tích, cường độ điện trường tổng hợp bằng không tại điểm thỏa mãn $E_1 = E_2$ và ngược chiều."
         ].join("<br>")
     }
 ];
-
-// Dành riêng cho kiểm tra giữa học kỳ 2
-window.questionsKTGHK2 = [...window.questionsChapter3];

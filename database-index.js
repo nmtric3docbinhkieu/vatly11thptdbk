@@ -44,9 +44,9 @@ window.getQuestionsByChapter = function(chapter, count = 50) {
     }
     
     // Trộn ngẫu nhiên và lấy đủ số lượng
-    // Đặc biệt cho chương 3: chỉ lấy 55 câu đầu tiên (bỏ 5 câu vận dụng cao)
+    // Đặc biệt cho chương 3: giữ nguyên tất cả 60 câu và không xáo trộn
     if (chapter === 3) {
-        return [...questions].slice(0, 55).sort(() => Math.random() - 0.5);
+        return [...questions]; // Giữ nguyên thứ tự 1-60
     }
     // Đặc biệt cho chương 4: giữ nguyên thứ tự (4 dạng bài tập khác nhau)
     if (chapter === 4) {
