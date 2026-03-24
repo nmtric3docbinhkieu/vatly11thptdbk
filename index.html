@@ -448,7 +448,7 @@ const backToChapter4Activities = () => {
                     playWrong();
                 }
                 
-                // Chỉ hiển thị giải thích khi chọn đúng ở phần "Trắc nghiệm lý thuyết" và "Trắc nghiệm công thức" của chương 4
+                // Chỉ hiển thị giải thích khi chọn đúng ở phần "Trắc nghiệm lý thuyết", "Trắc nghiệm công thức" và "Bài tập vận dụng" của chương 4
                 // hoặc hiển thị bình thường cho các phần khác
                 const isChapter4LyThuyet = gameState === 'quiz' && 
                                          chapter4Activity === 'solve' && 
@@ -458,7 +458,11 @@ const backToChapter4Activities = () => {
                                        chapter4Activity === 'quiz' && 
                                        questions === window.questionsChapter4CongThuc;
                 
-                if (isChapter4LyThuyet || isChapter4CongThuc) {
+                const isChapter4VanDung = gameState === 'quiz' && 
+                                        chapter4Activity === 'vandung' && 
+                                        questions === window.questionsChapter4VanDung;
+                
+                if (isChapter4LyThuyet || isChapter4CongThuc || isChapter4VanDung) {
                     // Chỉ hiển thị giải thích khi chọn đúng
                     setShowExpl(isCorrect);
                 } else {
