@@ -20,6 +20,9 @@
     <script src="database-chapter2.js"></script>
     <script src="database-chapter3.js"></script>
     <script src="database-chapter4.js"></script>
+    <script src="database-chapter4-lythuyet.js"></script>
+    <script src="database-chapter4-congthuc.js"></script>
+    <script src="database-chapter4-vandung.js"></script>
     <script src="kiemtrachuong3-fixed.js"></script>
     <script src="database-index.js"></script>
     <script src="components.js"></script>
@@ -322,10 +325,31 @@ const handleChapter4Activity = (activity) => {
             setGameState('chapter4-experiments');
             break;
         case 'quiz':
-            startQuiz(4);
+            // Trắc nghiệm công thức - 40 câu
+            setQuestions(window.questionsChapter4CongThuc || []);
+            setCurrentIdx(0);
+            setScore(0);
+            setSelected(null);
+            setShowExpl(false);
+            setGameState('quiz');
             break;
         case 'solve':
-            setGameState('chapter4-solve');
+            // Trắc nghiệm lý thuyết - 80 câu
+            setQuestions(window.questionsChapter4LyThuyet || []);
+            setCurrentIdx(0);
+            setScore(0);
+            setSelected(null);
+            setShowExpl(false);
+            setGameState('quiz');
+            break;
+        case 'vandung':
+            // Bài tập vận dụng - 30 câu trả lời ngắn
+            setQuestions(window.questionsChapter4VanDung || []);
+            setCurrentIdx(0);
+            setScore(0);
+            setSelected(null);
+            setShowExpl(false);
+            setGameState('quiz');
             break;
         case 'ktchuong4':
             setGameState('chapter4-quiz');

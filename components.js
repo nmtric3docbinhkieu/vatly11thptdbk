@@ -68,8 +68,8 @@ window.Chapter4ActivityScreen = function({ onSelectActivity, onLogout, student }
             React.createElement('h1', { className: "text-3xl font-black text-slate-800 mb-2" }, "CHƯƠNG 4: DÒNG ĐIỆN KHÔNG ĐỔI"),
             React.createElement('p', { className: "text-slate-500 mb-8" }, "Chọn hoạt động để bắt đầu"),
             
-            // Grid các hoạt động (2x3)
-            React.createElement('div', { className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3" },
+            // Grid các hoạt động (2x2)
+            React.createElement('div', { className: "grid gap-6 md:grid-cols-2 lg:grid-cols-2" },
                 // Lý thuyết
                 React.createElement('button', {
                     onClick: function() { onSelectActivity('theory'); },
@@ -94,7 +94,7 @@ window.Chapter4ActivityScreen = function({ onSelectActivity, onLogout, student }
                     React.createElement('div', { className: "text-slate-600 text-sm" }, "Thực hành các thí nghiệm tương tác")
                 ),
                 
-                // Ôn tập chương
+                // Trắc nghiệm lý thuyết
                 React.createElement('button', {
                     onClick: function() { onSelectActivity('solve'); },
                     className: "p-6 bg-white border-2 border-amber-200 rounded-2xl hover:border-amber-500 hover:bg-amber-50 transition-all text-left"
@@ -102,11 +102,11 @@ window.Chapter4ActivityScreen = function({ onSelectActivity, onLogout, student }
                     React.createElement('div', { className: "w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-4" },
                         React.createElement('i', { className: "fas fa-chalkboard-teacher text-amber-600 text-xl" })
                     ),
-                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Ôn tập chương"),
-                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Giải chi tiết các bài tập")
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Trắc nghiệm lý thuyết"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "80 câu trắc nghiệm nhiều lựa chọn")
                 ),
                 
-                // Ôn tập tại nhà
+                // Trắc nghiệm công thức
                 React.createElement('button', {
                     onClick: function() { onSelectActivity('quiz'); },
                     className: "p-6 bg-white border-2 border-indigo-200 rounded-2xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-left"
@@ -114,8 +114,20 @@ window.Chapter4ActivityScreen = function({ onSelectActivity, onLogout, student }
                     React.createElement('div', { className: "w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4" },
                         React.createElement('i', { className: "fas fa-tasks text-indigo-600 text-xl" })
                     ),
-                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Bài tập về nhà"),
-                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Làm bài tập trắc nghiệm")
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Trắc nghiệm công thức"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "40 câu trắc nghiệm nhiều lựa chọn")
+                ),
+                
+                // Bài tập vận dụng
+                React.createElement('button', {
+                    onClick: function() { onSelectActivity('vandung'); },
+                    className: "p-6 bg-white border-2 border-green-200 rounded-2xl hover:border-green-500 hover:bg-green-50 transition-all text-left"
+                },
+                    React.createElement('div', { className: "w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4" },
+                        React.createElement('i', { className: "fas fa-pencil-alt text-green-600 text-xl" })
+                    ),
+                    React.createElement('div', { className: "font-black text-slate-800 text-lg mb-2" }, "Bài tập vận dụng"),
+                    React.createElement('div', { className: "text-slate-600 text-sm" }, "Dạng bài tập trả lời ngắn")
                 ),
                 
                 // Kiểm tra chương 4
@@ -1155,9 +1167,11 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                         },
                             React.createElement('div', { 
                                 className: "w-10 h-10 rounded-xl flex items-center justify-center mr-4 font-bold transition-colors " + 
-                                    (isCorrect ? "bg-green-500 text-white" : "bg-slate-100 text-slate-500")
+                                    (showExpl && isCorrect ? "bg-green-500 text-white" : 
+                                     showExpl && isSelected && !isCorrect ? "bg-red-500 text-white" : 
+                                     isSelected ? "bg-blue-500 text-white" : "bg-slate-100 text-slate-500")
                             }, 
-                                isCorrect ? "✓" : String.fromCharCode(65 + i)
+                                showExpl && isCorrect ? "✓" : showExpl && isSelected && !isCorrect ? "✗" : String.fromCharCode(65 + i)
                             ),
                             React.createElement('div', { className: "flex-1" },
                                 React.createElement(window.LaTeXText, { 
