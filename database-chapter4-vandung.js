@@ -3,251 +3,368 @@
 // ==============================================
 // Ngân hàng câu hỏi bài tập vận dụng chương 4: Dòng điện không đổi
 // Vật lí 11 - Chân trời sáng tạo
-// Dạng bài tập trả lời ngắn
+// Dạng bài tập trả lời ngắn (tính toán)
 // ==============================================
 
 window.questionsChapter4VanDung = [
     // ============================================
-    // BÀI TẬP VẬN DỤNG - DẠNG TRẢ LỜI NGẮN
+    // DẠNG 1: TÍNH CƯỜNG ĐỘ DÒNG ĐIỆN, ĐIỆN LƯỢNG, SỐ ELECTRON
+    // Công thức: I = q/t; q = I.t; q = n.e
     // ============================================
     
-    // Bài 1: Tính điện lượng và số electron
+    // Bài 1.1
     {
         type: "short-answer",
-        q: "Dòng điện không đổi có cường độ 2,5A chạy qua một dây dẫn. Tính điện lượng dịch chuyển qua tiết diện thẳng của dây dẫn trong 3 phút. (Đơn vị: C)",
-        answer: "450",
-        expl: "q = I.t = 2,5A × 180s = 450 C"
-    },
-    
-    // Bài 2: Tính số electron
-    {
-        type: "short-answer",
-        q: "Trong 2 phút có 3×10²⁰ electron dịch chuyển qua tiết diện dây dẫn. Tính cường độ dòng điện. (Đơn vị: A, làm tròn đến 2 chữ số thập phân)",
-        answer: "0,40",
-        expl: "q = N.e = 3×10²⁰ × 1,6×10⁻¹⁹ = 48 C; I = q/t = 48/120 = 0,40 A"
-    },
-    
-    // Bài 3: Tính vận tốc trôi electron
-    {
-        type: "short-answer",
-        q: "Dây dẫn kim loại có tiết diện 1,5mm², mật độ electron tự do 8,5×10²⁸ electron/m³. Dòng điện qua dây có cường độ 3A. Tính vận tốc trôi của electron. (Đơn vị: mm/s, làm tròn đến 2 chữ số thập phân)",
-        answer: "0,15",
-        expl: "v = I/(nSe) = 3/(8,5×10²⁸ × 1,5×10⁻⁶ × 1,6×10⁻¹⁹) = 0,147×10⁻³ m/s ≈ 0,15 mm/s"
-    },
-    
-    // Bài 4: Tính điện trở dây dẫn
-    {
-        type: "short-answer",
-        q: "Một dây dẫn bằng đồng có chiều dài 200m, tiết diện 2mm². Điện trở suất của đồng là 1,7×10⁻⁸ Ωm. Tính điện trở của dây dẫn này. (Đơn vị: Ω)",
-        answer: "1,7",
-        expl: "R = ρ.l/S = 1,7×10⁻⁸ × 200/(2×10⁻⁶) = 1,7 Ω"
-    },
-    
-    // Bài 5: Tính điện trở ở nhiệt độ khác
-    {
-        type: "short-answer",
-        q: "Một dây dẫn có điện trở 5Ω ở 20°C. Biết hệ số nhiệt điện trở của vật liệu là 0,004 K⁻¹. Tính điện trở của dây dẫn ở 60°C. (Đơn vị: Ω)",
-        answer: "5,8",
-        expl: "R_t = R₀[1 + α(t-t₀)] = 5[1 + 0,004×40] = 5×1,16 = 5,8 Ω"
-    },
-    
-    // Bài 6: Tính cường độ dòng điện (Định luật Ohm)
-    {
-        type: "short-answer",
-        q: "Đặt hiệu điện thế 15V vào hai đầu dây dẫn có điện trở 3Ω. Tính cường độ dòng điện qua dây. (Đơn vị: A)",
-        answer: "5",
-        expl: "I = U/R = 15/3 = 5 A"
-    },
-    
-    // Bài 7: Tính hiệu điện thế
-    {
-        type: "short-answer",
-        q: "Dây dẫn có điện trở 8Ω, có dòng điện 1,5A chạy qua. Tính hiệu điện thế hai đầu dây. (Đơn vị: V)",
-        answer: "12",
-        expl: "U = I.R = 1,5×8 = 12 V"
-    },
-    
-    // Bài 8: Tính điện trở tương đương (nối tiếp)
-    {
-        type: "short-answer",
-        q: "Ba điện trở 2Ω, 3Ω và 5Ω mắc nối tiếp. Tính điện trở tương đương. (Đơn vị: Ω)",
+        q: "Một dòng điện không đổi chạy qua dây dẫn có cường độ 2 A. Tính điện lượng dịch chuyển qua tiết diện thẳng của dây dẫn trong thời gian 5 giây. (Đơn vị: C)",
         answer: "10",
-        expl: "R = R₁ + R₂ + R₃ = 2 + 3 + 5 = 10 Ω"
+        expl: "q = I.t = 2 × 5 = 10 C"
     },
     
-    // Bài 9: Tính điện trở tương đương (song song)
+    // Bài 1.2
     {
         type: "short-answer",
-        q: "Hai điện trở 6Ω và 12Ω mắc song song. Tính điện trở tương đương. (Đơn vị: Ω)",
-        answer: "4",
-        expl: "1/R = 1/6 + 1/12 = 3/12 → R = 12/3 = 4 Ω"
-    },
-    
-    // Bài 10: Tính dòng điện trong mạch có nguồn
-    {
-        type: "short-answer",
-        q: "Nguồn điện có suất điện động 12V, điện trở trong 1Ω mắc với điện trở ngoài 5Ω. Tính cường độ dòng điện trong mạch. (Đơn vị: A)",
+        q: "Một dòng điện không đổi chạy qua dây dẫn trong 10 phút, điện lượng dịch chuyển qua tiết diện thẳng của dây là 1200 C. Tính cường độ dòng điện chạy qua dây. (Đơn vị: A)",
         answer: "2",
-        expl: "I = ε/(R+r) = 12/(5+1) = 2 A"
+        expl: "t = 10 ph = 600 s; I = q/t = 1200/600 = 2 A"
     },
     
-    // Bài 11: Tính hiệu điện thế hai cực nguồn
+    // Bài 1.3
     {
         type: "short-answer",
-        q: "Nguồn điện có suất điện động 18V, điện trở trong 2Ω. Khi có dòng điện 3A chạy qua, tính hiệu điện thế hai cực nguồn. (Đơn vị: V)",
-        answer: "12",
-        expl: "U = ε - I.r = 18 - 3×2 = 12 V"
+        q: "Dòng điện chạy qua một dây dẫn có cường độ 0,5 A. Tính số electron dịch chuyển qua tiết diện thẳng của dây dẫn trong thời gian 1 phút. Cho e = 1,6.10⁻¹⁹ C. (Đáp án dạng a×10^b, ví dụ: 1,875×10^20)",
+        answer: "1,875×10^20",
+        expl: "t = 1 ph = 60 s; q = I.t = 0,5×60 = 30 C; n = q/|e| = 30/(1,6×10⁻¹⁹) = 1,875×10²⁰ electron"
     },
     
-    // Bài 12: Tính suất điện động
+    // Bài 1.4
     {
         type: "short-answer",
-        q: "Nguồn điện có điện trở trong 0,5Ω. Khi mắc với điện trở ngoài 9,5Ω có dòng điện 2A. Tính suất điện động của nguồn. (Đơn vị: V)",
-        answer: "20",
-        expl: "ε = I(R+r) = 2×(9,5+0,5) = 20 V"
+        q: "Một dòng điện không đổi có cường độ 1,2 A. Hỏi trong thời gian bao lâu thì điện lượng dịch chuyển qua tiết diện thẳng của dây là 360 C? (Đơn vị: giây)",
+        answer: "300",
+        expl: "t = q/I = 360/1,2 = 300 s"
     },
     
-    // Bài 13: Tính điện trở trong nguồn
+    // Bài 1.5
     {
         type: "short-answer",
-        q: "Nguồn điện có suất điện động 15V. Khi mắc với điện trở ngoài 10Ω có hiệu điện thế hai cực 12V. Tính điện trở trong của nguồn. (Đơn vị: Ω)",
-        answer: "2,5",
-        expl: "I = U/R = 12/10 = 1,2A; r = (ε-U)/I = (15-12)/1,2 = 2,5 Ω"
+        q: "Trong dây dẫn kim loại, dòng điện được tạo thành do các electron tự do dịch chuyển có hướng. Biết cường độ dòng điện chạy qua dây là 0,8 A. Tính số electron đi qua tiết diện thẳng của dây trong 2 phút 30 giây. Cho e = 1,6.10⁻¹⁹ C. (Đáp án dạng a×10^b, ví dụ: 7,5×10^20)",
+        answer: "7,5×10^20",
+        expl: "t = 2 ph 30 s = 150 s; q = I.t = 0,8×150 = 120 C; n = q/|e| = 120/(1,6×10⁻¹⁹) = 7,5×10²⁰ electron"
     },
     
-    // Bài 14: Tính công suất tiêu thụ
+    // ============================================
+    // DẠNG 2: TÍNH ĐIỆN TRỞ CỦA DÂY DẪN
+    // Công thức: R = ρ.l/S; S = πr² = πd²/4
+    // ============================================
+    
+    // Bài 2.1
     {
         type: "short-answer",
-        q: "Điện trở 20Ω mắc với hiệu điện thế 100V. Tính công suất tiêu thụ. (Đơn vị: W)",
-        answer: "500",
-        expl: "P = U²/R = 100²/20 = 500 W"
+        q: "Một dây dẫn bằng đồng có chiều dài 10 m, tiết diện 2 mm². Biết điện trở suất của đồng là ρ = 1,7.10⁻⁸ Ω.m. Tính điện trở của dây dẫn. (Đơn vị: Ω)",
+        answer: "0,085",
+        expl: "S = 2 mm² = 2×10⁻⁶ m²; R = ρ.l/S = 1,7×10⁻⁸ × 10/(2×10⁻⁶) = 0,085 Ω"
     },
     
-    // Bài 15: Tính công suất (dùng I và R)
+    // Bài 2.2
     {
         type: "short-answer",
-        q: "Điện trở 8Ω có dòng điện 2,5A chạy qua. Tính công suất tiêu thụ. (Đơn vị: W)",
-        answer: "50",
-        expl: "P = I²R = 2,5²×8 = 50 W"
+        q: "Một dây dẫn bằng nhôm có chiều dài 50 m, điện trở suất ρ = 2,8.10⁻⁸ Ω.m, điện trở của dây là 0,7 Ω. Tính tiết diện của dây dẫn. (Đơn vị: mm²)",
+        answer: "2",
+        expl: "S = ρ.l/R = 2,8×10⁻⁸ × 50/0,7 = 2×10⁻⁶ m² = 2 mm²"
     },
     
-    // Bài 16: Tính điện năng tiêu thụ
+    // Bài 2.3
     {
         type: "short-answer",
-        q: "Bóng đèn có công suất 60W hoạt động trong 5 giờ. Tính điện năng tiêu thụ. (Đơn vị: kWh)",
-        answer: "0,3",
-        expl: "A = P.t = 0,06kW × 5h = 0,3 kWh"
+        q: "Một dây dẫn bằng constantan có chiều dài 20 m, đường kính tiết diện 1 mm. Biết điện trở suất của constantan là 0,5.10⁻⁶ Ω.m. Tính điện trở của dây dẫn. Lấy π = 3,14. (Đơn vị: Ω, làm tròn đến 2 chữ số thập phân)",
+        answer: "12,74",
+        expl: "d = 1 mm = 10⁻³ m; S = πd²/4 = 3,14×(10⁻³)²/4 ≈ 7,85×10⁻⁷ m²; R = ρ.l/S = 0,5×10⁻⁶ × 20/(7,85×10⁻⁷) ≈ 12,74 Ω"
     },
     
-    // Bài 17: Tính nhiệt lượng tỏa ra
+    // Bài 2.4
     {
         type: "short-answer",
-        q: "Điện trở 10Ω có dòng điện 2A chạy qua trong 5 phút. Tính nhiệt lượng tỏa ra. (Đơn vị: kJ)",
-        answer: "12",
-        expl: "Q = I²Rt = 2²×10×300 = 12000 J = 12 kJ"
+        q: "Một dây dẫn hình trụ có điện trở 10 Ω, chiều dài 5 m, đường kính tiết diện 0,5 mm. Tính điện trở suất của vật liệu làm dây. Lấy π = 3,14. (Đơn vị: Ω.m, viết dạng a×10^-b, ví dụ: 3,92×10^-7)",
+        answer: "3,92×10^-7",
+        expl: "d = 0,5 mm = 5×10⁻⁴ m; S = πd²/4 = 3,14×(5×10⁻⁴)²/4 ≈ 1,96×10⁻⁷ m²; ρ = R.S/l = 10 × 1,96×10⁻⁷ / 5 = 3,92×10⁻⁷ Ω.m"
     },
     
-    // Bài 18: Tính hiệu suất nguồn
+    // Bài 2.5
     {
         type: "short-answer",
-        q: "Nguồn điện có suất điện động 20V, hiệu điện thế hai cực 16V khi hoạt động. Tính hiệu suất của nguồn. (Đơn vị: %)",
-        answer: "80",
-        expl: "η = U/ε × 100% = 16/20 × 100% = 80%"
+        q: "Một dây dẫn bằng đồng có điện trở 5 Ω ở nhiệt độ phòng. Người ta cắt dây thành hai đoạn bằng nhau rồi mắc song song. Tính điện trở tương đương của hai đoạn dây sau khi cắt. (Đơn vị: Ω)",
+        answer: "1,25",
+        expl: "Ban đầu R = 5 Ω, cắt làm hai đoạn bằng nhau, mỗi đoạn có R' = R/2 = 2,5 Ω. Mắc song song: R_tđ = R'/2 = 2,5/2 = 1,25 Ω"
     },
     
-    // Bài 19: Tính điện trở bóng đèn
+    // ============================================
+    // DẠNG 3: ĐỊNH LUẬT ÔM CHO ĐOẠN MẠCH CHỨA ĐIỆN TRỞ THUẦN
+    // Công thức: I = U/R; U = I.R; R = U/I
+    // ============================================
+    
+    // Bài 3.1
     {
         type: "short-answer",
-        q: "Bóng đèn ghi 220V-100W. Tính điện trở của đèn khi hoạt động bình thường. (Đơn vị: Ω, làm tròn đến số nguyên)",
-        answer: "484",
-        expl: "R = U²/P = 220²/100 = 484 Ω"
+        q: "Đặt vào hai đầu điện trở R = 10 Ω một hiệu điện thế U = 20 V. Tính cường độ dòng điện chạy qua điện trở. (Đơn vị: A)",
+        answer: "2",
+        expl: "I = U/R = 20/10 = 2 A"
     },
     
-    // Bài 20: Tính dòng điện qua bóng đèn
+    // Bài 3.2
     {
         type: "short-answer",
-        q: "Bóng đèn ghi 220V-40W. Tính cường độ dòng điện qua đèn khi hoạt động bình thường. (Đơn vị: A, làm tròn đến 2 chữ số thập phân)",
-        answer: "0,18",
-        expl: "I = P/U = 40/220 ≈ 0,18 A"
+        q: "Một dòng điện 0,5 A chạy qua điện trở 12 Ω. Tính hiệu điện thế đặt vào hai đầu điện trở. (Đơn vị: V)",
+        answer: "6",
+        expl: "U = I.R = 0,5 × 12 = 6 V"
     },
     
-    // Bài 21: Mạch hỗn hợp - Tính điện trở tương đương
+    // Bài 3.3
     {
         type: "short-answer",
-        q: "Mạch có hai điện trở 4Ω mắc song song, sau đó mắc nối tiếp với điện trở 2Ω. Tính điện trở tương đương của mạch. (Đơn vị: Ω)",
-        answer: "4",
-        expl: "R_song song = (4×4)/(4+4) = 2Ω; R_tđ = 2 + 2 = 4 Ω"
+        q: "Đặt hiệu điện thế U = 12 V vào hai đầu một điện trở, đo được cường độ dòng điện là 0,4 A. Tính điện trở của đoạn mạch. (Đơn vị: Ω)",
+        answer: "30",
+        expl: "R = U/I = 12/0,4 = 30 Ω"
     },
     
-    // Bài 22: Ghép nguồn nối tiếp
+    // Bài 3.4
     {
         type: "short-answer",
-        q: "Hai nguồn điện có suất điện động 6V và 9V, điện trở trong lần lượt 1Ω và 2Ω mắc nối tiếp. Tính suất điện động tổng. (Đơn vị: V)",
-        answer: "15",
-        expl: "Ghép nối tiếp: ε_b = ε₁ + ε₂ = 6 + 9 = 15 V"
+        q: "Một điện trở 15 Ω được mắc vào hiệu điện thế 9 V. Tính cường độ dòng điện chạy qua điện trở. (Đơn vị: A)",
+        answer: "0,6",
+        expl: "I = U/R = 9/15 = 0,6 A"
     },
     
-    // Bài 23: Ghép nguồn song song
+    // Bài 3.5
     {
         type: "short-answer",
-        q: "Hai nguồn điện giống nhau có suất điện động 12V, điện trở trong 2Ω mắc song song. Tính điện trở trong tương đương. (Đơn vị: Ω)",
+        q: "Khi đặt hiệu điện thế 12 V vào hai đầu một dây dẫn thì dòng điện chạy qua nó có cường độ 0,5 A. Nếu hiệu điện thế tăng lên 24 V thì cường độ dòng điện chạy qua dây là bao nhiêu? (Coi điện trở dây không đổi) (Đơn vị: A)",
         answer: "1",
-        expl: "Ghép song song giống nhau: r_b = r/2 = 2/2 = 1 Ω"
+        expl: "R = U₁/I₁ = 12/0,5 = 24 Ω; I₂ = U₂/R = 24/24 = 1 A"
     },
     
-    // Bài 24: Tính chi phí điện
-    {
-        type: "short-answer",
-        q: "Thiết bị điện có công suất 2000W hoạt động 3 giờ mỗi ngày. Giá điện 2500 đồng/kWh. Tính tiền điện phải trả trong 30 ngày. (Đơn vị: nghìn đồng)",
-        answer: "450",
-        expl: "A = 2kW × 3h/ngày × 30ngày = 180 kWh; Tiền = 180 × 2500 = 450.000 đồng = 450 nghìn đồng"
-    },
+    // ============================================
+    // DẠNG 4: GHÉP ĐIỆN TRỞ NỐI TIẾP, SONG SONG
+    // Công thức: Nối tiếp: R_tđ = R₁ + R₂ + ...; Song song: 1/R_tđ = 1/R₁ + 1/R₂ + ...
+    // ============================================
     
-    // Bài 25: Tính chiều dài dây dẫn
+    // Bài 4.1
     {
         type: "short-answer",
-        q: "Dây dẫn đồng có điện trở 1,7Ω, tiết diện 1mm². Điện trở suất đồng là 1,7×10⁻⁸ Ωm. Tính chiều dài dây dẫn. (Đơn vị: m)",
-        answer: "100",
-        expl: "l = R.S/ρ = 1,7×1×10⁻⁶/(1,7×10⁻⁸) = 100 m"
-    },
-    
-    // Bài 26: Tính tiết diện dây dẫn
-    {
-        type: "short-answer",
-        q: "Dây dẫn đồng dài 50m có điện trở 0,85Ω. Điện trở suất đồng là 1,7×10⁻⁸ Ωm. Tính tiết diện của dây dẫn. (Đơn vị: mm²)",
-        answer: "1",
-        expl: "S = ρ.l/R = 1,7×10⁻⁸ × 50/0,85 = 1×10⁻⁶ m² = 1 mm²"
-    },
-    
-    // Bài 27: Tính hệ số nhiệt điện trở
-    {
-        type: "short-answer",
-        q: "Dây dẫn có điện resist 4Ω ở 0°C và 4,8Ω ở 100°C. Tính hệ số nhiệt điện trở của vật liệu. (Đơn vị: K⁻¹, làm tròn đến 4 chữ số thập phân)",
-        answer: "0,0020",
-        expl: "α = (R_t - R₀)/(R₀×Δt) = (4,8-4)/(4×100) = 0,8/400 = 0,002 K⁻¹"
-    },
-    
-    // Bài 28: Tính dòng điện khi nối tắt
-    {
-        type: "short-answer",
-        q: "Nguồn điện có suất điện động 12V, điện trở trong 0,2Ω. Khi nối tắt hai cực, tính cường độ dòng điện. (Đơn vị: A)",
-        answer: "60",
-        expl: "Khi nối tắt: I = ε/r = 12/0,2 = 60 A"
-    },
-    
-    // Bài 29: Tính công suất tối đa
-    {
-        type: "short-answer",
-        q: "Nguồn điện có ε = 10V, r = 2Ω. Công suất hữu ích tối đa là bao nhiêu? (Đơn vị: W)",
-        answer: "12,5",
-        expl: "Khi R = r, P_max = ε²/(4r) = 10²/(4×2) = 100/8 = 12,5 W"
-    },
-    
-    // Bài 30: Tính thời gian hoạt động
-    {
-        type: "short-answer",
-        q: "Pin 9V có dung lượng 500mAh. Cung cấp dòng điện 50mA. Tính thời gian hoạt động của pin. (Đơn vị: giờ)",
+        q: "Cho hai điện trở R₁ = 4 Ω, R₂ = 6 Ω mắc nối tiếp. Tính điện trở tương đương của đoạn mạch. (Đơn vị: Ω)",
         answer: "10",
-        expl: "t = Dung lượng/Dòng điện = 500mAh/50mA = 10 h"
+        expl: "R_tđ = R₁ + R₂ = 4 + 6 = 10 Ω"
+    },
+    
+    // Bài 4.2
+    {
+        type: "short-answer",
+        q: "Cho hai điện trở R₁ = 3 Ω, R₂ = 6 Ω mắc song song. Tính điện trở tương đương của đoạn mạch. (Đơn vị: Ω)",
+        answer: "2",
+        expl: "R_tđ = (R₁×R₂)/(R₁+R₂) = (3×6)/(3+6) = 18/9 = 2 Ω"
+    },
+    
+    // Bài 4.3
+    {
+        type: "short-answer",
+        q: "Ba điện trở giống nhau, mỗi điện trở có giá trị 9 Ω được mắc nối tiếp. Tính điện trở tương đương. (Đơn vị: Ω)",
+        answer: "27",
+        expl: "R_tđ = 9 + 9 + 9 = 27 Ω"
+    },
+    
+    // Bài 4.4
+    {
+        type: "short-answer",
+        q: "Ba điện trở giống nhau, mỗi điện trở có giá trị 12 Ω được mắc song song. Tính điện trở tương đương. (Đơn vị: Ω)",
+        answer: "4",
+        expl: "R_tđ = R/n = 12/3 = 4 Ω"
+    },
+    
+    // Bài 4.5
+    {
+        type: "short-answer",
+        q: "Cho mạch điện gồm R₁ = 5 Ω nối tiếp với (R₂ = 10 Ω // R₃ = 10 Ω). Tính điện trở tương đương của toàn mạch. (Đơn vị: Ω)",
+        answer: "10",
+        expl: "R₂₃ = (10×10)/(10+10) = 5 Ω; R_tđ = R₁ + R₂₃ = 5 + 5 = 10 Ω"
+    },
+    
+    // ============================================
+    // DẠNG 5: ĐỊNH LUẬT ÔM CHO TOÀN MẠCH (MẠCH KÍN)
+    // Công thức: I = ε/(R + r); U = ε - I.r
+    // ============================================
+    
+    // Bài 5.1
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 6 V, điện trở trong 1 Ω được mắc với mạch ngoài có điện trở 5 Ω. Tính cường độ dòng điện chạy trong mạch. (Đơn vị: A)",
+        answer: "1",
+        expl: "I = ε/(R + r) = 6/(5 + 1) = 1 A"
+    },
+    
+    // Bài 5.2
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 9 V, điện trở trong 0,5 Ω. Khi mạch kín, cường độ dòng điện đo được là 1,5 A. Tính điện trở mạch ngoài. (Đơn vị: Ω)",
+        answer: "5,5",
+        expl: "I = ε/(R + r) ⇒ R + r = ε/I = 9/1,5 = 6 Ω ⇒ R = 6 - 0,5 = 5,5 Ω"
+    },
+    
+    // Bài 5.3
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 12 V, điện trở trong 2 Ω được nối với điện trở R = 4 Ω. Tính hiệu điện thế giữa hai cực của nguồn điện. (Đơn vị: V)",
+        answer: "8",
+        expl: "I = ε/(R + r) = 12/(4 + 2) = 2 A; U = ε - I.r = 12 - 2×2 = 8 V"
+    },
+    
+    // Bài 5.4
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 6 V, điện trở trong 1 Ω. Mạch ngoài có điện trở R = 2 Ω. Tính công suất tiêu thụ trên điện trở R. (Đơn vị: W)",
+        answer: "8",
+        expl: "I = ε/(R + r) = 6/(2 + 1) = 2 A; P = I².R = 2² × 2 = 8 W"
+    },
+    
+    // Bài 5.5
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 24 V, điện trở trong 2 Ω. Mạch ngoài gồm hai điện trở R₁ = 6 Ω và R₂ = 10 Ω mắc nối tiếp. Tính hiệu điện thế giữa hai đầu điện trở R₁. (Đơn vị: V, làm tròn đến 2 chữ số thập phân)",
+        answer: "7,98",
+        expl: "R_N = 6 + 10 = 16 Ω; I = ε/(R_N + r) = 24/(16 + 2) = 24/18 = 1,33 A; U₁ = I.R₁ = 1,33 × 6 = 7,98 V"
+    },
+    
+    // ============================================
+    // DẠNG 6: CÔNG – CÔNG SUẤT – NHIỆT LƯỢNG
+    // Công thức: A = UIt = I²Rt = U²t/R; P = UI = I²R = U²/R; Q = I²Rt
+    // ============================================
+    
+    // Bài 6.1
+    {
+        type: "short-answer",
+        q: "Một bóng đèn có ghi 6V – 3W. Tính cường độ dòng điện định mức chạy qua đèn. (Đơn vị: A)",
+        answer: "0,5",
+        expl: "P = U.I ⇒ I = P/U = 3/6 = 0,5 A"
+    },
+    
+    // Bài 6.2
+    {
+        type: "short-answer",
+        q: "Một bếp điện có điện trở 50 Ω, cường độ dòng điện chạy qua bếp là 2 A. Tính công suất tỏa nhiệt của bếp. (Đơn vị: W)",
+        answer: "200",
+        expl: "P = I².R = 2² × 50 = 200 W"
+    },
+    
+    // Bài 6.3
+    {
+        type: "short-answer",
+        q: "Một đoạn mạch có hiệu điện thế 12 V, cường độ dòng điện 0,5 A chạy qua trong 10 phút. Tính công của dòng điện thực hiện. (Đơn vị: J)",
+        answer: "3600",
+        expl: "t = 10 ph = 600 s; A = U.I.t = 12 × 0,5 × 600 = 3600 J"
+    },
+    
+    // Bài 6.4
+    {
+        type: "short-answer",
+        q: "Một bóng đèn có ghi 220V – 100W được mắc vào hiệu điện thế 220 V. Tính điện năng tiêu thụ của đèn trong 2 giờ theo đơn vị kWh. (Đơn vị: kWh)",
+        answer: "0,2",
+        expl: "A = P.t = 0,1 kW × 2 h = 0,2 kWh"
+    },
+    
+    // Bài 6.5
+    {
+        type: "short-answer",
+        q: "Một ấm điện có ghi 220V – 1000W được sử dụng ở hiệu điện thế 220V để đun sôi 2 lít nước từ 25°C. Biết nhiệt dung riêng của nước là 4200 J/kg.K, hiệu suất của ấm là 90%. Tính thời gian đun sôi nước. (Đơn vị: giây, làm tròn đến số nguyên)",
+        answer: "700",
+        expl: "m = 2 kg; Q_i = m.c.Δt = 2×4200×(100-25) = 630000 J; H = Q_i/A ⇒ A = Q_i/H = 630000/0,9 = 700000 J; t = A/P = 700000/1000 = 700 s"
+    },
+    
+    // ============================================
+    // DẠNG 7: GHÉP NGUỒN ĐIỆN
+    // Công thức: Nối tiếp: ε_b = ε₁ + ε₂ + ...; r_b = r₁ + r₂ + ...
+    // Song song (các nguồn giống nhau): ε_b = ε; r_b = r/n
+    // ============================================
+    
+    // Bài 7.1
+    {
+        type: "short-answer",
+        q: "Hai nguồn điện giống nhau, mỗi nguồn có suất điện động 3 V, điện trở trong 1 Ω được ghép nối tiếp. Tính suất điện động của bộ nguồn. (Đơn vị: V)",
+        answer: "6",
+        expl: "ε_b = 3 + 3 = 6 V"
+    },
+    
+    // Bài 7.2
+    {
+        type: "short-answer",
+        q: "Hai nguồn điện giống nhau, mỗi nguồn có suất điện động 4,5 V, điện trở trong 0,5 Ω được ghép song song. Tính điện trở trong của bộ nguồn. (Đơn vị: Ω)",
+        answer: "0,25",
+        expl: "r_b = r/2 = 0,5/2 = 0,25 Ω"
+    },
+    
+    // Bài 7.3
+    {
+        type: "short-answer",
+        q: "Ba nguồn điện giống nhau, mỗi nguồn có suất điện động 2 V, điện trở trong 0,3 Ω được ghép nối tiếp. Tính suất điện động của bộ nguồn. (Đơn vị: V)",
+        answer: "6",
+        expl: "ε_b = 2 + 2 + 2 = 6 V"
+    },
+    
+    // Bài 7.4
+    {
+        type: "short-answer",
+        q: "Bốn nguồn điện giống nhau, mỗi nguồn có suất điện động 6 V, điện trở trong 2 Ω được ghép song song. Tính suất điện động của bộ nguồn. (Đơn vị: V)",
+        answer: "6",
+        expl: "ε_b = ε = 6 V"
+    },
+    
+    // Bài 7.5
+    {
+        type: "short-answer",
+        q: "Cho bộ nguồn gồm hai nguồn điện giống nhau ghép nối tiếp, mỗi nguồn có suất điện động 6 V, điện trở trong 1 Ω. Bộ nguồn được mắc với mạch ngoài gồm điện trở R = 10 Ω. Tính cường độ dòng điện chạy trong mạch. (Đơn vị: A)",
+        answer: "1",
+        expl: "ε_b = 6 + 6 = 12 V; r_b = 1 + 1 = 2 Ω; I = ε_b/(R + r_b) = 12/(10 + 2) = 1 A"
+    },
+    
+    // ============================================
+    // DẠNG 8: HIỆU SUẤT NGUỒN ĐIỆN
+    // Công thức: H = U/ε = R/(R + r)
+    // ============================================
+    
+    // Bài 8.1
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 12 V, hiệu điện thế giữa hai cực khi mạch kín là 10,8 V. Tính hiệu suất của nguồn điện. (Đơn vị: %)",
+        answer: "90",
+        expl: "H = (U/ε) × 100% = (10,8/12) × 100% = 90%"
+    },
+    
+    // Bài 8.2
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 9 V, điện trở trong 1 Ω, mạch ngoài có điện trở 8 Ω. Tính hiệu suất của nguồn điện. (Đơn vị: %, làm tròn đến 1 chữ số thập phân)",
+        answer: "88,9",
+        expl: "H = R/(R + r) = 8/(8 + 1) = 8/9 ≈ 0,889 = 88,9%"
+    },
+    
+    // Bài 8.3
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 24 V, điện trở trong 2 Ω. Khi mạch kín, hiệu suất của nguồn là 80%. Tính điện trở mạch ngoài. (Đơn vị: Ω)",
+        answer: "8",
+        expl: "H = R/(R + r) ⇒ 0,8 = R/(R + 2) ⇒ 0,8(R + 2) = R ⇒ 0,8R + 1,6 = R ⇒ 0,2R = 1,6 ⇒ R = 8 Ω"
+    },
+    
+    // Bài 8.4
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 15 V, hiệu suất 75%. Tính hiệu điện thế giữa hai cực của nguồn khi mạch kín. (Đơn vị: V)",
+        answer: "11,25",
+        expl: "H = U/ε ⇒ U = H.ε = 0,75 × 15 = 11,25 V"
+    },
+    
+    // Bài 8.5
+    {
+        type: "short-answer",
+        q: "Một nguồn điện có suất điện động 12 V, điện trở trong 1 Ω được mắc với mạch ngoài gồm R₁ = 3 Ω nối tiếp R₂ = 5 Ω. Tính hiệu suất của nguồn điện. (Đơn vị: %, làm tròn đến 1 chữ số thập phân)",
+        answer: "88,9",
+        expl: "R_N = 3 + 5 = 8 Ω; H = R_N/(R_N + r) = 8/(8 + 1) = 8/9 ≈ 0,889 = 88,9%"
     }
 ];
