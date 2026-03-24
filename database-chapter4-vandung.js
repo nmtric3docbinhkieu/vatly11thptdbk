@@ -31,7 +31,7 @@ window.questionsChapter4VanDung = [
     // Bài 1.3
     {
         type: "short-answer",
-        q: "Dòng điện chạy qua một dây dẫn có cường độ 0,5 A. Tính số electron dịch chuyển qua tiết diện thẳng của dây dẫn trong thời gian 1 phút. Cho e = 1,6.10⁻¹⁹ C. (Đáp án dạng a×10^b, ví dụ: 1,875×10^20)",
+        q: "Dòng điện chạy qua một dây dẫn có cường độ 0,5 A. Tính số electron dịch chuyển qua tiết diện thẳng của dây dẫn trong thời gian 1 phút. Cho e = 1,6.10⁻¹⁹ C. (Đáp án dạng a×10^b, ví dụ: 8,112×10^19)",
         answer: "1,875×10^20",
         expl: "t = 1 ph = 60 s; q = I.t = 0,5×60 = 30 C; n = q/|e| = 30/(1,6×10⁻¹⁹) = 1,875×10²⁰ electron"
     },

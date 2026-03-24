@@ -420,13 +420,23 @@ const backToChapter4Activities = () => {
                         break;
                         
                     case 'short-answer':
-                        // Kiểm tra câu trả lời ngắn (đơn giản hóa)
+                        // Kiểm tra câu trả lời ngắn - chấp nhận đáp án chính xác và một số biến thể
                         const userAnswer = answer.toLowerCase().trim();
                         const correctAnswer = currentQuestion.answer.toLowerCase().trim();
-                        // Cho phép một số sai lệch nhỏ
-                        isCorrect = userAnswer === correctAnswer || 
-                                  userAnswer.replace(/\s/g, '') === correctAnswer.replace(/\s/g, '') ||
-                                  userAnswer.includes(correctAnswer) || correctAnswer.includes(userAnswer);
+                        
+                        // Chuẩn hóa các ký tự đặc biệt cho câu hỏi khoa học
+                        const normalizeAnswer = (ans) => {
+                            return ans
+                                .replace(/×/g, 'x')  // Thay ký tự nhân bằng chữ x
+                                .replace(/\s+/g, '')  // Bỏ tất cả khoảng trắng
+                                .replace(/,/g, '.');   // Thay dấu phẩy bằng dấu chấm
+                        };
+                        
+                        const normalizedUser = normalizeAnswer(userAnswer);
+                        const normalizedCorrect = normalizeAnswer(correctAnswer);
+                        
+                        // So sánh sau khi chuẩn hóa
+                        isCorrect = normalizedUser === normalizedCorrect;
                         points = isCorrect ? 0.2 : 0;
                         break;
                         
