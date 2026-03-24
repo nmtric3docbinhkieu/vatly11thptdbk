@@ -447,7 +447,20 @@ const backToChapter4Activities = () => {
                 } else {
                     playWrong();
                 }
-                setShowExpl(true);
+                
+                // Chỉ hiển thị giải thích khi chọn đúng ở phần "Trắc nghiệm lý thuyết" của chương 4
+                // hoặc hiển thị bình thường cho các phần khác
+                const isChapter4LyThuyet = gameState === 'quiz' && 
+                                         chapter4Activity === 'solve' && 
+                                         questions === window.questionsChapter4LyThuyet;
+                
+                if (isChapter4LyThuyet) {
+                    // Chỉ hiển thị giải thích khi chọn đúng
+                    setShowExpl(isCorrect);
+                } else {
+                    // Các phần khác: hiển thị giải thích bình thường
+                    setShowExpl(true);
+                }
             };
 
             const nextQuestion = () => {
@@ -1023,9 +1036,12 @@ const AdminApprovalModal = ({ onClose, onApprove, onReject }) => {
                     onSelect={handleSelect}
                     showExpl={showExpl}
                     onNext={nextQuestion}
+                    chapter4Activity={chapter4Activity}
+                    gameState={gameState}
+                    questions={questions}
                 />
             );
-        }
+        };
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);

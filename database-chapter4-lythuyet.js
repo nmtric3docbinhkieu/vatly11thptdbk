@@ -3,23 +3,23 @@
 // ==============================================
 // Ngân hàng câu hỏi trắc nghiệm lý thuyết chương 4: Dòng điện không đổi
 // Vật lí 11 - Chân trời sáng tạo
-// 80 câu trắc nghiệm nhiều lựa chọn
+// 80 câu trắc nghiệm lý thuyết thuần túy (không tính toán)
 // ==============================================
 
 window.questionsChapter4LyThuyet = [
     // ============================================
-    // CÂU 1-10: DÒNG ĐIỆN VÀ CƯỜNG ĐỘ DÒNG ĐIỆN
+    // CÂU 1-15: KHÁI NIỆM DÒNG ĐIỆN VÀ CƯỜNG ĐỘ DÒNG ĐIỆN
     // ============================================
     
     // Câu 1
     {
         type: "multiple-choice",
-        q: "Dòng điện là:",
+        q: "Dòng điện là gì?",
         options: [
-            "Dòng dịch chuyển có hướng của các điện tích",
-            "Dòng chuyển động của các electron",
-            "Dòng chuyển động của các ion dương",
-            "Dòng chuyển động của các điện tích tự do"
+            "Dòng dịch chuyển có hướng của các điện tích.",
+            "Dòng chuyển động của các electron tự do.",
+            "Dòng chuyển động của các ion dương.",
+            "Dòng chuyển động hỗn loạn của các phân tử."
         ],
         a: 0,
         expl: "Dòng điện là dòng dịch chuyển có hướng của các điện tích."
@@ -28,986 +28,1126 @@ window.questionsChapter4LyThuyet = [
     // Câu 2
     {
         type: "multiple-choice",
-        q: "Cường độ dòng điện không đổi được xác định bằng công thức:",
+        q: "Chiều dòng điện được quy ước là chiều dịch chuyển có hướng của hạt nào?",
         options: [
-            "$I = \\frac{q}{t}$",
-            "$I = \\frac{U}{R}$",
-            "$I = \\frac{A}{q}$",
-            "$I = \\frac{P}{U}$"
+            "Các electron.",
+            "Các điện tích dương.",
+            "Các ion âm.",
+            "Các hạt nhân nguyên tử."
         ],
-        a: 0,
-        expl: "Cường độ dòng điện không đổi: $I = \\frac{q}{t}$."
+        a: 1,
+        expl: "Chiều dòng điện được quy ước là chiều dịch chuyển có hướng của các điện tích dương."
     },
     
     // Câu 3
     {
         type: "multiple-choice",
-        q: "Chiều dòng điện được quy ước là:",
+        q: "Trong dây dẫn kim loại, dòng điện là dòng dịch chuyển có hướng của hạt nào?",
         options: [
-            "Chiều dịch chuyển có hướng của các điện tích dương",
-            "Chiều dịch chuyển có hướng của các điện tích âm",
-            "Chiều dịch chuyển có hướng của các electron",
-            "Chiều dịch chuyển có hướng của các ion"
+            "Các ion dương.",
+            "Các ion âm.",
+            "Các electron tự do.",
+            "Các nguyên tử kim loại."
         ],
-        a: 0,
-        expl: "Chiều dòng điện được quy ước là chiều dịch chuyển có hướng của các điện tích dương (ngược với chiều dịch chuyển của electron)."
+        a: 2,
+        expl: "Trong kim loại, dòng điện được tạo ra bởi sự dịch chuyển có hướng của các electron tự do."
     },
     
     // Câu 4
     {
         type: "multiple-choice",
-        q: "Đơn vị của cường độ dòng điện trong hệ SI là:",
-        options: ["Ampe (A)", "Vôn (V)", "Ôm (Ω)", "Oát (W)"],
-        a: 0,
-        expl: "Cường độ dòng điện có đơn vị là ampe (A)."
+        q: "Đại lượng vật lí nào đặc trưng cho tác dụng mạnh hay yếu của dòng điện?",
+        options: [
+            "Hiệu điện thế.",
+            "Điện trở.",
+            "Công suất.",
+            "Cường độ dòng điện."
+        ],
+        a: 3,
+        expl: "Cường độ dòng điện đặc trưng cho tác dụng mạnh, yếu của dòng điện."
     },
     
     // Câu 5
     {
         type: "multiple-choice",
-        q: "Dòng điện không đổi là dòng điện có:",
+        q: "Đơn vị của cường độ dòng điện trong hệ SI là gì?",
         options: [
-            "Chiều và cường độ không thay đổi theo thời gian",
-            "Chiều không đổi, cường độ thay đổi theo thời gian",
-            "Chiều thay đổi, cường độ không đổi",
-            "Chiều và cường độ luôn thay đổi"
+            "Vôn (V).",
+            "Ôm (Ω).",
+            "Oát (W).",
+            "Ampe (A)."
         ],
-        a: 0,
-        expl: "Dòng điện không đổi là dòng điện có chiều và cường độ không thay đổi theo thời gian."
+        a: 3,
+        expl: "Cường độ dòng điện có đơn vị là ampe (A)."
     },
     
     // Câu 6
     {
         type: "multiple-choice",
-        q: "Trong kim loại, dòng điện được tạo ra bởi sự dịch chuyển của:",
+        q: "Để duy trì một dòng điện trong mạch kín, cần có thiết bị nào sau đây?",
         options: [
-            "Electron tự do",
-            "Ion dương",
-            "Ion âm",
-            "Cả electron và ion"
+            "Vật dẫn.",
+            "Điện trở.",
+            "Nguồn điện.",
+            "Dây nối."
         ],
-        a: 0,
-        expl: "Trong kim loại, dòng điện được tạo ra bởi sự dịch chuyển có hướng của các electron tự do."
+        a: 2,
+        expl: "Nguồn điện tạo ra và duy trì hiệu điện thế, từ đó duy trì dòng điện."
     },
     
     // Câu 7
     {
         type: "multiple-choice",
-        q: "Trong chất điện phân, dòng điện được tạo ra bởi sự dịch chuyển của:",
+        q: "Dòng điện không đổi là dòng điện có đặc điểm nào?",
         options: [
-            "Cả ion dương và ion âm",
-            "Chỉ electron tự do",
-            "Chỉ ion dương",
-            "Chỉ ion âm"
+            "Chiều thay đổi, cường độ không đổi.",
+            "Chiều không đổi, cường độ thay đổi.",
+            "Chiều và cường độ không thay đổi theo thời gian.",
+            "Chiều và cường độ luôn thay đổi."
         ],
-        a: 0,
-        expl: "Trong chất điện phân, dòng điện được tạo ra bởi sự dịch chuyển có hướng của cả ion dương và ion âm."
+        a: 2,
+        expl: "Dòng điện không đổi là dòng điện có chiều và cường độ không thay đổi theo thời gian."
     },
     
     // Câu 8
     {
         type: "multiple-choice",
-        q: "Vận tốc trôi của electron trong kim loại khi có dòng điện có độ lớn khoảng:",
+        q: "Trong chất điện phân, dòng điện được tạo ra bởi sự dịch chuyển của hạt nào?",
         options: [
-            "10⁻⁴ - 10⁻³ m/s",
-            "10² - 10³ m/s",
-            "10⁶ - 10⁷ m/s",
-            "10⁸ - 10⁹ m/s"
+            "Chỉ electron tự do.",
+            "Chỉ ion dương.",
+            "Cả ion dương và ion âm.",
+            "Chỉ ion âm."
         ],
-        a: 0,
-        expl: "Vận tốc trôi của electron trong kim loại rất nhỏ, khoảng 10⁻⁴ - 10⁻³ m/s."
+        a: 2,
+        expl: "Trong chất điện phân, dòng điện được tạo ra bởi sự dịch chuyển có hướng của cả ion dương và ion âm."
     },
     
     // Câu 9
     {
         type: "multiple-choice",
-        q: "Điện lượng dịch chuyển qua tiết diện của dây dẫn trong thời gian t là:",
+        q: "Vận tốc trôi của electron trong kim loại khi có dòng điện có đặc điểm gì?",
         options: [
-            "q = I.t",
-            "q = I/t",
-            "q = t/I",
-            "q = I + t"
+            "Rất lớn, gần bằng vận tốc ánh sáng.",
+            "Có độ lớn khoảng 10² - 10³ m/s.",
+            "Rất nhỏ, khoảng 10⁻⁴ - 10⁻³ m/s.",
+            "Bằng 0 vì electron không di chuyển."
         ],
-        a: 0,
-        expl: "Từ công thức I = q/t suy ra q = I.t."
+        a: 2,
+        expl: "Vận tốc trôi của electron trong kim loại rất nhỏ, khoảng 10⁻⁴ - 10⁻³ m/s."
     },
     
     // Câu 10
     {
         type: "multiple-choice",
-        q: "Khi có dòng điện cường độ 2A chạy qua dây dẫn trong 5 phút, điện lượng dịch chuyển là:",
-        options: ["600 C", "300 C", "150 C", "1200 C"],
-        a: 0,
-        expl: "q = I.t = 2A × 300s = 600 C."
+        q: "Khi đèn sáng ngay sau khi bật công tắc, điều này chứng tỏ điều gì?",
+        options: [
+            "Electron di chuyển với vận tốc rất lớn.",
+            "Điện trường lan truyền với vận tốc lớn.",
+            "Dòng điện xuất hiện ngay tức thời.",
+            "Cả A, B, C đều đúng."
+        ],
+        a: 1,
+        expl: "Đèn sáng ngay là do điện trường lan truyền với vận tốc rất lớn (gần bằng vận tốc ánh sáng), không phải do electron di chuyển nhanh."
     },
-    
-    // ============================================
-    // CÂU 11-25: ĐIỆN TRỞ VÀ ĐỊNH LUẬT OHM
-    // ============================================
     
     // Câu 11
     {
         type: "multiple-choice",
-        q: "Điện trở của một vật dẫn được xác định bằng công thức:",
-        options: ["$R = \\frac{U}{I}$", "$R = \\frac{I}{U}$", "$R = U.I$", "$R = \\frac{U^2}{I}$"],
-        a: 0,
-        expl: "Điện trở $R = \\frac{U}{I}$."
+        q: "Khi nói về dòng điện trong kim loại, phát biểu nào sau đây là đúng?",
+        options: [
+            "Dòng điện trong kim loại là dòng dịch chuyển có hướng của các ion dương.",
+            "Dòng điện trong kim loại là dòng dịch chuyển có hướng của các electron tự do.",
+            "Dòng điện trong kim loại là dòng dịch chuyển có hướng của cả electron và ion.",
+            "Dòng điện trong kim loại là dòng dịch chuyển có hướng của các hạt nhân."
+        ],
+        a: 1,
+        expl: "Trong kim loại, dòng điện là dòng dịch chuyển có hướng của các electron tự do."
     },
     
     // Câu 12
     {
         type: "multiple-choice",
-        q: "Đơn vị của điện trở trong hệ SI là:",
-        options: ["Ôm (Ω)", "Ampe (A)", "Vôn (V)", "Oát (W)"],
-        a: 0,
-        expl: "Điện trở có đơn vị là ôm (Ω): $1 \\Omega = 1 V/A$."
+        q: "Khi nối hai đầu dây dẫn với hai cực của nguồn điện, các electron tự do trong dây dẫn sẽ:",
+        options: [
+            "Đứng yên tại chỗ.",
+            "Chuyển động hỗn loạn không ngừng.",
+            "Dịch chuyển có hướng từ cực âm sang cực dương.",
+            "Dịch chuyển có hướng từ cực dương sang cực âm."
+        ],
+        a: 2,
+        expl: "Electron tự do mang điện tích âm nên dịch chuyển từ cực âm sang cực dương của nguồn."
     },
     
     // Câu 13
     {
         type: "multiple-choice",
-        q: "Phát biểu nào sau đây là **đúng** với nội dung định luật Ohm?",
+        q: "Điện lượng là đại lượng đặc trưng cho:",
         options: [
-            "Cường độ dòng điện chạy qua dây dẫn tỉ lệ thuận với hiệu điện thế đặt vào hai đầu dây dẫn và tỉ lệ nghịch với điện trở của dây.",
-            "Cường độ dòng điện chạy qua dây dẫn tỉ lệ thuận với điện trở của dây dẫn.",
-            "Cường độ dòng điện chạy qua dây dẫn tỉ lệ nghịch với hiệu điện thế đặt vào hai đầu dây dẫn.",
-            "Cường độ dòng điện chạy qua dây dẫn không phụ thuộc vào hiệu điện thế."
+            "Khả năng sinh công của dòng điện.",
+            "Lượng điện tích dịch chuyển.",
+            "Cường độ dòng điện.",
+            "Hiệu điện thế giữa hai điểm."
         ],
-        a: 0,
-        expl: "Định luật Ohm: $I = \\frac{U}{R}$, cường độ dòng điện tỉ lệ thuận với hiệu điện thế và tỉ lệ nghịch với điện trở."
+        a: 1,
+        expl: "Điện lượng là lượng điện tích dịch chuyển qua tiết diện thẳng của dây dẫn."
     },
     
     // Câu 14
     {
         type: "multiple-choice",
-        q: "Điện trở của một dây dẫn kim loại phụ thuộc vào yếu tố nào?",
+        q: "Trong các vật liệu sau, vật liệu nào là chất dẫn điện tốt nhất?",
         options: [
-            "Chiều dài, tiết diện và bản chất vật liệu.",
-            "Chiều dài và hiệu điện thế.",
-            "Tiết diện và cường độ dòng điện.",
-            "Bản chất vật liệu và thời gian dòng điện chạy qua."
+            "Nhôm.",
+            "Sắt.",
+            "Đồng.",
+            "Bạc."
         ],
-        a: 0,
-        expl: "$R = \\rho \\frac{l}{S}$, phụ thuộc vào điện trở suất $\\rho$ (bản chất vật liệu), chiều dài $l$, tiết diện $S$."
+        a: 3,
+        expl: "Bạc có điện trở suất nhỏ nhất trong các kim loại, dẫn điện tốt nhất."
     },
     
     // Câu 15
     {
         type: "multiple-choice",
-        q: "Điện trở suất của vật liệu càng lớn thì:",
+        q: "Điều kiện để có dòng điện trong một vật là:",
         options: [
-            "Vật liệu dẫn điện càng kém.",
-            "Vật liệu dẫn điện càng tốt.",
-            "Vật liệu có khả năng cách điện càng kém.",
-            "Vật liệu có khối lượng riêng càng lớn."
+            "Vật đó phải là kim loại.",
+            "Vật đó phải ở nhiệt độ phòng.",
+            "Phải có hiệu điện thế đặt vào hai đầu vật và trong vật có các điện tích tự do.",
+            "Vật đó phải được nối với nguồn điện."
         ],
-        a: 0,
-        expl: "Điện trở suất đặc trưng cho khả năng cản trở dòng điện. Điện trở suất càng lớn, vật dẫn điện càng kém."
+        a: 2,
+        expl: "Để có dòng điện cần có hiệu điện thế và các điện tích tự do trong vật."
     },
+    
+    // ============================================
+    // CÂU 16-30: ĐIỆN TRỞ VÀ ĐỊNH LUẬT OHM
+    // ============================================
     
     // Câu 16
     {
         type: "multiple-choice",
-        q: "Khi tăng chiều dài dây dẫn lên 2 lần, các yếu tố khác không đổi thì điện trở:",
-        options: ["Tăng 2 lần", "Giảm 2 lần", "Tăng 4 lần", "Không đổi"],
-        a: 0,
-        expl: "Điện trở tỉ lệ thuận với chiều dài: $R \\sim l$."
+        q: "Điện trở của một vật dẫn đặc trưng cho tính chất gì?",
+        options: [
+            "Khả năng tích điện của vật dẫn.",
+            "Khả năng dẫn điện tốt của vật dẫn.",
+            "Khả năng cản trở dòng điện của vật dẫn.",
+            "Khả năng sinh công của vật dẫn."
+        ],
+        a: 2,
+        expl: "Điện trở đặc trưng cho khả năng cản trở dòng điện của vật dẫn."
     },
     
     // Câu 17
     {
         type: "multiple-choice",
-        q: "Khi tăng tiết diện dây dẫn lên 2 lần, các yếu tố khác không đổi thì điện trở:",
-        options: ["Giảm 2 lần", "Tăng 2 lần", "Giảm 4 lần", "Không đổi"],
-        a: 0,
-        expl: "Điện trở tỉ lệ nghịch với tiết diện: $R \\sim 1/S$."
+        q: "Đơn vị của điện trở trong hệ SI là gì?",
+        options: [
+            "Vôn (V).",
+            "Oát (W).",
+            "Ampe (A).",
+            "Ôm (Ω)."
+        ],
+        a: 3,
+        expl: "Điện trở có đơn vị là ôm (Ω): 1 Ω = 1 V/A."
     },
     
     // Câu 18
     {
         type: "multiple-choice",
-        q: "Đường đặc trưng vôn-ampe của dây dẫn kim loại ở nhiệt độ không đổi là:",
+        q: "Định luật Ôm cho đoạn mạch chỉ chứa điện trở thuần phát biểu rằng:",
         options: [
-            "Một đường thẳng đi qua gốc tọa độ",
-            "Một đường cong đi qua gốc tọa độ",
-            "Một đường thẳng không đi qua gốc tọa độ",
-            "Một đường cong không đi qua gốc tọa độ"
+            "Cường độ dòng điện tỉ lệ thuận với hiệu điện thế và tỉ lệ nghịch với điện trở.",
+            "Cường độ dòng điện tỉ lệ nghịch với hiệu điện thế và tỉ lệ thuận với điện trở.",
+            "Cường độ dòng điện tỉ lệ thuận với cả hiệu điện thế và điện trở.",
+            "Cường độ dòng điện không phụ thuộc vào hiệu điện thế."
         ],
         a: 0,
-        expl: "Theo định luật Ohm, U = R.I, đồ thị U theo I là đường thẳng đi qua gốc tọa độ."
+        expl: "Định luật Ôm: $I = \\frac{U}{R}$, I tỉ lệ thuận với U, tỉ lệ nghịch với R."
     },
     
     // Câu 19
     {
         type: "multiple-choice",
-        q: "Điện trở của dây dẫn khi nhiệt độ tăng:",
+        q: "Điện trở của một dây dẫn kim loại đồng chất, tiết diện đều phụ thuộc vào yếu tố nào?",
         options: [
-            "Tăng đối với kim loại, giảm đối với bán dẫn",
-            "Giảm đối với kim loại, tăng đối với bán dẫn",
-            "Tăng đối với cả kim loại và bán dẫn",
-            "Giảm đối với cả kim loại và bán dẫn"
+            "Chỉ phụ thuộc vào bản chất vật liệu.",
+            "Chỉ phụ thuộc vào chiều dài và tiết diện.",
+            "Phụ thuộc vào bản chất, chiều dài và tiết diện.",
+            "Phụ thuộc vào khối lượng riêng của vật liệu."
         ],
-        a: 0,
-        expl: "Điện trở kim loại tăng khi nhiệt độ tăng, ngược lại với bán dẫn."
+        a: 2,
+        expl: "$R = \\rho \\frac{l}{S}$, phụ thuộc vào điện trở suất (bản chất), chiều dài và tiết diện."
     },
     
     // Câu 20
     {
         type: "multiple-choice",
-        q: "Hệ số nhiệt điện trở α có đơn vị là:",
-        options: ["K⁻¹", "Ω", "Ω/K", "Ω.K"],
+        q: "Điện trở suất của vật liệu có ý nghĩa gì?",
+        options: [
+            "Đặc trưng cho khả năng dẫn điện của vật liệu.",
+            "Đặc trưng cho khả năng cách điện của vật liệu.",
+            "Đặc trưng cho khối lượng riêng của vật liệu.",
+            "Đặc trưng cho nhiệt độ nóng chảy của vật liệu."
+        ],
         a: 0,
-        expl: "Hệ số nhiệt điện trở có đơn vị là K⁻¹."
+        expl: "Điện trở suất đặc trưng cho khả năng cản trở dòng điện (hay khả năng dẫn điện) của vật liệu."
     },
     
     // Câu 21
     {
         type: "multiple-choice",
-        q: "Công thức tính điện trở của dây dẫn ở nhiệt độ t là:",
+        q: "Khi nhiệt độ của dây kim loại tăng, điện trở của nó thay đổi như thế nào?",
         options: [
-            "$R_t = R_0[1 + \\alpha(t - t_0)]$",
-            "$R_t = R_0[1 - \\alpha(t - t_0)]$",
-            "$R_t = R_0\\alpha(t - t_0)$",
-            "$R_t = \\frac{R_0}{1 + \\alpha(t - t_0)}$"
+            "Giảm xuống.",
+            "Không thay đổi.",
+            "Tăng lên.",
+            "Lúc đầu tăng, sau giảm."
         ],
-        a: 0,
-        expl: "Công thức tính điện trở ở nhiệt độ t: $R_t = R_0[1 + \\alpha(t - t_0)]$."
+        a: 2,
+        expl: "Khi nhiệt độ tăng, điện trở kim loại tăng do các ion dao động mạnh hơn, cản trở electron nhiều hơn."
     },
     
     // Câu 22
     {
         type: "multiple-choice",
-        q: "Dây dẫn nào sau đây có điện trở nhỏ nhất cùng kích thước?",
-        options: ["Dây bạc", "Dây đồng", "Dây nhôm", "Dây sắt"],
-        a: 0,
-        expl: "Bạc có điện trở suất nhỏ nhất trong các kim loại liệt kê."
+        q: "Đường đặc trưng vôn – ampe (U-I) của một vật dẫn tuân theo định luật Ôm có dạng như thế nào?",
+        options: [
+            "Một đường cong đi qua gốc tọa độ.",
+            "Một đường thẳng đi qua gốc tọa độ.",
+            "Một đường thẳng không đi qua gốc tọa độ.",
+            "Một đường parabol."
+        ],
+        a: 1,
+        expl: "Theo định luật Ôm, U = I.R, đồ thị U theo I là đường thẳng đi qua gốc tọa độ."
     },
     
     // Câu 23
     {
         type: "multiple-choice",
-        q: "Điện trở suất của đồng là:",
+        q: "Khi chiều dài dây dẫn tăng gấp đôi, các yếu tố khác không đổi thì điện trở của dây thay đổi như thế nào?",
         options: [
-            "$1,7.10^{-8} \\Omega.m$",
-            "$2,8.10^{-8} \\Omega.m$",
-            "$0,5.10^{-6} \\Omega.m$",
-            "$12.10^{-8} \\Omega.m$"
+            "Giảm 2 lần.",
+            "Không đổi.",
+            "Tăng 4 lần.",
+            "Tăng 2 lần."
         ],
-        a: 0,
-        expl: "Điện trở suất của đồng là $1,7.10^{-8} \\Omega.m$."
+        a: 3,
+        expl: "Điện trở tỉ lệ thuận với chiều dài: $R \\sim l$."
     },
     
     // Câu 24
     {
         type: "multiple-choice",
-        q: "Khi có hiệu điện thế 6V đặt vào hai đầu dây dẫn có điện trở 3Ω, cường độ dòng điện là:",
-        options: ["2 A", "0,5 A", "18 A", "9 A"],
-        a: 0,
-        expl: "Theo định luật Ohm: I = U/R = 6/3 = 2A."
+        q: "Khi tiết diện dây dẫn tăng gấp đôi, các yếu tố khác không đổi thì điện trở của dây thay đổi như thế nào?",
+        options: [
+            "Tăng 2 lần.",
+            "Giảm 2 lần.",
+            "Tăng 4 lần.",
+            "Không đổi."
+        ],
+        a: 1,
+        expl: "Điện trở tỉ lệ nghịch với tiết diện: $R \\sim 1/S$."
     },
     
     // Câu 25
     {
         type: "multiple-choice",
-        q: "Mắc nối tiếp hai điện trở R₁ = 2Ω và R₂ = 3Ω. Điện trở tương đương là:",
-        options: ["5 Ω", "1 Ω", "6 Ω", "1,2 Ω"],
-        a: 0,
-        expl: "Mắc nối tiếp: R = R₁ + R₂ = 2 + 3 = 5Ω."
+        q: "Hệ số nhiệt điện trở α của kim loại có đơn vị là gì?",
+        options: [
+            "Ôm (Ω).",
+            "K⁻¹.",
+            "Ω.K.",
+            "Không có đơn vị."
+        ],
+        a: 1,
+        expl: "Hệ số nhiệt điện trở có đơn vị là K⁻¹ (hoặc °C⁻¹)."
     },
-    
-    // ============================================
-    // CÂU 26-40: NGUỒN ĐIỆN VÀ SUẤT ĐIỆN ĐỘNG
-    // ============================================
     
     // Câu 26
     {
         type: "multiple-choice",
-        q: "Suất điện động của nguồn điện đặc trưng cho:",
+        q: "Kim loại nào sau đây có điện trở suất nhỏ nhất (dẫn điện tốt nhất)?",
         options: [
-            "Khả năng sinh công của nguồn điện.",
-            "Khả năng tích điện của nguồn điện.",
-            "Khả năng tác dụng lực của nguồn điện.",
-            "Khả năng dự trữ năng lượng của nguồn điện."
+            "Đồng.",
+            "Nhôm.",
+            "Vàng.",
+            "Bạc."
         ],
-        a: 0,
-        expl: "Suất điện động của nguồn điện là đại lượng vật lí đặc trưng cho khả năng sinh công của nguồn điện."
+        a: 3,
+        expl: "Bạc có điện trở suất nhỏ nhất $1,62.10^{-8} \\Omega.m$, dẫn điện tốt nhất."
     },
     
     // Câu 27
     {
         type: "multiple-choice",
-        q: "Công thức tính suất điện động của nguồn điện là:",
+        q: "Đối với bóng đèn sợi đốt, điện trở của nó thay đổi như thế nào khi đèn sáng?",
         options: [
-            "$\\mathcal{E} = \\frac{A}{q}$",
-            "$\\mathcal{E} = \\frac{q}{A}$",
-            "$\\mathcal{E} = A.q$",
-            "$\\mathcal{E} = \\frac{U}{I}$"
+            "Giảm mạnh so với lúc chưa sáng.",
+            "Tăng mạnh so với lúc chưa sáng.",
+            "Không thay đổi.",
+            "Lúc đầu tăng, sau giảm."
         ],
-        a: 0,
-        expl: "$\\mathcal{E} = \\frac{A}{q}$, với $A$ là công của lực lạ làm di chuyển điện tích $q$ từ cực âm đến cực dương bên trong nguồn điện."
+        a: 1,
+        expl: "Khi đèn sáng, nhiệt độ dây tóc tăng cao làm điện trở tăng mạnh."
     },
     
     // Câu 28
     {
         type: "multiple-choice",
-        q: "Mắc hai đầu một nguồn điện có suất điện động ε và điện trở trong r vào một mạch điện kín. Hiệu điện thế giữa hai cực của nguồn điện là:",
+        q: "Điện trở nhiệt (thermistor) là linh kiện có đặc điểm gì?",
         options: [
-            "$U = \\varepsilon - Ir$",
-            "$U = \\varepsilon + Ir$",
-            "$U = \\frac{\\varepsilon}{r}$",
-            "$U = \\varepsilon$"
+            "Điện trở không phụ thuộc nhiệt độ.",
+            "Điện trở biến thiên chậm theo nhiệt độ.",
+            "Điện trở biến thiên rất nhanh theo nhiệt độ.",
+            "Điện trở luôn có giá trị rất lớn."
         ],
-        a: 0,
-        expl: "$U = \\varepsilon - Ir$, với $r$ là điện trở trong của nguồn."
+        a: 2,
+        expl: "Điện trở nhiệt là linh kiện có điện trở biến thiên rất nhanh theo nhiệt độ, dùng làm cảm biến nhiệt."
     },
     
     // Câu 29
     {
         type: "multiple-choice",
-        q: "Khi mạch ngoài hở, hiệu điện thế giữa hai cực của nguồn điện:",
+        q: "Dây đốt nóng trong các thiết bị gia dụng như bếp điện, ấm điện thường được làm bằng vật liệu nào?",
         options: [
-            "Bằng suất điện động của nguồn.",
-            "Lớn hơn suất điện động của nguồn.",
-            "Nhỏ hơn suất điện động của nguồn.",
-            "Bằng 0."
+            "Đồng.",
+            "Nhôm.",
+            "Bạc.",
+            "Niken-crom (hợp kim)."
         ],
-        a: 0,
-        expl: "Khi mạch hở, không có dòng điện, hiệu điện thế giữa hai cực bằng suất điện động của nguồn."
+        a: 3,
+        expl: "Niken-crom có điện trở suất lớn và chịu nhiệt cao, thích hợp làm dây đốt nóng."
     },
     
     // Câu 30
     {
         type: "multiple-choice",
-        q: "Đơn vị của suất điện động trong hệ SI là:",
-        options: ["Vôn (V)", "Ampe (A)", "Ôm (Ω)", "Jun (J)"],
-        a: 0,
-        expl: "Suất điện động có đơn vị là vôn (V), giống như hiệu điện thế."
+        q: "Chất bán dẫn có đặc điểm điện trở như thế nào khi nhiệt độ tăng?",
+        options: [
+            "Điện trở tăng.",
+            "Điện trở giảm.",
+            "Điện trở không đổi.",
+            "Điện trở tăng rồi giảm."
+        ],
+        a: 1,
+        expl: "Chất bán dẫn có điện trở giảm khi nhiệt độ tăng (ngược với kim loại)."
     },
+    
+    // ============================================
+    // CÂU 31-45: NGUỒN ĐIỆN VÀ SUẤT ĐIỆN ĐỘNG
+    // ============================================
     
     // Câu 31
     {
         type: "multiple-choice",
-        q: "Điện trở trong của nguồn điện là:",
+        q: "Suất điện động của nguồn điện đặc trưng cho đại lượng nào?",
         options: [
-            "Điện trở của phần bên trong nguồn điện.",
-            "Điện trở của toàn bộ mạch.",
-            "Điện trở của mạch ngoài.",
-            "Điện tích bên trong nguồn điện."
+            "Khả năng tích điện của nguồn.",
+            "Khả năng tác dụng lực của nguồn.",
+            "Khả năng sinh công của nguồn.",
+            "Khả năng dự trữ năng lượng của nguồn."
         ],
-        a: 0,
-        expl: "Điện trở trong là điện trở của phần bên trong nguồn điện."
+        a: 2,
+        expl: "Suất điện động đặc trưng cho khả năng sinh công của nguồn điện."
     },
     
     // Câu 32
     {
         type: "multiple-choice",
-        q: "Khi nối tắt hai cực của một nguồn điện, cường độ dòng điện:",
+        q: "Đơn vị của suất điện động trong hệ SI là gì?",
         options: [
-            "Tối đa và bằng ε/r",
-            "Bằng 0",
-            "Tối thiểu",
-            "Bằng ε/R"
+            "Ampe (A).",
+            "Ôm (Ω).",
+            "Oát (W).",
+            "Vôn (V)."
         ],
-        a: 0,
-        expl: "Khi nối tắt, R = 0, dòng điện tối đa: I = ε/r."
+        a: 3,
+        expl: "Suất điện động có đơn vị là vôn (V)."
     },
     
     // Câu 33
     {
         type: "multiple-choice",
-        q: "Hiệu suất của nguồn điện được tính bằng:",
+        q: "Trong nguồn điện, lực lạ có tác dụng gì?",
         options: [
-            "$\\eta = \\frac{U}{\\varepsilon}$",
-            "$\\eta = \\frac{\\varepsilon}{U}$",
-            "$\\eta = \\frac{I}{\\varepsilon}$",
-            "$\\eta = \\frac{U}{I}$"
+            "Tạo ra điện trường bên trong nguồn.",
+            "Làm các electron dịch chuyển từ cực dương sang cực âm bên trong nguồn.",
+            "Làm các điện tích dương dịch chuyển từ cực âm sang cực dương bên trong nguồn.",
+            "Làm các điện tích dương dịch chuyển từ cực dương sang cực âm."
         ],
-        a: 0,
-        expl: "Hiệu suất của nguồn: $\\eta = \\frac{P_{ngoai}}{P_{toan}} = \\frac{UI}{\\varepsilon I} = \\frac{U}{\\varepsilon}$."
+        a: 2,
+        expl: "Lực lạ làm các điện tích dương dịch chuyển từ cực âm sang cực dương bên trong nguồn."
     },
     
     // Câu 34
     {
         type: "multiple-choice",
-        q: "Để hiệu suất của nguồn điện đạt giá trị lớn nhất, cần:",
+        q: "Khi mạch ngoài hở (không có dòng điện chạy qua nguồn), hiệu điện thế giữa hai cực của nguồn điện có giá trị như thế nào so với suất điện động?",
         options: [
-            "Điện trở mạch ngoài lớn hơn nhiều so với điện trở trong",
-            "Điện trở mạch ngoài nhỏ hơn nhiều so với điện trở trong",
-            "Điện trở mạch ngoài bằng điện trở trong",
-            "Điện trở mạch ngoài bằng 0"
+            "Nhỏ hơn.",
+            "Lớn hơn.",
+            "Bằng nhau.",
+            "Có thể lớn hơn hoặc nhỏ hơn."
         ],
-        a: 0,
-        expl: "Hiệu suất η = U/ε = ε/(R+r). Khi R >> r thì η → 1 (100%)."
+        a: 2,
+        expl: "Khi mạch hở, không có dòng điện, U = ε."
     },
     
     // Câu 35
     {
         type: "multiple-choice",
-        q: "Khi ghép nối tiếp hai nguồn điện có suất điện động ε₁, ε₂ và điện trở trong r₁, r₂ thì:",
+        q: "Điện trở trong của nguồn điện là gì?",
         options: [
-            "ε_b = ε₁ + ε₂, r_b = r₁ + r₂",
-            "ε_b = ε₁ + ε₂, r_b = r₁ = r₂",
-            "ε_b = |ε₁ - ε₂|, r_b = r₁ + r₂",
-            "ε_b = ε₁ = ε₂, r_b = r₁ + r₂"
+            "Điện trở của toàn bộ mạch điện.",
+            "Điện trở của mạch ngoài.",
+            "Điện trở của phần bên trong nguồn điện.",
+            "Điện trở của dây dẫn nối."
         ],
-        a: 0,
-        expl: "Ghép nối tiếp: ε_b = ε₁ + ε₂, r_b = r₁ + r₂."
+        a: 2,
+        expl: "Điện trở trong là điện trở của phần bên trong nguồn điện."
     },
     
     // Câu 36
     {
         type: "multiple-choice",
-        q: "Khi ghép song song hai nguồn điện giống hệt nhau thì:",
+        q: "Khi nối tắt hai cực của một nguồn điện (đoản mạch), hiện tượng gì xảy ra?",
         options: [
-            "ε_b = ε, r_b = r/2",
-            "ε_b = 2ε, r_b = r/2",
-            "ε_b = ε/2, r_b = 2r",
-            "ε_b = ε, r_b = 2r"
+            "Dòng điện rất nhỏ.",
+            "Không có dòng điện.",
+            "Dòng điện rất lớn, có thể gây cháy nổ.",
+            "Nguồn điện ngừng hoạt động."
         ],
-        a: 0,
-        expl: "Ghép song song hai nguồn giống nhau: ε_b = ε, r_b = r/2."
+        a: 2,
+        expl: "Khi nối tắt, R = 0, I = ε/r rất lớn, gây nguy hiểm cháy nổ."
     },
     
     // Câu 37
     {
         type: "multiple-choice",
-        q: "Công của lực lạ khi dịch chuyển điện tích q bên trong nguồn điện là:",
+        q: "Hiệu suất của nguồn điện được định nghĩa là tỉ số giữa:",
         options: [
-            "A = ε.q",
-            "A = U.q",
-            "A = ε/q",
-            "A = q/U"
+            "Công suất hao phí và công suất toàn phần.",
+            "Cường độ dòng điện và suất điện động.",
+            "Công suất có ích và công suất toàn phần.",
+            "Hiệu điện thế và cường độ dòng điện."
         ],
-        a: 0,
-        expl: "A = ε.q, với ε là suất điện động của nguồn."
+        a: 2,
+        expl: "Hiệu suất nguồn điện: $\\eta = \\frac{P_{ich}}{P_{tp}} = \\frac{U}{\\varepsilon}$."
     },
     
     // Câu 38
     {
         type: "multiple-choice",
-        q: "Nguồn điện thực tế có hai đại lượng đặc trưng là:",
+        q: "Khi ghép nối tiếp các nguồn điện, suất điện động của bộ nguồn được tính như thế nào?",
         options: [
-            "Suất điện động và điện trở trong",
-            "Hiệu điện thế và cường độ dòng điện",
-            "Công suất và điện năng",
-            "Điện tích và điện tích"
+            "Bằng hiệu các suất điện động.",
+            "Bằng suất điện động của nguồn lớn nhất.",
+            "Bằng trung bình cộng các suất điện động.",
+            "Bằng tổng các suất điện động."
         ],
-        a: 0,
-        expl: "Nguồn điện thực tế đặc trưng bởi suất điện động ε và điện trở trong r."
+        a: 3,
+        expl: "Ghép nối tiếp: $\\mathcal{E}_b = \\mathcal{E}_1 + \\mathcal{E}_2 + ... + \\mathcal{E}_n$."
     },
     
     // Câu 39
     {
         type: "multiple-choice",
-        q: "Khi nguồn điện cung cấp dòng điện cho mạch ngoài, hiệu điện thế hai cực:",
+        q: "Khi ghép nối tiếp các nguồn điện, điện trở trong của bộ nguồn được tính như thế nào?",
         options: [
-            "Nhỏ hơn suất điện động",
-            "Bằng suất điện động",
-            "Lớn hơn suất điện động",
-            "Bằng 0"
+            "Bằng hiệu các điện trở trong.",
+            "Bằng điện trở trong của nguồn lớn nhất.",
+            "Bằng tổng các điện trở trong.",
+            "Bằng trung bình cộng các điện trở trong."
         ],
-        a: 0,
-        expl: "Khi có dòng điện, U = ε - Ir < ε."
+        a: 2,
+        expl: "Ghép nối tiếp: $r_b = r_1 + r_2 + ... + r_n$."
     },
     
     // Câu 40
     {
         type: "multiple-choice",
-        q: "Cường độ dòng điện trong mạch kín có nguồn điện được tính bằng:",
+        q: "Khi ghép song song các nguồn điện giống hệt nhau, suất điện động của bộ nguồn được tính như thế nào?",
         options: [
-            "$I = \\frac{\\varepsilon}{R + r}$",
-            "$I = \\frac{\\varepsilon}{R}$",
-            "$I = \\frac{U}{R + r}$",
-            "$I = \\frac{U}{R}$"
+            "Bằng tổng các suất điện động.",
+            "Bằng suất điện động của một nguồn.",
+            "Bằng hiệu các suất điện động.",
+            "Bằng tích các suất điện động."
         ],
-        a: 0,
-        expl: "Định luật Ohm cho mạch kín: I = ε/(R + r)."
+        a: 1,
+        expl: "Ghép song song các nguồn giống nhau: $\\mathcal{E}_b = \\mathcal{E}$."
     },
-    
-    // ============================================
-    // CÂU 41-55: CÔNG SUẤT VÀ ĐIỆN NĂNG
-    // ============================================
     
     // Câu 41
     {
         type: "multiple-choice",
-        q: "Công thức tính công suất tiêu thụ điện của một đoạn mạch là:",
-        options: ["$P = UI$", "$P = \\frac{U}{I}$", "$P = \\frac{I}{U}$", "$P = \\frac{U}{I^2}$"],
-        a: 0,
-        expl: "Công suất $P = UI$."
+        q: "Khi ghép song song các nguồn điện giống hệt nhau, điện trở trong của bộ nguồn được tính như thế nào?",
+        options: [
+            "Bằng tổng các điện trở trong.",
+            "Bằng điện trở trong của một nguồn.",
+            "Bằng điện trở trong của một nguồn chia cho số nguồn.",
+            "Bằng tích các điện trở trong."
+        ],
+        a: 2,
+        expl: "Ghép song song n nguồn giống nhau: $r_b = \\frac{r}{n}$."
     },
     
     // Câu 42
     {
         type: "multiple-choice",
-        q: "Đơn vị của công suất điện trong hệ SI là:",
-        options: ["Oát (W)", "Jun (J)", "Vôn (V)", "Ampe (A)"],
-        a: 0,
-        expl: "Công suất có đơn vị là oát (W)."
+        q: "Nguồn điện thực tế được đặc trưng bởi hai đại lượng nào?",
+        options: [
+            "Hiệu điện thế và cường độ dòng điện.",
+            "Suất điện động và điện trở trong.",
+            "Công suất và điện năng.",
+            "Điện tích và điện dung."
+        ],
+        a: 1,
+        expl: "Nguồn điện thực tế có suất điện động ε và điện trở trong r."
     },
     
     // Câu 43
     {
         type: "multiple-choice",
-        q: "Công thức tính điện năng tiêu thụ là:",
+        q: "Khi nguồn điện cung cấp dòng điện cho mạch ngoài, hiệu điện thế giữa hai cực của nguồn có đặc điểm gì?",
         options: [
-            "A = P.t",
-            "A = P/t",
-            "A = t/P",
-            "A = P + t"
+            "Lớn hơn suất điện động.",
+            "Bằng suất điện động.",
+            "Nhỏ hơn suất điện động.",
+            "Bằng 0."
         ],
-        a: 0,
-        expl: "Điện năng tiêu thụ: A = P.t."
+        a: 2,
+        expl: "Khi có dòng điện, $U = \\varepsilon - Ir < \\varepsilon$."
     },
     
     // Câu 44
     {
         type: "multiple-choice",
-        q: "Nhiệt lượng tỏa ra trên điện trở do hiệu ứng Joule được tính bằng:",
+        q: "Pin và acquy có điểm giống nhau cơ bản là:",
         options: [
-            "Q = I²Rt",
-            "Q = IRT",
-            "Q = UIt",
-            "Q = URt"
+            "Đều có thể sạc điện lại được.",
+            "Đều tạo ra dòng điện nhờ phản ứng hóa học.",
+            "Đều có suất điện động rất lớn.",
+            "Đều có điện trở trong bằng 0."
         ],
-        a: 0,
-        expl: "Nhiệt lượng Joule: Q = I²Rt."
+        a: 1,
+        expl: "Pin và acquy đều biến đổi hóa năng thành điện năng, tạo ra dòng điện nhờ phản ứng hóa học."
     },
     
     // Câu 45
     {
         type: "multiple-choice",
-        q: "Hiệu ứng Joule là:",
+        q: "Khi sử dụng pin, ta không nên để pin ở nơi ẩm ướt vì:",
         options: [
-            "Sự tỏa nhiệt trên dây dẫn khi có dòng điện chạy qua",
-            "Sự phát sáng của dây dẫn khi có dòng điện",
-            "Sự tạo từ trường của dòng điện",
-            "Sự phân cực điện của dây dẫn"
+            "Pin sẽ bị rỉ sét.",
+            "Điện trở trong của pin tăng lên.",
+            "Pin có thể bị chập mạch qua lớp vỏ ẩm.",
+            "Pin sẽ bị giảm suất điện động."
         ],
-        a: 0,
-        expl: "Hiệu ứng Joule là hiện tượng tỏa nhiệt trên dây dẫn khi có dòng điện chạy qua."
+        a: 2,
+        expl: "Lớp vỏ ẩm có thể tạo đường dẫn điện làm pin bị chập, nhanh hết và gây nguy hiểm."
     },
+    
+    // ============================================
+    // CÂU 46-60: CÔNG SUẤT VÀ ĐIỆN NĂNG
+    // ============================================
     
     // Câu 46
     {
         type: "multiple-choice",
-        q: "Khi điện trở tăng lên, công suất tiêu thụ (với hiệu điện thế không đổi):",
-        options: ["Giảm", "Tăng", "Không đổi", "Tăng rồi giảm"],
-        a: 0,
-        expl: "P = U²/R, khi U không đổi, R tăng thì P giảm."
+        q: "Đơn vị của công suất điện trong hệ SI là gì?",
+        options: [
+            "Jun (J).",
+            "Vôn (V).",
+            "Ampe (A).",
+            "Oát (W)."
+        ],
+        a: 3,
+        expl: "Công suất có đơn vị là oát (W)."
     },
     
     // Câu 47
     {
         type: "multiple-choice",
-        q: "Khi cường độ dòng điện tăng lên, công suất tiêu thụ (với điện trở không đổi):",
-        options: ["Tăng theo bình phương", "Tăng tuyến tính", "Giảm", "Không đổi"],
-        a: 0,
-        expl: "P = I²R, khi R không đổi, P tăng theo bình phương của I."
+        q: "Công suất tiêu thụ điện của một đoạn mạch được tính bằng:",
+        options: [
+            "Tích của hiệu điện thế và thời gian.",
+            "Tích của cường độ dòng điện và thời gian.",
+            "Tích của hiệu điện thế và cường độ dòng điện.",
+            "Thương của hiệu điện thế và cường độ dòng điện."
+        ],
+        a: 2,
+        expl: "Công suất điện: $P = U.I$."
     },
     
     // Câu 48
     {
         type: "multiple-choice",
-        q: "Công suất của nguồn điện là:",
+        q: "Hiệu ứng Joule là hiện tượng gì?",
         options: [
-            "P_ng = ε.I",
-            "P_ng = U.I",
-            "P_ng = I²r",
-            "P_ng = U²/r"
+            "Sự phát sáng của dây dẫn khi có dòng điện.",
+            "Sự tạo từ trường của dòng điện.",
+            "Sự tỏa nhiệt trên dây dẫn khi có dòng điện chạy qua.",
+            "Sự phân cực điện của dây dẫn."
         ],
-        a: 0,
-        expl: "Công suất của nguồn: P_ng = ε.I."
+        a: 2,
+        expl: "Hiệu ứng Joule là hiện tượng tỏa nhiệt trên dây dẫn khi có dòng điện chạy qua."
     },
     
     // Câu 49
     {
         type: "multiple-choice",
-        q: "Công suất hữu ích trên mạch ngoài là:",
+        q: "Đơn vị của điện năng tiêu thụ thường dùng trong đời sống là:",
         options: [
-            "P_ch = U.I",
-            "P_ch = ε.I",
-            "P_ch = I²r",
-            "P_ch = U²/R"
+            "Jun (J).",
+            "Oát (W).",
+            "Vôn (V).",
+            "Kilôoát giờ (kWh)."
         ],
-        a: 0,
-        expl: "Công suất hữu ích trên mạch ngoài: P_ch = U.I."
+        a: 3,
+        expl: "Trong đời sống, điện năng tiêu thụ thường tính bằng kWh."
     },
     
     // Câu 50
     {
         type: "multiple-choice",
-        q: "Công suất hao phí trên điện trở trong là:",
+        q: "Công suất của nguồn điện được tính bằng công thức nào?",
         options: [
-            "P_hao = I²r",
-            "P_hao = U.I",
-            "P_hao = ε.I",
-            "P_hao = U²/r"
+            "$P_{ng} = U.I$",
+            "$P_{ng} = I^2R$",
+            "$P_{ng} = \\varepsilon.I$",
+            "$P_{ng} = \\frac{U^2}{R}$"
         ],
-        a: 0,
-        expl: "Công suất hao phí trên điện trở trong: P_hao = I²r."
+        a: 2,
+        expl: "Công suất của nguồn điện: $P_{ng} = \\varepsilon.I$."
     },
     
     // Câu 51
     {
         type: "multiple-choice",
-        q: "Điều kiện để công suất hữu ích đạt giá trị lớn nhất là:",
+        q: "Công suất hao phí trên điện trở trong của nguồn điện được tính bằng:",
         options: [
-            "R = r",
-            "R >> r",
-            "R << r",
-            "R = 2r"
+            "$P_{hp} = U.I$",
+            "$P_{hp} = \\varepsilon.I$",
+            "$P_{hp} = I^2r$",
+            "$P_{hp} = \\frac{U^2}{r}$"
         ],
-        a: 0,
-        expl: "Công suất hữu ích lớn nhất khi R = r."
+        a: 2,
+        expl: "Công suất hao phí tỏa nhiệt trên điện trở trong: $P_{hp} = I^2r$."
     },
     
     // Câu 52
     {
         type: "multiple-choice",
-        q: "Khi R = r, hiệu suất của nguồn điện là:",
-        options: ["50%", "100%", "25%", "75%"],
-        a: 0,
-        expl: "Khi R = r, η = U/ε = R/(R+r) = R/(2R) = 50%."
+        q: "Điều kiện để công suất tiêu thụ trên mạch ngoài đạt giá trị lớn nhất là:",
+        options: [
+            "$R >> r$",
+            "$R << r$",
+            "$R = r$",
+            "$R = 2r$"
+        ],
+        a: 2,
+        expl: "Công suất mạch ngoài lớn nhất khi $R = r$."
     },
     
     // Câu 53
     {
         type: "multiple-choice",
-        q: "Một bóng đèn ghi 220V-60W. Điện trở của đèn khi hoạt động bình thường là:",
-        options: ["806,7 Ω", "484 Ω", "366,7 Ω", "220 Ω"],
-        a: 0,
-        expl: "R = U²/P = 220²/60 = 48400/60 ≈ 806,7 Ω."
+        q: "Khi điện trở mạch ngoài bằng điện trở trong của nguồn, hiệu suất của nguồn điện là bao nhiêu?",
+        options: [
+            "25%",
+            "50%",
+            "75%",
+            "100%"
+        ],
+        a: 1,
+        expl: "Khi R = r, $\\eta = \\frac{R}{R+r} = \\frac{R}{2R} = 0,5 = 50\\%$."
     },
     
     // Câu 54
     {
         type: "multiple-choice",
-        q: "Một bóng đèn ghi 220V-60W. Cường độ dòng điện qua đèn khi hoạt động bình thường là:",
-        options: ["0,27 A", "0,5 A", "1 A", "2 A"],
-        a: 0,
-        expl: "I = P/U = 60/220 ≈ 0,27 A."
+        q: "Nhiệt lượng tỏa ra trên dây dẫn khi có dòng điện chạy qua được xác định bởi định luật nào?",
+        options: [
+            "Định luật Ohm.",
+            "Định luật Joule – Lenz.",
+            "Định luật Coulomb.",
+            "Định luật Faraday."
+        ],
+        a: 1,
+        expl: "Định luật Joule – Lenz xác định nhiệt lượng tỏa ra trên dây dẫn: $Q = I^2Rt$."
     },
     
     // Câu 55
     {
         type: "multiple-choice",
-        q: "Đơn vị của điện năng tiêu thụ thường dùng trong đời sống là:",
-        options: ["kWh", "W.s", "J", "cal"],
-        a: 0,
-        expl: "Điện năng tiêu thụ thường tính bằng kWh."
+        q: "Điện năng tiêu thụ của một thiết bị điện phụ thuộc vào những yếu tố nào?",
+        options: [
+            "Hiệu điện thế và thời gian sử dụng.",
+            "Cường độ dòng điện và thời gian sử dụng.",
+            "Công suất và thời gian sử dụng.",
+            "Điện trở và hiệu điện thế."
+        ],
+        a: 2,
+        expl: "Điện năng tiêu thụ: $A = P.t$, phụ thuộc vào công suất và thời gian."
     },
-    
-    // ============================================
-    // CÂU 56-70: MẠCH ĐIỆN GHÉP NỐI
-    // ============================================
     
     // Câu 56
     {
         type: "multiple-choice",
-        q: "Khi mắc các điện trở nối tiếp, đại lượng nào không đổi qua từng điện trở?",
-        options: ["Cường độ dòng điện", "Hiệu điện thế", "Công suất", "Điện trở"],
-        a: 0,
-        expl: "Mắc nối tiếp: cường độ dòng điện không đổi qua từng điện trở."
+        q: "Trên một bóng đèn có ghi 220V – 60W. Con số 60W có ý nghĩa gì?",
+        options: [
+            "Hiệu điện thế định mức của đèn.",
+            "Cường độ dòng điện định mức của đèn.",
+            "Công suất định mức của đèn.",
+            "Điện trở của đèn khi hoạt động."
+        ],
+        a: 2,
+        expl: "60W là công suất định mức của bóng đèn."
     },
     
     // Câu 57
     {
         type: "multiple-choice",
-        q: "Khi mắc các điện trở song song, đại lượng nào không đổi trên từng điện trở?",
-        options: ["Hiệu điện thế", "Cường độ dòng điện", "Công suất", "Điện trở"],
-        a: 0,
-        expl: "Mắc song song: hiệu điện thế không đổi trên từng điện trở."
+        q: "Công tơ điện (máy đếm điện năng) dùng để đo đại lượng nào?",
+        options: [
+            "Cường độ dòng điện.",
+            "Hiệu điện thế.",
+            "Công suất điện.",
+            "Điện năng tiêu thụ."
+        ],
+        a: 3,
+        expl: "Công tơ điện đo điện năng tiêu thụ (kWh)."
     },
     
     // Câu 58
     {
         type: "multiple-choice",
-        q: "Điện trở tương đương của hai điện trở R₁ và R₂ mắc song song là:",
+        q: "Khi dòng điện chạy qua một đoạn mạch chỉ chứa điện trở thuần, năng lượng điện được chuyển hóa chủ yếu thành dạng năng lượng nào?",
         options: [
-            "$\\frac{1}{R} = \\frac{1}{R_1} + \\frac{1}{R_2}$",
-            "$R = R_1 + R_2$",
-            "$R = \\frac{R_1 + R_2}{2}$",
-            "$R = \\frac{R_1 R_2}{R_1 + R_2}$"
+            "Cơ năng.",
+            "Quang năng.",
+            "Hóa năng.",
+            "Nhiệt năng."
         ],
-        a: 0,
-        expl: "Mắc song song: 1/R = 1/R₁ + 1/R₂."
+        a: 3,
+        expl: "Trên điện trở thuần, năng lượng điện chuyển hóa thành nhiệt năng."
     },
     
     // Câu 59
     {
         type: "multiple-choice",
-        q: "Khi mắc hai điện trở giống nhau R song song, điện trở tương đương là:",
-        options: ["R/2", "2R", "R", "R²"],
-        a: 0,
-        expl: "R = R/2 khi mắc hai điện trở giống nhau song song."
+        q: "Trong các thiết bị sau, thiết bị nào biến đổi điện năng thành cơ năng?",
+        options: [
+            "Bóng đèn.",
+            "Bếp điện.",
+            "Quạt điện.",
+            "Bàn là."
+        ],
+        a: 2,
+        expl: "Quạt điện biến đổi điện năng thành cơ năng (quay)."
     },
     
     // Câu 60
     {
         type: "multiple-choice",
-        q: "Khi mắc hai điện trở giống nhau R nối tiếp, điện trở tương đương là:",
-        options: ["2R", "R/2", "R", "R²"],
-        a: 0,
-        expl: "R = 2R khi mắc hai điện trở giống nhau nối tiếp."
+        q: "1 kWh tương đương với bao nhiêu Jun?",
+        options: [
+            "1000 J",
+            "3600 J",
+            "36000 J",
+            "3,6.10⁶ J"
+        ],
+        a: 3,
+        expl: "1 kWh = 1000 W × 3600 s = 3,6.10⁶ J."
     },
+    
+    // ============================================
+    // CÂU 61-75: GHÉP ĐIỆN TRỞ VÀ MẠCH ĐIỆN
+    // ============================================
     
     // Câu 61
     {
         type: "multiple-choice",
-        q: "Trong mạch song song, dòng điện chính bằng:",
+        q: "Khi mắc các điện trở nối tiếp, đại lượng nào sau đây là như nhau đối với tất cả các điện trở?",
         options: [
-            "Tổng các dòng nhánh",
-            "Dòng điện nhánh lớn nhất",
-            "Dòng điện nhánh nhỏ nhất",
-            "Trung bình các dòng nhánh"
+            "Hiệu điện thế.",
+            "Cường độ dòng điện.",
+            "Công suất tiêu thụ.",
+            "Nhiệt lượng tỏa ra."
         ],
-        a: 0,
-        expl: "Trong mạch song song: I = I₁ + I₂ + I₃ + ..."
+        a: 1,
+        expl: "Mạch nối tiếp có cường độ dòng điện bằng nhau qua các điện trở."
     },
     
     // Câu 62
     {
         type: "multiple-choice",
-        q: "Trong mạch nối tiếp, hiệu điện thế tổng bằng:",
+        q: "Khi mắc các điện trở song song, đại lượng nào sau đây là như nhau đối với tất cả các điện trở?",
         options: [
-            "Tổng hiệu điện thế từng phần",
-            "Hiệu điện thế lớn nhất",
-            "Hiệu điện thế nhỏ nhất",
-            "Hiệu điện thế trung bình"
+            "Cường độ dòng điện.",
+            "Công suất tiêu thụ.",
+            "Hiệu điện thế.",
+            "Nhiệt lượng tỏa ra."
         ],
-        a: 0,
-        expl: "Trong mạch nối tiếp: U = U₁ + U₂ + U₃ + ..."
+        a: 2,
+        expl: "Mạch song song có hiệu điện thế bằng nhau trên các nhánh."
     },
     
     // Câu 63
     {
         type: "multiple-choice",
-        q: "Khi có một điện trở bị hỏng (hở mạch) trong mạch song song:",
+        q: "Khi mắc hai điện trở giống nhau song song, điện trở tương đương của đoạn mạch so với mỗi điện trở thành phần là:",
         options: [
-            "Các điện khác vẫn hoạt động bình thường",
-            "Cả mạch đều hỏng",
-            "Chỉ có điện trở hỏng không hoạt động",
-            "Dòng điện tăng vọt"
+            "Bằng nhau.",
+            "Lớn gấp đôi.",
+            "Bằng một nửa.",
+            "Lớn gấp bốn."
         ],
-        a: 0,
-        expl: "Trong mạch song song, khi một nhánh hở thì các nhánh khác vẫn hoạt động."
+        a: 2,
+        expl: "Hai điện trở giống nhau mắc song song: $R_{td} = \\frac{R}{2}$."
     },
     
     // Câu 64
     {
         type: "multiple-choice",
-        q: "Khi có một điện trở bị hỏng (hở mạch) trong mạch nối tiếp:",
+        q: "Khi mắc hai điện trở giống nhau nối tiếp, điện trở tương đương của đoạn mạch so với mỗi điện trở thành phần là:",
         options: [
-            "Cả mạch đều hỏng",
-            "Các điện trở khác vẫn hoạt động",
-            "Dòng điện giảm một nửa",
-            "Dòng điện tăng gấp đôi"
+            "Bằng nhau.",
+            "Bằng một nửa.",
+            "Lớn gấp đôi.",
+            "Lớn gấp bốn."
         ],
-        a: 0,
-        expl: "Trong mạch nối tiếp, khi một vị trí hở thì cả mạch không có dòng điện."
+        a: 2,
+        expl: "Hai điện trở giống nhau mắc nối tiếp: $R_{td} = 2R$."
     },
     
     // Câu 65
     {
         type: "multiple-choice",
-        q: "Để đo điện trở của một thiết bị điện, ta dùng:",
-        options: ["Vôn-ôm kế", "Ampe kế", "Vôn kế", "Ôm kế"],
-        a: 0,
-        expl: "Vôn-ôm kế (multimeter) có thể đo điện trở."
+        q: "Trong mạch điện song song, cường độ dòng điện chính (dòng điện tổng) có giá trị như thế nào so với các dòng điện nhánh?",
+        options: [
+            "Bằng dòng điện nhánh lớn nhất.",
+            "Bằng dòng điện nhánh nhỏ nhất.",
+            "Bằng tổng các dòng điện nhánh.",
+            "Bằng trung bình cộng các dòng điện nhánh."
+        ],
+        a: 2,
+        expl: "Mạch song song: $I = I_1 + I_2 + I_3 + ...$."
     },
     
     // Câu 66
     {
         type: "multiple-choice",
-        q: "Khi mắc các thiết bị điện trong gia đình, chúng được mắc:",
-        options: ["Song song", "Nối tiếp", "Vừa nối tiếp vừa song song", "Tùy chỉnh"],
-        a: 0,
-        expl: "Các thiết bị điện trong gia đình được mắc song song để hoạt động độc lập."
+        q: "Trong mạch điện nối tiếp, hiệu điện thế tổng (giữa hai đầu đoạn mạch) có giá trị như thế nào so với các hiệu điện thế thành phần?",
+        options: [
+            "Bằng hiệu điện thế lớn nhất.",
+            "Bằng hiệu điện thế nhỏ nhất.",
+            "Bằng tổng các hiệu điện thế thành phần.",
+            "Bằng trung bình cộng các hiệu điện thế thành phần."
+        ],
+        a: 2,
+        expl: "Mạch nối tiếp: $U = U_1 + U_2 + U_3 + ...$."
     },
     
     // Câu 67
     {
         type: "multiple-choice",
-        q: "Công tắc trong mạch điện được mắc:",
-        options: ["Nối tiếp với thiết bị", "Song song với thiết bị", "Nối đất", "Bất kỳ vị trí nào"],
-        a: 0,
-        expl: "Công tắc được mắc nối tiếp với thiết bị để điều khiển dòng điện."
+        q: "Khi một điện trở trong mạch song song bị đứt (hở mạch), các điện trở còn lại có hoạt động không?",
+        options: [
+            "Không hoạt động.",
+            "Vẫn hoạt động bình thường.",
+            "Hoạt động yếu hơn.",
+            "Có thể cháy hỏng."
+        ],
+        a: 1,
+        expl: "Mạch song song: khi một nhánh hở, các nhánh khác vẫn hoạt động bình thường."
     },
     
     // Câu 68
     {
         type: "multiple-choice",
-        q: "Khi thêm một thiết bị vào mạch song song, điện trở tương đương của mạch:",
-        options: ["Giảm", "Tăng", "Không đổi", "Tăng rồi giảm"],
-        a: 0,
-        expl: "Khi thêm nhánh song song, điện trở tương đương giảm."
+        q: "Khi một điện trở trong mạch nối tiếp bị đứt (hở mạch), hiện tượng gì xảy ra?",
+        options: [
+            "Các điện trở khác vẫn hoạt động.",
+            "Dòng điện giảm một nửa.",
+            "Cả mạch không có dòng điện.",
+            "Dòng điện tăng gấp đôi."
+        ],
+        a: 2,
+        expl: "Mạch nối tiếp: khi một vị trí hở, dòng điện bị ngắt, toàn mạch không hoạt động."
     },
     
     // Câu 69
     {
         type: "multiple-choice",
-        q: "Khi thêm một thiết bị vào mạch song song, dòng điện chính:",
-        options: ["Tăng", "Giảm", "Không đổi", "Tăng rồi giảm"],
-        a: 0,
-        expl: "Khi R_tđ giảm, I_chính = U/R_tđ tăng."
+        q: "Các thiết bị điện trong gia đình thường được mắc với nhau theo cách nào?",
+        options: [
+            "Nối tiếp.",
+            "Song song.",
+            "Hỗn hợp.",
+            "Tùy theo từng loại thiết bị."
+        ],
+        a: 1,
+        expl: "Các thiết bị điện trong gia đình được mắc song song để hoạt động độc lập."
     },
     
     // Câu 70
     {
         type: "multiple-choice",
-        q: "Trong mạch hỗn hợp, cách tính điện trở tương đương là:",
+        q: "Công tắc điện trong mạch điện được mắc như thế nào với thiết bị cần điều khiển?",
         options: [
-            "Tính từng phần rồi cộng lại",
-            "Công thức đặc biệt cho mạch hỗn hợp",
-            "Không thể tính được",
-            "Tính trung bình các điện trở"
+            "Song song.",
+            "Nối tiếp.",
+            "Nối đất.",
+            "Có thể mắc tùy ý."
         ],
-        a: 0,
-        expl: "Mạch hỗn hợp được tính bằng cách chia thành các phần đơn giản rồi tính tổng hợp."
+        a: 1,
+        expl: "Công tắc được mắc nối tiếp với thiết bị để điều khiển dòng điện."
     },
-    
-    // ============================================
-    // CÂU 71-80: CÁC VẤN ĐỀ THỰC TẾ
-    // ============================================
     
     // Câu 71
     {
         type: "multiple-choice",
-        q: "Dây dẫn điện trong nhà thường làm bằng đồng hoặc nhôm vì:",
+        q: "Khi thêm một điện trở song song vào mạch, điện trở tương đương của toàn mạch thay đổi như thế nào?",
         options: [
-            "Có điện trở suất nhỏ",
-            "Có giá thành rẻ",
-            "Dễ gia công",
-            "Bền bỉ"
+            "Tăng lên.",
+            "Giảm xuống.",
+            "Không đổi.",
+            "Tăng rồi giảm."
         ],
-        a: 0,
-        expl: "Đồng và nhôm có điện trở suất nhỏ, dẫn điện tốt."
+        a: 1,
+        expl: "Thêm nhánh song song làm điện trở tương đương giảm."
     },
     
     // Câu 72
     {
         type: "multiple-choice",
-        q: "Dây đốt nóng trong các thiết bị gia dụng thường làm bằng:",
+        q: "Khi thêm một điện trở nối tiếp vào mạch, điện trở tương đương của toàn mạch thay đổi như thế nào?",
         options: [
-            "Niken-crom hoặc crom-niken",
-            "Đồng",
-            "Nhôm",
-            "Bạc"
+            "Giảm xuống.",
+            "Không đổi.",
+            "Tăng lên.",
+            "Giảm rồi tăng."
         ],
-        a: 0,
-        expl: "Niken-crom có điện trở suất lớn và chịu nhiệt tốt."
+        a: 2,
+        expl: "Thêm điện trở nối tiếp làm điện trở tương đương tăng."
     },
     
     // Câu 73
     {
         type: "multiple-choice",
-        q: "Chất bán dẫn có đặc điểm điện trở:",
+        q: "Để đo cường độ dòng điện chạy qua một thiết bị, ampe kế được mắc như thế nào?",
         options: [
-            "Giảm khi nhiệt độ tăng",
-            "Tăng khi nhiệt độ tăng",
-            "Không đổi khi nhiệt độ thay đổi",
-            "Tăng rồi giảm khi nhiệt độ tăng"
+            "Song song với thiết bị.",
+            "Nối tiếp với thiết bị.",
+            "Nối tiếp với nguồn.",
+            "Song song với nguồn."
         ],
-        a: 0,
-        expl: "Chất bán dẫn có điện trở giảm khi nhiệt độ tăng."
+        a: 1,
+        expl: "Ampe kế mắc nối tiếp với thiết bị cần đo dòng điện."
     },
     
     // Câu 74
     {
         type: "multiple-choice",
-        q: "Siêu dẫn là chất có điện trở:",
+        q: "Để đo hiệu điện thế giữa hai đầu một thiết bị, vôn kế được mắc như thế nào?",
         options: [
-            "Bằng 0 ở nhiệt độ đủ thấp",
-            "Rất lớn ở mọi nhiệt độ",
-            "Trung bình",
-            "Tăng khi nhiệt độ giảm"
+            "Nối tiếp với thiết bị.",
+            "Song song với thiết bị.",
+            "Nối tiếp với nguồn.",
+            "Bất kỳ vị trí nào."
         ],
-        a: 0,
-        expl: "Siêu dẫn có điện trở bằng 0 ở nhiệt độ dưới nhiệt độ tới hạn."
+        a: 1,
+        expl: "Vôn kế mắc song song với thiết bị cần đo hiệu điện thế."
     },
     
     // Câu 75
     {
         type: "multiple-choice",
-        q: "Hiệu ứng nhiệt điện là hiện tượng:",
+        q: "Ampe kế lý tưởng (đo chính xác) cần có điện trở như thế nào?",
         options: [
-            "Xuất hiện hiệu điện thế khi có sự khác biệt nhiệt độ",
-            "Tỏa nhiệt khi có dòng điện",
-            "Tạo từ trường khi có dòng điện",
-            "Phát sáng khi có dòng điện"
+            "Rất lớn.",
+            "Rất nhỏ.",
+            "Bằng điện trở của mạch.",
+            "Bằng 0."
         ],
-        a: 0,
-        expl: "Hiệu ứng nhiệt điện: sự xuất hiện hiệu điện thế khi có sự khác biệt nhiệt độ."
+        a: 1,
+        expl: "Ampe kế lý tưởng có điện trở rất nhỏ để không ảnh hưởng đến dòng điện cần đo."
     },
+    
+    // ============================================
+    // CÂU 76-80: ỨNG DỤNG VÀ AN TOÀN ĐIỆN
+    // ============================================
     
     // Câu 76
     {
         type: "multiple-choice",
-        q: "An-zen (zenner) là đi-ốt đặc biệt dùng để:",
+        q: "Cầu chì hoạt động dựa trên nguyên lý nào?",
         options: [
-            "Ổn áp",
-            "Chỉnh lưu",
-            "Khuếch đại",
-            "Chuyển đổi tần số"
+            "Hiệu ứng nhiệt điện.",
+            "Hiệu ứng Joule (tỏa nhiệt).",
+            "Định luật Ohm.",
+            "Suất điện động cảm ứng."
         ],
-        a: 0,
-        expl: "An-zen dùng để ổn áp."
+        a: 1,
+        expl: "Cầu chì hoạt động dựa trên hiệu ứng Joule: dòng điện quá lớn làm dây chì nóng chảy, ngắt mạch."
     },
     
     // Câu 77
     {
         type: "multiple-choice",
-        q: "Khi chọn dây dẫn điện, cần quan tâm đến:",
+        q: "Nguy cơ lớn nhất khi dây dẫn điện bị quá tải (dòng điện quá lớn) là gì?",
         options: [
-            "Tiết diện và dòng điện cho phép",
-            "Chỉ màu sắc của dây",
-            "Chỉ giá thành",
-            "Chỉ chiều dài"
+            "Giảm hiệu suất sử dụng điện.",
+            "Tăng điện trở dây dẫn.",
+            "Cháy nổ do tỏa nhiệt quá mức.",
+            "Giảm điện áp nguồn."
         ],
-        a: 0,
-        expl: "Tiết diện dây phải phù hợp với dòng điện cho phép để tránh quá nhiệt."
+        a: 2,
+        expl: "Dây dẫn quá tải tỏa nhiệt lớn, có thể gây cháy nổ, nguy hiểm."
     },
     
     // Câu 78
     {
         type: "multiple-choice",
-        q: "Nguy cơ lớn nhất khi dây dẫn điện quá tải là:",
+        q: "Khi chọn dây dẫn điện cho gia đình, yếu tố quan trọng nhất cần quan tâm là:",
         options: [
-            "Cháy nổ",
-            "Giảm hiệu suất",
-            "Tăng điện trở",
-            "Giảm điện áp"
+            "Màu sắc dây dẫn.",
+            "Chiều dài dây dẫn.",
+            "Tiết diện dây và dòng điện cho phép.",
+            "Giá thành của dây."
         ],
-        a: 0,
-        expl: "Dây dẫn quá tải có thể gây cháy nổ do tỏa nhiệt quá mức."
+        a: 2,
+        expl: "Tiết diện dây phải phù hợp với dòng điện cho phép để tránh quá tải và cháy nổ."
     },
     
     // Câu 79
     {
         type: "multiple-choice",
-        q: "Cầu chì hoạt động dựa trên nguyên lý:",
+        q: "Siêu dẫn là hiện tượng:",
         options: [
-            "Hiệu ứng Joule",
-            "Định luật Ohm",
-            "Hiệu ứng nhiệt điện",
-            "Suất điện động"
+            "Điện trở của vật liệu bằng 0 ở nhiệt độ đủ thấp.",
+            "Điện trở của vật liệu rất lớn ở nhiệt độ thường.",
+            "Vật liệu dẫn điện tốt ở mọi nhiệt độ.",
+            "Vật liệu cách điện ở nhiệt độ thấp."
         ],
         a: 0,
-        expl: "Cầu chì hoạt động dựa trên hiệu ứng Joule - nóng chảy khi dòng điện quá lớn."
+        expl: "Siêu dẫn là hiện tượng điện trở của vật liệu bằng 0 khi nhiệt độ dưới nhiệt độ tới hạn."
     },
     
     // Câu 80
     {
         type: "multiple-choice",
-        q: "Trong các thiết bị điện tử, đi-ốt bán dẫn thường dùng để:",
+        q: "Khi sử dụng điện, để đảm bảo an toàn, ta cần:",
         options: [
-            "Cho dòng điện chạy một chiều",
-            "Tăng điện áp",
-            "Giảm điện trở",
-            "Lọc nhiễu"
+            "Sử dụng dây dẫn có tiết diện nhỏ để tiết kiệm.",
+            "Không sử dụng cầu chì để tránh mất điện.",
+            "Ngắt nguồn điện trước khi sửa chữa thiết bị.",
+            "Sử dụng nhiều thiết bị cùng lúc trên một ổ cắm."
         ],
-        a: 0,
-        expl: "Đi-ốt bán dẫn có tính chỉnh lưu - cho dòng điện chạy một chiều."
+        a: 2,
+        expl: "Ngắt nguồn điện trước khi sửa chữa là biện pháp an toàn quan trọng nhất."
     }
 ];

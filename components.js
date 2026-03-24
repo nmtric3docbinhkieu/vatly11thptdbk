@@ -1098,7 +1098,7 @@ window.SolveExercisesScreen = function({ onBack, chapter }) {
 };
 
 // QuizScreen component for regular quiz functionality
-window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elapsedTime, cheatWarnings, onSelect, onNext, showExpl, selected }) {
+window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elapsedTime, cheatWarnings, onSelect, onNext, showExpl, selected, chapter4Activity, gameState, questions }) {
     // State for true-false selections
     const [trueFalseSelections, setTrueFalseSelections] = React.useState({});
     
@@ -1407,7 +1407,15 @@ window.QuizScreen = function({ question, currentIdx, totalQuestions, score, elap
                     currentIdx === totalQuestions - 1 ? 'XEM KẾT QUẢ' : 'CÂU TIẾP THEO',
                     React.createElement('i', { className: "fas fa-chevron-right ml-3" })
                 )
-            ) : null,
+            ) : (
+                // Nếu không hiển thị giải thích nhưng đã chọn đáp án, vẫn hiển thị nút tiếp theo
+                selected !== null && React.createElement('div', { className: "mb-8" },
+                    React.createElement('button', { onClick: onNext, className: "w-full bg-blue-600 text-white py-5 rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all" },
+                        currentIdx === totalQuestions - 1 ? 'XEM KẾT QUẢ' : 'CÂU TIẾP THEO',
+                        React.createElement('i', { className: "fas fa-chevron-right ml-3" })
+                    )
+                )
+            ),
             
             // Question
             React.createElement('div', { className: "glass-panel p-8 md:p-12 mb-6" },
