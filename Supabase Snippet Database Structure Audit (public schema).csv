@@ -1,0 +1,11 @@
+info_type,tablename,policyname,permissive,roles,cmd,qual,with_check
+POLICIES,exercise_attempts_chapter3,Allow all authenticated users,PERMISSIVE,{authenticated},ALL,true,true
+POLICIES,exercise_attempts_chapter3,Users can insert their own exercise attempts,PERMISSIVE,{authenticated},ALL,((auth.uid())::text = (student_id)::text),((auth.uid())::text = (student_id)::text)
+POLICIES,quiz_attempts_chapter3,Users can insert their own quiz attempts,PERMISSIVE,{authenticated},ALL,((auth.uid())::text = (student_id)::text),((auth.uid())::text = (student_id)::text)
+POLICIES,quiz_attempts_chapter3_ktghk2,Users can insert their own ktghk2 attempts,PERMISSIVE,{public},INSERT,null,((auth.uid() = student_id) OR (auth.uid() IS NULL))
+POLICIES,quiz_attempts_chapter3_ktghk2,Users can view their own ktghk2 attempts,PERMISSIVE,{public},SELECT,((auth.uid() = student_id) OR (auth.uid() IS NULL)),null
+POLICIES,quiz_attempts_chapter3_quiz,Users can insert their own quiz attempts,PERMISSIVE,{public},INSERT,null,((auth.uid() = student_id) OR (auth.uid() IS NULL))
+POLICIES,quiz_attempts_chapter3_quiz,Users can view their own quiz attempts,PERMISSIVE,{public},SELECT,((auth.uid() = student_id) OR (auth.uid() IS NULL)),null
+POLICIES,quiz_attempts_chapter3_solve,Users can insert their own solve attempts,PERMISSIVE,{public},INSERT,null,((auth.uid() = student_id) OR (auth.uid() IS NULL))
+POLICIES,quiz_attempts_chapter3_solve,Users can view their own solve attempts,PERMISSIVE,{public},SELECT,((auth.uid() = student_id) OR (auth.uid() IS NULL)),null
+POLICIES,students,Cho phép tất cả,PERMISSIVE,{public},ALL,true,true
