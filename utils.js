@@ -247,6 +247,10 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
             tableName = 'quiz_attempts_chapter3_quiz';
             totalQuestions = 50; // Bài tập về nhà có 50 câu
             chapterNumber = 3;
+        } else if (chapter === 4 || chapter === 'formula') {
+            tableName = 'quiz_attempts_chapter4_formula';
+            totalQuestions = 38; // Công thức chương 4 có 38 câu
+            chapterNumber = 4;
         } else {
             // Các chương khác giữ nguyên bảng cũ
             tableName = 'quiz_attempts_chapter3';
@@ -257,7 +261,7 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
         console.log('Sẽ lưu vào bảng:', tableName, 'với', totalQuestions, 'câu');
         
         // Chèn dữ liệu vào đúng bảng
-        const { data, error } = await supabase.from(tableName).insert({
+        const insertData = {
             student_id: studentData.id,  // UUID thật từ database
             score: parseInt(Math.round(finalScore)), // Chắc chắn là integer
             total_questions: totalQuestions,
@@ -266,7 +270,16 @@ window.saveQuizResult = async function(student, finalScore, cheatWarnings, timeT
             cheat_warnings: cheatWarnings,
             chapter: chapterNumber,
             created_at: new Date(new Date().getTime() + 7 * 60 * 60 * 1000).toISOString() // +7 giờ
-        }).select();
+        };
+        
+        // Thêm các trường đặc biệt cho chương 4 công thức
+        if (chapter === 4 || chapter === 'formula') {
+            insertData.formula_category = 'dong_dien_khong_doi'; // Mặc định, có thể thay đổi
+            insertData.difficulty_level = 'medium'; // Mặc định
+            insertData.answers = JSON.stringify({}); // Rỗng mặc định
+        }
+        
+        const { data, error } = await supabase.from(tableName).insert(insertData).select();
 
         if (error) {
             console.error('Lỗi Supabase khi lưu:', error);
@@ -342,6 +355,8 @@ window.fetchLeaderboard = async function(testType = 'quiz') {
             viewName = 'leaderboard_chapter3_solve';
         } else if (testType === 'quiz') {
             viewName = 'leaderboard_chapter3_quiz';
+        } else if (testType === 'formula' || testType === 4) {
+            viewName = 'leaderboard_chapter4_formula';
         } else {
             viewName = 'leaderboard_chapter3'; // Mặc định cũ
         }
