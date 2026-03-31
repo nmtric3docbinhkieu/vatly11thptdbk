@@ -1,0 +1,513 @@
+// ==============================================
+// FILE: database-chapter3.js
+// ==============================================
+// Ngân hàng câu hỏi chương 3: Điện trường (60 câu)
+// Gồm: 30 câu nhận biết, 15 câu thông hiểu, 10 câu vận dụng thấp, 5 câu vận dụng cao
+
+window.questionsChapter3 = [
+    // ==============================================
+    // PHẦN 1: NHẬN BIẾT (30 CÂU)
+    // ==============================================
+    
+    // Câu 1: Nhận biết
+    { 
+        q: "Có mấy loại điện tích?", 
+        options: ["3 loại", "1 loại", "2 loại", "4 loại"], 
+        a: 2, 
+        expl: "Có hai loại điện tích là điện tích dương (+) và điện tích âm (-)." 
+    },
+    
+    // Câu 2: Nhận biết
+    { 
+        q: "Các điện tích cùng dấu thì:", 
+        options: ["Vừa hút vừa đẩy", "Hút nhau", "Đẩy nhau", "Không tương tác"], 
+        a: 2, 
+        expl: "Các điện tích cùng dấu đẩy nhau, trái dấu hút nhau." 
+    },
+    
+    // Câu 3: Nhận biết
+    { 
+        q: "Các điện tích trái dấu thì:", 
+        options: ["Đẩy nhau", "Hút nhau", "Vừa hút vừa đẩy", "Không tương tác"], 
+        a: 1, 
+        expl: "Các điện tích trái dấu hút nhau, cùng dấu đẩy nhau." 
+    },
+    
+    // Câu 4: Nhận biết
+    { 
+        q: "Đơn vị của điện tích trong hệ SI là:", 
+        options: ["Vôn (V)", "Fara (F)", "Ampe (A)", "Culông (C)"], 
+        a: 3, 
+        expl: "Đơn vị đo điện tích là culông, kí hiệu là C." 
+    },
+    
+    // Câu 5: Nhận biết
+    { 
+        q: "Điện tích nguyên tố có giá trị bằng:", 
+        options: ["$1,6.10^{-19} C$", "$1,6.10^{-19} nC$", "$1,6.10^{-19} \\mu C$", "$1,6.10^{-19} pF$"], 
+        a: 0, 
+        expl: "Điện tích nguyên tố $e = 1,6.10^{-19} C$." 
+    },
+    
+    // Câu 6: Nhận biết
+    { 
+        q: "Electron là hạt:", 
+        options: ["Không mang điện", "Tích điện dương", "Có thể mang điện dương hoặc âm", "Tích điện âm"], 
+        a: 3, 
+        expl: "Electron là hạt tích điện âm và có độ lớn điện tích bằng điện tích nguyên tố." 
+    },
+    
+    // Câu 7: Nhận biết
+    { 
+        q: "Proton là hạt:", 
+        options: ["Có thể mang điện dương hoặc âm", "Tích điện âm", "Tích điện dương", "Không mang điện"], 
+        a: 2, 
+        expl: "Proton mang điện tích dương, nằm trong hạt nhân nguyên tử." 
+    },
+    
+    // Câu 8: Nhận biết
+    { 
+        q: "Khi cọ xát thanh thủy tinh vào lụa, thanh thủy tinh nhiễm điện:", 
+        options: ["Trung hòa", "Dương", "Có thể âm hoặc dương", "Âm"], 
+        a: 1, 
+        expl: "Khi cọ xát thanh thủy tinh với lụa, thanh thủy tinh nhiễm điện dương, mảnh lụa nhiễm điện âm." 
+    },
+    
+    // Câu 9: Nhận biết
+    { 
+        q: "Khi cọ xát thanh nhựa vào vải khô, thanh nhựa nhiễm điện:", 
+        options: ["Dương", "Trung hòa", "Có thể âm hoặc dương", "Âm"], 
+        a: 3, 
+        expl: "Khi cọ xát thanh nhựa với vải khô, thanh nhựa nhiễm điện âm, vải khô nhiễm điện dương." 
+    },
+    
+    // Câu 10: Nhận biết
+    { 
+        q: "Theo thuyết electron, nguyên tử trung hòa về điện là do:", 
+        options: ["Số electron bằng số neutron", "Số proton bằng số electron", "Số proton bằng số neutron", "Tổng điện tích âm lớn hơn tổng điện tích dương"], 
+        a: 1, 
+        expl: "Nguyên tử trung hòa về điện khi số proton (mang điện dương) bằng số electron (mang điện âm)." 
+    },
+    
+    // Câu 11: Nhận biết
+    { 
+        q: "Định luật Coulomb mô tả lực tương tác giữa:", 
+        options: ["Hai điện tích điểm", "Hai nam châm", "Điện tích và dòng điện", "Hai dòng điện"], 
+        a: 0, 
+        expl: "Định luật Coulomb mô tả lực tương tác tĩnh điện giữa hai điện tích điểm." 
+    },
+    
+    // Câu 12: Nhận biết
+    { 
+        q: "Công thức của định luật Coulomb trong chân không là:", 
+        options: ["$F = k\\frac{|q_1q_2|}{r}$", "$F = k\\frac{q_1q_2}{r}$", "$F = k\\frac{q_1q_2}{r^2}$", "$F = k\\frac{|q_1q_2|}{r^2}$"], 
+        a: 3, 
+        expl: "Công thức định luật Coulomb:<br>$F = k\\frac{|q_1q_2|}{r^2}$<br>với $k = 9.10^9 \\frac{Nm^2}{C^2}$" 
+    },
+    
+    // Câu 13: Nhận biết
+    { 
+        q: "Hằng số Coulomb có giá trị:", 
+        options: ["$k = 9.10^{-9} \\frac{Nm^2}{C^2}$", "$k = 9.10^9 \\frac{Nm}{C}$", "$k = 9.10^9 \\frac{C^2}{Nm^2}$", "$k = 9.10^9 \\frac{Nm^2}{C^2}$"], 
+        a: 3, 
+        expl: "Trong hệ SI, $k = 9.10^9 \\frac{Nm^2}{C^2}$." 
+    },
+    
+    // Câu 14: Nhận biết
+    { 
+        q: "Hằng số điện môi của chân không có giá trị:", 
+        options: ["0", "81", "1,00059", "1"], 
+        a: 3, 
+        expl: "Hằng số điện môi của chân không bằng 1." 
+    },
+    
+    // Câu 15: Nhận biết
+    { 
+        q: "Hằng số điện môi của không khí có giá trị:", 
+        options: ["1", "0", "81", "1,00059"], 
+        a: 3, 
+        expl: "Hằng số điện môi của không khí là 1,00059 (gần bằng 1)." 
+    },
+    
+    // Câu 16: Nhận biết
+    { 
+        q: "Điện trường là:", 
+        options: ["Chân không xung quanh điện tích", "Dạng vật chất bao quanh điện tích", "Từ trường xung quanh điện tích", "Khoảng không gian xung quanh điện tích"], 
+        a: 1, 
+        expl: "Điện trường là dạng vật chất bao quanh điện tích và truyền tương tác giữa các điện tích." 
+    },
+    
+    // Câu 17: Nhận biết
+    { 
+        q: "Cường độ điện trường được định nghĩa bằng công thức:", 
+        options: ["$\\vec{E} = \\frac{\\vec{F}}{q}$", "$\\vec{E} = \\frac{q}{\\vec{F}}$", "$\\vec{E} = \\vec{F} + q$", "$\\vec{E} = \\vec{F}.q$"], 
+        a: 0, 
+        expl: "Cường độ điện trường:<br>$\\vec{E} = \\frac{\\vec{F}}{q}$<br>với $\\vec{F}$ là lực điện tác dụng lên điện tích thử q." 
+    },
+    
+    // Câu 18: Nhận biết
+    { 
+        q: "Đơn vị của cường độ điện trường là:", 
+        options: ["C", "V", "F", "V/m"], 
+        a: 3, 
+        expl: "Đơn vị cường độ điện trường là vôn trên mét (V/m) hoặc niuton trên culông (N/C)." 
+    },
+    
+    // Câu 19: Nhận biết
+    { 
+        q: "Đường sức điện là đường:", 
+        options: [
+            "Có độ lớn tỉ lệ với cường độ điện trường",
+            "Có phương vuông góc với vectơ cường độ điện trường",
+            "Có tiếp tuyến tại mỗi điểm trùng với vectơ cường độ điện trường tại điểm đó",
+            "Có chiều ngược với vectơ cường độ điện trường"
+        ], 
+        a: 2, 
+        expl: "Đường sức điện là đường mà tiếp tuyến tại mỗi điểm trùng với phương của vectơ cường độ điện trường tại điểm đó, chiều trùng với chiều của vectơ cường độ điện trường." 
+    },
+    
+    // Câu 20: Nhận biết
+    { 
+        q: "Đường sức điện xuất phát từ:", 
+        options: ["Điện tích dương, kết thúc ở vô cực", "Điện tích dương, kết thúc ở điện tích âm", "Điện tích âm, kết thúc ở vô cực", "Điện tích âm, kết thúc ở điện tích dương"], 
+        a: 1, 
+        expl: "Đường sức điện bắt đầu từ điện tích dương (hoặc ở vô cực) và kết thúc ở điện tích âm (hoặc ở vô cực)." 
+    },
+    
+    // Câu 21: Nhận biết
+    { 
+        q: "Điện trường đều là điện trường có:", 
+        options: [
+            "Vectơ cường độ điện trường tại mọi điểm bằng nhau",
+            "Tất cả đều đúng",
+            "Đường sức là những đường thẳng song song cách đều",
+            "Cường độ điện trường tại mọi điểm bằng nhau"
+        ], 
+        a: 1, 
+        expl: "Điện trường đều có vectơ cường độ điện trường tại mọi điểm bằng nhau, đường sức là những đường thẳng song song và cách đều." 
+    },
+    
+    // Câu 22: Nhận biết
+    { 
+        q: "Công thức liên hệ giữa cường độ điện trường và hiệu điện thế trong điện trường đều là:", 
+        options: ["$E = \\frac{U}{d}$", "$E = U + d$", "$E = U.d$", "$E = \\frac{d}{U}$"], 
+        a: 0, 
+        expl: "Trong điện trường đều:<br>$E = \\frac{U}{d}$<br>với d là khoảng cách giữa hai điểm trên phương đường sức." 
+    },
+    
+    // Câu 23: Nhận biết
+    { 
+        q: "Điện dung của tụ điện được định nghĩa bằng công thức:", 
+        options: ["$C = Q + U$", "$C = \\frac{U}{Q}$", "$C = \\frac{Q}{U}$", "$C = Q.U$"], 
+        a: 2, 
+        expl: "Điện dung:<br>$C = \\frac{Q}{U}$<br>đặc trưng cho khả năng tích điện của tụ." 
+    },
+    
+    // Câu 24: Nhận biết
+    { 
+        q: "Đơn vị của điện dung là:", 
+        options: ["Tesla (T)", "Fara (F)", "Culông (C)", "Vôn (V)"], 
+        a: 1, 
+        expl: "Đơn vị điện dung là fara (F)." 
+    },
+    
+    // Câu 25: Nhận biết
+    { 
+        q: "1 µF bằng:", 
+        options: ["$10^{-9} F$", "$10^{-6} F$", "$10^{-12} F$", "$10^{-3} F$"], 
+        a: 1, 
+        expl: "$1 \\mu F = 10^{-6} F$,<br>$1 nF = 10^{-9} F$,<br>$1 pF = 10^{-12} F$." 
+    },
+    
+    // Câu 26: Nhận biết
+    { 
+        q: "Công thức tính năng lượng của tụ điện là:", 
+        options: ["$W = \\frac{1}{2}QU$", "$W = \\frac{U}{Q}$", "$W = QU$", "$W = \\frac{Q}{U}$"], 
+        a: 0, 
+        expl: "Năng lượng tụ điện:<br>$W = \\frac{1}{2}QU = \\frac{1}{2}CU^2 = \\frac{Q^2}{2C}$" 
+    },
+    
+    // Câu 27: Nhận biết
+    { 
+        q: "Tụ điện không cho dòng điện nào đi qua?", 
+        options: ["Dòng điện một chiều", "Tất cả đều sai", "Dòng điện xoay chiều", "Cả dòng xoay chiều và một chiều"], 
+        a: 0, 
+        expl: "Tụ điện không cho dòng điện một chiều đi qua nhưng cho dòng điện xoay chiều đi qua." 
+    },
+    
+    // Câu 28: Nhận biết
+    { 
+        q: "Hiện tượng nhiễm điện do tiếp xúc là:", 
+        options: ["Hai vật nhiễm điện cùng dấu", "Hai vật nhiễm điện trái dấu", "Vật nhiễm điện hút vật trung hòa", "Vật trung hòa vẫn trung hòa"], 
+        a: 0, 
+        expl: "Khi vật trung hòa tiếp xúc với vật nhiễm điện, hai vật sẽ nhiễm điện cùng dấu." 
+    },
+    
+    // Câu 29: Nhận biết
+    { 
+        q: "Hiện tượng nhiễm điện do hưởng ứng là:", 
+        options: ["Vật nhiễm điện cùng dấu với vật kia", "Hai đầu vật nhiễm điện trái dấu", "Vật nhiễm điện trái dấu với vật kia", "Hai đầu vật nhiễm điện cùng dấu"], 
+        a: 1, 
+        expl: "Khi vật dẫn trung hòa đặt gần vật nhiễm điện, hai đầu vật nhiễm điện trái dấu nhau." 
+    },
+    
+    // Câu 30: Nhận biết
+    { 
+        q: "Khi tăng khoảng cách giữa hai điện tích lên 2 lần thì lực tương tác giữa chúng:", 
+        options: ["Tăng 4 lần", "Giảm 4 lần", "Tăng 2 lần", "Giảm 2 lần"], 
+        a: 1, 
+        expl: "Lực Coulomb tỉ lệ nghịch với bình phương khoảng cách:<br>$F \\sim \\frac{1}{r^2}$.<br>Khi r tăng 2 lần, F giảm 4 lần." 
+    },
+
+    // ==============================================
+    // PHẦN 2: THÔNG HIỂU (15 CÂU)
+    // ==============================================
+    
+    // Câu 31: Thông hiểu
+    { 
+        q: "Hai điện tích điểm $q_1 = 3.10^{-8} C$ và $q_2 = -4.10^{-8} C$ đặt cách nhau 4 cm trong chân không. Lực tương tác giữa chúng có độ lớn:", 
+        options: ["$6,75.10^{-3} N$", "$6,75.10^{-4} N$", "$6,75.10^{-5} N$", "$6,75.10^{-2} N$"], 
+        a: 0, 
+        expl: "$F = k\\frac{|q_1q_2|}{r^2}$<br>với $k = 9.10^9 \\frac{Nm^2}{C^2}$.<br><br>$F = 9.10^9 \\frac{|3.10^{-8}.(-4).10^{-8}|}{(0,04)^2}$<br>$F = 9.10^9 \\frac{12.10^{-16}}{16.10^{-4}}$<br>$F = 6,75.10^{-3} N$" 
+    },
+    
+    // Câu 32: Thông hiểu
+    { 
+        q: "Một vật nhiễm điện dương là vật:", 
+        options: ["Thừa electron", "Thừa proton", "Thiếu proton", "Thiếu electron"], 
+        a: 3, 
+        expl: "Vật nhiễm điện dương khi thiếu electron (số proton > số electron).<br>Vật nhiễm điện âm khi thừa electron." 
+    },
+    
+    // Câu 33: Thông hiểu
+    { 
+        q: "Khi đưa một vật nhiễm điện dương lại gần một quả cầu kim loại trung hòa về điện (không tiếp xúc) thì:", 
+        options: ["Quả cầu nhiễm điện âm", "Quả cầu vẫn trung hòa nhưng bị phân cực", "Quả cầu không bị ảnh hưởng", "Quả cầu nhiễm điện dương"], 
+        a: 1, 
+        expl: "Đây là hiện tượng nhiễm điện do hưởng ứng.<br>Quả cầu vẫn trung hòa nhưng điện tích phân bố lại:<br>đầu gần vật nhiễm điện dương tích điện âm,<br>đầu xa tích điện dương." 
+    },
+    
+    // Câu 34: Thông hiểu
+    { 
+        q: "Một điện tích điểm $Q = 5.10^{-8} C$ đặt trong chân không. Cường độ điện trường do Q gây ra tại điểm M cách Q 3 cm có độ lớn:", 
+        options: ["$5.10^5 V/m$", "$5.10^4 V/m$", "$5.10^3 V/m$", "$5.10^6 V/m$"], 
+        a: 1, 
+        expl: "$E = k\\frac{|Q|}{r^2} = 9.10^9\\frac{5.10^{-8}}{(0,03)^2}$<br>$E = 9.10^9\\frac{5.10^{-8}}{9.10^{-4}}$<br>$E = 5.10^5 V/m$" 
+    },
+    
+    // Câu 35: Thông hiểu
+    { 
+        q: "Đường sức điện cho phép xác định:", 
+        options: ["Điện tích của nguồn", "Độ lớn của cường độ điện trường", "Khoảng cách đến nguồn", "Phương và chiều của vectơ cường độ điện trường"], 
+        a: 3, 
+        expl: "Tiếp tuyến của đường sức điện tại một điểm cho biết phương, chiều của vectơ cường độ điện trường tại điểm đó.<br>Mật độ đường sức cho biết độ lớn của cường độ điện trường." 
+    },
+    
+    // Câu 36: Thông hiểu
+    { 
+        q: "Công của lực điện tác dụng lên điện tích q di chuyển từ điểm M đến điểm N trong điện trường đều:", 
+        options: ["Phụ thuộc vào vận tốc của điện tích", "Luôn bằng 0", "Không phụ thuộc vào hình dạng đường đi", "Phụ thuộc vào hình dạng đường đi"], 
+        a: 2, 
+        expl: "Lực điện là lực thế, công của lực điện không phụ thuộc vào hình dạng đường đi mà chỉ phụ thuộc vào vị trí điểm đầu và điểm cuối." 
+    },
+    
+    // Câu 37: Thông hiểu
+    { 
+        q: "Hiệu điện thế giữa hai điểm M và N là $U_{MN} = 120 V$. Công của lực điện khi di chuyển electron từ M đến N là:", 
+        options: ["$-1,92.10^{-17} J$", "$1,92.10^{-17} J$", "$1,92.10^{-19} J$", "$-1,92.10^{-19} J$"], 
+        a: 0, 
+        expl: "$A = q.U = (-1,6.10^{-19}).120$<br>$= -1,92.10^{-17} J$.<br>Dấu âm thể hiện lực điện cản trở chuyển động của electron." 
+    },
+    
+    // Câu 38: Thông hiểu
+    { 
+        q: "Một tụ điện phẳng có điện dung 30 µF, được tích điện dưới hiệu điện thế 60 V. Điện tích của tụ điện là:", 
+        options: ["0,0018 C", "0,00018 C", "0,018 C", "0,18 C"], 
+        a: 0, 
+        expl: "$Q = C.U = 30.10^{-6}.60$<br>$= 1800.10^{-6} = 1,8.10^{-3} C$<br>$= 0,0018 C$" 
+    },
+    
+    // Câu 39: Thông hiểu
+    { 
+        q: "Hai tụ điện có điện dung $C_1 = 3 µF$ và $C_2 = 5 µF$ mắc song song. Điện dung tương đương của bộ tụ là:", 
+        options: ["8 µF", "2 µF", "15 µF", "1,875 µF"], 
+        a: 0, 
+        expl: "Mắc song song:<br>$C_b = C_1 + C_2 = 3 + 5 = 8 µF$" 
+    },
+    
+    // Câu 40: Thông hiểu
+    { 
+        q: "Hai tụ điện có điện dung $C_1 = 3 µF$ và $C_2 = 6 µF$ mắc nối tiếp. Điện dung tương đương của bộ tụ là:", 
+        options: ["2 µF", "4,5 µF", "9 µF", "0,5 µF"], 
+        a: 0, 
+        expl: "Mắc nối tiếp:<br>$\\frac{1}{C_b} = \\frac{1}{C_1} + \\frac{1}{C_2}$<br>$\\frac{1}{C_b} = \\frac{1}{3} + \\frac{1}{6} = \\frac{1}{2}$<br>$\\Rightarrow C_b = 2 \\mu F$" 
+    },
+    
+    // Câu 41: Thông hiểu
+    { 
+        q: "Một điện tích q = 3.10⁻⁶ C di chuyển từ điểm A đến điểm B trong điện trường đều có cường độ E = 6000 V/m. Biết AB = 12 cm và AB hợp với đường sức điện một góc 60°. Công của lực điện là:", 
+        options: ["$1,08.10^{-3} J$", "$1,08.10^{-4} J$", "$1,08.10^{-5} J$", "$1,08.10^{-2} J$"], 
+        a: 0, 
+        expl: "$A = q.E.d = q.E.AB.\\cos\\alpha$<br>$A = 3.10^{-6}.6000.0,12.\\cos60°$<br>$A = 3.10^{-6}.6000.0,12.0,5$<br>$A = 1,08.10^{-3} J$" 
+    },
+    
+    // Câu 42: Thông hiểu
+    { 
+        q: "Một proton bay vào điện trường đều theo phương vuông góc với đường sức với vận tốc đầu $v_0$. Chuyển động của proton có quỹ đạo là:", 
+        options: ["Đường elip", "Đường parabol", "Đường thẳng", "Đường tròn"], 
+        a: 1, 
+        expl: "Proton chuyển động như vật ném ngang:<br>theo phương vuông góc với điện trường là chuyển động thẳng đều,<br>theo phương song song với điện trường là chuyển động thẳng nhanh dần đều.<br>Quỹ đạo là đường parabol." 
+    },
+    
+    // Câu 43: Thông hiểu
+    { 
+        q: "Khi tăng hiệu điện thế giữa hai bản tụ lên 3 lần thì năng lượng của tụ điện thay đổi thế nào?", 
+        options: ["Tăng 6 lần", "Tăng 3 lần", "Giảm 3 lần", "Tăng 9 lần"], 
+        a: 3, 
+        expl: "Năng lượng tụ điện:<br>$W = \\frac{1}{2}CU^2$.<br>Khi U tăng 3 lần, W tăng $3^2 = 9$ lần." 
+    },
+    
+    // Câu 44: Thông hiểu
+    { 
+        q: "Một tụ điện phẳng có điện dung C, được tích điện đến hiệu điện thế U, sau đó ngắt khỏi nguồn. Nhúng tụ vào điện môi lỏng có $\\varepsilon = 3$ thì:", 
+        options: ["Điện dung tăng 3 lần, hiệu điện thế giảm 3 lần", "Điện dung không đổi, hiệu điện thế giảm 3 lần", "Điện dung tăng 3 lần, hiệu điện thế không đổi", "Điện dung giảm 3 lần, hiệu điện thế tăng 3 lần"], 
+        a: 0, 
+        expl: "Khi ngắt khỏi nguồn, Q không đổi.<br>Nhúng vào điện môi, $C' = \\varepsilon C = 3C$.<br>$U' = \\frac{Q}{C'} = \\frac{Q}{3C} = \\frac{U}{3}$." 
+    },
+    
+    // Câu 45: Thông hiểu
+    { 
+        q: "Hai điện tích điểm bằng nhau đặt trong dầu có $\\varepsilon = 3$, cách nhau 4 cm thì lực tương tác giữa chúng là $4,5.10^{-5} N$. Độ lớn mỗi điện tích là:", 
+        options: ["$8.10^{-9} C$", "$2.10^{-9} C$", "$4.10^{-9} C$", "$6.10^{-9} C$"], 
+        a: 0, 
+        expl: "$F = k\\frac{q^2}{\\varepsilon r^2}$<br>$\\Rightarrow q = r\\sqrt{\\frac{\\varepsilon F}{k}}$<br>$= 0,04\\sqrt{\\frac{3.4,5.10^{-5}}{9.10^9}}$<br>$= 0,04\\sqrt{\\frac{13,5.10^{-5}}{9.10^9}}$<br>$= 0,04\\sqrt{1,5.10^{-14}}$<br>$\\approx 8.10^{-9} C$" 
+    },
+
+    // ==============================================
+    // PHẦN 3: VẬN DỤNG THẤP (10 CÂU)
+    // ==============================================
+    
+    // Câu 46: Vận dụng thấp
+    { 
+        q: "Hai điện tích điểm bằng nhau đặt trong chân không cách nhau 5 cm thì lực tương tác giữa chúng là $3,6.10^{-5} N$. Độ lớn của mỗi điện tích là:", 
+        options: ["$10^{-8} C$", "$2.10^{-8} C$", "$3.10^{-8} C$", "$4.10^{-8} C$"], 
+        a: 0, 
+        expl: "$F = k\\frac{q^2}{r^2}$<br>$\\Rightarrow q = r\\sqrt{\\frac{F}{k}}$<br>$= 0,05\\sqrt{\\frac{3,6.10^{-5}}{9.10^9}}$<br>$= 0,05\\sqrt{4.10^{-15}}$<br>$= 0,05.2.10^{-7,5}$<br>$= 10^{-8} C$" 
+    },
+    
+    // Câu 47: Vận dụng thấp
+    { 
+        q: "Cho hai điện tích $q_1 = 5.10^{-8} C$ và $q_2 = -5.10^{-8} C$ đặt tại hai điểm A, B cách nhau 8 cm trong chân không. Xác định vectơ cường độ điện trường tổng hợp tại trung điểm M của AB.", 
+        options: ["$E = 5,625.10^5 V/m$, hướng từ M đến A", "$E = 0$", "$E = 1,125.10^6 V/m$, hướng từ M đến B", "$E = 5,625.10^5 V/m$, hướng từ M đến B"], 
+        a: 3, 
+        expl: "$E_1 = k\\frac{|q_1|}{r^2}$<br>$= 9.10^9\\frac{5.10^{-8}}{(0,04)^2}$<br>$= 2,8125.10^5 V/m$.<br><br>$E_2 = k\\frac{|q_2|}{r^2}$<br>$= 9.10^9\\frac{5.10^{-8}}{(0,04)^2}$<br>$= 2,8125.10^5 V/m$.<br><br>Vì $q_1 > 0$ nên $\\vec{E_1}$ hướng ra xa A (từ M đến B),<br>$q_2 < 0$ nên $\\vec{E_2}$ hướng về B (từ M đến B).<br>Hai vectơ cùng hướng nên:<br>$E = E_1 + E_2 = 5,625.10^5 V/m$,<br>hướng từ M đến B." 
+    },
+    
+    // Câu 48: Vận dụng thấp
+    { 
+        q: "Một electron chuyển động với vận tốc ban đầu bằng 0, được gia tốc bởi hiệu điện thế 2000 V. Vận tốc của electron khi đến điện thế cao là bao nhiêu? Biết $m_e = 9,1.10^{-31} kg$, $e = 1,6.10^{-19} C$.", 
+        options: ["$2,65.10^7 m/s$", "$2,65.10^6 m/s$", "$2,65.10^8 m/s$", "$2,65.10^9 m/s$"], 
+        a: 0, 
+        expl: "$\\frac{1}{2}mv^2 = eU$<br>$\\Rightarrow v = \\sqrt{\\frac{2eU}{m}}$<br>$= \\sqrt{\\frac{2.1,6.10^{-19}.2000}{9,1.10^{-31}}}$<br>$= \\sqrt{7,04.10^{14}}$<br>$\\approx 2,65.10^7 m/s$" 
+    },
+    
+    // Câu 49: Vận dụng thấp
+    { 
+        q: "Một tụ điện phẳng không khí có điện dung 30 pF, khoảng cách giữa hai bản là 1,5 cm. Tính điện tích của tụ khi đặt vào hai bản một hiệu điện thế 120 V.", 
+        options: ["$3,6.10^{-9} C$", "$3,6.10^{-10} C$", "$3,6.10^{-11} C$", "$3,6.10^{-12} C$"], 
+        a: 0, 
+        expl: "$Q = C.U = 30.10^{-12}.120$<br>$= 3,6.10^{-9} C$" 
+    },
+    
+    // Câu 50: Vận dụng thấp
+    { 
+        q: "Cho bộ tụ gồm $C_1 = 3 µF$ mắc nối tiếp với $C_2 = 6 µF$. Bộ tụ được mắc vào nguồn có hiệu điện thế 120 V. Điện tích của bộ tụ là:", 
+        options: ["$2,4.10^{-4} C$", "$1,2.10^{-4} C$", "$3,6.10^{-4} C$", "$4,8.10^{-4} C$"], 
+        a: 0, 
+        expl: "$\\frac{1}{C_b} = \\frac{1}{C_1} + \\frac{1}{C_2}$<br>$= \\frac{1}{3} + \\frac{1}{6} = \\frac{1}{2}$<br>$\\Rightarrow C_b = 2 µF = 2.10^{-6} F$.<br><br>$Q = C_b.U = 2.10^{-6}.120$<br>$= 2,4.10^{-4} C$" 
+    },
+    
+    // Câu 51: Vận dụng thấp
+    { 
+        q: "Một điện tích q = 8.10⁻⁶ C di chuyển từ điểm M đến điểm N trong điện trường, công của lực điện là $3,2.10^{-4} J$. Hiệu điện thế $U_{MN}$ là:", 
+        options: ["40 V", "50 V", "60 V", "70 V"], 
+        a: 0, 
+        expl: "$U_{MN} = \\frac{A_{MN}}{q}$<br>$= \\frac{3,2.10^{-4}}{8.10^{-6}}$<br>$= 40 V$" 
+    },
+    
+    // Câu 52: Vận dụng thấp
+    { 
+        q: "Hai bản kim loại phẳng song song cách nhau 2,5 cm, được tích điện trái dấu tạo ra điện trường đều giữa hai bản. Một electron thả không vận tốc đầu từ bản âm và đến bản dương với vận tốc $5.10^6 m/s$. Hiệu điện thế giữa hai bản là bao nhiêu? Biết $m_e = 9,1.10^{-31} kg$, $e = 1,6.10^{-19} C$.", 
+        options: ["71,1 V", "61,1 V", "51,1 V", "81,1 V"], 
+        a: 0, 
+        expl: "$\\frac{1}{2}mv^2 = eU$<br>$\\Rightarrow U = \\frac{mv^2}{2e}$<br>$= \\frac{9,1.10^{-31}.(5.10^6)^2}{2.1,6.10^{-19}}$<br>$= \\frac{9,1.10^{-31}.25.10^{12}}{3,2.10^{-19}}$<br>$= \\frac{227,5.10^{-19}}{3,2.10^{-19}}$<br>$= 71,1 V$" 
+    },
+    
+    // Câu 53: Vận dụng thấp
+    { 
+        q: "Một tụ điện có điện dung 15 µF được tích điện đến hiệu điện thế 200 V. Năng lượng của tụ điện là:", 
+        options: ["0,3 J", "0,2 J", "0,4 J", "0,5 J"], 
+        a: 0, 
+        expl: "$W = \\frac{1}{2}CU^2$<br>$= \\frac{1}{2}.15.10^{-6}.200^2$<br>$= \\frac{1}{2}.15.10^{-6}.40000$<br>$= 7,5.10^{-6}.40000$<br>$= 0,3 J$" 
+    },
+    
+    // Câu 54: Vận dụng thấp
+    { 
+        q: "Ba tụ điện giống nhau có điện dung C = 3 µF được mắc nối tiếp. Điện dung tương đương của bộ tụ là:", 
+        options: ["9 µF", "3 µF", "1 µF", "0,5 µF"], 
+        a: 2, 
+        expl: "$\\frac{1}{C_b} = \\frac{1}{C} + \\frac{1}{C} + \\frac{1}{C}$<br>$= \\frac{3}{C}$<br>$\\Rightarrow C_b = \\frac{C}{3}$<br>$= \\frac{3}{3} = 1 µF$" 
+    },
+    
+    // Câu 55: Vận dụng thấp
+    { 
+        q: "Ba tụ điện giống nhau có điện dung C = 3 µF được mắc song song. Điện dung tương đương của bộ tụ là:", 
+        options: ["1 µF", "3 µF", "6 µF", "9 µF"], 
+        a: 3, 
+        expl: "Mắc song song:<br>$C_b = C + C + C = 3C$<br>$= 3.3 = 9 µF$" 
+    },
+
+    // ==============================================
+    // PHẦN 4: VẬN DỤNG CAO (5 CÂU)
+    // ==============================================
+    
+    // Câu 56: Vận dụng cao
+    { 
+        q: "Hai quả cầu nhỏ giống nhau, mỗi quả có khối lượng 0,5 g, được treo bằng hai sợi dây mảnh, không dãn, cùng chiều dài 60 cm vào cùng một điểm. Khi truyền cho mỗi quả một điện tích q như nhau, chúng đẩy nhau và cách nhau 8 cm. Lấy $g = 10 m/s^2$. Điện tích q có độ lớn bằng:", 
+        options: ["$1,2.10^{-8} C$", "$2,4.10^{-8} C$", "$3,6.10^{-8} C$", "$4,8.10^{-8} C$"], 
+        a: 1, 
+        expl: "Khi cân bằng, $\\tan\\alpha = \\frac{F}{P}$<br>$= \\frac{r/2}{\\sqrt{l^2 - (r/2)^2}}$.<br><br>Với $r = 0,08 m$, $l = 0,6 m$,<br>$\\sqrt{l^2 - (r/2)^2} = \\sqrt{0,36 - (0,04)^2}$<br>$= \\sqrt{0,36 - 0,0016} = \\sqrt{0,3588} \\approx 0,599$.<br><br>$\\tan\\alpha = \\frac{0,04}{0,599} \\approx 0,0668$.<br><br>$F = P\\tan\\alpha$<br>$= 0,5.10^{-3}.10.0,0668$<br>$= 3,34.10^{-4} N$.<br><br>$F = k\\frac{q^2}{r^2}$<br>$\\Rightarrow q = r\\sqrt{\\frac{F}{k}}$<br>$= 0,08\\sqrt{\\frac{3,34.10^{-4}}{9.10^9}}$<br>$= 0,08\\sqrt{3,71.10^{-14}}$<br>$= 0,08.1,93.10^{-7}$<br>$\\approx 2,4.10^{-8} C$" 
+    },
+    
+    // Câu 57: Vận dụng cao
+    { 
+        q: "Ba điện tích điểm $q_1 = 3.10^{-8} C$, $q_2 = -5.10^{-8} C$, $q_3 = 7.10^{-8} C$ đặt lần lượt tại ba đỉnh A, B, C của tam giác đều cạnh 8 cm trong chân không. Lực điện tổng hợp tác dụng lên điện tích $q_3$ có độ lớn xấp xỉ bằng:", 
+        options: ["$5,91.10^{-3} N$", "$7,91.10^{-3} N$", "$9,91.10^{-3} N$", "$11,91.10^{-3} N$"], 
+        a: 1, 
+        expl: "$F_{13} = k\\frac{|q_1q_3|}{r^2}$<br>$= 9.10^9\\frac{|3.10^{-8}.7.10^{-8}|}{0,08^2}$<br>$= 9.10^9\\frac{21.10^{-16}}{64.10^{-4}}$<br>$= 9.10^9.3,28.10^{-13}$<br>$= 2,95.10^{-3} N$.<br><br>$F_{23} = k\\frac{|q_2q_3|}{r^2}$<br>$= 9.10^9\\frac{|(-5.10^{-8}).7.10^{-8}|}{0,08^2}$<br>$= 9.10^9\\frac{35.10^{-16}}{64.10^{-4}}$<br>$= 9.10^9.5,47.10^{-13}$<br>$= 4,92.10^{-3} N$.<br><br>Góc giữa $\\vec{F_{13}}$ và $\\vec{F_{23}}$ là 60° (do tam giác đều).<br><br>$F = \\sqrt{F_{13}^2 + F_{23}^2 + 2F_{13}F_{23}\\cos60°}$<br>$= \\sqrt{(2,95.10^{-3})^2 + (4,92.10^{-3})^2 + 2.2,95.10^{-3}.4,92.10^{-3}.0,5}$<br>$= \\sqrt{8,70.10^{-6} + 24,2.10^{-6} + 14,5.10^{-6}}$<br>$= \\sqrt{47,4.10^{-6}}$<br>$= \\sqrt{47,4}.10^{-3}$<br>$\\approx 6,88.10^{-3} N$" 
+    },
+    
+    // Câu 58: Vận dụng cao
+    { 
+        q: "Một electron bay vào điện trường đều của một tụ điện phẳng theo phương song song với các đường sức với vận tốc đầu $v_0 = 3.10^7 m/s$. Biết chiều dài mỗi bản tụ là 6 cm, khoảng cách giữa hai bản là 3 cm, hiệu điện thế giữa hai bản là 300 V. Electron bay vào từ sát bản âm. Hỏi electron sẽ ra khỏi tụ điện ở vị trí cách bản dương một khoảng bao nhiêu? (Bỏ qua tác dụng của trọng lực)", 
+        options: ["2,26 cm", "1,26 cm", "2,5 cm", "3 cm"], 
+        a: 0, 
+        expl: "$E = \\frac{U}{d} = \\frac{300}{0,03} = 10^4 V/m$.<br><br>Gia tốc:<br>$a = \\frac{eE}{m} = \\frac{1,6.10^{-19}.10^4}{9,1.10^{-31}}$<br>$\\approx 1,76.10^{15} m/s^2$.<br><br>Thời gian chuyển động trong tụ:<br>$t = \\frac{l}{v_0} = \\frac{0,06}{3.10^7} = 2.10^{-9} s$.<br><br>Độ lệch theo phương vuông góc (hướng về bản dương):<br>$y = \\frac{1}{2}at^2$<br>$= \\frac{1}{2}.1,76.10^{15}.(2.10^{-9})^2$<br>$= 3,52.10^{-3} m = 0,352 cm$.<br><br>Electron bay vào từ sát bản âm (cách bản âm 0 cm),<br>sau khi ra khỏi tụ nó đã lệch về phía bản dương một đoạn 0,352 cm.<br><br>Vậy khoảng cách từ electron đến bản dương lúc này là:<br>$d - y = 3 - 0,352 = 2,648 cm$." 
+    },
+    
+    // Câu 59: Vận dụng cao
+    { 
+        q: "Một tụ điện phẳng không khí có điện dung $C = 600 pF$, được tích điện đến hiệu điện thế $U = 400 V$. Sau đó ngắt tụ khỏi nguồn và nhúng tụ vào điện môi lỏng có $\\varepsilon = 2,5$. Hiệu điện thế của tụ lúc này là:", 
+        options: ["160 V", "200 V", "250 V", "300 V"], 
+        a: 0, 
+        expl: "Khi ngắt khỏi nguồn, điện tích Q không đổi.<br><br>$Q = C.U = 600.10^{-12}.400$<br>$= 2,4.10^{-7} C$.<br><br>Khi nhúng vào điện môi,<br>$C' = \\varepsilon C = 2,5.600$<br>$= 1500 pF = 1,5.10^{-9} F$.<br><br>$U' = \\frac{Q}{C'} = \\frac{2,4.10^{-7}}{1,5.10^{-9}}$<br>$= 160 V$." 
+    },
+    
+    // Câu 60: Vận dụng cao
+    { 
+        q: "Cho mạch điện gồm $C_1 = 2 µF$, $C_2 = 3 µF$, $C_3 = 4 µF$ mắc theo cách: $C_1$ nối tiếp $C_2$, cả bộ $C_{12}$ song song với $C_3$. Hiệu điện thế đặt vào hai đầu mạch là 120 V. Năng lượng của bộ tụ là:", 
+        options: ["$2,88.10^{-2} J$", "$1,44.10^{-2} J$", "$4,32.10^{-2} J$", "$5,76.10^{-2} J$"], 
+        a: 0, 
+        expl: "$C_{12} = \\frac{C_1C_2}{C_1 + C_2}$<br>$= \\frac{2.3}{2+3} = \\frac{6}{5} = 1,2 µF$.<br><br>$C_b = C_{12} + C_3$<br>$= 1,2 + 4 = 5,2 µF$<br>$= 5,2.10^{-6} F$.<br><br>$W = \\frac{1}{2}C_bU^2$<br>$= \\frac{1}{2}.5,2.10^{-6}.120^2$<br>$= \\frac{1}{2}.5,2.10^{-6}.14400$<br>$= 2,6.10^{-6}.14400$<br>$= 3,744.10^{-2} J$." 
+    }
+];

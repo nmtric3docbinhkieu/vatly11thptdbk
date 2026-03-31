@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Questions</title>
+</head>
+<body>
+    <h1>Test Chapter 3 Questions</h1>
+    <div id="result"></div>
+    
+    <script src="database-chapter3.js"></script>
+    <script>
+        console.log('Total questions in window.questionsChapter3:', window.questionsChapter3.length);
+        document.getElementById('result').innerHTML = 
+            `<p>Total questions loaded: ${window.questionsChapter3.length}</p>
+             <p>First question: ${window.questionsChapter3[0]?.q || 'Not found'}</p>
+             <p>Last question (60): ${window.questionsChapter3[59]?.q || 'Not found'}</p>
+             <p>Question 25: ${window.questionsChapter3[24]?.q || 'Not found'}</p>`;
+    </script>
+</body>
+</html>
