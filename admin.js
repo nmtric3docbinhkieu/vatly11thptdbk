@@ -13,11 +13,11 @@ window.exportToExcel = async function(adminPassword) {
     }
     
     try {
-        // Tự tổng hợp dữ liệu từ quiz_attempts_chapter3
-        const { data: students } = await supabase.from('students').select('*, quiz_attempts_chapter3(*)');
+        // Lấy dữ liệu từ bảng quiz_attempts_chapter4_formula (chương 4 công thức)
+        const { data: students } = await supabase.from('students').select('*, quiz_attempts_chapter4_formula(*)');
         
         const summary = (students || []).map(student => {
-            const attempts = student.quiz_attempts_chapter3 || [];
+            const attempts = student.quiz_attempts_chapter4_formula || [];
             const scores = attempts.map(a => a.score).filter(s => s != null);
             
             // Format thời gian cho từng attempt
@@ -39,7 +39,7 @@ window.exportToExcel = async function(adminPassword) {
             return {
                 "Họ và tên": student.full_name,
                 "Lớp": student.class_name,
-                "Số lần làm bài": attempts.length,
+                "Số lần làm bài Chương 4 Công thức": attempts.length,
                 "Điểm cao nhất": scores.length > 0 ? Math.max(...scores) : 0,
                 "Điểm trung bình": scores.length > 0 
                     ? Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2))
@@ -80,8 +80,8 @@ window.exportToExcel = async function(adminPassword) {
         
         const ws = window.XLSX.utils.json_to_sheet(rows);
         const wb = window.XLSX.utils.book_new();
-        window.XLSX.utils.book_append_sheet(wb, ws, 'Kết quả');
-        window.XLSX.writeFile(wb, `ket-qua-vatly11-${dateStr}_${timeStr}.xlsx`);
+        window.XLSX.utils.book_append_sheet(wb, ws, 'Kết quả Chương 4 Công thức');
+        window.XLSX.writeFile(wb, `ket-qua-chapter4-cong-thuc-${dateStr}_${timeStr}.xlsx`);
         
         return { success: true };
         
