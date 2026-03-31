@@ -347,6 +347,8 @@ window.fetchLeaderboard = async function(testType = 'quiz') {
     }
     
     try {
+        console.log('fetchLeaderboard called with testType:', testType);
+        
         // Xác định view dựa trên loại bài kiểm tra
         let viewName;
         if (testType === 'ktghk2') {
@@ -360,6 +362,8 @@ window.fetchLeaderboard = async function(testType = 'quiz') {
         } else {
             viewName = 'leaderboard_chapter3'; // Mặc định cũ
         }
+        
+        console.log('Final viewName:', viewName);
         
         console.log('Lấy leaderboard từ view:', viewName);
         

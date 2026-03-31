@@ -542,15 +542,21 @@ const backToChapter4Activities = () => {
                     setTimeout(async () => {
                         // Xác định testType dựa trên chapter
                         let testType = 'quiz'; // mặc định
+                        console.log('Debug - selectedChapter:', selectedChapter);
+                        console.log('Debug - chapter3Activity:', chapter3Activity);
+                        console.log('Debug - chapter4Activity:', chapter4Activity);
+                        
                         if (selectedChapter === 'ktghk2') {
                             testType = 'ktghk2';
                         } else if (selectedChapter === 3 && chapter3Activity === 'solve') {
                             testType = 'solve';
                         } else if (selectedChapter === 3 && chapter3Activity === 'quiz') {
                             testType = 'quiz';
-                        } else if (selectedChapter === 'ktchuong4') {
+                        } else if (selectedChapter === 4 && chapter4Activity === 'quiz') {
                             testType = 'formula';
                         }
+                        
+                        console.log('Debug - Final testType:', testType);
                         
                         const data = await window.fetchLeaderboard?.(testType) || [];
                         setLeaderboard(data);
