@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "vatly11-database": {
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": ["d:\\OneDrive - moet.edu.vn\\CÁ NHÂN\\VIẾT APP\\VATLY11\\mcp-server-auto.js"],
+      "cwd": "d:\\OneDrive - moet.edu.vn\\CÁ NHÂN\\VIẾT APP\\VATLY11",
+      "env": {
+        "SUPABASE_URL": "https://bxffaxcimeturttxqrme.supabase.co",
+        "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ4ZmZheGNpbWV0dXJ0dHhxcm1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MDk1MzQsImV4cCI6MjA4NTk4NTUzNH0.uU3H707Qjfd2X4iQN3K9KKhsvNZkYn8v8zB_5lthzr0",
+        "MCP_SERVER_NAME": "vatly11-database",
+        "MCP_SERVER_VERSION": "1.0.0"
+      }
+    }
+  }
+}

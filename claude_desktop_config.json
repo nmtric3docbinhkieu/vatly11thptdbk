@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "vatly11-database-auto": {
+      "command": "node",
+      "args": ["mcp-server-auto.js"],
+      "cwd": "d:\\OneDrive - moet.edu.vn\\CÁ NHÂN\\VIẾT APP\\VATLY11"
+    }
+  }
+}

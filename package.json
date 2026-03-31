@@ -1,0 +1,23 @@
+{
+  "name": "vatly11-mcp-database",
+  "version": "1.0.0",
+  "description": "MCP Database connector for VatLy11 Supabase",
+  "main": "mcp-server-auto.js",
+  "scripts": {
+    "start": "node mcp-server.js",
+    "start:auto": "node mcp-server-auto.js",
+    "dev": "nodemon mcp-server.js",
+    "dev:auto": "nodemon mcp-server-auto.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": ["mcp", "database", "supabase", "vatly11"],
+  "author": "Your Name",
+  "license": "MIT"
+}
