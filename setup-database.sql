@@ -91,43 +91,55 @@ ALTER TABLE chapter4_formula_scores ENABLE ROW LEVEL SECURITY;
 ALTER TABLE leaderboard ENABLE ROW LEVEL SECURITY;
 
 -- 6. Policies cho bảng students
-CREATE POLICY IF NOT EXISTS "Anyone can view approved students" ON students
+DROP POLICY IF EXISTS "Anyone can view approved students" ON students;
+CREATE POLICY "Anyone can view approved students" ON students
   FOR SELECT USING (is_approved = true);
 
-CREATE POLICY IF NOT EXISTS "Anyone can insert students" ON students
+DROP POLICY IF EXISTS "Anyone can insert students" ON students;
+CREATE POLICY "Anyone can insert students" ON students
   FOR INSERT WITH CHECK (true);
 
-CREATE POLICY IF NOT EXISTS "Admins can update students" ON students
+DROP POLICY IF EXISTS "Admins can update students" ON students;
+CREATE POLICY "Admins can update students" ON students
   FOR UPDATE USING (true);
 
 -- 7. Policies cho bảng quiz_results
-CREATE POLICY IF NOT EXISTS "Students can view own results" ON quiz_results
+DROP POLICY IF EXISTS "Students can view own results" ON quiz_results;
+CREATE POLICY "Students can view own results" ON quiz_results
   FOR SELECT USING (auth.uid()::text = student_id::text);
 
-CREATE POLICY IF NOT EXISTS "Anyone can insert results" ON quiz_results
+DROP POLICY IF EXISTS "Anyone can insert results" ON quiz_results;
+CREATE POLICY "Anyone can insert results" ON quiz_results
   FOR INSERT WITH CHECK (true);
 
-CREATE POLICY IF NOT EXISTS "Admins can view all results" ON quiz_results
+DROP POLICY IF EXISTS "Admins can view all results" ON quiz_results;
+CREATE POLICY "Admins can view all results" ON quiz_results
   FOR SELECT USING (true);
 
 -- 8. Policies cho bảng chapter4_formula_scores
-CREATE POLICY IF NOT EXISTS "Students can view own formula results" ON chapter4_formula_scores
+DROP POLICY IF EXISTS "Students can view own formula results" ON chapter4_formula_scores;
+CREATE POLICY "Students can view own formula results" ON chapter4_formula_scores
   FOR SELECT USING (auth.uid()::text = student_id::text);
 
-CREATE POLICY IF NOT EXISTS "Anyone can insert formula results" ON chapter4_formula_scores
+DROP POLICY IF EXISTS "Anyone can insert formula results" ON chapter4_formula_scores;
+CREATE POLICY "Anyone can insert formula results" ON chapter4_formula_scores
   FOR INSERT WITH CHECK (true);
 
-CREATE POLICY IF NOT EXISTS "Admins can view all formula results" ON chapter4_formula_scores
+DROP POLICY IF EXISTS "Admins can view all formula results" ON chapter4_formula_scores;
+CREATE POLICY "Admins can view all formula results" ON chapter4_formula_scores
   FOR SELECT USING (true);
 
 -- 9. Policies cho bảng leaderboard
-CREATE POLICY IF NOT EXISTS "Anyone can view leaderboard" ON leaderboard
+DROP POLICY IF EXISTS "Anyone can view leaderboard" ON leaderboard;
+CREATE POLICY "Anyone can view leaderboard" ON leaderboard
   FOR SELECT USING (true);
 
-CREATE POLICY IF NOT EXISTS "Anyone can insert leaderboard" ON leaderboard
+DROP POLICY IF EXISTS "Anyone can insert leaderboard" ON leaderboard;
+CREATE POLICY "Anyone can insert leaderboard" ON leaderboard
   FOR INSERT WITH CHECK (true);
 
-CREATE POLICY IF NOT EXISTS "Admins can update leaderboard" ON leaderboard
+DROP POLICY IF EXISTS "Admins can update leaderboard" ON leaderboard;
+CREATE POLICY "Admins can update leaderboard" ON leaderboard
   FOR UPDATE USING (true);
 
 -- 10. Function để cập nhật leaderboard tự động
@@ -163,7 +175,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- 11. Trigger để tự động cập nhật leaderboard
-CREATE TRIGGER IF NOT EXISTS trigger_update_leaderboard
+DROP TRIGGER IF EXISTS trigger_update_leaderboard ON quiz_results;
+CREATE TRIGGER trigger_update_leaderboard
   AFTER INSERT ON quiz_results
   FOR EACH ROW
   EXECUTE FUNCTION update_leaderboard();
@@ -200,7 +213,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER IF NOT EXISTS trigger_update_formula_leaderboard
+DROP TRIGGER IF EXISTS trigger_update_formula_leaderboard ON chapter4_formula_scores;
+CREATE TRIGGER trigger_update_formula_leaderboard
   AFTER INSERT ON chapter4_formula_scores
   FOR EACH ROW
   EXECUTE FUNCTION update_formula_leaderboard();

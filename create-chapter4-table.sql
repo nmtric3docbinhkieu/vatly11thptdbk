@@ -24,13 +24,16 @@ CREATE INDEX IF NOT EXISTS idx_chapter4_formula_score ON chapter4_formula_scores
 ALTER TABLE chapter4_formula_scores ENABLE ROW LEVEL SECURITY;
 
 -- Policies
-CREATE POLICY IF NOT EXISTS "Anyone can insert formula results" ON chapter4_formula_scores
+DROP POLICY IF EXISTS "Anyone can insert formula results" ON chapter4_formula_scores;
+CREATE POLICY "Anyone can insert formula results" ON chapter4_formula_scores
   FOR INSERT WITH CHECK (true);
 
-CREATE POLICY IF NOT EXISTS "Students can view own formula results" ON chapter4_formula_scores
+DROP POLICY IF EXISTS "Students can view own formula results" ON chapter4_formula_scores;
+CREATE POLICY "Students can view own formula results" ON chapter4_formula_scores
   FOR SELECT USING (auth.uid()::text = student_id::text);
 
-CREATE POLICY IF NOT EXISTS "Admins can view all formula results" ON chapter4_formula_scores
+DROP POLICY IF EXISTS "Admins can view all formula results" ON chapter4_formula_scores;
+CREATE POLICY "Admins can view all formula results" ON chapter4_formula_scores
   FOR SELECT USING (true);
 
 -- Hiển thị thông báo thành công

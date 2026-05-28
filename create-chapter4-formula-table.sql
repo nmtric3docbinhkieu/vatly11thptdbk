@@ -5,7 +5,7 @@
 -- ==========================================
 
 -- Tạo bảng lưu kết quả trắc nghiệm công thức chương 4
-CREATE TABLE quiz_attempts_chapter4_formula (
+CREATE TABLE IF NOT EXISTS quiz_attempts_chapter4_formula (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     student_id UUID REFERENCES students(id) ON DELETE CASCADE,
     score INTEGER NOT NULL CHECK (score >= 0 AND score <= 10),
@@ -23,18 +23,20 @@ CREATE TABLE quiz_attempts_chapter4_formula (
 );
 
 -- Tạo index để tối ưu truy vấn
-CREATE INDEX idx_chapter4_formula_student_id ON quiz_attempts_chapter4_formula(student_id);
-CREATE INDEX idx_chapter4_formula_formula_category ON quiz_attempts_chapter4_formula(formula_category);
-CREATE INDEX idx_chapter4_formula_score ON quiz_attempts_chapter4_formula(score DESC);
-CREATE INDEX idx_chapter4_formula_completed_at ON quiz_attempts_chapter4_formula(completed_at DESC);
-CREATE INDEX idx_chapter4_formula_student_category ON quiz_attempts_chapter4_formula(student_id, formula_category);
+CREATE INDEX IF NOT EXISTS idx_chapter4_formula_student_id ON quiz_attempts_chapter4_formula(student_id);
+CREATE INDEX IF NOT EXISTS idx_chapter4_formula_formula_category ON quiz_attempts_chapter4_formula(formula_category);
+CREATE INDEX IF NOT EXISTS idx_chapter4_formula_score ON quiz_attempts_chapter4_formula(score DESC);
+CREATE INDEX IF NOT EXISTS idx_chapter4_formula_completed_at ON quiz_attempts_chapter4_formula(completed_at DESC);
+CREATE INDEX IF NOT EXISTS idx_chapter4_formula_student_category ON quiz_attempts_chapter4_formula(student_id, formula_category);
 
 -- Enable Row Level Security
 ALTER TABLE quiz_attempts_chapter4_formula ENABLE ROW LEVEL SECURITY;
 
 -- Tạo policies theo pattern hiện có
-CREATE POLICY "Allow all authenticated users" ON quiz_attempts_chapter4_formula
-    FOR ALL USING (auth.uid() = student_id OR auth.uid() IS NULL);
+DROP POLICY IF EXISTS "Allow all authenticated users" ON quiz_attempts_chapter4_formula;
+DROP POLICY IF EXISTS "Users can insert their own formula attempts" ON quiz_attempts_chapter4_formula;
+DROP POLICY IF EXISTS "Users can view their own formula attempts" ON quiz_attempts_chapter4_formula;
+DROP POLICY IF EXISTS "Everyone can view formula leaderboard" ON quiz_attempts_chapter4_formula;
 
 CREATE POLICY "Users can insert their own formula attempts" ON quiz_attempts_chapter4_formula
     FOR INSERT WITH CHECK ((auth.uid() = student_id) OR (auth.uid() IS NULL));
@@ -45,7 +47,7 @@ CREATE POLICY "Users can view their own formula attempts" ON quiz_attempts_chapt
 -- Tạo VIEW cho leaderboard công thức chương 4
 CREATE OR REPLACE VIEW leaderboard_chapter4_formula AS
 SELECT 
-    s.full_name,
+    COALESCE(to_jsonb(s) ->> 'full_name', to_jsonb(s) ->> 'name') AS full_name,
     s.class_name,
     q.formula_category,
     MAX(q.score) as highest_score,
@@ -55,7 +57,7 @@ SELECT
     MAX(q.completed_at) as last_attempt
 FROM students s
 JOIN quiz_attempts_chapter4_formula q ON s.id = q.student_id
-GROUP BY s.id, s.full_name, s.class_name, q.formula_category
+GROUP BY s.id, COALESCE(to_jsonb(s) ->> 'full_name', to_jsonb(s) ->> 'name'), s.class_name, q.formula_category
 ORDER BY highest_score DESC, best_time ASC;
 
 -- Cho phép mọi người đọc leaderboard (view)

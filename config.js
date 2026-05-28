@@ -46,8 +46,7 @@ window.CONFIG = {
     
     // Cài đặt chung
     totalQuestionsPerChapter: 50,
-    pointsPerCorrect: 10,
-    storageKey: 'vatly11_student'
+    pointsPerCorrect: 10
 };
 
 // Hàm tiện ích lấy Supabase client
@@ -61,10 +60,50 @@ window.getSupabase = function() {
         return null;
     }
     
+    if (window.__supabaseClient) {
+        return window.__supabaseClient;
+    }
+
     try {
-        return window.supabase?.createClient(window.CONFIG.supabaseUrl, window.CONFIG.supabaseKey) || null;
+        window.__supabaseClient = window.supabase?.createClient(
+            window.CONFIG.supabaseUrl,
+            window.CONFIG.supabaseKey,
+            {
+                auth: {
+                    persistSession: false,
+                    autoRefreshToken: false,
+                    detectSessionInUrl: false
+                },
+                global: {
+                    headers: {
+                        'x-application-name': 'vatly11-web'
+                    }
+                }
+            }
+        ) || null;
+
+        return window.__supabaseClient;
     } catch (err) {
         console.error('❌ Lỗi khi tạo Supabase client:', err);
         return null;
     }
+};
+
+// Chuẩn hóa thông báo lỗi Supabase để dễ debug khi project bị pause/sleep
+window.getSupabaseFriendlyError = function(error) {
+    const raw = (error?.message || error?.details || String(error || '')).toLowerCase();
+
+    const isPaused =
+        raw.includes('project has been paused') ||
+        raw.includes('project is paused') ||
+        raw.includes('upstream connect error') ||
+        raw.includes('service temporarily unavailable') ||
+        raw.includes('failed to fetch') ||
+        raw.includes('networkerror');
+
+    if (isPaused) {
+        return 'Supabase co the dang o trang thai sleep/tam dung. Neu website vua bat lai sau thoi gian nghi he, hay doi 30-60 giay roi thu lai. Nen bat che do keep-alive de tranh bi tam dung.';
+    }
+
+    return error?.message || 'Loi ket noi Supabase khong xac dinh.';
 };
